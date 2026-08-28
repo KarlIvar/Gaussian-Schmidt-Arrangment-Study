@@ -116,6 +116,11 @@ def rat_recognize(x, dps, guard=None):
     return fr, spare
 
 
+def spare_str(spare):
+    """Format a spare-digit count that may be mp.inf (an exact fit)."""
+    return 'inf' if spare == mp.inf else f'{float(spare):.0f}'
+
+
 def poly_from_roots(roots):
     """Coefficients of prod (x - r), highest degree first."""
     co = [mpc(1)]
@@ -285,7 +290,7 @@ def level(n, dps=None, direct=False):
     ints, den = clear_denominators([Fraction(1)] + fr)
     res = residual(ints, roots)
     print(f"\n  Phi_n(x) = prod_f (x - u_f) has rational coefficients "
-          f"(>= {spare:.0f} spare digits)")
+          f"(>= {spare_str(spare)} spare digits)")
     print(f"  Q_n(x) = {poly_str(ints)}")
     tags, gzok = gz_tags(ints[0], n)
     print(f"    leading coefficient {ints[0]} = {show_factor(ints[0])}")
@@ -318,8 +323,8 @@ def level(n, dps=None, direct=False):
         agree = (pints2 == pints)
         print(f"\n  DIRECT certification of Psi_n at {d2} digits "
               f"(no use of Phi_n's rationality): coefficients rational, "
-              f">= {spare2:.0f} spare digits;  agrees with the Newton form: "
-              f"{agree}")
+              f">= {spare_str(spare2)} spare digits;  agrees with the Newton "
+              f"form: {agree}")
         mp.dps = dps + 20
     return ints, pints
 
@@ -349,7 +354,7 @@ def pair_sums(n, dps=None):
                   mpf(10) ** (-dps // 2) * max(fabs(s_), mpf(1)) else (None, 'complex'))
         rats.append(fr)
         print(f"    {key[0]},{key[1]}: S = {nstr(s_, 20)}"
-              + (f"  = {fr}  ({sp:.0f} spare digits)" if fr else
+              + (f"  = {fr}  ({spare_str(sp)} spare digits)" if fr else
                  f"  (not rational: {sp})"))
     if len(S) == 2 and not all(rats):
         e1, e2 = S[0][1] + S[1][1], S[0][1] * S[1][1]
@@ -357,8 +362,8 @@ def pair_sums(n, dps=None):
         f2, s2 = rat_recognize(e2.real, dps)
         if f1 and f2:
             print(f"    the two are quadratic conjugates over Q:")
-            print(f"      S_A + S_B = {f1}   ({s1:.0f} spare digits)")
-            print(f"      S_A S_B   = {f2}   ({s2:.0f} spare digits)")
+            print(f"      S_A + S_B = {f1}   ({spare_str(s1)} spare digits)")
+            print(f"      S_A S_B   = {f2}   ({spare_str(s2)} spare digits)")
             disc = f1 * f1 - 4 * f2
             r = msqrt(mpf(disc.numerator) / mpf(disc.denominator))
             for m in [d for d in range(2, 2 * (n * n - 1) + 1)
@@ -367,8 +372,8 @@ def pair_sums(n, dps=None):
                 fm, sm = rat_recognize(r / msqrt(mpf(m)), dps)
                 if fm:
                     print(f"      S_A - S_B = ({fm}) sqrt({m})"
-                          f"   ({sm:.0f} spare digits)  ->  the pair-sums lie "
-                          f"in Q(sqrt({m}))")
+                          f"   ({spare_str(sm)} spare digits)  ->  the "
+                          f"pair-sums lie in Q(sqrt({m}))")
                     break
 
 
