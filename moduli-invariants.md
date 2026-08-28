@@ -208,7 +208,7 @@ An audit of the PSLQ experiments exposed two numerical traps — a multi-term re
 | 11 | two pairs | \(S_A, S_B \notin \mathbb{Q}\) but **quadratic conjugates over \(\mathbb{Q}\)**: \(S_A + S_B = -\tfrac{51779502787135248685964}{8508413439}\), \(S_AS_B = -\tfrac{216521978405798024786175556}{76575720951}\) |
 | 13 | two pairs | likewise: \(S_A + S_B = -\tfrac{182330892545845931198260964}{38032133275}\), \(S_AS_B = \tfrac{4603575719671472163580355540068}{722610532225}\) |
 
-So in every certified case the multiset \(\{u_f\}\) at level \(n\) is the root set of a **single reciprocal polynomial with rational coefficients of degree \(\le 2h\)** — e.g. at \(n = 9, 11, 13\) all four \(u\)'s are roots of \((x^2 - S_Ax + 1)(x^2 - S_Bx + 1) \in \mathbb{Q}[x]\).
+So in every certified case the multiset \(\{u_f\}\) at level \(n\) is the root set of a **single reciprocal polynomial with rational coefficients**, of the minimal degree \(h\) — e.g. at \(n = 9, 11, 13\) all four \(u\)'s are roots of \((x^2 - S_Ax + 1)(x^2 - S_Bx + 1) \in \mathbb{Q}[x]\). That the \(u_f\) of a level are the roots of one polynomial with **integer** coefficients is a theorem, not an observation: see §5.9, where it is deduced unconditionally from Theorem A (in degree \(12h\)) and the degree-\(h\) form above is certified up to \(n = 17\).
 
 **The mechanism, matched to the Theorem.** The reachable translation classes in the Theorem are those of \(\mathrm{Gal}(H/H\cap B)\), and \(B = K(i)\) sits inside the genus field iff \(-4\) splits off the discriminant, i.e. iff \(16 \mid n^2-1\), i.e. \(n \equiv \pm1 \pmod 8\). Assuming \(\xi\)-torsion, the Theorem then *predicts* the table:
 
@@ -265,8 +265,103 @@ The translation theorem of §5.5 covered \(\sigma \in \mathrm{Gal}(\bar{\mathbb{
 
 **First-power descent (what separates \(u^{12}\) from \(u\)).** Theorem A gives \(\sigma(u_f) = \zeta(\sigma,f)\,u_{f^{e}\mathfrak{c}}\) with \(\zeta \in \mu_{12}\) a twisted cocycle (\(\zeta^6 = 1\) unless \(n^2-1=2\square\)). Law 3 at the level of \(S = u + u^{-1}\) is the statement \(\zeta \in \{\pm1\}\)-with-matching-signs; this holds in **every certified case**, and its general proof is the standard Siegel-unit refinement: writing the kernel as \(\eta^4\cdot(\text{weight-0 function of level 6})\) expresses \(u\) through Siegel–Ramachandra invariants, whose exact first-power Galois behaviour (Kubert–Lang-style multiplier bookkeeping) resolves the sixth root. Unconditionally, since \(\sigma(u^3) = \pm u'^3\) (generic \(n\)), the multiset \(\{(S_x^3 - 3S_x)^2\}\) is *exactly* dihedrally permuted. With this, the derivation of law 3 is complete: the Galois module structure of the phase invariant is fully determined, with only the last root-of-unity bookkeeping outsourced to the classical Siegel-unit calculus.
 
+### 5.9 One level, one integer polynomial: the \(u_f\) as a root system
+
+The dihedral equivariance of §5.8 has an elementary corollary that packages the entire phase invariant of a level into a single object of classical arithmetic: **the \(h\) phase units of a level are the roots of one polynomial with integer coefficients.**
+
+> **Theorem C.** Fix an odd level \(n \ge 3\); write \(D = 1-n^2\), \(h = h(D)\), and let \(u_f\) (\(f \in \mathrm{Cl}(\mathcal{O}_D)\)) be the phase units of §4. Put
+> $$
+> \Psi_n(y) \;:=\; \prod_{f \in \mathrm{Cl}(\mathcal{O}_D)} \bigl(y - u_f^{12}\bigr).
+> $$
+> Then \(\Psi_n \in \mathbb{Q}[y]\): it is monic of degree \(h\), self-reciprocal (\(y^h\Psi_n(1/y) = (-1)^h\Psi_n(y)\)), and \(\Psi_n(0) = (-1)^h\). Consequently, with \(d_n \in \mathbb{Z}_{>0}\) the least common denominator of its coefficients,
+> $$
+> \boxed{\;P_n(x) \;:=\; d_n\,\Psi_n\bigl(x^{12}\bigr) \;\in\; \mathbb{Z}[x], \qquad \deg P_n = 12h, \qquad P_n(u_f) = 0 \quad\text{for every class } f. \;}
+> $$
+> \(P_n\) is nonzero and (anti)palindromic — \(x^{12h}P_n(1/x) = (-1)^hP_n(x)\) — and its root set is \(\{\zeta u_f : \zeta^{12} = 1,\ f \in \mathrm{Cl}(\mathcal{O}_D)\}\).
+
+*Proof.* Four inputs, each already proved above:
+
+  (i) \(u_f \in \bar{\mathbb{Q}}\) — §5.4 (Shimura algebraicity of the \(j'\)-ratio);
+  (ii) \(u_f \ne 0\) — \(j' = -2\pi i\,E_4^2E_6/\Delta\) vanishes or blows up only at the elliptic points \(\rho, i\) (discriminants \(-3, -4\)) and the cusp, while our CM points have discriminant \(1-n^2 \notin \{-3,-4\}\) for \(n \ge 3\); and \(X'(m_2) = \mu^{-2} \ne 0\);
+  (iii) \(u_{\mathfrak{r}_nf}\,u_f = 1\) — law 2, proved in §5;
+  (iv) \(\sigma\bigl(u_f^{12}\bigr) = u_{f^{e(\sigma)}\mathfrak{c}(\sigma)}^{12}\) for every \(\sigma \in \mathrm{Gal}(\bar{\mathbb{Q}}/\mathbb{Q})\) — Theorem A of §5.8.
+
+**Rationality.** Fix \(\sigma \in \mathrm{Gal}(\bar{\mathbb{Q}}/\mathbb{Q})\). The map \(\varphi_\sigma : f \mapsto f^{e(\sigma)}\mathfrak{c}(\sigma)\) is a bijection of the finite set \(\mathrm{Cl}(\mathcal{O}_D)\) — a group automorphism (\(e = \pm1\)) followed by a translation. So by (iv), \(\sigma\) permutes the multiset \(\{u_f^{12}\}_{f}\), hence fixes each elementary symmetric function \(e_k\{u_f^{12}\}\). By (i) these are algebraic numbers, and being fixed by *all* of \(\mathrm{Gal}(\bar{\mathbb{Q}}/\mathbb{Q})\) they lie in \(\mathbb{Q}\). Thus \(\Psi_n \in \mathbb{Q}[y]\), monic of degree \(h\) by construction. (This is the entire content of the theorem: everything else is bookkeeping.)
+
+**Self-reciprocity.** By (iii) the bijection \(f \mapsto \mathfrak{r}_nf\) of \(\mathrm{Cl}(\mathcal{O}_D)\) sends \(u_f^{12} \mapsto u_f^{-12}\), so the root multiset is stable under \(y \mapsto y^{-1}\) (legitimate by (ii)). Moreover \(\prod_f u_f^{12} = 1\): if \([\mathfrak{r}_n] \ne 1\), then \(f \mapsto \mathfrak{r}_nf\) is a fixed-point-free involution of \(\mathrm{Cl}\) and the factors cancel in pairs, \(\prod_fu_f = 1\); if \([\mathfrak{r}_n] = 1\) (i.e. \(n = 3\)), then (iii) reads \(u_f^2 = 1\) for every \(f\), so \(\prod_fu_f = \pm1\). Either way the twelfth powers multiply to \(1\), and
+$$
+y^h\Psi_n(1/y) \;=\; \prod_f\bigl(1 - y\,u_f^{12}\bigr) \;=\; (-1)^h\Bigl(\prod_fu_f^{12}\Bigr)\prod_f\bigl(y - u_f^{-12}\bigr) \;=\; (-1)^h\,\Psi_n(y),
+$$
+the last step by stability of the multiset under inversion. Setting \(y = 0\) in the definition gives \(\Psi_n(0) = \prod_f(-u_f^{12}) = (-1)^h\).
+
+**Clearing denominators.** \(d_n\Psi_n \in \mathbb{Z}[y]\) by definition of \(d_n\), so \(P_n(x) = d_n\Psi_n(x^{12}) \in \mathbb{Z}[x]\); it has degree \(12h\), leading coefficient \(d_n \neq 0\), and \(P_n(u_f) = d_n\Psi_n(u_f^{12}) = 0\) for every \(f\) — one polynomial, all \(h\) units. The symmetry \(x^{12h}P_n(1/x) = (-1)^hP_n(x)\) is the self-reciprocity of \(\Psi_n\) read in \(x\), and the root set is as stated because \(x \mapsto x^{12}\) is \(12\)-to-\(1\) onto the roots of \(\Psi_n\), none of which is \(0\). \(\square\)
+
+**Sharpenings and limits.**
+
+- **Degree \(6h\) away from the \(\zeta_8\)-levels.** By §5.8, \(\sigma(u_f) = \zeta\,u_{f'}\) with \(\zeta^6 = 1\) except when \(n^2-1 = 2\square\). So for all other \(n\) the multiset \(\{u_f^{6}\}\) is already Galois-stable, \(\Psi^{(6)}_n(y) = \prod_f(y - u_f^6) \in \mathbb{Q}[y]\), and \(d\,\Psi^{(6)}_n(x^6) \in \mathbb{Z}[x]\) works in degree \(6h\). Only the levels \(n = 3, 17, 99, \dots\) with \(n^2-1 = 2\square\) (where \(B = \mathbb{Q}(\zeta_8)\), outlook §1.7) need the twelfth power.
+- **Degree \(h\): the sharp form.** Granting the first-power descent (\(\zeta \equiv 1\); proved modulo the Kubert–Lang multiplier bookkeeping, §5.8), the multiset \(\{u_f\}\) is *itself* Galois-stable and
+$$
+\Phi_n(x) := \prod_{f}\bigl(x - u_f\bigr) \in \mathbb{Q}[x], \qquad Q_n(x) := d_n'\,\Phi_n(x) \in \mathbb{Z}[x]
+$$
+is a common integer polynomial of the minimal conceivable degree \(h\), whose roots are *exactly* the \(u_f\). This is what the computations below certify at every computed level; \(\Psi_n\) is then recovered from \(\Phi_n\) by Newton's identities, and \(P_n\) from \(\Psi_n\).
+- **The leading coefficient is unavoidable.** The \(u_f\) are not algebraic integers: were they, \(\Psi_n\) (monic, rational, with algebraic-integer coefficients) would lie in \(\mathbb{Z}[y]\), i.e. \(d_n = 1\) — contradicted already at \(n = 5\), where the directly certified \(\Psi_5(y) = y^2 - Ty + 1\) has \(d_5 = 6647^{12}\). So "integer coefficients" is the correct statement and "monic integer coefficients" is false; by §5.7 the primes of \(d_n\) are Gross–Zagier primes of \((D,-3)\) and \((D,-4)\).
+- **One polynomial per level, not one for all levels.** On the principal class \(|u_f|\) grows exponentially with \(n\) (\(1,\ 4.6\cdot10^3,\ 6.8\cdot10^6,\ 7.0\cdot10^9,\ 6.1\cdot10^{12},\ 4.8\cdot10^{15},\ 3.5\cdot10^{18},\ 2.5\cdot10^{21}\) for \(n = 3, \dots, 17\)), so the phase units of distinct levels are distinct; a nonzero polynomial has finitely many roots, and no single one can serve infinitely many levels. The statement is per level by necessity.
+- **What is *not* used.** The proof needs neither the genus-field statements of §5.8 nor the denominator law of §5.7 — only algebraicity plus the permutation action. In particular Theorem C is unconditional, whereas the degree-\(h\) form is (still) conditional on the first-power descent.
+
+**Certified integer polynomials.** `python3 scripts/uf_integer_polynomial.py --direct` computes \(u_f\) at the precision listed, certifies each coefficient of \(\Phi_n\) as a rational by an overdetermined continued-fraction fit (every fit below is confirmed by at least \(168\) spare digits — the number of decimal digits by which the reconstruction exceeds the information content of the fraction), clears denominators, and checks \(Q_n(u_f) = 0\) to the working precision. Independently, and *without* using the rationality of \(\Phi_n\), it certifies the coefficients of the unconditional \(\Psi_n = \prod(y - u_f^{12})\) directly from the numerical twelfth powers (at up to \(2600\) digits); the two routes agree exactly at every level.
+
+$$
+\begin{aligned}
+Q_3(x) &= x + 1\\
+Q_5(x) &= 6647\,x^2 + 30594194\,x + 6647\\
+Q_7(x) &= 11891\,x^2 + 80674200806\,x + 11891\\
+Q_9(x) &= 10565574794063311\,x^4 + 73919532109765731422845124\,x^3 - 118807282021266004510100774\,x^2\\ &\qquad + 73919532109765731422845124\,x + 10565574794063311\\
+Q_{11}(x) &= 76575720951\,x^4 + 466015525084217238173676\,x^3 - 216521978405797871634733654\,x^2\\ &\qquad + 466015525084217238173676\,x + 76575720951\\
+Q_{13}(x) &= 722610532225\,x^4 + 3464286958371072692766958316\,x^3 + 4603575719671472165025576604518\,x^2\\ &\qquad + 3464286958371072692766958316\,x + 722610532225\\
+Q_{17}(x) &= 819697933195874886721\,x^4 + 2045693252535068591803195236166141118259260\,x^3\\ &\qquad + 4207718806754010047859719149317312347901942534\,x^2\\ &\qquad + 2045693252535068591803195236166141118259260\,x + 819697933195874886721
+\end{aligned}
+$$
+
+and, at \(n = 15\) (\(h = 8\), the largest level computed; coefficients \(c_8, \dots, c_0\), palindromic):
+
+```
+231902488879724417597324208272447
+820767611794540060586926641691129674477616253164712
+-3736910623206271622009575975230452428835195604215370332
+4648900280945215092152336462310642642094781730724532480920
+-1793168822031308965307730451798651893626330340481570873697350
+4648900280945215092152336462310642642094781730724532480920
+-3736910623206271622009575975230452428835195604215370332
+820767611794540060586926641691129674477616253164712
+231902488879724417597324208272447
+```
+
+Consistency with the earlier record: dividing out the leading coefficient, \(Q_n = d_n'\prod_{\mathfrak{p} \in \mathrm{Cl}/\langle\mathfrak{r}\rangle}(x^2 - S_{\mathfrak{p}}x + 1)\), and the resulting symmetric functions of the pair-sums reproduce *exactly* the certified fractions of §5.6 and §5.8 — e.g. \(Q_{11}\) gives \(S_A + S_B = -\tfrac{51779502787135248685964}{8508413439}\) and \(S_AS_B = -\tfrac{216521978405798024786175556}{76575720951}\); the \(x^7\)-coefficient of \(Q_{15}\) divided by its leading coefficient reduces to \(\tfrac{734533038616697980508422327428261898604776}{207537477565866265193431} = -e_1\) of §5.8, and the leading coefficient of \(Q_{15}\) is precisely the \(e_4\)-denominator recorded there. Two structural features are visible in every line, and they are exactly the two proved laws: **palindromy** is law 2 (\(u \mapsto 1/u\) under the \(\mathfrak{r}_n\)-twist), and **real coefficients** are law 1 (\(u \mapsto \bar u\) under class inversion). Precisely, \(x^hQ_n(1/x) = (-1)^h\bigl(\prod_fu_f\bigr)Q_n(x)\), and for \(n \ge 5\) the reduced form \(\mathfrak{r}_n = (\tfrac{n-1}2, 0, \tfrac{n+1}2)\) has \(a \ne 1\), hence \([\mathfrak{r}_n] \ne 1\), hence \(h\) is even and \(\prod_fu_f = 1\): \(Q_n\) is exactly palindromic, as the table shows (at \(n = 3\), \(h = 1\) and \(\prod u = -1\), and \(Q_3 = x+1\) is palindromic too).
+
+Leading coefficients, factored and tagged by the Gross–Zagier sets of §5.7 (the script asserts the tagging):
+
+| \(n\) | \(h\) | \(d_n' = \) lead \(Q_n\) | factorization (tags: \(\mathrm{GZ}(D,-3)\) / \(\mathrm{GZ}(D,-4)\)) |
+|---|---|---|---|
+| 3 | 1 | \(1\) | — |
+| 5 | 2 | \(6647\) | \(17^2\)[−3] \(\cdot\ 23\)[−4] |
+| 7 | 2 | \(11891\) | \(11\)[−3,−4] \(\cdot\ 23\)[−4] \(\cdot\ 47\)[−4] |
+| 9 | 4 | \(10565574794063311\) | \(11\)[−3,−4] \(\cdot\ 17^4\)[−3] \(\cdot\ 19\cdot31\)[−4] \(\cdot\ 59^2\)[−3] \(\cdot\ 71\cdot79\)[−4] |
+| 11 | 4 | \(76575720951\) | \(3^4\)[−3,−4] \(\cdot\ 41^2\)[−3] \(\cdot\ 71\)[−4] \(\cdot\ 89^2\)[−3] |
+| 13 | 4 | \(722610532225\) | \(5^2\)[−3] \(\cdot\ 19^2\cdot47\)[−4] \(\cdot\ 101^2\)[−3] \(\cdot\ 167\)[−4] |
+| 15 | 8 | \(231902488879724417597324208272447\) | \(11^2\)[−3,−4] \(\cdot\ 29^4\)[−3] \(\cdot\ 31\)[−4] \(\cdot\ 43^2\)[−4] \(\cdot\ 47\)[−3,−4] \(\cdot\ 53^4\)[−3] \(\cdot\ 103\)[−4] \(\cdot\ 167^2\)[−3] \(\cdot\ 199\cdot223\)[−4] |
+| 17 | 4 | \(819697933195874886721\) | \(23\cdot47\)[−3,−4] \(\cdot\ 71\)[−4] \(\cdot\ 167^3\)[−3,−4] \(\cdot\ 191^2\)[−3] \(\cdot\ 239\cdot263\)[−4] |
+
+Every prime is a Gross–Zagier prime, as §5.7 predicts. The exponent pattern of §5.7 (squares for \(\mathrm{GZ}(-3)\), first powers for \(\mathrm{GZ}(-4)\)) is a statement about a *single* pair-denominator; \(d_n'\) is the least common denominator over all pairs, so multiplicities can add across pairs — visible at \(n = 13\) (\(19^2\), a \(\mathrm{GZ}(-4)\)-prime met by two pairs) and \(n = 15\) (\(43^2\)). Support is unaffected.
+
+**A new level, and a check of the §5.8 mechanism.** Level \(n = 17\) was not in the tables of §5.6/§5.8; the computation above adds it. Here \(h = 4\), \(\mathrm{Cl}(-288) = (\mathbb{Z}/2)^2\), all classes ambiguous (all \(u_f\) real, all signs \(-\)), and the two pair-sums are **not** individually rational but are conjugate over \(\mathbb{Q}(\sqrt2)\):
+$$
+S_A + S_B = -\frac{12249660194820770010797576264467910887780}{4908370857460328663},\qquad
+S_A - S_B = \frac{8661817790988691324094078675916121095168}{4908370857460328663}\sqrt2 ,
+$$
+both certified with over \(380\) spare digits at \(420\)-digit working precision (`python3 scripts/uf_integer_polynomial.py --pairs --dps 420 17`; the same mode re-derives the earlier record — \(S \in \mathbb{Q}\) at \(n = 5, 7\), \(\mathbb{Q}(\sqrt5)\) at \(n = 9, 11\), \(\mathbb{Q}(\sqrt{14})\) at \(n = 13\)). This is exactly the prediction of Theorem B: \(n = 17 \equiv +1 \pmod 8\), so \(B = \mathbb{Q}(i, \sqrt{288}) = \mathbb{Q}(\zeta_8)\) lies in the genus field, translations preserve each \(\mathfrak{r}\)-pair, and the pair-sums land in \(B \cap \mathbb{R} = \mathbb{Q}(\sqrt2)\), the leftover Galois elements swapping the two pairs — the same pattern as \(n = 9\) with \(\mathbb{Q}(\sqrt5)\). And \(n = 17\) is a \(\zeta_8\)-level (\(288 = 2\cdot12^2\)), the case where Theorem C genuinely needs the twelfth and not the sixth power.
+
 **Remaining open questions:**
-- The Kubert–Lang multiplier computation for the first-power \(\zeta \equiv 1\) (routine but long).
+- The Kubert–Lang multiplier computation for the first-power \(\zeta \equiv 1\) (routine but long) — it is also what separates the degree-\(h\) common integer polynomial \(Q_n\) of §5.9 from the unconditional degree-\(12h\) one.
 - Exact valuations in the denominator law of §5.7.
 - Distribution of \(\arg u_f\) over classes as \(n \to \infty\) (between CM-point and closed-geodesic equidistribution); heights on the discriminant-coupled fiber product \(X_0(\tfrac{n-1}2)\times_{X(1)}X_0(\tfrac{n+1}2)\).
 
@@ -275,5 +370,6 @@ The translation theorem of §5.5 covered \(\sigma \in \mathrm{Gal}(\bar{\mathbb{
 - [scripts/moduli_invariants.py](scripts/moduli_invariants.py) — all experiments (A: intertwining; B: \(\Theta\), invariance, fiber test; C: Hilbert class polynomials; D: simultaneous isogenies; E: trace table). Requires mpmath.
 - Laws 1–3 of §4: `python3 scripts/moduli_invariants.py deep` (all primitive classes, odd \(n \le 17\), 80 digits).
 - Proof verification (§5, representative level): `python3 scripts/moduli_invariants.py laws`.
+- The common integer polynomial of a level (§5.9): [scripts/uf_integer_polynomial.py](scripts/uf_integer_polynomial.py) — `python3 scripts/uf_integer_polynomial.py --direct` (certifies \(\Phi_n, \Psi_n, Q_n, P_n\) and the Gross–Zagier tagging of the leading coefficient for odd \(n \le 17\)); `--pairs` prints the \(\mathfrak{r}\)-pair sums with their fields.
 - Denominator identification (§5.7): `python3 scripts/gz_denominators.py`.
 - §5.8 verifications (field predictions at \(n = 11, 13\); the \(n=15\) rational quartic, 420 digits): inline runs recorded with exact fractions in §5.8.
