@@ -141,7 +141,7 @@ so the normalized count fluctuates within \((\log\log n)^{\pm 1/2}\) — mild, a
 
 ### Geometric corollaries
 
-- **Total circumference per curvature level.** The circles of curvature \(2n\) in the unit square have total length \(\frac{2\pi}{2n} N_e(n) = \pi \prod_{p \mid n \text{ odd}}(1 - \chi_{-4}(p)/p)\), which is \(\asymp \pi\) for every \(n\) and \(\to \pi/G \approx 3.4304\) on average. Summed over \(n \le X\) the total length of the arrangement grows linearly, \(\sim (\pi/G) X\).
+- **Total circumference per curvature level.** The circles of curvature \(2n\) in the unit square have total length \(\frac{2\pi}{2n} N_e(n) = \pi \prod_{p \mid n \text{ odd}}(1 - \chi_{-4}(p)/p)\), which is \(\asymp \pi\) for every \(n\) and \(\to \pi/G \approx 3.4298\) on average. Summed over \(n \le X\) the total length of the arrangement grows linearly, \(\sim (\pi/G) X\).
 - **Total disk area per unit area** up to curvature \(2X\):
   $$
   \sum_{n \le X} N_e(n)\, \frac{\pi}{4n^2} \;\sim\; \frac{\pi}{4G} \log X \;\to\; \infty,
