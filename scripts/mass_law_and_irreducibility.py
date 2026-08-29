@@ -354,6 +354,53 @@ def irreducibility(levels=None):
                   f"P2 {degs(fl2, z)}, P6 {degs(fl6, y)}, P2(x^2) {degs(flx, x)}")
 
 
+# ------------------- Theorem 5: the all-n irreducibility -------------------
+def check_theorem5(levels=None):
+    """Verify the two computational ingredients of Theorem 5 (section 5.6):
+      (i)  the root-free closed form
+             u^2 = -12 beta (beta - 1728) g2(Lambda)/g2(Z[i])
+                 = -12 beta (beta - 1728) E4(w) / (c^4 E4(i)),
+           at every class of every level (including 3 | n: no cube roots);
+      (ii) Lemma D: |u_c| / |u_1| <= 10 e^(-pi n)  for every class c != 1
+           (the principal class dominates, so the coincidence subgroup T
+           is trivial).
+    The Galois-theoretic ingredients (Lemma T, the adelic class action) are
+    classical CM theory; the certified irreducibility table is their witness."""
+    from mpmath import exp as mexp
+    print("Theorem 5 ingredients")
+    levels = levels or list(range(2, 17))
+
+    def E4_at(tau):
+        tr, (cg, dg) = sl2_reduce(tau)
+        return E4E6D(tr)[0] / (cg * tau + dg) ** 4
+
+    mp.dps = 80
+    anchor = E4_at(mpc(0, 2)) / E4_at(mpc(0, 1))
+    assert fabs(anchor - mpf(11) / 16) < mpf(10) ** (-60)
+    print("  anchor E4(2i)/E4(i) = 11/16: OK")
+    for n in levels:
+        mp.dps = min(DPS.get(n, 600), 300)
+        cv = class_values(n)
+        E4i = E4_at(mpc(0, 1))
+        u1 = None
+        worst = mpf(0)
+        for f, (u, jw, L) in cv.items():
+            (A, B), (c, dd) = build_X(*L)
+            cc = cval(c)
+            rhs = -12 * jw * (jw - 1728) * E4_at(cval(dd) / cc) / (cc ** 4 * E4i)
+            assert fabs(u ** 2 - rhs) < mpf(10) ** (-mp.dps // 2) * (1 + fabs(rhs)), (n, f)
+            if f == (1, 0, n * n):
+                u1 = fabs(u)
+            else:
+                worst = max(worst, fabs(u))
+        bound = 10 * mexp(-mpf(n) * pi)
+        ratio = worst / u1
+        assert ratio < bound, (n, ratio, bound)
+        print(f"  n={n:2d}: closed form OK (all classes);  "
+              f"max |u_c|/|u_1| = {nstr(ratio, 6):>12s} < 10 e^-pi n = {nstr(bound, 4)}")
+    print("  (Lemma D holds with margin; T = 1 at every level)")
+
+
 if __name__ == "__main__":
     mode = sys.argv[1] if len(sys.argv) > 1 else "mass"
     if mode in ("mass", "all"):
@@ -363,5 +410,8 @@ if __name__ == "__main__":
         print()
         check_M4()
     if mode in ("irred", "all"):
-        levels = [int(a) for a in sys.argv[2:]] or None
+        levels = [int(a) for a in sys.argv[2:] if a.isdigit()] or None
         irreducibility(levels)
+    if mode in ("theorem5", "all"):
+        levels = [int(a) for a in sys.argv[2:] if a.isdigit()] or None
+        check_theorem5(levels)
