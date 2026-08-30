@@ -86,6 +86,7 @@ Phase layer (CM machinery):
 | [moduli-invariants.md](moduli-invariants.md) | the 6-coordinate system \((\alpha,\beta_1,\beta_2,\arg u)\); \(\hat\sigma\)-pairs on the fiber product \(X_0(\tfrac{n-1}2)\times_{X(1)}X_0(\tfrac{n+1}2)\), discriminant coupled to level; laws \(u_{f^{-1}}=\bar u_f\), \(u_fu_{\mathfrak{r}f}=1\); Theorem A (dihedral equivariance of \(u^{12}\)); GZ-prime denominators (§5.7); level polynomials \(Q_n\) (§5.9) irreducible at computed levels (§5.10) |
 | [first-power-descent.md](first-power-descent.md) | \(u_f = \Phi_y/\Phi_x(\beta_1,\beta_2)\) (derivative of the modular correspondence); Galois law at **first power**; \(\omega_f\equiv1\); irreducibility re-proved by exact arithmetic, no PSLQ |
 | [euclidean-moduli-invariants.md](euclidean-moduli-invariants.md) | \(N_e(n)=2h(-4n^2)\); \(j\)-values \(=H_{-4n^2}^2\); trace slice \(t(4n^2)\); lemniscatic phase; \(\Delta\)-mass law (Thm 4, proved); \(P^{(2)}_n\) irreducible for **every** \(n\) (Thm 5, proved) |
+| [phase-atlas.md](phase-atlas.md) | the phase portrait of the arrangement (figures, all odd \(n \le 41\) + 101); **sign law on divisor classes proved** (gcd inequality via the \(E_6\)-zero; character hypothesis refuted at \(n = 31, 41\)); imprimitive phase strata observed; DIT comparison: certified mismatch with cycle-integral invariants of \(4(n^2-1)\); \(\arg u/\pi\) irrational off the ambiguous locus |
 | [spherical-moduli-invariants.md](spherical-moduli-invariants.md) | third geometry: \(\cot\theta = \ell\); census \(4H(4(\ell^2+1))\); shape polynomial \(\prod_{f^2\mid\ell^2+1}H_{-4(\ell^2+1)/f^2}\) (each stratum once); trace slice \(t(4\ell^2+4)\); Pell-unit phase, cap-swap \(u^2_-=\varepsilon^4u^2_+\), level norm \(m_\ell\) with GZ valuation law; **half-orbit phenomenon** (phases = half the Galois root system, golden-ratio cocycle at \(\ell=2\)) |
 
 Monoid / operation layer:
@@ -146,6 +147,12 @@ Planning: [outlook.md](outlook.md) — the master outlook (small/medium/large qu
     \(u^2\sigma(u^2)=m_\ell\) with valuation law \(v_p(m_\ell) = 2v_p(4\ell^2)+\tfrac43v_p(H_0)+v_p(H_{1728})\),
     and the half-orbit phenomenon with unit cocycle. Certified at computed levels
     (\(\ell\le6\)); proofs open (the hyperbolic \(\xi\)-torsion/Kronecker step provably fails here).
+20. **Sign law on divisor classes** (phase-atlas.md Thm 1): for ambiguous \(f=(a,0,c)\),
+    \(\operatorname{sign}(u_f) = -\operatorname{sign}(a_rc_s - a_sc_r)\) (splittings along
+    \(r_0s_0 = ac\)) — the side of the \(E_6\)-zero the \(\mathfrak{r}_n\)-twisted CM point
+    falls on. Proved; verified at all 81 divisor classes, odd \(n\le41\) and \(n=101\).
+    No character (genus or otherwise) can give the sign: multiplicativity on \(\mathrm{Cl}[2]\)
+    fails at \(n = 31, 41\).
 
 ## Status ledger (open problems, deduplicated)
 
@@ -154,8 +161,25 @@ Planning: [outlook.md](outlook.md) — the master outlook (small/medium/large qu
   analogue was closed by archimedean dominance; try the same at level \(1-n^2\).)
 - **Exact denominator/\(\lambda_n\) valuations** (hyperbolic §5.7, Euclidean §6.1) —
   Gross–Zagier multiplicities / quasi-canonical lifting calculus.
-- **Sign law of \(u_f\) on ambiguous classes** (outlook §1.1; the Euclidean R/I criterion
-  is proved — hyperbolic analogue open). Data: \(n=11,15\) anomalous.
+- **Sign law of \(u_f\)**: the divisor-class (\(b=0\)) case is now **proved**
+  (phase-atlas.md Thm 1, gcd inequality via the \(E_6\)-zero; the genus-character
+  hypothesis of outlook §1.1 is refuted — not any character, counterexamples
+  \(n=31,41\)). Still open: the 2-adic ambiguous classes (\((a,a,c)\), \((a,b,a)\),
+  levels \(n\equiv\pm1\bmod 8\)) — same mechanism, HNF closed form on the ramified
+  stratum not yet extracted (phase-atlas.md §3.3).
+- **Imprimitive phase strata** (phase-atlas.md §2.3, figures): \(\Theta\) is a
+  well-defined class invariant on content-\(g\) classes (elliptic cores excluded);
+  observed exact values \(u=\pm1\) at small cores and full twin/unit-circle structure
+  inside strata (e.g. \(n=15,17\)) — a stratum theory of \(\mathcal{O}_{D/g^2}\),
+  unproved.
+- **DIT comparison closed as a mismatch** (phase-atlas.md §4): no linear relation of
+  \(\log|u_f|\), \(\arg u_f\), \(S_x\) with cycle integrals of \(j\), Kronecker-limit
+  integrals, Rademacher symbols of disc \(4(n^2-1)\) (safe PSLQ, margins logged);
+  \(\arg u_f/\pi\) irrational at all 86 non-ambiguous classes \(n\le41\) (cusp probe,
+  outlook §2.4 cheap end). Next comparison object: two-discriminant (Katok–Sarnak)
+  mixed data for the coupled pair \((1-n^2,\,4(n^2-1))\). By-product observed:
+  internal \(\mathbb{Z}\)-relations among the \(E_A\) across strata (logs of
+  algebraic invariants).
 - **Imprimitive strata** of the class formula at the ramified prime 2 (verified, unproved).
 - **\(3/\pi\) split**: make the incomplete-period equidistribution step rigorous.
 - **Euclidean first power**: irreducibility of \(P^{(2)}_n(x^2)\) for all \(n\)
@@ -197,13 +221,20 @@ root, e.g. `python3 scripts/alpha_circles.py --selftest`.
 | `euclidean_moduli_invariants.py` | Euclidean structure, ring class polys, phases, \(P^{(2)},P^{(6)}\) | euclidean-moduli-invariants |
 | `mass_law_and_irreducibility.py` | Theorem 4 (M1–M4), Theorem 5 ingredients, exact factorizations | euclidean-moduli-invariants |
 | `spherical_moduli_invariants.py` | census, shape bijection (\(\ell\le20\) exact), resultant identity (symbolic), phase laws, level norms | spherical-moduli-invariants |
+| `make_phase_atlas.py` | phase dataset (two routes, 139+ digit agreement, published-\(Q_n\) + \(\Phi_2\) anchors), atlas figures, sign table + Thm 1 rule + character refutation | phase-atlas |
+| `dit_comparison.py` | cycle integrals of \(j\)/\(\log\lvert\Delta\rvert\) (two parametrizations), Rademacher symbols (two routes), safe-PSLQ battery, cusp probe | phase-atlas |
 | `make_composition_figure.py`, `make_omega_figure.py` | figures | — |
 
 **Known gap**: `scripts/first_power_descent.py` is referenced by
 [first-power-descent.md](first-power-descent.md) §6 but was **never committed** — the
 document's results are independently confirmed by `uf_integer_polynomial.py` /
 `uf_irreducibility.py` agreement, but the script should be recovered or rewritten
-before publication.
+before publication. (Partial mitigation: `make_phase_atlas.py` route B implements the
+Thm-3.3 closed form \(u = -r_0 h_2(\mathfrak{b}_1)/h_2(\mathfrak{r}^{-1}\mathfrak{b}_1)\)
+with exact HNF lattice arithmetic, agreeing with the canonical-matrix route to 138+
+digits at every level \(\le 41\) and 101, and re-derives \(u\) from the integer
+\(\Phi_2\) at \(n = 5\); the exact-arithmetic \(\Phi_m\) construction itself is still
+the missing piece.)
 
 ### Certification guard rails (learned the hard way — do not regress)
 
@@ -241,8 +272,8 @@ before publication.
 `prompts/` holds ready-to-run session prompts for the highest-value next steps:
 [01-kronecker-limit-formula.md](prompts/01-kronecker-limit-formula.md) (\(\log|u|\) vs
 \(L'(0,\chi)\) — the likely headline theorem), [02-schmidt-trace-formula.md](prompts/02-schmidt-trace-formula.md)
-(the flagship spectral identity, staged), [03-phase-atlas-and-dit.md](prompts/03-phase-atlas-and-dit.md)
-(the atlas figure + sign-law data + Duke–Imamoğlu–Tóth novelty check, one dataset).
+(the flagship spectral identity, staged). Prompt 03 (phase atlas + DIT) was **executed**
+(session of 2026-08-30): see [phase-atlas.md](phase-atlas.md).
 
 ## Paper planning
 
