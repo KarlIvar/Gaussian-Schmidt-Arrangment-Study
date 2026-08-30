@@ -91,6 +91,16 @@ per-class refinement of the \(\Delta\)-mass law, natural territory for Gross's
 quasi-canonical-lifting valuations (this would simultaneously settle euclidean
 §6.1); (b) descend from \(R_f\) (a sixth-power-level object) to a first-power
 kernel-level unit \(\varepsilon\Theta_g\).
+*Update — **DONE** ([schmidt-units.md](schmidt-units.md)): (a) is the unit
+theorem (proved, all strata, via the lattice form
+\(R_f = r_0^6\Delta(\mathfrak{b}_1)/\Delta(\mathfrak{r}^{-1}\mathfrak{b}_1)\)
+and local rigidity — no quasi-canonical input needed; euclidean §6.1's
+\(\Delta\)-part and split ladder settled); (b) exists as
+\(w_f = u_f(\gamma_2^2\gamma_3)(\tau_{\mathfrak{r}f})/(\gamma_2^2\gamma_3)(\tau_f)\)
+with exact first-power laws and a \(\mu_6\)-cocycle whose minimal exponent
+\(m(n)\) is certified for odd \(n \le 35\) (\(m=1\) at \(n=3,7,13,15,25\),
+e.g. \(w = -\varepsilon_{12}^{\pm1}\) at \(n=7\)); only the cocycle's closed
+law (Kubert–Lang bookkeeping) is still open.*
 
 **2.8 Genus-refined Gross–Zagier: the exponent law of the dressing (new, from 2.3).**
 The certified tables of [phase-kronecker-limit.md](phase-kronecker-limit.md)
@@ -125,6 +135,13 @@ class fields (Robert; Kubert–Lang ch. 12–13): an index formula with class
 numbers appearing as indices would be the *quantitative* form of "the Schmidt
 arrangement is an elliptic-unit system", the analogue of the cyclotomic-unit
 index \(= h^+\);
+*update — first installment **done** ([schmidt-units.md](schmidt-units.md) §5):
+quadratic-layer projections \(= -24m_\chi\log\varepsilon_{d_2}\) with
+\(m_\chi = \tfrac{2h(d_1)}{w(d_1)}h(d_2)C(0)\), and on the cubic layer
+\([\mathcal{O}_{L_3}^\times : \langle-1,\theta_u\rangle] = 8\,h_{L_3}\) at
+Euclidean \(n = 9, 11, 13\) (\(h_{L_3} = 1, 1, 3\); fundamental units
+certified) — the class number **is** the index; remaining: the general
+conjecture and the hyperbolic sextic layer (\(n = 21\));*
 (b) **Stark recognition for the non-real characters** — the certified coset
 cubics/quartics of phase-kronecker-limit §3 pin \(L'(0,\chi_3)\) etc. as logs
 of explicit cubic algebraic numbers; identify them as the Stark units of the
@@ -164,11 +181,11 @@ to the trace-formula program.
 
 (2.1 and 2.3 are done — first-power-descent.md and phase-kronecker-limit.md.)
 
-1. (2.7 + 3.4a) **the Schmidt-unit program**: prove the unit property of the
-   \(\mathfrak{r}\)-twisted \(\Delta\)-ratios \(R_f\) (per-class valuation
-   cancellation — also closes euclidean §6.1), descend to a first-power unit,
-   and compute the Robert index — turns the KLF answer into a structure
-   theorem, and is the natural headline of the phase paper;
+1. (2.7 + 3.4a) **the Schmidt-unit program — DONE**
+   ([schmidt-units.md](schmidt-units.md)): unit theorem proved, per-class
+   valuation law proved (split \(\lambda_n\) closed), first-power \(w_f\)
+   with certified coherence table, cubic Robert index \(= 8h_{L_3}\);
+   remaining threads: the \(w\)-cocycle law, the hyperbolic sextic index;
 2. (2.8) **genus-refined Gross–Zagier** for the dressing exponents — one
    finite-place paper closing 1.1, 1.3 and the valuation questions
    simultaneously; the exact data is already computed;

@@ -87,6 +87,7 @@ Phase layer (CM machinery):
 | [first-power-descent.md](first-power-descent.md) | \(u_f = \Phi_y/\Phi_x(\beta_1,\beta_2)\) (derivative of the modular correspondence); Galois law at **first power**; \(\omega_f\equiv1\); irreducibility re-proved by exact arithmetic, no PSLQ |
 | [euclidean-moduli-invariants.md](euclidean-moduli-invariants.md) | \(N_e(n)=2h(-4n^2)\); \(j\)-values \(=H_{-4n^2}^2\); trace slice \(t(4n^2)\); lemniscatic phase; \(\Delta\)-mass law (Thm 4, proved); \(P^{(2)}_n\) irreducible for **every** \(n\) (Thm 5, proved) |
 | [phase-kronecker-limit.md](phase-kronecker-limit.md) | character sums of \(\log\lvert u\rvert\) = elliptic-unit theory: \(S(\chi) = -2L'(0,\chi) + \tfrac23\Sigma_0 + \tfrac12\Sigma_{1728}\) (Euclidean, proved); hyperbolic \(S(\chi) = 0\) for \(\chi(\mathfrak{r})=+1\), \(= -4L'(0,\chi)+\tfrac43\Sigma_0+\Sigma_{1728}\) for odd \(\chi\) (proved, \(\varepsilon\) and \(\mu\) cancel); genus-character closed forms \(c\, h\log\varepsilon_d\) with the Euclidean field \(=\mathbb{Q}(\sqrt n)\); exact GZ-supported \(S\)-unit dressing; certified \(\Delta\)-mass polynomials \(D_n\) |
+| [schmidt-units.md](schmidt-units.md) | **unit theorem proved**: \(R_f = r_0^6\Delta(\mathfrak{b}_1)/\Delta(\mathfrak{r}^{-1}\mathfrak{b}_1)\) is a unit for every class (imprimitive strata included; \(R\equiv1\) iff induced twist principal); per-class valuation law \(v_P(G_\mathfrak{c}) = w_p(k)\) class-independent (proved, Newton-polygon-verified to \(n=49\)) settling the split \(\lambda_n\)-ladder; first-power \(w_f\) (\(w^6=R\), laws at first power, \(\mu_6\)-cocycle, coherence table \(m(n)\), \(w=-\varepsilon_{12}^{\pm1}\) at \(n=7\)); **Robert index** \([\mathcal{O}_{L_3}^\times:\langle-1,\theta_u\rangle]=8h_{L_3}\) at Euclidean \(n=9,11,13\) (\(h=1,1,3\)) |
 | [spherical-moduli-invariants.md](spherical-moduli-invariants.md) | third geometry: \(\cot\theta = \ell\); census \(4H(4(\ell^2+1))\); shape polynomial \(\prod_{f^2\mid\ell^2+1}H_{-4(\ell^2+1)/f^2}\) (each stratum once); trace slice \(t(4\ell^2+4)\); Pell-unit phase, cap-swap \(u^2_-=\varepsilon^4u^2_+\), level norm \(m_\ell\) with GZ valuation law; **half-orbit phenomenon** (phases = half the Galois root system, golden-ratio cocycle at \(\ell=2\)) |
 
 Monoid / operation layer:
@@ -147,6 +148,13 @@ Planning: [outlook.md](outlook.md) — the master outlook (small/medium/large qu
     \(u^2\sigma(u^2)=m_\ell\) with valuation law \(v_p(m_\ell) = 2v_p(4\ell^2)+\tfrac43v_p(H_0)+v_p(H_{1728})\),
     and the half-orbit phenomenon with unit cocycle. Certified at computed levels
     (\(\ell\le6\)); proofs open (the hyperbolic \(\xi\)-torsion/Kronecker step provably fails here).
+20. **Schmidt-unit theorem**: \(R_f\) is an algebraic unit for every class of every
+    odd level (lattice form \(r_0^6\Delta(\mathfrak{b}_1)/\Delta(\mathfrak{r}^{-1}\mathfrak{b}_1)\),
+    local rigidity of the invertible ambiguous twist). Proved; polynomials certified
+    + irreducible to \(n\le21\). **Per-class valuation law** for the Euclidean
+    \(G_\mathfrak{c}\) (class-independent \(w_p(k)\)). Proved; split \(\lambda_n\)-ladder
+    settled. **Robert index** \(= 8h_{L_3}\) on the cubic layer (certified, \(n=9,11,13\);
+    fundamental units and \(h_{L_3}=1,1,3\) rigorous via Friedman's bound).
 
 ## Status ledger (open problems, deduplicated)
 
@@ -155,13 +163,22 @@ Planning: [outlook.md](outlook.md) — the master outlook (small/medium/large qu
   evaluates through \(L'(0,\chi)\) in both aspects (proved); genus characters in full
   closed form (Euclidean field \(=\mathbb{Q}(\sqrt n)\)); remaining open there:
   the exponent law of the \(\Sigma\)-dressings (genus-refined Gross–Zagier), the
-  local Euler factor at square conductors, Stark closed forms for order \(>2\)
-  characters, and the Robert-unit index of \(\{G_\mathfrak{c}\}\).
+  local Euler factor at square conductors, and Stark closed forms for order \(>2\)
+  characters.
+- **Schmidt units: settled** ([schmidt-units.md](schmidt-units.md)): unit theorem for
+  \(R_f\) proved (all strata), per-class Euclidean valuation law proved (split
+  \(\lambda_n\)-ladder closed), cubic-layer Robert index \(= 8h_{L_3}\) certified at
+  \(n = 9, 11, 13\). Remaining open there: the \(\mu_6\)-cocycle law \(m(n)\) of the
+  first-power \(w_f\) (Kubert–Lang multiplier bookkeeping; certified table odd
+  \(n\le35\) is the target), the general Robert-index conjecture, the hyperbolic
+  sextic layer (\(n=21\)), and the non-split \(\lambda_n\) fine structure (needs
+  §2.8's conductor-degenerate GZ \(\beta\)-valuations only).
 - **Hyperbolic first-power loose ends**: \(T = 1\) (distinctness of \(u_f^{12}\)) for general
   \(n\) — the only gap between per-level and all-\(n\) irreducibility. (The Euclidean
   analogue was closed by archimedean dominance; try the same at level \(1-n^2\).)
 - **Exact denominator/\(\lambda_n\) valuations** (hyperbolic §5.7, Euclidean §6.1) —
-  Gross–Zagier multiplicities / quasi-canonical lifting calculus.
+  the \(\Delta\)-part is now proved (per-class law, schmidt-units §3); what remains is
+  the \(\beta\)-side: Gross–Zagier multiplicities at conductor-degenerate pairs.
 - **Sign law of \(u_f\) on ambiguous classes** (outlook §1.1; the Euclidean R/I criterion
   is proved — hyperbolic analogue open). Data: \(n=11,15\) anomalous.
 - **Imprimitive strata** of the class formula at the ramified prime 2 (verified, unproved).
@@ -206,6 +223,7 @@ root, e.g. `python3 scripts/alpha_circles.py --selftest`.
 | `mass_law_and_irreducibility.py` | Theorem 4 (M1–M4), Theorem 5 ingredients, exact factorizations | euclidean-moduli-invariants |
 | `spherical_moduli_invariants.py` | census, shape bijection (\(\ell\le20\) exact), resultant identity (symbolic), phase laws, level norms | spherical-moduli-invariants |
 | `phase_klf.py` | Kronecker-limit character sums: master identities, Epstein \(L'(0,\chi)\), genus factorizations with conductor Euler factors, exact \(\mathbb{Q}(\sqrt d)\) coset factorizations, \(D_n\)/\(R\)-polynomials, safe-PSLQ non-fits (`--selftest`: 250–400 digits) | phase-kronecker-limit |
+| `schmidt_units.py` | lattice lemma for \(R_f\); unit polynomials \(n\le21\) + imprimitive strata; Newton-polygon per-class law (to \(n=49\)); first-power \(w_f\) laws + \(m(n)\) table (odd \(n\le35\)); quadratic projections; cubic fundamental units, \(h_{L_3}\), Robert index \(8h_{L_3}\) (`--selftest`, ~45 s) | schmidt-units |
 | `make_composition_figure.py`, `make_omega_figure.py` | figures | — |
 
 **Known gap**: `scripts/first_power_descent.py` is referenced by
@@ -254,8 +272,7 @@ results in [phase-kronecker-limit.md](phase-kronecker-limit.md)),
 (the flagship spectral identity, staged), [03-phase-atlas-and-dit.md](prompts/03-phase-atlas-and-dit.md)
 (the atlas figure + sign-law data + Duke–Imamoğlu–Tóth novelty check, one dataset),
 [04-schmidt-units-robert-index.md](prompts/04-schmidt-units-robert-index.md)
-(prove the \(R_f\) unit property, first-power Schmidt units via \(\gamma_2^2\gamma_3\),
-Robert index — the recommended next step), and
+(**done** — results in [schmidt-units.md](schmidt-units.md)), and
 [05-genus-refined-gross-zagier.md](prompts/05-genus-refined-gross-zagier.md)
 (the dressing exponent law via GZ/Lauter–Viray; closes the exact valuations, the
 \(\lambda_n\)-law and the sign anomaly, and rebuilds the missing
