@@ -516,7 +516,8 @@ the hyperbolic plane $\HH$.
 \item $\alpha(\omega)$ is the inversive product of $\omega$ with
 $\Rhat$: for circles with Hermitian matrices $M, N$ normalized to
 $\det = -1$, the inversive product is
-$\langle M, N\rangle = -\tfrac12 \tr(M N^{\mathrm{adj}})$, and
+$\langle M, N\rangle = \tfrac12 \tr(M N^{\mathrm{adj}})$ with
+$N^{\mathrm{adj}}$ the adjugate, and
 $\langle M_\omega, M_0\rangle = \alpha(\omega)$.
 \item If $\omega = X(\Rhat)$ with $X \in \SL_2(\C)$, then
 $\tr(X \bar X^{-1}) = -2\alpha_\pm(\omega)$, the sign recording the
@@ -535,11 +536,12 @@ radius $\rho$ is the Euclidean circle of center $a + ib\cosh\rho$ and
 radius $b\sinh\rho$; hence $\alpha = \coth\rho$, manifestly a hyperbolic
 isometry invariant.  (2) With $M_\omega$ normalized as in
 \S\ref{subsec:hermitian}, $M_\omega = \bigl(\begin{smallmatrix} 1/r &
--z_0/r \\ -\bar z_0/r & (|z_0|^2 - r^2)/r \end{smallmatrix}\bigr)$ up to
-the stated conventions, and the displayed pairing with $M_0$ evaluates to
-$y_0/r$; this is the standard inversive product (for two proper circles
-it equals $\frac{|z_1 - z_2|^2 - r_1^2 - r_2^2}{2r_1r_2}$, and for a
-circle and a line the distance-to-center over radius).  (3) is proved in
+-z_0/r \\ -\bar z_0/r & (|z_0|^2 - r^2)/r \end{smallmatrix}\bigr)$, and
+for $M = (A_1, B_1, C_1)$, $N = (A_2, B_2, C_2)$ one computes
+$\tfrac12\tr(MN^{\mathrm{adj}}) = \tfrac12(A_1C_2 + C_1A_2) -
+\re(B_1\bar B_2)$, which for two proper circles is the classical
+inversive product $\frac{|z_1 - z_2|^2 - r_1^2 - r_2^2}{2r_1r_2}$ and
+for $N = M_0$ evaluates to $y_0/r$.  (3) is proved in
 Theorem \ref{thm:cartan}.  Finally for a Schmidt circle,
 $\alpha = \frac{y/2q}{1/2q} = y \in \Z$, and the parity of $x$ (even for
 $\Sarr$, odd for $i\Sarr$) together with $x^2 + y^2 \equiv 1 \pmod 4$
@@ -1020,7 +1022,9 @@ preserving the fixed set is the twisted conjugation
 $X \mapsto \bar g X g^{-1}$, matching the action
 \eqref{eq:equivariance} on forms; classifying fixed points up to
 twisted conjugacy is a Galois-cohomology problem (over the field,
-Hilbert 90 trivializes it; over $\Zi$ it is a genus question).
+Hilbert 90 trivializes it; over $\Zi$ it is a genus question).  For
+the classical theory of binary Hermitian forms over imaginary
+quadratic rings, going back to Bianchi, see \cite[Ch.~9]{EGM1998}.
 
 \begin{proposition}[computational]\label{prop:threeclasses}
 Among the integral binary Hermitian forms of determinant $-1$ with
@@ -1765,11 +1769,13 @@ and conjugated in (a).  From now on $g = j'$.
 \label{subsec:heegner}
 
 \begin{proposition}\label{prop:singularmoduli}
-At level $n$, $m_1$ is the CM point of the class $[f]$ and $-m_2 \in
-\HH$ is the CM point of the class $[\idealr_nf]$; consequently
-$\beta_1 = j(\tau_{[f]})$ and $\beta_2 = j(\tau_{[\idealr_n f]})$
-are singular moduli of discriminant $D = 1 - n^2$, and over the
-primitive level-$n$ classes
+At level $n$, $m_1$ is the CM point of the class $[f]$, $\bar m_2 \in
+\HH$ is the CM point of the class $\hat\sigma[f] = [\idealr_n][f]^{-1}$,
+and $-m_2 \in \HH$ is the CM point of the class $[\idealr_nf]$;
+consequently $\beta_1 = j(\tau_{[f]})$ and $\beta_2 =
+j(\tau_{[\idealr_n][f]^{-1}})$, with $\bar\beta_2 = j(-m_2) =
+j(\tau_{[\idealr_nf]})$, are singular moduli of discriminant
+$D = 1 - n^2$, and over the primitive level-$n$ classes
 \[
   \prod_{f}\bigl(x - \beta_1(f)\bigr) \;=\; H_{D}(x) \in \Z[x],
 \]
@@ -1779,12 +1785,11 @@ contribute the strata $H_{D/g^2}$).
 
 \begin{proof}
 The first claim is Proposition \ref{prop:formdictionary} for $m_1$ and
-Theorem \ref{thm:classformula} for $m_2$ (composed with law 1's mirror
-bookkeeping: $\bar m_2$ is the CM point of $\hat\sigma[f] =
-[\idealr_n][f]^{-1}$, so $-m_2 = -\overline{\bar m_2}$ is the point of
-the inverse class $[\idealr_nf]$).  The product formula is then the
-definition of the ring class polynomial, whose integrality is
-classical \cite[\S13]{Cox2013}.
+Theorem \ref{thm:classformula} for $\bar m_2$; then $-m_2$, the mirror
+image of $\bar m_2$, is the point of the inverse class
+$[\idealr_nf]$, and $j$ of mirror points are complex conjugates.  The
+product formula is the definition of the ring class polynomial, whose
+integrality is classical \cite[\S13]{Cox2013}.
 \end{proof}
 
 \begin{proposition}[traces]\label{prop:traces}
@@ -2247,10 +2252,13 @@ discriminant $e$ (i.e.\ with $j = 0$ for $e = -3$, $j = 1728$ for
 $e = -4$).
 
 \begin{proposition}[the denominator mechanism]\label{prop:gzmech}
-Write the sixth power of the phase in the closed form
+Write $j_i := j(\idealb_i)$, so $j_1 = \beta_1$ and $j_2 =
+\bar\beta_2$ is the singular modulus of the class $[\idealr_nf]$
+(Proposition \ref{prop:singularmoduli}), and write the sixth power of
+the phase in the closed form
 \[
   u_f^6 \;=\; \varepsilon^6\,\mu^{-12}\,
-  \frac{\beta_1^4(\beta_1 - 1728)^3}{\beta_2^4(\beta_2 - 1728)^3}
+  \frac{j_1^4(j_1 - 1728)^3}{j_2^4(j_2 - 1728)^3}
   \cdot\frac{\Delta(\idealb_1)}{\Delta(\idealb_2)}
 \]
 (from $h_2^6 = C\,j^4(j - 1728)^3\Delta$ applied to Proposition
@@ -2261,8 +2269,8 @@ $\Delta$-quotient is an $S$-unit supported over the primes dividing
 $r_0s_0$ and the curvatures (by the classical index-divisibility of
 $\Delta$-quotients of nested lattices \cite[Ch.~12]{Lang1987}, applied
 through $\idealb_2 = \nu\idealr^{-1}\idealb_1$); the numerators
-$\beta_1^4(\beta_1 - 1728)^3$ are algebraic integers; and the prime
-support of $\beta_2^4(\beta_2 - 1728)^3$ lies in
+$j_1^4(j_1 - 1728)^3$ are algebraic integers; and the prime
+support of the algebraic integer $j_2^4(j_2 - 1728)^3$ lies in
 $\GZ(D, -3) \cup \GZ(D, -4)$ \cite{GrossZagier1985, LauterViray2015}.
 Consequently every prime of the denominator ideal of $u_f^6$ divides
 $2\,r_0s_0\,q_1q_2$ or lies in $\GZ(D, -3) \cup \GZ(D, -4)$.
@@ -2688,9 +2696,9 @@ discriminant and conductor.}
 \begin{proposition}[traces: the even-square slice; computational]
 \label{prop:euctraces}
 Set $\mathrm{Tr}^E_n := \sum_{\idealc}(j(\idealc) - 744)$ over
-$\Cl(\mathcal{O}_n)$ for $n \ge 2$, and
-$\mathrm{Tr}^E_1 := 492$, one has $\sum_{g \mid n}\mathrm{Tr}^E_{n/g}
-= t(4n^2)$, Zagier's trace \cite{Zagier2002}; verified for all
+$\Cl(\mathcal{O}_n)$ for $n \ge 2$, and $\mathrm{Tr}^E_1 := 492$; then
+$\sum_{g \mid n}\mathrm{Tr}^E_{n/g} = t(4n^2)$, Zagier's trace
+\cite{Zagier2002}; verified for all
 $n \le 13$ by \texttt{euclidean\_\allowbreak moduli\_\allowbreak invariants.py}.  The Euclidean
 census reads the weight-$3/2$ coefficients along the even squares
 $d = 4n^2$, the complementary diagonal to the hyperbolic slice.
@@ -3355,6 +3363,18 @@ E.~Grosswald,
 \emph{Representations of integers as sums of squares},
 Springer, 1985.
 
+\bibitem{PaperII}
+%% TODO: update author/title on completion of Paper II.
+K.~Ivar,
+\emph{Schmidt circles and elliptic units: Kronecker limit formulas
+and the Robert index},
+in preparation.
+
+\bibitem{mpmath}
+F.~Johansson et al.,
+\emph{mpmath: a Python library for arbitrary-precision floating-point
+arithmetic}, \texttt{https://mpmath.org}.
+
 \bibitem{KatokSarnak1993}
 S.~Katok, P.~Sarnak,
 \emph{Heegner points, cycles and Maass forms},
@@ -3380,17 +3400,10 @@ D.~E.~Martin,
 \emph{A geometric study of circle packings and ideal class groups},
 preprint, arXiv:2202.10530 (2022).
 
-\bibitem{mpmath}
-F.~Johansson et al.,
-\emph{mpmath: a Python library for arbitrary-precision floating-point
-arithmetic}, \texttt{https://mpmath.org}.
-
-\bibitem{PaperII}
-%% TODO: update author/title on completion of Paper II.
-K.~Ivar,
-\emph{Schmidt circles and elliptic units: Kronecker limit formulas
-and the Robert index},
-in preparation.
+\bibitem{sympy}
+A.~Meurer et al.,
+\emph{SymPy: symbolic computing in Python},
+PeerJ Comput.\ Sci.\ \textbf{3}:e103 (2017).
 
 \bibitem{RickardsStange2026}
 J.~Rickards, K.~E.~Stange,
@@ -3424,11 +3437,6 @@ Trans.\ Amer.\ Math.\ Soc.\ \textbf{370} (2018), 6169--6219.
 K.~E.~Stange,
 \emph{Visualising the arithmetic of imaginary quadratic fields},
 Int.\ Math.\ Res.\ Not.\ IMRN \textbf{2018}, no.\ 12, 3908--3938.
-
-\bibitem{sympy}
-A.~Meurer et al.,
-\emph{SymPy: symbolic computing in Python},
-PeerJ Comput.\ Sci.\ \textbf{3}:e103 (2017).
 
 \bibitem{Zagier1975}
 D.~Zagier,
