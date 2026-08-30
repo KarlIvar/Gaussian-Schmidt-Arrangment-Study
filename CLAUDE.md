@@ -273,11 +273,19 @@ results in [phase-kronecker-limit.md](phase-kronecker-limit.md)),
 (the flagship spectral identity, staged), [03-phase-atlas-and-dit.md](prompts/03-phase-atlas-and-dit.md)
 (the atlas figure + sign-law data + Duke–Imamoğlu–Tóth novelty check, one dataset),
 [04-schmidt-units-robert-index.md](prompts/04-schmidt-units-robert-index.md)
-(**done** — results in [schmidt-units.md](schmidt-units.md)), and
+(**done** — results in [schmidt-units.md](schmidt-units.md)),
 [05-genus-refined-gross-zagier.md](prompts/05-genus-refined-gross-zagier.md)
 (the dressing exponent law via GZ/Lauter–Viray; closes the exact valuations, the
 \(\lambda_n\)-law and the sign anomaly, and rebuilds the missing
-`first_power_descent.py`).
+`first_power_descent.py`), and the two **paper prompts**:
+[06-paper-1-schmidt-circles.md](prompts/06-paper-1-schmidt-circles.md)
+(Paper I, broad: classification, three-geometry counts, involution/class
+formula, composition, the phase with first-power descent and the Euclidean
+phase theory; monoid and spectral layers excluded) and
+[07-paper-2-schmidt-elliptic-units.md](prompts/07-paper-2-schmidt-elliptic-units.md)
+(Paper II, narrow, assumes Paper I: Kronecker limit formulas, the unit
+theorem with per-class valuations, first-power Schmidt units, the Robert
+index \(8h_{L_3}C_n(0)\)).
 
 ## Paper planning
 

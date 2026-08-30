@@ -174,7 +174,27 @@ to the trace-formula program.
 
 ## 4. Consolidation
 
-- **Two papers**: (I) *Counting and composing Schmidt circles* — classification, \(N_e\)/Catalan, \(3H(n^2-1)\), class formula for \(\hat\sigma\), circle-language composition (self-contained, elementary tools); (II) *The phase of a Schmidt circle* — \(\Theta\), functional equations, dihedral reciprocity, GZ-denominators (CM machinery). The documents already contain the proofs; the work is selection and polish.
+- **Two papers** — split finalized, session prompts written
+  ([06-paper-1-schmidt-circles.md](prompts/06-paper-1-schmidt-circles.md),
+  [07-paper-2-schmidt-elliptic-units.md](prompts/07-paper-2-schmidt-elliptic-units.md)):
+  (I) *Schmidt circles of the Gaussian integers: classification, class numbers,
+  and the phase invariant* — broad and fully proved: classification/level, the
+  three-geometry counting triptych (\(N_e\)/Catalan, \(3H(n^2-1)\), spherical
+  census), involution + class formula, circle-language composition, the
+  six-invariant moduli with the first-power descent
+  \(u = \Phi_y/\Phi_x\) and integer level polynomials, the Euclidean phase
+  theory (monic polynomials, all-\(n\) irreducibility, \(\Delta\)-mass law),
+  plus — conditional on porting the phase-atlas branch — the divisor-class
+  sign law and the certified DIT novelty statement;
+  (II) *Schmidt circles and elliptic units: Kronecker limit formulas and the
+  Robert index* — narrow, assumes (I): master identities against
+  \(L'(0,\chi)\), genus closed forms, the unit theorem for \(R_f\) with the
+  per-class valuation law and ladders, first-power \(w_f\), and the Robert
+  index \(8h_{L_3}C_n(0)\). Excluded from both by design: the
+  monoid/operation layer, the spectral layer, the spherical phase laws and
+  shape bijection, and all merely-certified spherical/imprimitive statements
+  beyond flagged remarks. The documents already contain the proofs; the work
+  is selection, polish, and the literature-diligence pass below.
 - **Software**: consolidate the nine scripts into one module with a test suite; port the exact-ideal parts to Sage/PARI to replace PSLQ certification by exact arithmetic where possible. Guard rails learned this session: never trust a PSLQ fit with (terms)×(coefficient digits) near the working precision, and never let module import set `mp.dps`.
 - **Literature diligence** before writing: Stange (Schmidt arrangements — how much of the classification/counting is folklore there), Sarnak (reciprocal geodesics), Duke–Imamoğlu–Tóth (cycle integrals), Gross–Zagier (singular moduli), Kubert–Lang/Schertz (Siegel units in ring class fields), Mertens/Bringmann–Kane (class number identities), Vlasenko–Zagier and Andersen (higher Kronecker limit formulas along real quadratic data — possibly the closest existing relatives of \(\log|u|\)).
 
