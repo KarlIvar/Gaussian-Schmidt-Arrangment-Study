@@ -86,6 +86,7 @@ Phase layer (CM machinery):
 | [moduli-invariants.md](moduli-invariants.md) | the 6-coordinate system \((\alpha,\beta_1,\beta_2,\arg u)\); \(\hat\sigma\)-pairs on the fiber product \(X_0(\tfrac{n-1}2)\times_{X(1)}X_0(\tfrac{n+1}2)\), discriminant coupled to level; laws \(u_{f^{-1}}=\bar u_f\), \(u_fu_{\mathfrak{r}f}=1\); Theorem A (dihedral equivariance of \(u^{12}\)); GZ-prime denominators (§5.7); level polynomials \(Q_n\) (§5.9) irreducible at computed levels (§5.10) |
 | [first-power-descent.md](first-power-descent.md) | \(u_f = \Phi_y/\Phi_x(\beta_1,\beta_2)\) (derivative of the modular correspondence); Galois law at **first power**; \(\omega_f\equiv1\); irreducibility re-proved by exact arithmetic, no PSLQ |
 | [euclidean-moduli-invariants.md](euclidean-moduli-invariants.md) | \(N_e(n)=2h(-4n^2)\); \(j\)-values \(=H_{-4n^2}^2\); trace slice \(t(4n^2)\); lemniscatic phase; \(\Delta\)-mass law (Thm 4, proved); \(P^{(2)}_n\) irreducible for **every** \(n\) (Thm 5, proved) |
+| [phase-kronecker-limit.md](phase-kronecker-limit.md) | character sums of \(\log\lvert u\rvert\) = elliptic-unit theory: \(S(\chi) = -2L'(0,\chi) + \tfrac23\Sigma_0 + \tfrac12\Sigma_{1728}\) (Euclidean, proved); hyperbolic \(S(\chi) = 0\) for \(\chi(\mathfrak{r})=+1\), \(= -4L'(0,\chi)+\tfrac43\Sigma_0+\Sigma_{1728}\) for odd \(\chi\) (proved, \(\varepsilon\) and \(\mu\) cancel); genus-character closed forms \(c\, h\log\varepsilon_d\) with the Euclidean field \(=\mathbb{Q}(\sqrt n)\); exact GZ-supported \(S\)-unit dressing; certified \(\Delta\)-mass polynomials \(D_n\) |
 | [spherical-moduli-invariants.md](spherical-moduli-invariants.md) | third geometry: \(\cot\theta = \ell\); census \(4H(4(\ell^2+1))\); shape polynomial \(\prod_{f^2\mid\ell^2+1}H_{-4(\ell^2+1)/f^2}\) (each stratum once); trace slice \(t(4\ell^2+4)\); Pell-unit phase, cap-swap \(u^2_-=\varepsilon^4u^2_+\), level norm \(m_\ell\) with GZ valuation law; **half-orbit phenomenon** (phases = half the Galois root system, golden-ratio cocycle at \(\ell=2\)) |
 
 Monoid / operation layer:
@@ -149,6 +150,13 @@ Planning: [outlook.md](outlook.md) — the master outlook (small/medium/large qu
 
 ## Status ledger (open problems, deduplicated)
 
+- **Kronecker limit formula for the phases: settled** (outlook §2.3 / euclidean §6.6,
+  [phase-kronecker-limit.md](phase-kronecker-limit.md)): \(S(\chi) = \sum\chi\log|u|\)
+  evaluates through \(L'(0,\chi)\) in both aspects (proved); genus characters in full
+  closed form (Euclidean field \(=\mathbb{Q}(\sqrt n)\)); remaining open there:
+  the exponent law of the \(\Sigma\)-dressings (genus-refined Gross–Zagier), the
+  local Euler factor at square conductors, Stark closed forms for order \(>2\)
+  characters, and the Robert-unit index of \(\{G_\mathfrak{c}\}\).
 - **Hyperbolic first-power loose ends**: \(T = 1\) (distinctness of \(u_f^{12}\)) for general
   \(n\) — the only gap between per-level and all-\(n\) irreducibility. (The Euclidean
   analogue was closed by archimedean dominance; try the same at level \(1-n^2\).)
@@ -197,6 +205,7 @@ root, e.g. `python3 scripts/alpha_circles.py --selftest`.
 | `euclidean_moduli_invariants.py` | Euclidean structure, ring class polys, phases, \(P^{(2)},P^{(6)}\) | euclidean-moduli-invariants |
 | `mass_law_and_irreducibility.py` | Theorem 4 (M1–M4), Theorem 5 ingredients, exact factorizations | euclidean-moduli-invariants |
 | `spherical_moduli_invariants.py` | census, shape bijection (\(\ell\le20\) exact), resultant identity (symbolic), phase laws, level norms | spherical-moduli-invariants |
+| `phase_klf.py` | Kronecker-limit character sums: master identities, Epstein \(L'(0,\chi)\), genus factorizations with conductor Euler factors, exact \(\mathbb{Q}(\sqrt d)\) coset factorizations, \(D_n\)/\(R\)-polynomials, safe-PSLQ non-fits (`--selftest`: 250–400 digits) | phase-kronecker-limit |
 | `make_composition_figure.py`, `make_omega_figure.py` | figures | — |
 
 **Known gap**: `scripts/first_power_descent.py` is referenced by
