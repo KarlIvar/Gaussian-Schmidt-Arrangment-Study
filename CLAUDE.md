@@ -248,10 +248,18 @@ before publication.
 ## Next-step prompts
 
 `prompts/` holds ready-to-run session prompts for the highest-value next steps:
-[01-kronecker-limit-formula.md](prompts/01-kronecker-limit-formula.md) (\(\log|u|\) vs
-\(L'(0,\chi)\) — the likely headline theorem), [02-schmidt-trace-formula.md](prompts/02-schmidt-trace-formula.md)
+[01-kronecker-limit-formula.md](prompts/01-kronecker-limit-formula.md) (**done** —
+results in [phase-kronecker-limit.md](phase-kronecker-limit.md)),
+[02-schmidt-trace-formula.md](prompts/02-schmidt-trace-formula.md)
 (the flagship spectral identity, staged), [03-phase-atlas-and-dit.md](prompts/03-phase-atlas-and-dit.md)
-(the atlas figure + sign-law data + Duke–Imamoğlu–Tóth novelty check, one dataset).
+(the atlas figure + sign-law data + Duke–Imamoğlu–Tóth novelty check, one dataset),
+[04-schmidt-units-robert-index.md](prompts/04-schmidt-units-robert-index.md)
+(prove the \(R_f\) unit property, first-power Schmidt units via \(\gamma_2^2\gamma_3\),
+Robert index — the recommended next step), and
+[05-genus-refined-gross-zagier.md](prompts/05-genus-refined-gross-zagier.md)
+(the dressing exponent law via GZ/Lauter–Viray; closes the exact valuations, the
+\(\lambda_n\)-law and the sign anomaly, and rebuilds the missing
+`first_power_descent.py`).
 
 ## Paper planning
 
