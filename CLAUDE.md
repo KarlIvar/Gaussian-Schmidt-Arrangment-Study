@@ -153,8 +153,9 @@ Planning: [outlook.md](outlook.md) — the master outlook (small/medium/large qu
     local rigidity of the invertible ambiguous twist). Proved; polynomials certified
     + irreducible to \(n\le21\). **Per-class valuation law** for the Euclidean
     \(G_\mathfrak{c}\) (class-independent \(w_p(k)\)). Proved; split \(\lambda_n\)-ladder
-    settled. **Robert index** \(= 8h_{L_3}\) on the cubic layer (certified, \(n=9,11,13\);
-    fundamental units and \(h_{L_3}=1,1,3\) rigorous via Friedman's bound).
+    settled. **Robert index** \(= 8h_{L_3}C_n(0)\) on the cubic layer (certified at all
+    eight cubic levels \(n\le27\); out-of-sample confirmation at \(n=23\), \(h_{L_3}=2\);
+    fundamental units rigorous via Friedman's bound).
 
 ## Status ledger (open problems, deduplicated)
 

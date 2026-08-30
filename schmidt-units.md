@@ -21,7 +21,9 @@ descent of [first-power-descent.md](first-power-descent.md). Results:
    ([euclidean-moduli-invariants.md](euclidean-moduli-invariants.md) Thm 4),
    proved without quasi-canonical-lifting inputs and verified by Newton
    polygons at every computed level. This settles the split-prime part of
-   euclidean §6.1 (the \(5^{4k}\)-ladder) exactly.
+   euclidean §6.1 (the \(5^{4k}\)-ladder) exactly, and decomposes the
+   recorded inert ladders (\(7^3, 7^6, 7^9, 7^{13}\) at \(n=7\); the 3-adic
+   ladder at \(n=9\)) into certified single-slope ingredients.
 3. **First-power Schmidt units** (§4): the canonical sixth root
    \(w_f = u_f\,(\gamma_2^2\gamma_3)(\tau_{\mathfrak{r}f})/(\gamma_2^2\gamma_3)(\tau_f)\)
    satisfies \(w_f^6 = R_f\), \(w_fw_{\mathfrak{r}f} = 1\) and
@@ -36,16 +38,19 @@ descent of [first-power-descent.md](first-power-descent.md). Results:
    systems are \(-24\,m_\chi\log\varepsilon_{d_2}\) (hyperbolic) and
    \(-12\,m_\chi\log\varepsilon_{d_2}\) (Euclidean) with
    \(m_\chi = \tfrac{2h(d_1)}{w(d_1)}h(d_2)C(0)\) — class numbers appear as
-   indices; and on the cubic layer (Euclidean \(n = 9, 11, 13\)) the
-   \(\Delta\)-coset unit \(\theta_u\) satisfies
+   indices; and on the cubic layer (all eight Euclidean levels with a cubic
+   character, \(n = 9, 11, 13, 18, 22, 23, 26, 27\)) the \(\Delta\)-coset
+   unit \(\theta_u\) satisfies
    $$
    \bigl[\mathcal{O}_{L_3}^\times : \langle -1, \theta_u\rangle\bigr]
-   \;=\; 8\,h_{L_3}
+   \;=\; 8\,h_{L_3}\,C_n(0),
    $$
-   with \(h_{L_3} = 1, 1, 3\) — **the class number of the cubic field is the
+   \(C_n(0) = 1\) at primitive \(\chi_3\): with \(h_{L_3} = 1, 1, 3, 2\) at
+   \(n = 9, 11, 13, 23\) — **the class number of the cubic field is the
    Robert index**, the exact analogue of "cyclotomic units have index
-   \(h^+\)". The fundamental units are computed and certified
-   (\(x^3+15x^2+57x-1\), \(x^3-25x^2+201x-1\), \(x^3-x^2+9x-1\)).
+   \(h^+\)", confirmed out-of-sample at \(n = 23\). The fundamental units
+   are computed and certified (\(x^3+15x^2+57x-1\), \(x^3-25x^2+201x-1\),
+   \(x^3-x^2+9x-1\), \(x^3-49x^2+601x-1\)).
 
 Everything displayed is machine-verified by
 [scripts/schmidt_units.py](scripts/schmidt_units.py) under the certification
@@ -348,6 +353,29 @@ collision valuations — the remaining open ingredient is exactly the
 conductor-degenerate Gross–Zagier data of outlook §2.8, no longer the
 \(\Delta\)-part.
 
+**Corollary 3.2 (the inert ladders of euclidean §5.5, decomposed).** At
+\(n = 7\) (\(p = 7\), \(k = 1\)) and \(n = 9\) (\(p = 3\), \(k = 2\)) every
+ingredient of \(v_P(u^2_\mathfrak{c}) = \tfrac43v(\beta) + v(\beta-1728) +
+\tfrac13v(G) - 4k\) is certified to be a *single* Newton-polygon slope —
+the \(\beta\)-collision valuations are class-independent too — giving the
+constant per-class values
+$$
+n=7:\ v_7(u^2_\mathfrak{c}) = \tfrac43\cdot0 + \tfrac14 + \tfrac13\cdot\tfrac32 - 4
+= -\tfrac{13}4,
+\qquad
+n=9:\ v_3(u^2_\mathfrak{c}) = \tfrac43\cdot\tfrac12 + \tfrac12 + \tfrac13\cdot4 - 8
+= -\tfrac{11}2 .
+$$
+The recorded denominator ladders follow: at \(n = 7\) the integrality bound
+\(7^{\lfloor 13k/4\rfloor} = 7^3, 7^6, 7^9, 7^{13}\) is met **exactly** by
+the data of euclidean §5.5; at \(n = 9\) the bound
+\(3^{\lfloor 11k/2\rfloor}\) is attained at the coset-structured
+\(k = 3, 6\) (\(3^{16}, 3^{33}\)), with structured cancellation at the
+other \(k\) (\(3^2, 3^6, 3^{19}, 3^{22}\)). So the \(\lambda_n\)-question is
+reduced, at every computed level, to one datum: the per-class
+\(\beta\)-collision slopes (certified constant here; their general law is
+outlook §2.8).
+
 ## 4. First-power Schmidt units
 
 Set \(\gamma_2 = E_4/\eta^8\), \(\gamma_3 = E_6/\eta^{12}\) (canonical
@@ -464,9 +492,10 @@ unit of its real quadratic field is an explicit integer built from the two
 
 ### 5.2 Cubic layer: the index is \(8\,h_{L_3}\)
 
-At Euclidean \(n = 9, 11, 13\) (\(\mathrm{Cl}(\mathcal{O}_n) \cong \mathbb{Z}/6\))
-let \(\chi_3\) be a cubic character, \(L_3\) the real cubic subfield of the
-ring class field \(H_n\) cut out by \(\ker\chi_3\), and
+At a Euclidean level whose class group has 3-torsion
+(\(n = 9, 11, 13, 18, 22, 23, 26, 27\) among \(n \le 31\)) let \(\chi_3\) be
+a cubic character, \(L_3\) the real cubic subfield of the ring class field
+\(H_n\) cut out by \(\ker\chi_3\), and
 \(\theta = \prod_{\mathfrak{c}\in\ker\chi_3} G_\mathfrak{c}\) the principal
 \(\Delta\)-mass coset product (the real root of the certified coset cubics of
 phase-kronecker-limit §3).
@@ -479,66 +508,96 @@ embedding.
 \(G_\mathfrak{c}\) at every place is the constant \(w_p(k)\), so
 \(v(\theta) = \tfrac{h}3 w_p(k) = \tfrac13v(M(n))\) at every place over
 \(p \mid n\) and \(0\) elsewhere — exactly the valuations of
-\(|M(n)|^{1/3} \in \mathbb{Z}\) (the mass is a cube at these levels:
-\(3^{24}, 11^6, 1\)). The logarithm: writing \(a = \log|\theta|\),
-\(b\) for the common log-modulus of the two conjugate coset products,
-the uniform Stark law \(-12L'(0,\chi_3) = \sum\chi_3\log|G|\)
+\(|M(n)|^{1/3} \in \mathbb{Z}\) (the mass is a cube at every level with
+3-torsion: \(3 \mid h\) forces \(3 \mid v_p(M)\) through
+\(h = \tfrac12N_e(p^k)N_e(n')\); e.g. \(3^{24}, 11^6, 1, 2^{18}3^{48},
+2^{36}11^{12}, 23^6, 2^{36}, 3^{78}\)). The logarithm: writing
+\(a = \log|\theta|\), \(b\) for the common log-modulus of the two conjugate
+coset products, the uniform Stark law
+\(-12L'(0,\chi_3) = \sum\chi_3\log|G|\)
 (phase-kronecker-limit Thm 2, proved) reads \(a - b = -12L'\), while
 \(a + 2b = \log|M(n)|\); solving,
 \(\log|\theta_u| = a - \tfrac13\log|M| = -8L'(0,\chi_3)\). \(\square\)
 
 **Proposition 5.2.** \(L_3\) has one real and one complex place (unit rank
-1), and \(h_{L_3}R_{L_3} = L'(0,\chi_3)\).
+1), and \(h_{L_3}R_{L_3}\,C_n(0) = L'(0,\chi_3)\), where \(L(s,\chi_3)\) is
+the Epstein sum at level \(n\) and \(C_n(s)\) is the finite Euler product
+relating it to the primitive \(L\)-function of \(\chi_3\)
+(\(C_n \equiv 1\) when \(\chi_3\) is primitive — at \(n = 9, 11, 13, 23\),
+since the class groups of the proper divisor levels have no 3-torsion except
+along the displayed pullbacks).
 
-*Proof.* \(\zeta_{L_3}(s) = \zeta(s)\,L(s,\chi_3)\) (dihedral Artin
-formalism for the ring class extension; \(\chi_3\) does not factor through
-any smaller conductor, as the class groups of the proper suborders have no
-3-torsion). \(L(0,\chi_3) = 0\), \(L'(0,\chi_3) \neq 0\) and
-\(\zeta(0) = -\tfrac12\), so \(\zeta_{L_3}\) vanishes to first order at
-\(s = 0\): \(r_1 + r_2 - 1 = 1\) with a real embedding present, forcing
-\((r_1, r_2) = (1,1)\). The class number formula at \(s = 0\),
-\(\zeta_{L_3}'(0) = -h_LR_L/w_L\) with \(w_L = 2\), gives
-\(h_LR_L = -2\zeta'_{L_3}(0) = L'(0,\chi_3)\). \(\square\)
+*Proof.* \(\zeta_{L_3}(s) = \zeta(s)\,L_{\mathrm{prim}}(s,\chi_3)\)
+(dihedral Artin formalism for the ring class extension), and
+\(L(s,\chi_3) = L_{\mathrm{prim}}(s,\chi_3)C_n(s)\). \(L(0,\chi_3) = 0\),
+\(L'(0,\chi_3) \neq 0\) and \(\zeta(0) = -\tfrac12\), so \(\zeta_{L_3}\)
+vanishes to first order at \(s = 0\): \(r_1 + r_2 - 1 = 1\) with a real
+embedding present, forcing \((r_1, r_2) = (1,1)\). The class number formula
+at \(s = 0\), \(\zeta_{L_3}'(0) = -h_LR_L/w_L\) with \(w_L = 2\), gives
+\(h_LR_L = -2\zeta'_{L_3}(0) = L'_{\mathrm{prim}}(0,\chi_3)\), and
+\(L'(0,\chi_3) = C_n(0)L'_{\mathrm{prim}}(0,\chi_3)\) since
+\(L_{\mathrm{prim}}(0) = 0\). \(\square\)
 
-> **Theorem 3 (Robert index, cubic layer).** At Euclidean
-> \(n = 9, 11, 13\):
+> **Theorem 3 (Robert index, cubic layer).** At every Euclidean level with a
+> cubic character (\(n = 9, 11, 13, 18, 22, 23, 26, 27\)):
 > $$
 > \bigl[\mathcal{O}_{L_3}^\times : \langle -1,\ \theta_u\rangle\bigr]
-> \;=\; \frac{\log|\theta_u|}{R_{L_3}} \;=\; 8\,h_{L_3},
+> \;=\; \frac{\log|\theta_u|}{R_{L_3}} \;=\; 8\,\frac{L'(0,\chi_3)}{R_{L_3}}
+> \;=\; 8\,h_{L_3}\,C_n(0),
 > $$
-> with all quantities computed and certified:
+> where \(C_n(0) = 1\) when \(\chi_3\) is primitive (its conductor is not a
+> proper divisor level) and \(C_n(0)\) is the integer imprimitivity Euler
+> multiplier otherwise. All quantities computed and certified:
 >
-> | \(n\) | \(\theta_u\) minimal polynomial | fundamental unit | \(h_{L_3}\) | index |
-> |---|---|---|---|---|
-> | 9 | \(x^3 - 11708931x^2 + 115597311109635x - 1\) | \(x^3+15x^2+57x-1\) | 1 | **8** |
-> | 11 | \(x^3 + 2297078781x^2 + 2651044211389651971x - 1\) | \(x^3-25x^2+201x-1\) | 1 | **8** |
-> | 13 | \(x^3 + 446643445245x^2 + 61048319249786206560771x - 1\) | \(x^3-x^2+9x-1\) | 3 | **24** |
+> | \(n\) | \(\chi_3\) | fundamental unit of \(L_3\) | \(h_{L_3}\) | \(C_n(0)\) | index |
+> |---|---|---|---|---|---|
+> | 9 | primitive | \(x^3+15x^2+57x-1\) | 1 | 1 | **8** |
+> | 11 | primitive | \(x^3-25x^2+201x-1\) | 1 | 1 | **8** |
+> | 13 | primitive | \(x^3-x^2+9x-1\) | 3 | 1 | **24** |
+> | 23 | primitive | \(x^3-49x^2+601x-1\) | 2 | 1 | **16** |
+> | 18 | from \(n=9\) | \(x^3+15x^2+57x-1\) | 1 | 2 | 16 |
+> | 22 | from \(n=11\) | \(x^3-25x^2+201x-1\) | 1 | 2 | 16 |
+> | 26 | from \(n=13\) | \(x^3-x^2+9x-1\) | 3 | 2 | 48 |
+> | 27 | from \(n=9\) | \(x^3+15x^2+57x-1\) | 1 | 4 | 32 |
 >
-> The identity index \(= 8h_{L_3}\) follows from Propositions 5.1–5.2; the
+> (\(\theta_u\) minimal polynomials in the script output; e.g.
+> \(x^3 - 11708931x^2 + 115597311109635x - 1\) at \(n=9\),
+> \(x^3 - 28994720086003708422147x^2 + \cdots x - 1\) at \(n=23\).) The
+> identity index \(= 8L'/R_{L_3}\) follows from Propositions 5.1–5.2; the
 > content of the computation is the fundamental unit (hence \(R_{L_3}\) and
-> the certified integer \(h_{L_3} = L'(0,\chi_3)/R_{L_3}\), with \(\ge 248\)
-> spare digits). Fundamentality is rigorous: the descent tests every
-> \(k\)-th root (\(k \le 40\)) for certified integrality of the minimal
-> polynomial, and Friedman's unconditional regulator bound
-> \(R > 0.2052\) caps any residual index by \(R_{L_3}/0.2052 < 40\).
+> the certified integer \(L'(0,\chi_3)/R_{L_3}\), \(\ge 249\) spare digits).
+> Fundamentality is rigorous: the descent tests every \(k\)-th root
+> (\(k \le 40\)) for certified integrality of the minimal polynomial, and
+> Friedman's unconditional regulator bound \(R > 0.2052\) caps any residual
+> index by \(R_{L_3}/0.2052 < 40\).
 
-At \(n = 13\) the class number \(h_{L_3} = 3\) of the cubic field
-\(x^3 - x^2 + 9x - 1\) is forced into the index — precisely the
-Kubert–Lang/Robert phenomenon ("cyclotomic units have index \(h^+\)"),
-realized by the Schmidt disks of curvature 26. The universal factor
-\(8 = 12/(3/2)\) is the weight bookkeeping of the \(\Delta\)-normalization
-(the coset object is a 12th-power-level datum, projected with the
-\((3/2)\)-coefficient of the Stark relation).
+Three structural readings. (i) At \(n = 13\) and \(n = 23\) the class
+numbers \(h_{L_3} = 3, 2\) of the cubic fields are forced into the index —
+precisely the Kubert–Lang/Robert phenomenon ("cyclotomic units have index
+\(h^+\)"), realized by the Schmidt disks of curvature \(2n\). The
+\(n = 23\) row is a genuine out-of-sample confirmation: a **new** cubic
+field, computed after the law \(8h_{L_3}\) was formulated on \(9, 11, 13\).
+(ii) The pullback levels are a strong internal consistency check: the
+*identical* fundamental units and regulators recur at \(n = 9, 18, 27\) and
+at \(n = 11, 22\) and \(n = 13, 26\), while the coset units \(\theta_u\)
+differ — the index grows by exactly the local Euler value \(C_n(0)\)
+(observed: \(2\) per added prime, \(4\) at the square-conductor step
+\(9 \to 27\) — the same local Euler phenomenon as phase-kronecker-limit §8,
+opens 2). (iii) The universal factor \(8 = 12/(3/2)\) is the weight
+bookkeeping of the \(\Delta\)-normalization (the coset object is a
+12th-power-level datum, projected with the \((3/2)\)-coefficient of the
+Stark relation).
 
 **Conjecture (Robert index for Schmidt units).** For every Euclidean level
-with a cubic character, \([\mathcal{O}_{L_3}^\times : \langle -1,
-\theta_u\rangle] = 8\,h_{L_3}\); and more generally, for every ring class
-field \(H_n\), the full group generated by the \(\{G_\mathfrak{c}\}\)
+whose cubic character is primitive, \([\mathcal{O}_{L_3}^\times : \langle -1,
+\theta_u\rangle] = 8\,h_{L_3}\) (imprimitive levels: times the local Euler
+multiplier \(C_n(0)\)); and more generally, for every ring class field
+\(H_n\), the full group generated by the \(\{G_\mathfrak{c}\}\)
 modulo its mass-normalization sits inside the unit/\(S\)-unit group of
 \(H_n\) with index a product of class numbers of the subfields cut out by
 the character group, up to powers of 2 and 3 — the Kubert–Lang ch. 12–13
-shape. (Certified at every computed level through the layers above; the
-quadratic layer's class-number factors are §5.1.)
+shape. (Certified at all eight computed cubic levels; the quadratic layer's
+class-number factors are §5.1.)
 
 **Remark (hyperbolic side).** The hyperbolic \(R_f\) satisfy
 \(R_{\mathfrak{r}f} = 1/R_f\), so their projections vanish on every
@@ -573,8 +632,9 @@ natural continuation).
 - The Newton-polygon verification of Theorem 2 at \(n \le 18, 21, 25, 27,
   49\).
 - The \(m(n)\) coherence table and the coherent-level \(w\)-polynomials of
-  §4; the fundamental units, \(h_{L_3}\)-values and indices of Theorem 3
-  (fundamentality rigorous via Friedman's bound).
+  §4; the fundamental units, \(h_{L_3}\)-values, Euler multipliers and
+  indices of Theorem 3 at all eight cubic levels (fundamentality rigorous
+  via Friedman's bound; \(n = 23\) out-of-sample).
 - \(R \equiv 1 \Rightarrow\) principal induced twist (converse direction of
   the stratum criterion).
 
@@ -592,7 +652,7 @@ natural continuation).
 ## 7. Machine verification
 
 All displayed statements: `python3 scripts/schmidt_units.py --selftest`
-(phases 1–4; ~1 minute). Per phase the script asserts:
+(phases 1–4; ~4 minutes). Per phase the script asserts:
 
 1. the lattice lemma classwise (max deviation \(< 10^{-3\,\mathrm{dps}/5}\));
    integer/palindromy/constant-term certification of every \(R\)-polynomial
@@ -601,15 +661,19 @@ All displayed statements: `python3 scripts/schmidt_units.py --selftest`
    strata; irreducibility via exact factorization;
 2. the single-slope Newton polygons of the certified \(D_n\) at every
    \(p \mid n\), all levels including \(n = 49\) at 460 digits, against
-   \(w_p(k)\); the split-ladder witness at \(n = 15\);
+   \(w_p(k)\); the split-ladder witness at \(n = 15\); the inert-ladder
+   decompositions of Corollary 3.2 (denominator ladders re-derived from
+   certified slopes);
 3. the laws \(w^6 = R\), \(w_fw_{\mathfrak{r}f} = 1\), the off-boundary
    mirror law, and the \(m(n)\) table (each entry re-certified);
 4. the quadratic-layer projections against
-   \(\log\varepsilon_{d_2}\) (proved KLF factorizations as input); the
-   unit-normalized coset cubics, the \(k\)-th-root descent with the
-   Friedman cap, \(h_{L_3} = L'(0,\chi_3)/R_{L_3}\) as certified integers
-   (independent Epstein evaluation of \(L'\)), the Stark relation
-   \(\log|\theta_u| = -8L'\), and the index \(= 8h_{L_3}\).
+   \(\log\varepsilon_{d_2}\) (proved KLF factorizations as input); at all
+   eight cubic levels the unit-normalized coset cubics, the \(k\)-th-root
+   descent with the Friedman cap, \(L'(0,\chi_3)/R_{L_3}\) as certified
+   integers (independent Epstein evaluation of \(L'\)), the Stark relation
+   \(\log|\theta_u| = -8L'\), the index \(= 8L'/R_{L_3}\), and the
+   regression record of Theorem 3 (identical fundamental units across the
+   pullback families).
 
 Guard rails: precision set after imports; absolute-error certification with
 \(\ge\max(20, \mathrm{dps}/5)\) spare digits; no PSLQ anywhere.

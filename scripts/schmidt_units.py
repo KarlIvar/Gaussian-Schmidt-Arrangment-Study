@@ -33,12 +33,15 @@ Phase 3 (first power).  w_f := u_f * (g2^2 g3)(tau_{rf}) / (g2^2 g3)(tau_f)
 
 Phase 4 (Robert index).  (a) The chi-eigenprojections of the unit systems
   against fundamental real quadratic units, from the proved KLF genus closed
-  forms.  (b) The cubic layer at Euclidean n = 9, 11, 13: the Delta-coset
-  units theta_u = theta / M(n)^{1/3} in the real cubic subfield L_3 of the
+  forms.  (b) The cubic layer at every Euclidean level with a cubic
+  character (n = 9, 11, 13, 18, 22, 23, 26, 27): the Delta-coset units
+  theta_u = theta / M(n)^{1/3} in the real cubic subfield L_3 of the
   ring class field; certified k-th-root descent (rigorous via Friedman's
-  regulator bound R > 0.2052) finds the fundamental unit, whence
-      R_L, h_L = L'(0,chi_3)/R_L (certified integer), and
-      [O_{L_3}^x : <-1, theta_u>] = 8 h_L.
+  regulator bound R > 0.2052) finds the fundamental unit, whence R_L and
+      [O_{L_3}^x : <-1, theta_u>] = 8 L'(0,chi_3)/R_L
+  (certified integer) -- equal to 8 h_{L_3} at the primitive-character
+  levels 9, 11, 13, 23, and to 8 h_{L_3} C_n(0) at the pullback levels
+  18, 22, 26, 27, where the same cubic fields and fundamental units recur.
 
 Certification policy (CLAUDE.md guard rails): precision is set AFTER
 imports; integers/rationals accepted only with >= max(20, dps/5) spare
@@ -430,6 +433,44 @@ def phase2(levels=None, verbose=True):
     if verbose:
         print("split-ladder witness at n=15: v_5(H(0)) = v_5(H(1728)) = 0, "
               "so v_5(u_c^2) = -4 for every class (the 5^{4k} ladder)")
+    # the inert ladders of euclidean section 5.5, decomposed exactly:
+    #   v_p(u_c^2) = (4/3)v(beta) + v(beta-1728) + (1/3)v(G) - 4k,
+    # every ingredient a single Newton-polygon slope.
+    from math import lcm
+
+    def frac_poly(vals, what):
+        co = EU.poly_from_roots(vals)
+        out = []
+        for c_ in co:
+            v, sp = EU.cert_rational(c_, maxden=10 ** 60)
+            assert v is not None, (what, nstr(c_, 30))
+            out.append(v)
+        return out
+
+    for n, p, k, ladder in ((7, 7, 1, [3, 6, 9, 13]),
+                            (9, 3, 2, [2, 6, 16, 19, 22, 33])):
+        cv = EU.class_values(n)
+        forms = EU.reduced_forms(-4 * n * n)
+        co = frac_poly([cv[f][0] ** 2 for f in forms], f"u^2 n={n}")
+        assert [c.denominator for c in co][1:] == [p ** e for e in ladder], n
+        den = 1
+        for c in co:
+            den = lcm(den, c.denominator)
+        npg = newton_polygon([int(c * den) for c in co], p)
+        npH = newton_polygon([int(c) for c in
+                              frac_poly([cv[f][1] for f in forms], "j")], p)
+        npH17 = newton_polygon(
+            [int(c) for c in frac_poly([cv[f][1] - 1728 for f in forms],
+                                       "j-1728")], p)
+        assert len(npg) == len(npH) == len(npH17) == 1
+        vb, vb17, w = npH[0][0], npH17[0][0], predicted_w(p, k)
+        vu2 = Fraction(4, 3) * vb + vb17 + w / 3 - 4 * k
+        assert npg[0][0] == vu2, (n, npg, vu2)
+        if verbose:
+            print(f"inert ladder n={n}: v_{p}(u_c^2) = (4/3)({vb}) + "
+                  f"({vb17}) + (1/3)({w}) - {4 * k} = {vu2} for every "
+                  f"class; e_k denominators {p}^{ladder} vs floor bound "
+                  f"{[int(-vu2 * j) for j in range(1, len(forms) + 1)]}")
 
 
 # ======================================================================
@@ -633,11 +674,29 @@ def kth_root_descent(triple, kmax):
     return cur, index
 
 
+# (theta_u cubic, fundamental-unit cubic, c_n = L'(0,chi3)/R_L, index).
+# At the levels where chi_3 is primitive (n = 9, 11, 13, 23) c_n = h_{L_3};
+# at the pullback levels (18, 22, 26, 27: chi_3 factors through a smaller
+# conductor) the SAME cubic field and fundamental unit reappear and
+# c_n = h_{L_3} * C_n(0), C_n(0) the imprimitivity Euler multiplier.
 CUBIC_RECORD = {
     9: ([1, -11708931, 115597311109635, -1], [1, 15, 57, -1], 1, 8),
     11: ([1, 2297078781, 2651044211389651971, -1], [1, -25, 201, -1], 1, 8),
     13: ([1, 446643445245, 61048319249786206560771, -1],
          [1, -1, 9, -1], 3, 24),
+    18: ([1, 94095557056509, 13362738335777743394966415363, -1],
+         [1, 15, 57, -1], 2, 16),
+    22: ([1, 25517496658857981, 7028035410742581725200408425098342403, -1],
+         [1, -25, 201, -1], 2, 16),
+    23: ([1, -28994720086003708422147,
+          289100431655153833437856247634098764691761155, -1],
+         [1, -49, 601, -1], 2, 16),
+    26: ([1, -77393728680750899988483,
+          3726897283223817102236830775918158257403004931, -1],
+         [1, -1, 9, -1], 6, 48),
+    27: ([1, 17871502813780746125713563645,
+          178562775830464135183026414005799966775800870888956534787, -1],
+         [1, 15, 57, -1], 4, 32),
 }
 
 
@@ -647,7 +706,7 @@ def phase4b(verbose=True):
           "and the index [O_L^x : <±1, theta_u>] = 8 h_L")
     print("=" * 78)
     mp.dps = 250
-    for n in (9, 11, 13):
+    for n in sorted(CUBIC_RECORD):
         t0 = time.time()
         Dd = -4 * n * n
         forms = EU.reduced_forms(Dd)
@@ -672,7 +731,11 @@ def phase4b(verbose=True):
                 Mn *= p ** (3 * (2 ** k - 1) * Ne(n // p ** k))
             elif p % 4 == 3:
                 Mn *= p ** (6 * (p ** k - 1) // (p - 1) * Ne(n // p ** k))
-        M13 = round(abs(Mn) ** (1 / 3))
+        M13 = round(abs(Mn) ** (1 / 3.0))
+        while M13 ** 3 < abs(Mn):
+            M13 += 1
+        while M13 ** 3 > abs(Mn):
+            M13 -= 1
         assert M13 ** 3 == abs(Mn)
         tru = [mpc(p) / M13 for p in prods]
         co_u, sp_u = poly_int_certify(tru, f"n={n} unit-normalized cubic")
@@ -692,9 +755,9 @@ def phase4b(verbose=True):
         Lp, reps, M = PK.epstein_Lprime0(forms, Dd, chis)
         i3 = next(i for i, (ks, o, c, r) in enumerate(chis) if o == 3)
         Lval = Lp[i3].real
-        hL = Lval / RL
-        v, sp = EU.cert_integer(hL)
-        assert v is not None and v >= 1, (n, nstr(hL, 20))
+        cn = Lval / RL
+        v, sp = EU.cert_integer(cn)
+        assert v is not None and v >= 1, (n, nstr(cn, 20))
         index = theta_log / RL
         vi, spi = EU.cert_integer(index)
         assert vi == 8 * v, (n, vi, v)
@@ -702,11 +765,13 @@ def phase4b(verbose=True):
         assert fabs(theta_log - 8 * Lval) < mpf(10) ** (-(mp.dps * 3) // 5)
         rec = CUBIC_RECORD[n]
         assert (co_u, fund_co, v, vi) == rec, (n, co_u, fund_co, v, vi)
+        prim_chi = n in (9, 11, 13, 23)
         if verbose:
             print(f"n={n}: theta_u cubic {co_u}")
             print(f"      fundamental unit {fund_co}  R_L = {nstr(RL, 20)}")
-            print(f"      h_L = L'(0,chi3)/R_L = {v} (spare {spare(sp)});  "
-                  f"index [O_L^x : <±1, theta_u>] = {vi} = 8 h_L   "
+            print(f"      L'(0,chi3)/R_L = {v} (spare {spare(sp)})"
+                  + (f" = h_L" if prim_chi else " = h_L * C_n(0)")
+                  + f";  index [O_L^x : <±1, theta_u>] = {vi} = 8 L'/R_L   "
                   f"({time.time() - t0:.0f}s)")
 
 

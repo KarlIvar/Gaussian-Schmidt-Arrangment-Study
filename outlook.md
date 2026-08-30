@@ -138,9 +138,10 @@ index \(= h^+\);
 *update — first installment **done** ([schmidt-units.md](schmidt-units.md) §5):
 quadratic-layer projections \(= -24m_\chi\log\varepsilon_{d_2}\) with
 \(m_\chi = \tfrac{2h(d_1)}{w(d_1)}h(d_2)C(0)\), and on the cubic layer
-\([\mathcal{O}_{L_3}^\times : \langle-1,\theta_u\rangle] = 8\,h_{L_3}\) at
-Euclidean \(n = 9, 11, 13\) (\(h_{L_3} = 1, 1, 3\); fundamental units
-certified) — the class number **is** the index; remaining: the general
+\([\mathcal{O}_{L_3}^\times : \langle-1,\theta_u\rangle] = 8\,h_{L_3}C_n(0)\)
+at all eight Euclidean cubic levels \(n \le 27\) (\(h_{L_3} = 1, 1, 3, 2\) at
+the primitive levels \(9, 11, 13, 23\), the last out-of-sample; fundamental
+units certified) — the class number **is** the index; remaining: the general
 conjecture and the hyperbolic sextic layer (\(n = 21\));*
 (b) **Stark recognition for the non-real characters** — the certified coset
 cubics/quartics of phase-kronecker-limit §3 pin \(L'(0,\chi_3)\) etc. as logs
