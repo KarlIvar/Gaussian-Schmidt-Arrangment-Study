@@ -86,6 +86,7 @@ Phase layer (CM machinery):
 | [moduli-invariants.md](moduli-invariants.md) | the 6-coordinate system \((\alpha,\beta_1,\beta_2,\arg u)\); \(\hat\sigma\)-pairs on the fiber product \(X_0(\tfrac{n-1}2)\times_{X(1)}X_0(\tfrac{n+1}2)\), discriminant coupled to level; laws \(u_{f^{-1}}=\bar u_f\), \(u_fu_{\mathfrak{r}f}=1\); Theorem A (dihedral equivariance of \(u^{12}\)); GZ-prime denominators (§5.7); level polynomials \(Q_n\) (§5.9) irreducible at computed levels (§5.10) |
 | [first-power-descent.md](first-power-descent.md) | \(u_f = \Phi_y/\Phi_x(\beta_1,\beta_2)\) (derivative of the modular correspondence); Galois law at **first power**; \(\omega_f\equiv1\); irreducibility re-proved by exact arithmetic, no PSLQ |
 | [euclidean-moduli-invariants.md](euclidean-moduli-invariants.md) | \(N_e(n)=2h(-4n^2)\); \(j\)-values \(=H_{-4n^2}^2\); trace slice \(t(4n^2)\); lemniscatic phase; \(\Delta\)-mass law (Thm 4, proved); \(P^{(2)}_n\) irreducible for **every** \(n\) (Thm 5, proved) |
+| [phase-atlas.md](phase-atlas.md) | phase portraits of all odd levels \(\le 41\) + 101; **sign law proved on divisor classes** (Thm 1: \(\operatorname{sign}u_f = -\operatorname{sign}(a_rc_s - a_sc_r)\)); character hypothesis **refuted** (\(n=31,41\)); certified DIT non-relation battery (52 non-relations) |
 | [phase-kronecker-limit.md](phase-kronecker-limit.md) | character sums of \(\log\lvert u\rvert\) = elliptic-unit theory: \(S(\chi) = -2L'(0,\chi) + \tfrac23\Sigma_0 + \tfrac12\Sigma_{1728}\) (Euclidean, proved); hyperbolic \(S(\chi) = 0\) for \(\chi(\mathfrak{r})=+1\), \(= -4L'(0,\chi)+\tfrac43\Sigma_0+\Sigma_{1728}\) for odd \(\chi\) (proved, \(\varepsilon\) and \(\mu\) cancel); genus-character closed forms \(c\, h\log\varepsilon_d\) with the Euclidean field \(=\mathbb{Q}(\sqrt n)\); exact GZ-supported \(S\)-unit dressing; certified \(\Delta\)-mass polynomials \(D_n\) |
 | [schmidt-units.md](schmidt-units.md) | **unit theorem proved**: \(R_f = r_0^6\Delta(\mathfrak{b}_1)/\Delta(\mathfrak{r}^{-1}\mathfrak{b}_1)\) is a unit for every class (imprimitive strata included; \(R\equiv1\) iff induced twist principal); per-class valuation law \(v_P(G_\mathfrak{c}) = w_p(k)\) class-independent (proved, Newton-polygon-verified to \(n=49\)) settling the split \(\lambda_n\)-ladder; first-power \(w_f\) (\(w^6=R\), laws at first power, \(\mu_6\)-cocycle, coherence table \(m(n)\), \(w=-\varepsilon_{12}^{\pm1}\) at \(n=7\)); **Robert index** \([\mathcal{O}_{L_3}^\times:\langle-1,\theta_u\rangle]=8h_{L_3}\) at Euclidean \(n=9,11,13\) (\(h=1,1,3\)) |
 | [spherical-moduli-invariants.md](spherical-moduli-invariants.md) | third geometry: \(\cot\theta = \ell\); census \(4H(4(\ell^2+1))\); shape polynomial \(\prod_{f^2\mid\ell^2+1}H_{-4(\ell^2+1)/f^2}\) (each stratum once); trace slice \(t(4\ell^2+4)\); Pell-unit phase, cap-swap \(u^2_-=\varepsilon^4u^2_+\), level norm \(m_\ell\) with GZ valuation law; **half-orbit phenomenon** (phases = half the Galois root system, golden-ratio cocycle at \(\ell=2\)) |
@@ -180,8 +181,10 @@ Planning: [outlook.md](outlook.md) — the master outlook (small/medium/large qu
 - **Exact denominator/\(\lambda_n\) valuations** (hyperbolic §5.7, Euclidean §6.1) —
   the \(\Delta\)-part is now proved (per-class law, schmidt-units §3); what remains is
   the \(\beta\)-side: Gross–Zagier multiplicities at conductor-degenerate pairs.
-- **Sign law of \(u_f\) on ambiguous classes** (outlook §1.1; the Euclidean R/I criterion
-  is proved — hyperbolic analogue open). Data: \(n=11,15\) anomalous.
+- **Sign law of \(u_f\) on ambiguous classes**: divisor classes (\(b=0\)) **proved**
+  ([phase-atlas.md](phase-atlas.md) Thm 1, archimedean \(E_6\)-law) and the character
+  hypothesis refuted (\(n=31,41\)); open: the 2-adic ambiguous classes
+  (\((a,a,c)\), \((a,b,a)\), levels \(n\equiv\pm1\bmod 8\)).
 - **Imprimitive strata** of the class formula at the ramified prime 2 (verified, unproved).
 - **\(3/\pi\) split**: make the incomplete-period equidistribution step rigorous.
 - **Euclidean first power**: irreducibility of \(P^{(2)}_n(x^2)\) for all \(n\)
@@ -225,13 +228,17 @@ root, e.g. `python3 scripts/alpha_circles.py --selftest`.
 | `spherical_moduli_invariants.py` | census, shape bijection (\(\ell\le20\) exact), resultant identity (symbolic), phase laws, level norms | spherical-moduli-invariants |
 | `phase_klf.py` | Kronecker-limit character sums: master identities, Epstein \(L'(0,\chi)\), genus factorizations with conductor Euler factors, exact \(\mathbb{Q}(\sqrt d)\) coset factorizations, \(D_n\)/\(R\)-polynomials, safe-PSLQ non-fits (`--selftest`: 250–400 digits) | phase-kronecker-limit |
 | `schmidt_units.py` | lattice lemma for \(R_f\); unit polynomials \(n\le21\) + imprimitive strata; Newton-polygon per-class law (to \(n=49\)); first-power \(w_f\) laws + \(m(n)\) table (odd \(n\le35\)); quadratic projections; cubic fundamental units, \(h_{L_3}\), Robert index \(8h_{L_3}\) (`--selftest`, ~45 s) | schmidt-units |
+| `first_power_descent.py` | exact \(\Phi_m\) (\(m\le10\)); \(\omega_f=1\) exact (odd \(n\le21\)); \(u=\Phi_y/\Phi_x\) vs \(\varepsilon\Theta\) (\(\ge108\) digits, \(n\le13\)); exact \(\Pi_n\) = published \(Q_n\), irreducible (\(n\le13\)) (`--selftest`, ~4 s) | first-power-descent |
+| `make_phase_atlas.py` | two-route phases (\(\ge138\) digits), laws on data, \(Q_n\) roots, figures; `--signs`: sign table, character refutation, Theorem-1 divisor rule (81 classes, odd \(n\le41\), 101) | phase-atlas |
+| `dit_comparison.py` | DIT cycle integrals/Rademacher from definitions + the PSLQ battery (52 certified non-relations, 150 digits; `--selftest` anchors) | phase-atlas |
 | `make_composition_figure.py`, `make_omega_figure.py` | figures | — |
 
-**Known gap**: `scripts/first_power_descent.py` is referenced by
-[first-power-descent.md](first-power-descent.md) §6 but was **never committed** — the
-document's results are independently confirmed by `uf_integer_polynomial.py` /
-`uf_irreducibility.py` agreement, but the script should be recovered or rewritten
-before publication.
+**Known gap — closed** (Paper I session): `scripts/first_power_descent.py`,
+referenced by [first-power-descent.md](first-power-descent.md) §6 but never
+committed, has been rewritten to spec and committed: exact \(\Phi_m\) construction
+(\(m \le 10\)), exact \(\omega_f = 1\) checks with all of Lemma 3.2 (odd \(n \le 21\)),
+\(u = \Phi_y/\Phi_x\) numerics (\(\ge 108\) digits, \(n \le 13\)), and the exact
+\(\Pi_n\) computation matching the published \(Q_n\) (`--selftest`, ~4 s).
 
 ### Certification guard rails (learned the hard way — do not regress)
 
@@ -271,7 +278,7 @@ before publication.
 results in [phase-kronecker-limit.md](phase-kronecker-limit.md)),
 [02-schmidt-trace-formula.md](prompts/02-schmidt-trace-formula.md)
 (the flagship spectral identity, staged), [03-phase-atlas-and-dit.md](prompts/03-phase-atlas-and-dit.md)
-(the atlas figure + sign-law data + Duke–Imamoğlu–Tóth novelty check, one dataset),
+(**done** — results in [phase-atlas.md](phase-atlas.md), ported from its branch),
 [04-schmidt-units-robert-index.md](prompts/04-schmidt-units-robert-index.md)
 (**done** — results in [schmidt-units.md](schmidt-units.md)),
 [05-genus-refined-gross-zagier.md](prompts/05-genus-refined-gross-zagier.md)
@@ -279,9 +286,7 @@ results in [phase-kronecker-limit.md](phase-kronecker-limit.md)),
 \(\lambda_n\)-law and the sign anomaly, and rebuilds the missing
 `first_power_descent.py`), and the two **paper prompts**:
 [06-paper-1-schmidt-circles.md](prompts/06-paper-1-schmidt-circles.md)
-(Paper I, broad: classification, three-geometry counts, involution/class
-formula, composition, the phase with first-power descent and the Euclidean
-phase theory; monoid and spectral layers excluded) and
+(**done** — manuscript in `papers/1-schmidt-circles/`; see Paper planning below) and
 [07-paper-2-schmidt-elliptic-units.md](prompts/07-paper-2-schmidt-elliptic-units.md)
 (Paper II, narrow, assumes Paper I: Kronecker limit formulas, the unit
 theorem with per-class valuations, first-power Schmidt units, the Robert
@@ -289,6 +294,19 @@ index \(8h_{L_3}C_n(0)\)).
 
 ## Paper planning
 
+**Paper I is drafted**: `papers/1-schmidt-circles/schmidt-circles.tex` (+
+`references.bib`, `NOTES.md` with the literature-diligence verdicts), compiling to
+~49 pp. under amsart (pdflatex; figures from `figures/`). Contents: classification +
+level (§2), the three-geometry census triptych (§3), involution + class formula with
+Lemma A displayed (§4), circle-language composition (§5), the phase — six
+coordinates, laws, Heegner pairs on \(X_0(\tfrac{n-1}2)\times_{X(1)}X_0(\tfrac{n+1}2)\),
+first-power descent \(u=\Phi_y/\Phi_x\), level polynomials, GZ support, divisor-class
+sign law, DIT non-relation (§6), the Euclidean phase with Theorems 3–5 and the
+\(\Delta\)-mass law (§7), open problems (§8), machine-verification appendix (every
+cited script re-run; runtimes recorded). Theorem numbering is now fixed — Paper II
+should cite it as stated. Diligence outcome: the classification (§2) and the
+class-number form of the Euclidean census are known (Stange IMRN 2018; GLMWY 2006;
+Rickards–Stange 2026) and are credited as such; everything else checked as new.
 The consolidation plan lives in [outlook.md](outlook.md) §4–5 (two-paper split:
 *Counting and composing Schmidt circles* and *The phase of a Schmidt circle*) and
 [spectral-outlook.md](spectral-outlook.md) §10 (spectral paper ladder, starting with

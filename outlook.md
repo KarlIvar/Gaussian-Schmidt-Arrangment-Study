@@ -40,6 +40,14 @@ coset-product factorization \(A/B = \pm\varepsilon^k\prod(\pi/\pi')^{e}\) in
 \(\mathbb{Q}(\sqrt d)\) — the sign of \(u_f\) on ambiguous classes should be
 exactly this \(\pm\) traced through the closed form; likely resolvable together
 with 2.8.
+*Update — **largely DONE** ([phase-atlas.md](phase-atlas.md), ported for Paper I):
+the sign is **not** a character (refuted at \(n = 31, 41\) by exact Gauss
+composition against certified signs — which is why the \(n \le 17\) data was
+misleading), and on every divisor-type ambiguous class it is the **proved
+archimedean law** \(\operatorname{sign}(u_f) = -\operatorname{sign}(a_rc_s - a_sc_r)\)
+(Theorem 1 there: which side of the \(E_6\)-zero the \(\mathfrak{r}_n\)-twisted CM
+point falls). Remaining: the 2-adic ambiguous classes \((a,a,c)\), \((a,b,a)\) at
+\(n \equiv \pm1 \bmod 8\).*
 
 **1.2 Exact formulas for the counts via Eichler's relations.** \(H(n^2-1)\) is the \(t = \pm1\) term of the classical relation \(\sum_{t^2\le 4m} H(4m-t^2) = \ldots\) Combined with Mertens/Bringmann–Kane-type mock-modular class number identities, one should get exact recurrences for the triangle counts \(3H(n^2-1)\) — closed-form arithmetic for our census. First move: assemble the relation for \(m = (n^2-1)/4 + \) shifts and isolate the diagonal.
 
@@ -49,7 +57,11 @@ with 2.8.
 
 **1.5 Regularizing \(\alpha = 2\).** The level \(n = 2\) (the inscribed circle; CM point \(\rho\)) is excluded because \(j'(\rho) = 0\). Both \(m_1, m_2\) are \(\rho\)-points, so the *ratio* of leading Laurent coefficients of any kernel defines a regularized \(\Theta(2)\). Compute it; it should be a particularly clean number (the class group is trivial and \(\varepsilon = 2+\sqrt3\)).
 
-**1.6 A phase atlas.** Render the circles of the ideal triangle colored by \(\arg u\) and \(\log|u|\) across levels — a "phase portrait of the Schmidt arrangement". Cheap, likely to expose patterns (e.g. the sign dichotomy of 1.1 geometrically), and the natural figure for any eventual paper.
+**1.6 A phase atlas — DONE** ([phase-atlas.md](phase-atlas.md), figures in
+[figures/](figures/)): all odd levels \(\le 41\) plus 101, two independent routes
+agreeing to 138+ digits, laws re-checked on the drawn data; exposed the sign
+geography (→ 1.1 update) and the imprimitive phase strata (roots of unity at small
+cores — new open stratum recorded there).
 
 **1.7 The \(\zeta_8\)-levels.** \(n^2 - 1 = 2\square\) (\(n = 3, 17, 99, \ldots\) — NSW-adjacent) are exactly where \(B = \mathbb{Q}(\zeta_8)\) and the \(u^6\)-translation may pick up a sign. At \(n = 17\) the data shows all signs \(-\): check whether the metaplectic sign actually occurs, or the \(\mu_8\)-caveat is vacuous.
 
@@ -77,7 +89,14 @@ mirroring \(\varepsilon_{n^2-1}\) in the discriminant aspect (→ 3.4).
 
 **2.5 The imprimitive strata.** The class formula's behaviour on non-invertible classes (content \(g > 1\), ramified prime 2) is verified but unproved. The tools now available (cocycle ideal, \(\mathcal{O}_B\)-extension trick) should handle it: non-invertibility of \(\mathfrak{a}_f\) obstructs only one index count, and passing to \(\mathcal{O}_B\) may again dissolve it.
 
-**2.6 Comparison with Duke–Imamoğlu–Tóth.** DIT's cycle integrals of \(j\) along real-quadratic geodesics, and their linking numbers of modular knots, mix real-quadratic geodesics with modular data in the same way our bridge does (\(\operatorname{tr} Z = -2n\), length \(2\log\varepsilon\), CM points of \(1-n^2\)). Determine whether \(u\) (or \(\log|u|\), or \(\arg u\)) is expressible through DIT invariants — either outcome is valuable: a match imports their machinery; a mismatch means \(u\) is genuinely new.
+**2.6 Comparison with Duke–Imamoğlu–Tóth — DONE, mismatch certified**
+([phase-atlas.md](phase-atlas.md) §4): at \(3 \le n \le 17\), 52 certified
+non-relations at 150 digits (safe PSLQ) between \(\log|u_f|\), \(\arg u_f\), the
+pair-sums and the discriminant-\(4(n^2-1)\) cycle integrals of \(j\), the
+Kronecker-limit integrals, \(\log\varepsilon\), \(\pi\), \(\pi^2\); no Rademacher
+shadow either. **The phase is genuinely new** — this is Paper I's novelty
+statement. The structured next object: Katok–Sarnak-type mixed two-discriminant
+coefficients at \((1-n^2, 4(n^2-1))\).
 
 **2.7 Kernel optimization: "Schmidt units".** The denominators come from the kernel's zeros at the elliptic points. Search weight-2 kernels (eta-quotients on \(\Gamma_0(\ell)\), Weber-function combinations) minimizing or eliminating denominators — ideally making \(\varepsilon\Theta\) a genuine algebraic *unit*. Also yields smaller class-polynomial-style certificates.
 *Update after 2.3:* the target object very likely already exists — the
@@ -174,18 +193,19 @@ to the trace-formula program.
 
 ## 4. Consolidation
 
-- **Two papers** — split finalized, session prompts written
-  ([06-paper-1-schmidt-circles.md](prompts/06-paper-1-schmidt-circles.md),
-  [07-paper-2-schmidt-elliptic-units.md](prompts/07-paper-2-schmidt-elliptic-units.md)):
+- **Two papers** — split finalized; **Paper I is drafted**
+  (`papers/1-schmidt-circles/schmidt-circles.tex`, ~49 pp., compiling; with
+  `references.bib` and the literature-diligence record `NOTES.md`):
   (I) *Schmidt circles of the Gaussian integers: classification, class numbers,
-  and the phase invariant* — broad and fully proved: classification/level, the
-  three-geometry counting triptych (\(N_e\)/Catalan, \(3H(n^2-1)\), spherical
-  census), involution + class formula, circle-language composition, the
-  six-invariant moduli with the first-power descent
-  \(u = \Phi_y/\Phi_x\) and integer level polynomials, the Euclidean phase
-  theory (monic polynomials, all-\(n\) irreducibility, \(\Delta\)-mass law),
-  plus — conditional on porting the phase-atlas branch — the divisor-class
-  sign law and the certified DIT novelty statement;
+  and the phase invariant* — classification/level, the three-geometry counting
+  triptych (\(N_e\)/Catalan, \(3H(n^2-1)\), spherical census), involution +
+  class formula, circle-language composition, the six-invariant moduli with the
+  first-power descent \(u = \Phi_y/\Phi_x\) and integer level polynomials, GZ
+  support, the Euclidean phase theory (monic polynomials, all-\(n\)
+  irreducibility, \(\Delta\)-mass law), **plus** (the phase-atlas branch was
+  ported) the divisor-class sign law and the certified DIT novelty statement;
+  every cited script re-run, runtimes in the paper's appendix; theorem
+  numbering now fixed for Paper II to cite;
   (II) *Schmidt circles and elliptic units: Kronecker limit formulas and the
   Robert index* — narrow, assumes (I): master identities against
   \(L'(0,\chi)\), genus closed forms, the unit theorem for \(R_f\) with the
@@ -218,3 +238,8 @@ to the trace-formula program.
    spectral-outlook.md as staging;
 5. literature pass (§4) before drafting — add Robert, Schertz
    (*Complex Multiplication*), and Stark's original papers to the list.
+   *(Done for Paper I: see `papers/1-schmidt-circles/NOTES.md` — outcome:
+   the classification and the class-number form of the Euclidean census are
+   Stange/GLMWY/Rickards–Stange material, credited as such; the level
+   stratification, class formula, composition calculus, phase and Euclidean
+   phase checked as new.)*
