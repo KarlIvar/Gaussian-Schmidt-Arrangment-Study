@@ -333,10 +333,16 @@ cycles; imprimitive classes included and marked), and per class \(A\):
 **Validation of the DIT side**: \(C_A(1) = 2\log\varepsilon_A\) to \(10^{-70}\);
 every value re-derived under random \(\mathrm{SL}_2(\mathbb{Z})\)-transforms of the
 form and under an independent second parametrization (\(d\theta/\sin\theta\) along
-the semicircle), agreeing to \(\sim10^{-140}\); Dedekind-sum reciprocity checked
-against the brute-force definition; \(\Psi\) conjugation-invariance checked on random
-conjugates; hand-proved anchors \(\Psi = 0\) (golden geodesic, \(d = 5\)) and
-\(\Psi([[4,-1],[1,0]]) = 1\) (\(d = 12\)) reproduced by both routes.
+the semicircle), agreeing to \(10^{-140}\)–\(10^{-200}\) (the working precision is
+elevated internally by \(\pi\sqrt d/\ln 10\) digits, the growth of the \(j\)-kernel
+at the top of the tallest geodesic, so that 150 digits stay certified);
+Dedekind-sum reciprocity checked against the brute-force definition; \(\Psi\)
+conjugation-invariance checked on random conjugates; hand-proved anchors
+\(\Psi = 0\) (golden geodesic, \(d = 5\)) and \(\Psi([[4,-1],[1,0]]) = 1\)
+(\(d = 12\)) reproduced by both routes. Sample \(\Psi\)-vectors:
+\((11, 1, 4, -1, 1, -1, -4, -11)\) at \(d = 192\),
+\((31, 3, 7, 9, 2, 1, 1, -1, -1, 14, -2, -9, 0, -7, 4, -3, -4, -14, -31)\) at
+\(d = 1152\) — always antisymmetric under class inversion.
 
 Sample values (full tables in the script log): at \(n = 3\) (\(d = 32\), 3 classes):
 \(\mathrm{Tr}_d(j - 744) = -318.54299833\ldots\), \(\sum_A E_A = -84.12550259\ldots\),
@@ -357,7 +363,7 @@ removed:
 |---|---|---|---|
 | \(\log\lvert u_f \rvert\) (one per twin pair) | \([1, \log\varepsilon, \mathrm{Tr}_d(j{-}744), \sum E_A, \pi^2]\) | \(10^8\) | **no relation**, every class, every level |
 | \(\log\lvert u_f \rvert\) | \([1, \log\varepsilon]\) | \(10^{10}\) | **no relation** (so \(u_f\) is not \(\pm\,\mathrm{rational}\times\varepsilon^k\) in disguise) |
-| \(\log\lvert u_f \rvert\) | per-pair \(\operatorname{Re}C_A(j{-}744)\) and \(E_A\) | \(10^6\) | **no relation** |
+| \(\log\lvert u_f \rvert\) | per-pair \(\operatorname{Re}C_A(j{-}744)\) and \(E_A\) | \(10^6\) | **no relation** (run wherever the deduplicated basis stays \(\le 12\) terms, i.e. \(n \le 15\)) |
 | \(\arg u_f\) (non-ambiguous) | \([\pi, \log\varepsilon]\) | \(10^{10}\) | **no relation** |
 | \(\arg u_f\) | per-pair \(\operatorname{Im}C_A(j{-}744)\), \(\pi\) | \(10^6\) | **no relation** |
 | pair-sums \(S_x\) (real) | aggregate basis | \(10^6\) | **no relation** (the sole hit is \(n = 3\): \(S + 2 = 0\), i.e. the proved anchor \(u = -1\)) |
@@ -432,8 +438,12 @@ open.
 | cusp probe | `python3 scripts/dit_comparison.py --cusp` | no rational \(\arg u/\pi\), 86 classes |
 
 Precisions: phases at 100 and 140 digits (two-precision drift \(\le 10^{-95}\));
-DIT integrals at 150 digits with validation to \(\sim10^{-140}\); PSLQ at 150 digits
-with the (terms) × (digits) safety rule of CLAUDE.md.
+DIT integrals certified at 150 digits (internally elevated by
+\(\pi\sqrt d/\ln 10\) digits against the kernel's growth), validations to
+\(10^{-140}\)–\(10^{-200}\); PSLQ at 150 digits with the (terms) × (digits) safety
+rule of CLAUDE.md. Across the full battery (\(n = 3, \dots, 17\)): 52 certified
+non-relations, zero unsafe or rejected candidates, and the only target-involving
+hit is the proved \(n = 3\) anchor \(S + 2 = 0\).
 
 ## 6. Outlook
 
