@@ -52,6 +52,16 @@ involution class formula, the phase invariant, or spectral geometry.
   \(\mathrm{Cl}(\mathbb{Z}+n\mathbb{Z}[i])\), so \(N_e(n) = 2h(-4n^2)\); its phase
   \(u = \Theta/\Omega_{\text{lemn}}\) has **monic** integer level polynomials, irreducible
   for **every** \(n\) (proved).
+- **The spherical theory** (finite \(\Gamma_{\mathrm{sph}} = \mathrm{SU}(2)\cap\mathrm{SL}_2(\mathbb{Z}[i])\)
+  \(\times\ \mathrm{SL}_2(\mathbb{Z})\)): on the Riemann sphere, radii quantize to
+  \(\cot\theta = \ell = q+m \in \mathbb{Z}\); census \(N_{\mathrm{sph}}(\ell) = \tfrac13 r_3(\ell^2+1)
+  = 4H(4(\ell^2+1))\); shape classes sweep **all** form classes of disc \(-4(\ell^2+1)\)
+  exactly once (imprimitive strata included); the phase is normalized by the
+  negative-Pell unit \(\varepsilon_\ell = \ell+\sqrt{\ell^2+1}\), with cap-swap law
+  \(u^2_- = \varepsilon^4 u^2_+\), level norm \(u^2\sigma(u^2) = m_\ell\) (GZ-supported), and the
+  **half-orbit phenomenon**: for \(\ell \ge 2\) the phases are only half of their Galois
+  root system — the other half are Pell-twisted virtual partners \(m_\ell/u^2\) realized
+  by no circle, with a unit-valued (infinite-order) Galois cocycle.
 
 Key constants: Catalan's \(G = L(2,\chi_{-4})\); \(\operatorname{vol}(\mathrm{PSL}_2(\mathbb{Z}[i])\backslash\mathbb{H}^3) = G/3\);
 \(\operatorname{area}(Y_{\mathrm{mod}}) = \pi/3\); Apollonian dimension \(\delta = 1.3056867\ldots\)
@@ -76,6 +86,7 @@ Phase layer (CM machinery):
 | [moduli-invariants.md](moduli-invariants.md) | the 6-coordinate system \((\alpha,\beta_1,\beta_2,\arg u)\); \(\hat\sigma\)-pairs on the fiber product \(X_0(\tfrac{n-1}2)\times_{X(1)}X_0(\tfrac{n+1}2)\), discriminant coupled to level; laws \(u_{f^{-1}}=\bar u_f\), \(u_fu_{\mathfrak{r}f}=1\); Theorem A (dihedral equivariance of \(u^{12}\)); GZ-prime denominators (§5.7); level polynomials \(Q_n\) (§5.9) irreducible at computed levels (§5.10) |
 | [first-power-descent.md](first-power-descent.md) | \(u_f = \Phi_y/\Phi_x(\beta_1,\beta_2)\) (derivative of the modular correspondence); Galois law at **first power**; \(\omega_f\equiv1\); irreducibility re-proved by exact arithmetic, no PSLQ |
 | [euclidean-moduli-invariants.md](euclidean-moduli-invariants.md) | \(N_e(n)=2h(-4n^2)\); \(j\)-values \(=H_{-4n^2}^2\); trace slice \(t(4n^2)\); lemniscatic phase; \(\Delta\)-mass law (Thm 4, proved); \(P^{(2)}_n\) irreducible for **every** \(n\) (Thm 5, proved) |
+| [spherical-moduli-invariants.md](spherical-moduli-invariants.md) | third geometry: \(\cot\theta = \ell\); census \(4H(4(\ell^2+1))\); shape polynomial \(\prod_{f^2\mid\ell^2+1}H_{-4(\ell^2+1)/f^2}\) (each stratum once); trace slice \(t(4\ell^2+4)\); Pell-unit phase, cap-swap \(u^2_-=\varepsilon^4u^2_+\), level norm \(m_\ell\) with GZ valuation law; **half-orbit phenomenon** (phases = half the Galois root system, golden-ratio cocycle at \(\ell=2\)) |
 
 Monoid / operation layer:
 
@@ -127,6 +138,14 @@ Planning: [outlook.md](outlook.md) — the master outlook (small/medium/large qu
 17. **The \(3/\pi\) split**: Ford stratum has density \(3/\pi\) among all classes
     (deep/Apollonian stratum \(1-3/\pi\)). Derivation solid, one equidistribution step
     not yet rigorous; numerics to \(X=1601\).
+18. **Spherical census** \(N_{\mathrm{sph}}(\ell) = \tfrac13 r_3(\ell^2+1) = 4H(4(\ell^2+1))\);
+    free \(V_4\)-action; resultant identity (phase never vanishes). Proved. Shape-class
+    bijection onto **all** reduced forms of disc \(-4(\ell^2+1)\): verified exactly
+    \(\ell\le20\), proof (Gauss-quaternionic) outstanding.
+19. **Spherical phase laws**: cap-swap \(u^2_- = \varepsilon_\ell^4 u^2_+\), mirror, level norm
+    \(u^2\sigma(u^2)=m_\ell\) with valuation law \(v_p(m_\ell) = 2v_p(4\ell^2)+\tfrac43v_p(H_0)+v_p(H_{1728})\),
+    and the half-orbit phenomenon with unit cocycle. Certified at computed levels
+    (\(\ell\le6\)); proofs open (the hyperbolic \(\xi\)-torsion/Kronecker step provably fails here).
 
 ## Status ledger (open problems, deduplicated)
 
@@ -144,6 +163,10 @@ Planning: [outlook.md](outlook.md) — the master outlook (small/medium/large qu
 - **Even levels / \(i\mathcal{S}\)**: whole \(\alpha\)-theory run only at odd \(n\);
   transport expected clean (odd discriminants).
 - **\(\alpha=2\) regularization** (\(j'(\rho)=0\)).
+- **Spherical opens**: the shape bijection unconditionally (Gauss-quaternionic count);
+  cap-swap law and \(T\)-norm lemma proofs; the \(\ell=4\) coefficient field; the cocycle
+  calculus (what replaces Kronecker's theorem when the cocycle lives in a real field);
+  the geometric carrier of the virtual partners \(m_\ell/u^2\).
 - The **large programs**: see outlook.md §3, spectral-outlook.md, and the per-document
   outlooks (trace formula, ortholength spectrum, Kronecker limit formula for
   \(\log|u|\), heights/unlikely intersections, other fields, transfer operators,
@@ -173,6 +196,7 @@ root, e.g. `python3 scripts/alpha_circles.py --selftest`.
 | `middle_kernel.py` | master formula, layer integral, counting law (654 checks) | middle-kernel |
 | `euclidean_moduli_invariants.py` | Euclidean structure, ring class polys, phases, \(P^{(2)},P^{(6)}\) | euclidean-moduli-invariants |
 | `mass_law_and_irreducibility.py` | Theorem 4 (M1–M4), Theorem 5 ingredients, exact factorizations | euclidean-moduli-invariants |
+| `spherical_moduli_invariants.py` | census, shape bijection (\(\ell\le20\) exact), resultant identity (symbolic), phase laws, level norms | spherical-moduli-invariants |
 | `make_composition_figure.py`, `make_omega_figure.py` | figures | — |
 
 **Known gap**: `scripts/first_power_descent.py` is referenced by
@@ -211,6 +235,14 @@ before publication.
   \(n=9\) (\(\mathbb{Z}/4\)) and \(n=11\) (\((\mathbb{Z}/2)^2\)).
 - New documents should follow the house style: statement–proof Markdown with
   machine-verification section, cross-links to sibling documents, and an outlook.
+
+## Next-step prompts
+
+`prompts/` holds ready-to-run session prompts for the highest-value next steps:
+[01-kronecker-limit-formula.md](prompts/01-kronecker-limit-formula.md) (\(\log|u|\) vs
+\(L'(0,\chi)\) — the likely headline theorem), [02-schmidt-trace-formula.md](prompts/02-schmidt-trace-formula.md)
+(the flagship spectral identity, staged), [03-phase-atlas-and-dit.md](prompts/03-phase-atlas-and-dit.md)
+(the atlas figure + sign-law data + Duke–Imamoğlu–Tóth novelty check, one dataset).
 
 ## Paper planning
 
