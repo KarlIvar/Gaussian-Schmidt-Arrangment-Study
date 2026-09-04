@@ -288,9 +288,10 @@ results in [phase-kronecker-limit.md](phase-kronecker-limit.md)),
 [06-paper-1-schmidt-circles.md](prompts/06-paper-1-schmidt-circles.md)
 (**done** — manuscript in `papers/1-schmidt-circles/`; see Paper planning below) and
 [07-paper-2-schmidt-elliptic-units.md](prompts/07-paper-2-schmidt-elliptic-units.md)
-(Paper II, narrow, assumes Paper I: Kronecker limit formulas, the unit
-theorem with per-class valuations, first-power Schmidt units, the Robert
-index \(8h_{L_3}C_n(0)\)).
+(**done** — manuscript in `papers/2-schmidt-elliptic-units/`; Paper II, narrow,
+assumes Paper I: Kronecker limit formulas, the unit theorem with per-class
+valuations, first-power Schmidt units, the Robert index \(8h_{L_3}C_n(0)\);
+see Paper planning below).
 
 ## Paper planning
 
@@ -307,6 +308,35 @@ cited script re-run; runtimes recorded). Theorem numbering is now fixed — Pape
 should cite it as stated. Diligence outcome: the classification (§2) and the
 class-number form of the Euclidean census are known (Stange IMRN 2018; GLMWY 2006;
 Rickards–Stange 2026) and are credited as such; everything else checked as new.
+**Paper II is drafted**: `papers/2-schmidt-elliptic-units/schmidt-elliptic-units.tex`
+(+ `references.bib`, `NOTES.md` with the literature-diligence verdicts),
+compiling to 34 pp. under amsart (pdflatex, zero errors; no figures). It cites
+Paper I as [SchmidtI] by its fixed theorem numbers and restates none of its
+proofs. Contents: introduction with the arc and the literature position
+(Siegel–Ramachandra–Robert, Gillard–Robert, Kubert–Lang, Stark,
+Hajir–Villegas, Küçüksakallı, Schertz) (§1); Epstein \(L\)-functions, the
+limit value \(L'(0,\chi) = -\tfrac1{12}\sum\chi\log g\) with the independent
+incomplete-gamma evaluation, the classwise laws, both master identities, the
+\(\Delta\)-mass polynomial \(D_n\) and the twisted-ratio polynomial (§2, Thms
+2.5, 2.6, 2.9, 2.10); genus characters in closed form, Sturm-proved
+factorizations, \(\mathbb{Q}(\sqrt n)\), exact \(\Sigma\)-tables, certified
+non-fits (§3); the unit theorem with its five-lemma proof, level and stratum
+polynomials, the per-class valuation law with Newton polygons and ladders (§4,
+Thms 4.2, 4.11); first-power units \(w_f\) and the \(m(n)\) table (§5); the
+Robert index — quadratic projections, \(\theta_u\) unit, \(h_LR_LC_n(0) = L'\),
+a new short lemma on conductor Euler factors (\(C_n \equiv 1\) at primitive
+levels), fundamental units via root descent + Friedman's \(0.2052\), the
+eight-level table, the index conjecture (§6, Thm 6.6); outlook (four
+continuations) + machine-verification appendix (§7, App. A). Both selftests
+were re-run before writing (`phase_klf.py --selftest` 4 min 39 s,
+`schmidt_units.py --selftest` 4 min 0 s; every recorded constant agrees; one
+typo in schmidt-units.md — \(M(18) = 2^{36}3^{48}\), not \(2^{18}3^{48}\) —
+corrected). Diligence outcome: the index-equals-class-number shape is
+classical (Robert, Kubert–Lang, Stark; prime-conductor ring class fields in
+Hajir–Villegas and Küçüksakallı, credited as such); the limit formulas for
+the phase, the \(\varepsilon\)-cancellation, the \(\mathbb{Q}(\sqrt n)\)
+phenomenon, the unit theorem on all strata, the per-class law and the
+explicit index \(8h_{L_3}C_n(0)\) over \(\mathbb{Q}(i)\) checked as new.
 The consolidation plan lives in [outlook.md](outlook.md) §4–5 (two-paper split:
 *Counting and composing Schmidt circles* and *The phase of a Schmidt circle*) and
 [spectral-outlook.md](spectral-outlook.md) §10 (spectral paper ladder, starting with

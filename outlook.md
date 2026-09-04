@@ -210,7 +210,10 @@ to the trace-formula program.
   Robert index* — narrow, assumes (I): master identities against
   \(L'(0,\chi)\), genus closed forms, the unit theorem for \(R_f\) with the
   per-class valuation law and ladders, first-power \(w_f\), and the Robert
-  index \(8h_{L_3}C_n(0)\). Excluded from both by design: the
+  index \(8h_{L_3}C_n(0)\); **Paper II is drafted** as well
+  (`papers/2-schmidt-elliptic-units/schmidt-elliptic-units.tex`, ~34 pp.,
+  compiling; with `references.bib` and the diligence record `NOTES.md`;
+  cites Paper I by its fixed theorem numbers). Excluded from both by design: the
   monoid/operation layer, the spectral layer, the spherical phase laws and
   shape bijection, and all merely-certified spherical/imprimitive statements
   beyond flagged remarks. The documents already contain the proofs; the work
@@ -242,4 +245,10 @@ to the trace-formula program.
    the classification and the class-number form of the Euclidean census are
    Stange/GLMWY/Rickards–Stange material, credited as such; the level
    stratification, class formula, composition calculus, phase and Euclidean
-   phase checked as new.)*
+   phase checked as new.)* *(Done for Paper II as well:
+   `papers/2-schmidt-elliptic-units/NOTES.md` — Robert, Gillard–Robert,
+   Kubert–Lang, Oukhaba, Stark, Hajir–Villegas, Küçüksakallı, Schertz are the
+   classical context for "index = class number"; the phase limit formulas,
+   the unit theorem on all strata, the per-class law and the explicit
+   \(8h_{L_3}C_n(0)\) over \(\mathbb{Q}(i)\) checked as new; Friedman's
+   constant \(0.2052\) verified.)*

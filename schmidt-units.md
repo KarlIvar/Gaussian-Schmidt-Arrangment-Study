@@ -510,7 +510,7 @@ embedding.
 \(p \mid n\) and \(0\) elsewhere — exactly the valuations of
 \(|M(n)|^{1/3} \in \mathbb{Z}\) (the mass is a cube at every level with
 3-torsion: \(3 \mid h\) forces \(3 \mid v_p(M)\) through
-\(h = \tfrac12N_e(p^k)N_e(n')\); e.g. \(3^{24}, 11^6, 1, 2^{18}3^{48},
+\(h = \tfrac12N_e(p^k)N_e(n')\); e.g. \(3^{24}, 11^6, 1, 2^{36}3^{48},
 2^{36}11^{12}, 23^6, 2^{36}, 3^{78}\)). The logarithm: writing
 \(a = \log|\theta|\), \(b\) for the common log-modulus of the two conjugate
 coset products, the uniform Stark law

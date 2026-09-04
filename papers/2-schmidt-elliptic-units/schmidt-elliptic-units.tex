@@ -1,0 +1,2317 @@
+%% Paper II of the Gaussian Schmidt arrangement project.
+%% Sources: the repository documents phase-kronecker-limit.md and
+%% schmidt-units.md (primary), euclidean-moduli-invariants.md SS5.5-5.6 and
+%% moduli-invariants.md SS5.4-5.7 (background), and Paper I
+%% (papers/1-schmidt-circles/schmidt-circles.tex), cited as [SchmidtI].
+%% Machine verification: see Appendix A and scripts/phase_klf.py,
+%% scripts/schmidt_units.py.
+\documentclass[11pt]{amsart}
+
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage[hidelinks]{hyperref}
+\usepackage[expansion=false]{microtype}
+
+\allowdisplaybreaks
+
+\numberwithin{equation}{section}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{openproblem}[theorem]{Open problem}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+%% notation (as in Paper I)
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\HH}{\mathbb{H}}
+\newcommand{\Zi}{\Z[i]}
+\newcommand{\Rhat}{\widehat{\R}}
+\newcommand{\SL}{\mathrm{SL}}
+\newcommand{\PSL}{\mathrm{PSL}}
+\newcommand{\Gal}{\mathrm{Gal}}
+\newcommand{\Cl}{\mathrm{Cl}}
+\newcommand{\im}{\operatorname{Im}}
+\newcommand{\re}{\operatorname{Re}}
+\newcommand{\Sarr}{\mathcal{S}}
+\newcommand{\ideala}{\mathfrak{a}}
+\newcommand{\idealb}{\mathfrak{b}}
+\newcommand{\idealc}{\mathfrak{c}}
+\newcommand{\idealp}{\mathfrak{p}}
+\newcommand{\idealP}{\mathfrak{P}}
+\newcommand{\idealq}{\mathfrak{q}}
+\newcommand{\idealr}{\mathfrak{r}}
+\newcommand{\ideals}{\mathfrak{s}}
+\newcommand{\idealm}{\mathfrak{m}}
+\newcommand{\GZ}{\mathrm{GZ}}
+\newcommand{\Ne}{N_{e}}
+\newcommand{\covol}{\operatorname{covol}}
+\newcommand{\Lie}{\operatorname{Lie}}
+\newcommand{\lat}[1]{\left[#1\right]}
+\newcommand{\Lprim}{L_{\mathrm{prim}}}
+\newcommand{\Oc}{\mathcal{O}}
+\newcommand{\Sig}{\Sigma}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\PaperI}{\cite{SchmidtI}}
+
+\begin{document}
+
+\title[Schmidt circles and elliptic units]{Schmidt circles and elliptic
+units:\\ Kronecker limit formulas and the Robert index}
+
+%% TODO before submission: complete author name and affiliation.
+\author{Karl Ivar}
+\email{karlivar2004@gmail.com}
+
+\begin{abstract}
+The phases $u_f$ of the Gaussian Schmidt arrangement --- the sixth
+coordinate on $\SL_2(\Z)\backslash\SL_2(\C)/\SL_2(\Z)$, quantized on the
+Bianchi group in the companion paper --- are, classwise, twisted
+$\Delta$-quotients at CM points.  We pursue this to its quantitative end.
+First, the character sums $S(\chi) = \sum\chi\log|u|$ over the classes of
+a level obey Kronecker limit formulas in both aspects of the theory:
+$S(\chi) = -2L'(0,\chi) + \tfrac23\Sigma_0(\chi) + \tfrac12\Sigma_{1728}(\chi)$
+for the Euclidean phases of the curvature-$2n$ disks (over the ring class
+group of $\Z + n\Z[i]$), and, for the hyperbolic phases of discriminant
+$1-n^2$, $S(\chi) = 0$ or $-4L'(0,\chi) + \tfrac43\Sigma_0 + \Sigma_{1728}$
+according to the value of $\chi$ on the twist class, the unit
+$n + \sqrt{n^2-1}$ cancelling identically.  Here $L(s,\chi)$ is the Epstein
+$L$-function of the level and $\Sigma_x(\chi) = \sum\chi\log|j - x|$ a
+Gross--Zagier collision quantity.  For genus characters everything is in
+closed form through Sturm-proved factorizations of $L(s,\chi)$; the real
+quadratic field carrying the Euclidean genus sum at conductor $n$ is
+$\Q(\sqrt n)$, and the $j$-dressings factor exactly in it with split-prime
+support at Gross--Zagier primes.  Second, the $\idealr$-twisted
+$\Delta$-ratios $R_f = r_0^{6}\Delta(\idealb_1)/\Delta(\idealr^{-1}\idealb_1)$
+are algebraic units for every class of every odd level, imprimitive strata
+included --- a local rigidity argument for isogenies attached to invertible
+ambiguous ideals, needing no quasi-canonical-lifting input --- and the
+Euclidean $\Delta$-data $n^{12}\Delta(\Lambda_\idealc)/\Delta(\Z[i])$ have a
+$\idealP$-adic valuation independent of the class, with an explicit value
+that settles the split-prime denominator ladders.  A canonical sixth root
+$w_f$ obeys the laws at first power; at level $7$ it is $-(2\pm\sqrt3)$.
+Third, on the cubic layer of the Euclidean theory the $\Delta$-coset unit
+$\theta_u$ has index $[\Oc_{L_3}^\times : \langle -1, \theta_u\rangle] =
+8\,h_{L_3}\,C_n(0)$ in the unit group of the real cubic subfield $L_3$ of the
+ring class field, certified at all eight levels $n \le 27$ with a cubic
+character, with $h_{L_3} = 1, 1, 3, 2$ at the primitive levels $9, 11, 13,
+23$, the last out of sample: the class number of the cubic field is the
+Robert index of the Schmidt units.  Every finite claim is machine-verified;
+the scripts and precision policies are catalogued in an appendix.
+\end{abstract}
+
+\maketitle
+\tableofcontents
+
+%%% ============================================================
+\section{Introduction}\label{sec:intro}
+
+Let $\Sarr = \PSL_2(\Zi)\cdot\Rhat$ be the Gaussian Schmidt arrangement,
+the orbit of the extended real line under the Bianchi group
+\cite{Schmidt1975, StangeTAMS, StangeIMRN}.  The companion paper
+\PaperI{} --- cited throughout as [SchmidtI], with its theorem numbers ---
+stratified $\Sarr$ by an integer level, counted it in three geometries,
+computed the involution $\sigma(X) = \bar X^{-1}$ on the form classes of a
+level, and constructed a \emph{phase}: a sixth coordinate on the double
+cosets $\SL_2(\Z)\backslash\SL_2(\C)/\SL_2(\Z)$ which, on Schmidt matrices,
+quantizes to algebraic numbers $u_f$ indexed by the primitive form classes
+$f$ of discriminant $1 - n^2$, and to Euclidean phases $u_\idealc$ indexed
+by the ring class group $\Cl(\Z + n\Zi)$ of the curvature-$2n$ disks.  Its
+last structural statement was the closed form
+\[
+  u_f = -\,\eps\,\mu^{-2}\,\frac{h_2(\idealb_1)}{h_2(\idealb_2)},
+  \qquad
+  u_\idealc^{\,6} = -\,\beta^4(\beta - 1728)^3\,
+  \frac{\Delta(\Lambda_\idealc)}{\Delta(\Zi)},
+\]
+\PaperI[Prop.~6.10, eq.~(7.1)]: the phase is a weight-$2$ ratio at two CM
+points, and its sixth power a $\Delta$-quotient dressed by singular moduli.
+This paper takes that statement to its quantitative end.  The theme is
+single: \emph{the phases of the Schmidt arrangement form an elliptic-unit
+system, and the index of that system is a class number.}
+
+\subsection*{The arc}
+Write, for a class $\idealc$ of a level with reduced CM point
+$\tau_\idealc$, $g_\idealc = y_\idealc^6|\Delta_q(\tau_\idealc)|$ for its
+scale-invariant $\Delta$-datum, and, for a character $\chi$ of the class
+group,
+\[
+  S(\chi) = \sum_\idealc\chi(\idealc)\log|u_\idealc|,
+  \qquad
+  \Sigma_x(\chi) = \sum_\idealc\chi(\idealc)\log|j(\idealc) - x| .
+\]
+Taking logarithms of
+the closed forms and summing against $\chi$, the first Kronecker limit
+formula converts $\sum\chi\log g$ into $-12L'(0,\chi)$ for the Epstein
+$L$-function of the level (Proposition \ref{prop:klf}), and one obtains
+the two \emph{master identities} (Theorems \ref{thm:euc-master} and
+\ref{thm:hyp-master}):
+\begin{gather*}
+  \text{Euclidean:}\quad
+  S(\chi) = -2\,L'(0,\chi) + \tfrac23\,\Sigma_0(\chi) + \tfrac12\,\Sigma_{1728}(\chi);\\
+  \text{hyperbolic:}\quad
+  S(\chi) = \begin{cases} 0, & \chi(\idealr_n) = +1,\\
+  -4\,L'(0,\chi) + \tfrac43\,\Sigma_0(\chi) + \Sigma_{1728}(\chi), &
+  \chi(\idealr_n) = -1.\end{cases}
+\end{gather*}
+The $L'$-part is the Kronecker limit formula; the $j$-parts are
+Gross--Zagier collision quantities.  Two structural facts make the
+hyperbolic identity possible: the Norm Lemma of \PaperI[Lemma~6.11] kills
+both the unit $\eps = n + \sqrt{n^2-1}$ and the cocycle scalar $\mu$ in
+$|u_f|$, leaving a scale-invariant two-CM-point law (Lemma
+\ref{lem:hyp-classwise}); and the twist law $u_fu_{\idealr_nf} = 1$ of
+\PaperI[Thm.~6.6] forces the character sums to live on the odd
+characters.
+
+For genus characters the identities evaluate completely (Section
+\ref{sec:genus}).  The Epstein $L$-function of a real character factors
+as a product of two Dirichlet $L$-functions times a finite Euler
+correction at square conductors --- an identity of $q$-expansions, hence
+provable by Sturm's bound --- and $L'(0,\chi)$ becomes an explicit
+rational multiple of $\log\eps_{d_2}$ for a fundamental unit.  On the
+Euclidean side the real quadratic field is $\Q(\sqrt n)$ in every case:
+the phases of the curvature-$2n$ disks know the Pell unit of $\Q(\sqrt n)$.
+The $j$-dressings $\Sigma_0, \Sigma_{1728}$ factor exactly in the same
+field as unit powers times ratios of split-prime generators, supported on
+the Gross--Zagier sets $\GZ(D,-3)$ and $\GZ(D,-4)$; for the non-real
+characters certified integer-relation searches find no such expression,
+as the Stark philosophy predicts.
+
+The $\Delta$-part of the hyperbolic phase is a genuine unit.  With
+$r_0 = \tfrac{n-1}2$ and $\idealr = \lat{r_0, \sqrt D/2}$ the invertible
+ambiguous twist ideal of the order of discriminant $D = 1 - n^2$, the
+$\idealr$-twisted $\Delta$-ratio
+$R_f = u_f^{6}\,\beta_2^4(\beta_2-1728)^3/\beta_1^4(\beta_1-1728)^3$ has
+the lattice form $R_f = r_0^{6}\Delta(\idealb_1)/\Delta(\idealr^{-1}\idealb_1)$
+(Lemma \ref{lem:lattice}), and Theorem \ref{thm:unit} proves that $R_f$
+is an algebraic unit for every class of every odd level, on every
+imprimitive stratum as well.  The proof is local: the twist is an isogeny
+whose tangent valuation is the same for every proper ideal (a rigidity of
+$p$-divisible-group quotients), and composing two twists gives
+multiplication by $p^k$, which balances the valuation exactly against
+$r_0^6$.  No Kronecker limit formula, no Siegel units and no
+quasi-canonical liftings enter.  The same rigidity gives the per-class
+valuation law for the Euclidean $\Delta$-data (Theorem \ref{thm:perclass}):
+$v_\idealP(n^{12}\Delta(\Lambda_\idealc)/\Delta(\Zi))$ is independent of
+$\idealc$, with an explicit value $w_p(k)$, which settles the
+split-prime denominator ladders of \PaperI[\S7] exactly and decomposes
+the inert ones into certified single-slope ingredients.  A canonical
+sixth root $w_f$ of $R_f$ obeys the mirror and twist laws at first power
+and is an $\eta$-quotient on $\Gamma_0(r_0)$ at a Heegner point (Section
+\ref{sec:firstpower}); at level $7$ the first-power Schmidt units are
+$w = -(2 \pm \sqrt3)$, the fundamental unit of $\Q(\sqrt3)$ up to sign.
+
+Finally, the index (Section \ref{sec:robert}).  On the quadratic layer,
+the eigenprojections of the unit systems under a real character $\chi$
+are explicit integer multiples of $\log\eps_{d_2}$, with coefficients
+built from the class numbers $h(d_1)$ and $h(d_2)$.  On the
+cubic layer --- the eight Euclidean levels $n \le 27$ whose ring class
+group has $3$-torsion --- the principal coset product $\theta$ of the
+$\Delta$-data, normalized by the cube root of the $\Delta$-mass, is a unit
+$\theta_u$ of the real cubic subfield $L_3$ of the ring class field, and
+\[
+  \bigl[\Oc_{L_3}^\times : \langle -1, \theta_u\rangle\bigr]
+  \;=\; 8\,h_{L_3}\,C_n(0)
+\]
+(Theorem \ref{thm:robert}), where $C_n(0)$ is the integer imprimitivity
+multiplier, equal to $1$ at the primitive levels $9, 11, 13, 23$ where
+$h_{L_3} = 1, 1, 3, 2$.  The identity $\text{index} = 8L'(0,\chi_3)/R_{L_3}$
+is proved (Propositions \ref{prop:thetaunit}--\ref{prop:cubicfield}); the
+content of the theorem is the certified computation of the fundamental
+units, rigorous through a root descent capped by Friedman's regulator
+bound.  The row $n = 23$ was computed after the law $8h_{L_3}$ had been
+formulated on $9, 11, 13$, and confirmed it on a new cubic field of class
+number $2$: \emph{the class number of the cubic field is the Robert index
+of the Schmidt units}, the exact analogue of ``cyclotomic units have index
+$h^+$'', realized by the disks of curvature $2n$.
+
+\subsection*{Position in the literature}
+The objects are classical and the ambition is to place a new geometric
+invariant among them.  Kronecker's limit formula and its use to produce
+units in class fields of imaginary quadratic fields go back to Kronecker
+and Hecke, in the form we use to Siegel's lectures \cite{Siegel1961} and
+Ramachandra \cite{Ramachandra1964}; Robert \cite{Robert1973} defined the
+elliptic units of an abelian extension of an imaginary quadratic field and
+proved that their index in the full unit group is the class number up to
+an explicit factor, refined by Gillard--Robert \cite{GillardRobert1979}
+and systematized, with the function-theoretic side of Siegel and Klein
+forms, by Kubert--Lang \cite[Ch.~11--13]{KubertLang1981}; index formulas
+for ramified elliptic units in the style of Sinnott are due to Oukhaba
+\cite{Oukhaba2003}; Schertz's monograph \cite[Ch.~6--7]{Schertz2010}
+presents the relation between elliptic units and class numbers and the
+Stark units of ring class fields.  Stark \cite{Stark1980} showed that his
+conjecture over an imaginary quadratic base is a theorem through
+elliptic units; for ring class fields of prime conductor the Stark unit
+generates, with the roots of unity, a subgroup of index exactly the class
+number of the ring class field --- the form in which Hajir and
+Rodriguez Villegas \cite{HajirVillegas1997} made the units explicit and in
+which K\"u\c{c}\"uksakall{\i} \cite{Kucuksakalli2012} computed class numbers
+of ring class fields.  On the finite-place side, Gross--Zagier's
+factorization of singular moduli \cite{GrossZagier1985} is the reference
+for the collision quantities $\Sigma_0, \Sigma_{1728}$, and Gross's
+quasi-canonical liftings \cite{Gross1986} give the conceptual reading of
+the valuation laws of Section \ref{sec:unit} --- a reading we keep as
+interpretation, not input.  Meyer's monograph \cite{Meyer1957} computed
+class numbers of abelian extensions of quadratic fields through Kronecker
+limit formulas, and the higher Kronecker limit formulas of Vlasenko--Zagier
+\cite{VlasenkoZagier2013} along real quadratic data are the closest
+existing relatives of $\log|u_f|$ on the real-quadratic side, where the
+phase is normalized by the unit of $\Q(\sqrt{n^2-1})$ and was shown in
+\PaperI[Prop.~6.29] not to be cycle-integral data.  Friedman's regulator
+bound \cite{Friedman1989} is the tool that makes the fundamental units of
+Section \ref{sec:robert} rigorous.
+
+What is new is not the Kronecker limit formula, nor the existence of
+units in ring class fields with class-number index --- those are the
+classical theory just cited.  It is that a \emph{geometric} invariant of
+circles is such a system: the character sums of the phase compute
+$L'(0,\chi)$ exactly, with the unit $\eps$ cancelling and the genus field
+$\Q(\sqrt n)$ appearing; the ambiguous-ideal twist $\idealr$ of a
+non-maximal order preserves every local $\Delta$-datum, so that the
+$\Delta$-ratios the phase carries are units on every stratum; the
+Euclidean $\Delta$-data have class-independent valuations; and the
+$\Delta$-coset units of the curvature-$2n$ disks have index
+$8h_{L_3}C_n(0)$ in the cubic layer over $\Q(i)$, a number computed and
+certified at eight levels.  A literature record accompanies the paper in
+the repository; we found no prior index computation for elliptic-unit
+systems in ring class fields of $\Q(i)$ and no prior appearance of these
+$\Delta$-coset units.  How $\theta_u$ compares with the Stark unit of the
+ring class field --- both generate finite-index subgroups, with indices
+$8h_{L_3}$ in $\Oc_{L_3}^\times$ and $h_{H_n}$ in $\Oc_{H_n}^\times$
+respectively --- is a natural question we do not pursue here.
+
+\subsection*{What is proved and what is certified}
+Proved for every level: the limit-value formula (Proposition
+\ref{prop:klf}); the classwise laws (Lemmas \ref{lem:euc-classwise},
+\ref{lem:hyp-classwise}); both master identities (Theorems
+\ref{thm:euc-master}, \ref{thm:hyp-master}) with the trivial-character
+anchor; the $\Delta$-mass polynomial and the uniform Stark law (Theorem
+\ref{thm:Dn}); the rationality of the twisted-ratio polynomial (Theorem
+\ref{thm:Rpoly}); the genus factorizations and the resulting $L'(0,\chi_2)$
+closed forms at every displayed level (Proposition \ref{prop:genus-euc},
+Sturm's bound); each displayed $\Sigma$-factorization (exact arithmetic in
+its quadratic field); the lattice lemma and the unit theorem on all strata
+(Lemma \ref{lem:lattice}, Theorem \ref{thm:unit}); the collapse $R \equiv 1$
+on strata with principal induced twist; the per-class valuation law and
+the split ladder (Theorem \ref{thm:perclass}, Corollary \ref{cor:split});
+the first-power laws of $w_f$ and its $\eta$-quotient form (Proposition
+\ref{prop:wlaws}); the unit property of $\theta_u$, the Stark relation and
+the index identity $8L'(0,\chi_3)/R_{L_3}$ (Propositions
+\ref{prop:thetaunit}--\ref{prop:cubicfield}).  Certified, by exact
+integer arithmetic or with at least $140$ (typically $\ge 200$) spare
+digits, and not proved in general: the coefficient values of the displayed
+polynomials and their irreducibility; the Newton-polygon verification of
+Theorem \ref{thm:perclass} and the inert-ladder decompositions; the
+coherence table $m(n)$ of the first-power units; the fundamental units,
+class numbers and indices of Theorem \ref{thm:robert}; the
+$\eps$-ratio identifications at the composite conductor $n = 15$; and the
+converse direction of the stratum criterion.  Certified negatives: the
+PSLQ non-fits for non-real characters and the absence of a congruence
+law for $m(n)$.
+
+\subsection*{Plan of the paper}
+Section \ref{sec:master} proves the limit-value formula, the classwise
+laws and the master identities, and records the $\Delta$-mass and
+twisted-ratio polynomials.  Section \ref{sec:genus} evaluates the genus
+characters in closed form.  Section \ref{sec:unit} proves the unit theorem
+and the per-class valuation law --- the technical core.  Section
+\ref{sec:firstpower} constructs the first-power Schmidt units.  Section
+\ref{sec:robert} computes the Robert index.  Section \ref{sec:outlook}
+lists the four genuine continuations, and Appendix \ref{app:verification}
+documents the machine verification.
+
+\subsection*{Status conventions}
+As in \PaperI, a \textbf{Theorem}, \textbf{Proposition}, \textbf{Lemma} or
+\textbf{Corollary} without qualification is proved.  A statement labelled
+\emph{(computational)} is a finite claim verified by exact arithmetic, or
+a numerical claim certified at a stated precision with stated safety
+margins, by a named script; the range of verification is part of the
+statement.  Every script cited was re-run for this paper (Appendix
+\ref{app:verification}).  No integer-relation search is used to establish
+a claim: the discoveries made by PSLQ are re-derived in exact arithmetic,
+and PSLQ appears only in certified \emph{negative} statements.
+
+\subsection*{Notation}
+$K$ denotes the imaginary quadratic field of the aspect at hand.
+\emph{Euclidean level $n \ge 2$}: $K = \Q(i)$, $\Oc_n = \Z + n\Zi$ the
+order of conductor $n$, discriminant $D = -4n^2$, class group
+$\Cl(\Oc_n)$ of order $h = h(-4n^2)$, ring class field $H_n$; the phases
+$u_\idealc = \Theta/\Omega$ of \PaperI[\S7], normalized by the lemniscatic
+period, with $|u_\idealc|$ and $u_\idealc^2$ well defined on classes
+\PaperI[Prop.~7.10]; $\Lambda_\idealc \subseteq \Zi$ the primitive
+index-$n$ sublattice of the class \PaperI[Thm.~7.6];
+$G_\idealc := n^{12}\Delta(\Lambda_\idealc)/\Delta(\Zi)$ and the
+$\Delta$-mass $M(n) = \prod_\idealc G_\idealc$ \PaperI[Thm.~7.18].
+\emph{Hyperbolic level $n \ge 3$ odd}: $K = \Q(\sqrt{1-n^2})$,
+$D = 1 - n^2$, $N = n^2 - 1$, $\Oc$ the order of discriminant $D$ with
+class group $\Cl(D)$ of primitive classes, $h = h(D)$, ring class field
+$H$; $\eps = n + \sqrt N$; $r_0 = \tfrac{n-1}2$, $s_0 = \tfrac{n+1}2$,
+$\omega_0 = \sqrt D/2$; the twist ideal $\idealr = \idealr_n =
+\lat{r_0, \omega_0}$, invertible and ambiguous, with $\bar\idealr =
+\idealr$, $\idealr^2 = (r_0)$, $N\idealr = r_0$, and class
+$[\idealr_n] = [(r_0, 0, s_0)]$ \PaperI[Thm.~4.5]; for a primitive class
+$f$ with CM point $m_1$, $\idealb_1 = \lat{1, m_1}$, $\beta_1 = j(f)$,
+$\beta_2 = j(\idealr f) = j(\idealr^{-1}\idealb_1)$ (the complex conjugate
+of the moduli coordinate $\beta_2$ of \PaperI[\S6.1]), and $u_f = \eps\Theta_f$
+the normalized phase with laws $u_{f^{-1}} = \bar u_f$ and
+$u_fu_{\idealr f} = 1$ \PaperI[Thm.~6.6].  In both aspects the unit count of
+the order is $w = 2$.  $\Delta_q = \eta^{24}$ is the normalized
+discriminant, $\Delta(\Lambda)$ the weight-$12$ lattice discriminant,
+$j$ the modular invariant, $\tau_\idealc$ the CM point of the reduced
+form $Q_\idealc = (A, B, C)$ of a class, $y_\idealc = \im\tau_\idealc =
+\sqrt{|D|}/2A$, and
+\begin{equation}\label{eq:gdef}
+  g_\idealc \;:=\; y_\idealc^{\,6}\,\bigl|\Delta_q(\tau_\idealc)\bigr|
+\end{equation}
+the scale-invariant $\Delta$-datum of the class ($g = \covol^6|\Delta|$ of
+any lattice in the class, up to one global constant).  For a real
+quadratic discriminant $d$, $\eps_d > 1$ is the fundamental unit and
+$h(d)$ the class number; $w(d)$ is the number of roots of unity of the
+imaginary quadratic order of discriminant $d < 0$.
+
+\subsection*{Acknowledgements}
+The results of this paper were obtained in a sequence of
+computer-assisted research sessions; the complete research notes,
+verification scripts and literature record are available in the
+accompanying repository.
+%% TODO before submission: repository URL / archival DOI.
+
+%%% ============================================================
+\section{The classwise laws and the master identities}\label{sec:master}
+
+\subsection{The Epstein $L$-function of a level and the limit value}
+\label{subsec:epstein}
+
+\begin{definition}\label{def:epstein}
+For a discriminant $D < 0$ with class group $\Cl(D)$ of primitive forms
+and a character $\chi$ of $\Cl(D)$, set
+\[
+  L(s,\chi) \;:=\; \frac1w\sum_{\idealc \in \Cl(D)}\chi(\idealc)\,
+  \zeta_{Q_\idealc}(s),
+  \qquad
+  \zeta_Q(s) = \sideset{}{'}\sum_{(x,y)\in\Z^2}Q(x,y)^{-s},
+\]
+the form-class (Epstein) $L$-function of the discriminant.  For $m \ge
+1$ let $r_\idealc(m)$ be the number of representations of $m$ by
+$Q_\idealc$ and $R_\chi(m) := \sum_\idealc\chi(\idealc)r_\idealc(m)$, so
+that $L(s,\chi) = w^{-1}\sum_{m \ge 1}R_\chi(m)m^{-s}$.
+\end{definition}
+
+Since $(x,y) \mapsto (x,-y)$ bijects the representations by $Q$ and by
+$Q^{-1}$, one has $R_\chi = R_{\bar\chi}$, and $L(s,\chi) = L(s,\bar\chi)$
+is real on the real axis.  In our two aspects $D = -4n^2$ resp.\ $D = 1
+- n^2$, and $w = 2$.
+
+\begin{proposition}[functional equation and the limit value]\label{prop:klf}
+Write $\gamma(s) = \bigl(\tfrac{\sqrt{|D|}}{2\pi}\bigr)^{s}\Gamma(s)$.
+Then $\gamma(s)\zeta_Q(s) = \gamma(1-s)\zeta_Q(1-s)$ for every class, so
+for nontrivial $\chi$ the function $L(s,\chi)$ is entire with $L(0,\chi)
+= 0$, and
+\begin{equation}\label{eq:klf}
+  L'(0,\chi) \;=\; \frac{\sqrt{|D|}}{2\pi}\,L(1,\chi)
+  \;=\; -\,\frac{1}{12}\sum_{\idealc}\chi(\idealc)\,\log g_\idealc .
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+With $\tau_Q = \tfrac{-B + i\sqrt{|D|}}{2A}$ one has $A|x + y\tau_Q|^2 =
+Q(x,-y)$ and $Ay_{\tau_Q} = \sqrt{|D|}/2$, whence
+$\zeta_Q(s) = \bigl(\tfrac{2}{\sqrt{|D|}}\bigr)^{s}E(\tau_Q, s)$ for the
+nonholomorphic Eisenstein series $E(\tau,s) = \sum'y^s/|m\tau + n|^{2s}$.
+The completed series $E^*(\tau,s) = \pi^{-s}\Gamma(s)E(\tau,s)$ satisfies
+$E^*(\tau,s) = E^*(\tau,1-s)$, and $\gamma(s)\zeta_Q(s) = E^*(\tau_Q,s)$:
+this is the functional equation, class by class.  For nontrivial $\chi$
+the poles at $s = 1$ cancel in the character sum, so $\Gamma(s)L(s,\chi)$
+is finite at $s = 0$; since $\Gamma(s) \sim 1/s$, $L(0,\chi) = 0$ and
+$L'(0,\chi) = \lim_{s \to 0}\gamma(s)L(s,\chi) = \gamma(1)L(1,\chi)$.  The
+first Kronecker limit formula \cite[Ch.~I]{Siegel1961}, \cite[Ch.~20]{Lang1987},
+\[
+  E(\tau,s) = \frac{\pi}{s-1} + 2\pi\bigl(\gamma_E - \log 2 -
+  \log(\sqrt y\,|\eta(\tau)|^2)\bigr) + O(s-1),
+\]
+gives, after the $\chi$-sum has killed every $\idealc$-independent
+constant, and with $\sqrt y\,|\eta|^2 = (y^6|\Delta_q|)^{1/12} =
+g^{1/12}$,
+\[
+  L(1,\chi) = -\frac1w\cdot\frac{2}{\sqrt{|D|}}\cdot\frac{\pi}{6}
+  \sum_\idealc\chi(\idealc)\log g_\idealc ;
+\]
+multiply by $\gamma(1) = \sqrt{|D|}/2\pi$ and use $w = 2$.
+\end{proof}
+
+The verification of every identity below rests on an evaluation of
+$L'(0,\chi)$ that uses \emph{no} modular quantity at all.
+
+\begin{lemma}[independent evaluation]\label{lem:gamma-eval}
+For nontrivial $\chi$, with $\alpha = 2\pi/\sqrt{|D|}$ and $E_1$ the
+exponential integral,
+\[
+  L'(0,\chi) \;=\; \frac1w\sum_{m \ge 1}R_\chi(m)\Bigl[\frac{e^{-\alpha m}}
+  {\alpha m} + E_1(\alpha m)\Bigr] .
+\]
+\end{lemma}
+
+\begin{proof}
+Let $\theta_Q(t) = \sum_{(x,y)\in\Z^2}e^{-\alpha Q(x,y)t}$.  The Mellin
+transform gives
+\[
+  \gamma(s)\zeta_Q(s) = \int_0^\infty(\theta_Q(t) - 1)\,t^{s-1}\,dt,
+\]
+and Poisson summation gives $\theta_Q(1/t) = t\,
+\theta_{Q^{-1}}(t)$: in the normalization $\alpha = 2\pi/\sqrt{|D|}$ the
+Gram matrix $2G_Q/\sqrt{|D|}$ has determinant $1$, and its inverse is
+$2G_{Q^{-1}}/\sqrt{|D|}$.  Splitting the integral at $t = 1$ and
+inverting $t$ on $(0,1)$,
+\[
+  \gamma(s)\zeta_Q(s) = \int_1^\infty(\theta_Q(t) - 1)t^{s-1}\,dt
+  + \int_1^\infty(\theta_{Q^{-1}}(t) - 1)t^{-s}\,dt + \frac1{s-1} -
+  \frac1s .
+\]
+Summing against a nontrivial $\chi$ kills the last two terms, and
+$R_\chi = R_{\bar\chi}$ identifies the $Q^{-1}$-sum with the $Q$-sum;
+at $s = 0$ the left side is $L'(0,\chi)$ by Proposition \ref{prop:klf},
+and the two integrals of $e^{-\alpha mt}$ are $E_1(\alpha m)$ and
+$e^{-\alpha m}/\alpha m$.
+\end{proof}
+
+The series converges like $e^{-\alpha m}$; at $250$ digits it needs
+between $600$ and $2600$ terms at the levels below, and its inputs are
+the exact integers $R_\chi(m)$.  Every limit-formula identity in this
+paper is checked against it (residuals $\le 2\cdot 10^{-248}$ at $250$
+digits; Appendix \ref{app:verification}).
+
+\subsection{Euclidean: the classwise law and the master identity}
+\label{subsec:euc-master}
+
+\begin{lemma}[classwise law]\label{lem:euc-classwise}
+For every class $\idealc \in \Cl(\Oc_n)$ of every level $n \ge 2$, with
+$\beta = j(\idealc)$,
+\[
+  |u_\idealc|^{6} \;=\; \bigl|\beta^4(\beta - 1728)^3\bigr|\;
+  \frac{g_\idealc}{n^{6}\,|\Delta_q(i)|} .
+\]
+\end{lemma}
+
+\begin{proof}
+$u^6 = -\beta^4(\beta - 1728)^3\Delta(\Lambda_\idealc)/\Delta(\Zi)$ is
+\PaperI[eq.~(7.1)].  Write $\Lambda_\idealc = c\lat{1, w}$; then $|c|^2y_w
+= n = \covol(\Lambda_\idealc)$ and $|\Delta(\Lambda_\idealc)| =
+|c|^{-12}(2\pi)^{12}|\Delta_q(w)|$, so $|\Delta(\Lambda_\idealc)/
+\Delta(\Zi)| = y_w^6|\Delta_q(w)|/(n^6|\Delta_q(i)|)$, and $y_w^6
+|\Delta_q(w)| = g_\idealc$ by $\SL_2(\Z)$-invariance of $y^6|\Delta_q|$.
+\end{proof}
+
+\begin{theorem}[Euclidean master identity]\label{thm:euc-master}
+For every nontrivial character $\chi$ of $\Cl(\Oc_n)$, with $S(\chi) =
+\sum_\idealc\chi(\idealc)\log|u_\idealc|$ and $\Sigma_x(\chi) =
+\sum_\idealc\chi(\idealc)\log|j(\idealc) - x|$,
+\begin{equation}\label{eq:euc-master}
+  \boxed{\;S(\chi) \;=\; -2\,L'(0,\chi) + \tfrac23\,\Sigma_0(\chi) +
+  \tfrac12\,\Sigma_{1728}(\chi).\;}
+\end{equation}
+For the trivial character, with $H_{-4n^2}$ the ring class polynomial
+and $M(n)$ the $\Delta$-mass of \PaperI[Thm.~7.18],
+\begin{equation}\label{eq:euc-trivial}
+  6\sum_\idealc\log|u_\idealc| \;=\; 4\log|H_{-4n^2}(0)| +
+  3\log|H_{-4n^2}(1728)| + \log|M(n)| - 12\,h\log n .
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Take logarithms in Lemma \ref{lem:euc-classwise} and sum against
+$\chi$: the $\idealc$-independent constant $-6\log n - \log|\Delta_q(i)|$
+dies for $\chi \ne 1$, and $\sum\chi\log g = -12L'(0,\chi)$ by
+Proposition \ref{prop:klf}.  For the trivial character sum the same
+identity over all classes: $\sum\log|\beta| = \log|H(0)|$, $\sum\log|\beta
+- 1728| = \log|H(1728)|$, and $\sum_\idealc(\log g_\idealc -
+\log|\Delta_q(i)| - 6\log n) = \log|M(n)| - 12h\log n$ by the definition
+$M(n) = \prod_\idealc n^{12}\Delta(\Lambda_\idealc)/\Delta(\Zi)$.
+\end{proof}
+
+Both statements are verified at $n = 3, 5, 7, 9, 11, 13, 15$, every
+character, with residuals $\le 2\cdot 10^{-248}$ ($250$ digits; $400$ at
+$n = 15$), the identity and the independent evaluation of Lemma
+\ref{lem:gamma-eval} being separate computations; the trivial-character
+anchor is checked against the certified $H_{-4n^2}$ and the closed form of
+$M(n)$.
+
+The limit formula becomes an algebraic statement through one integer
+polynomial per level.
+
+\begin{theorem}[the $\Delta$-mass polynomial and the uniform Stark law]
+\label{thm:Dn}
+Let $G_\idealc = n^{12}\Delta(\Lambda_\idealc)/\Delta(\Zi)$; this is a
+nonzero algebraic integer, of absolute value $n^6g_\idealc/|\Delta_q(i)|$.
+Then:
+\begin{enumerate}
+\item $\sigma(G_\idealc) = G_{\idealc(\sigma)^{-1}\idealc}$ for $\sigma \in
+\Gal(\bar\Q/K)$ with Artin class $\idealc(\sigma)$ on $H_n$, and
+$\overline{G_\idealc} = G_{\idealc^{-1}}$; hence the multiset
+$\{G_\idealc\}$ is $\Gal(\bar\Q/\Q)$-stable, and
+\[
+  D_n(x) := \prod_{\idealc \in \Cl(\Oc_n)}(x - G_\idealc) \;\in\; \Z[x],
+  \qquad D_n(0) = (-1)^h M(n) .
+\]
+\item For every nontrivial $\chi$:
+$\;-12\,L'(0,\chi) = \sum_\idealc\chi(\idealc)\log|G_\idealc|$.
+\end{enumerate}
+Thus all the $L'(0,\chi)$ of a level are character combinations of the
+logarithms of the roots of one integer polynomial: the $\Delta$-data
+$\{G_\idealc\}$ of the curvature-$2n$ disks form an elliptic-unit system
+for the ring class tower of $\Q(i)$ in the sense of Siegel and Robert.
+\end{theorem}
+
+\begin{proof}
+(1) $G_\idealc = F(\Lambda_\idealc; \Zi)$ with $F(\Lambda; L) =
+n^{12}\Delta(\Lambda)/\Delta(L)$, isobaric of joint weight zero.  The
+transport lemma \PaperI[Lemma~7.13] gives $\sigma(F(\Lambda_\idealc;\Zi))
+= F(s^{-1}\Lambda_\idealc; s^{-1}\Zi)$ for the id\`ele $s$ of $\sigma$;
+rescaling jointly by a generator of the principal ideal
+$(s^{-1}\Zi)^{-1}$, exactly as in the translation law \PaperI[Prop.~7.14],
+lands on a primitive representative of the class
+$\idealc(\sigma)^{-1}\idealc$, determined up to $\mu_4$ --- and
+$\Delta(i\Lambda) = \Delta(\Lambda)$, so there is no ambiguity at all.
+Complex conjugation: $\Delta(\bar\Lambda) = \overline{\Delta(\Lambda)}$
+and $\bar\Lambda$ represents $\idealc^{-1}$ \PaperI[Prop.~7.10].  The
+coefficients of $D_n$ are therefore rational, and integral because
+$n^{12}\Delta$-quotients of commensurable CM lattices are algebraic
+integers \cite[Ch.~12]{Lang1987}; $D_n(0) = (-1)^h\prod G_\idealc =
+(-1)^hM(n)$.  (2) $\log|G_\idealc| = \log g_\idealc + 6\log n -
+\log|\Delta_q(i)|$, so the character sum reproduces Proposition
+\ref{prop:klf}.
+\end{proof}
+
+The certified polynomials (integer coefficients with $\ge 226$ spare
+digits at $250$ digits, $358$ at $n = 15$; constant terms equal to
+$(-1)^hM(n)$ exactly):
+\begin{align*}
+D_3 &= x^2 - 378x + 729, \qquad D_5 = x^2 - 322x + 1,\\
+D_7 &= x^4 + 58604x^3 + 5618502582x^2 - 191605917748x + 7^{6},\\
+D_9 &= x^6 + 777114x^5 + 469570343535x^4 + 88033943990172204x^3\\
+    &\qquad + 4975970841324612804303x^2 - 6464018128844293554150x + 3^{24},\\
+D_{11} &= x^6 - 2940366x^5 + 2977596073815x^4 + 116499046538184860x^3\\
+    &\qquad + 38813935158542440699935x^2 - 1046289507684469650030x + 11^{6},\\
+D_{13} &= x^6 + 7210938x^5 + 12700046391567x^4 - 1529217345755339156x^3\\
+    &\qquad + 61048319821249936271631x^2 - 22813565655771828294x + 1,\\
+D_{15} &= x^8 - 243432x^7 - 49497426055620x^6 - 1528089585117383803032x^5\\
+    &\qquad + 12625658759774046395283174x^4\\
+    &\qquad + 2831276695986378100679863409676072x^3\\
+    &\qquad + 85367425855325247262124045173735929698940x^2\\
+    &\qquad - 331767481864968679465735138096222248x + 3^{24}.
+\end{align*}
+
+\begin{remark}[coset cubics; the Stark objects of the cubic layer]
+\label{rem:cosetcubics}
+At $n = 9, 11, 13$, where $\Cl(\Oc_n) \cong \Z/6$, the products of the
+$G_\idealc$ over the three cosets of the kernel of the order-$3$
+character are the roots of the certified integer cubics
+\begin{align*}
+n = 9:&\quad x^3 - 76822296291x^2 + 4976085199686658256835x - 3^{24},\\
+n = 11:&\quad x^3 + 277946532501x^2 + 38813938298955894507411x - 11^{6},\\
+n = 13:&\quad x^3 + 446643445245x^2 + 61048319249786206560771x - 1,
+\end{align*}
+with the Stark-type closed form
+$-12L'(0,\chi_3) = \tfrac32\log|G^{(3)}_0| - \tfrac12\log|C_\Delta(0)|$,
+$G^{(3)}_0$ the principal coset product and $C_\Delta(0)$ the constant
+term, verified to $10^{-247}$.  These cubics are the objects whose unit
+normalization carries the Robert index of Section \ref{sec:robert}.
+\end{remark}
+
+\subsection{Hyperbolic: cancellation of $\eps$ and $\mu$, and the
+odd-character law}\label{subsec:hyp-master}
+
+\begin{lemma}[scale-invariant closed form]\label{lem:hyp-classwise}
+For every primitive class $f$ of discriminant $D = 1 - n^2$, with
+$\beta_1 = j(f)$, $\beta_2 = j(\idealr_nf)$ and $g(f) =
+y_f^6|\Delta_q(\tau_f)|$,
+\[
+  |u_f|^{6} \;=\;
+  \frac{\bigl|\beta_1^4(\beta_1 - 1728)^3\bigr|}
+       {\bigl|\beta_2^4(\beta_2 - 1728)^3\bigr|}\cdot
+  \frac{g(f)}{g(\idealr_nf)} .
+\]
+In particular neither $\eps = n + \sqrt{n^2-1}$ nor $\mu$ survives in
+$|u_f|$.
+\end{lemma}
+
+\begin{proof}
+By the closed form \PaperI[Prop.~6.10], $u_f = -\eps\mu^{-2}h_2(\idealb_1)
+/h_2(\idealb_2)$ with $\idealb_2 = \lat{1, -m_2}$ the lattice of the class
+$[\idealr_nf]$ \PaperI[Prop.~6.7], and by the Norm Lemma
+\PaperI[Lemma~6.11], $|\mu|^2 = \eps q_1/q_2$ with $q_1, q_2$ the
+half-curvatures of the two circles; hence $|u_f| =
+(q_2/q_1)\,|h_2(\idealb_1)/h_2(\idealb_2)|$.  The weight algebra $h_2^6 =
+c\,j^4(j - 1728)^3\Delta$ (one universal constant $c$) and
+\[
+  |\Delta(\idealb_i)| = (2\pi)^{12}\,\frac{g(\idealb_i)}{\covol(\idealb_i)^6},
+  \qquad
+  \frac{\covol(\idealb_1)}{\covol(\idealb_2)} = \frac{q_2}{q_1}
+\]
+(both CM points have imaginary part $\sqrt N/2q_i$) give
+\[
+  \Bigl|\frac{h_2(\idealb_1)}{h_2(\idealb_2)}\Bigr|^{6}
+  = \Bigl(\frac{q_1}{q_2}\Bigr)^{6}\cdot
+  \frac{|\beta_1^4(\beta_1-1728)^3|}{|\beta_2^4(\beta_2-1728)^3|}\cdot
+  \frac{g_1}{g_2} ;
+\]
+assemble, and identify $\beta_2, g_2$ as the class functions at
+$\idealr_nf$ through $[\idealb_2] = [\idealr_n][\idealb_1]$
+\PaperI[Thm.~4.5].
+\end{proof}
+
+The lemma is verified classwise at $n = 9, 11, 13, 15$ with maximal
+deviation $4.5\cdot 10^{-249}$.  The expected new ingredient of the
+hyperbolic aspect, $\log\eps_{n^2-1}$ coming from $\eps^6\mu^{-12}$,
+cancels identically: the Norm Lemma places $\eps$ exactly as the
+discrepancy between the two archimedean places of $\mu$, and $|u_f|$ sees
+only one of them.
+
+\begin{theorem}[hyperbolic master identity]\label{thm:hyp-master}
+Let $\chi$ be a character of $\Cl(1 - n^2)$, $S(\chi) = \sum_f\chi(f)
+\log|u_f|$, $\Sigma_x(\chi) = \sum_f\chi(f)\log|\beta_1(f) - x|$.  Then
+\begin{equation}\label{eq:hyp-master}
+  \boxed{\;S(\chi) \;=\; \begin{cases} 0, & \chi(\idealr_n) = +1,\\[3pt]
+  -4\,L'(0,\chi) + \tfrac43\,\Sigma_0(\chi) + \Sigma_{1728}(\chi), &
+  \chi(\idealr_n) = -1 .\end{cases}\;}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Sum $6\log|u_f|$ from Lemma \ref{lem:hyp-classwise} against $\chi$.
+Re-indexing the $\idealr_nf$-terms by $f \mapsto \idealr_nf$ multiplies
+their sum by $\chi(\idealr_n)^{-1} = \chi(\idealr_n)$, the twist class
+being $2$-torsion, so
+$6S(\chi) = (1 - \chi(\idealr_n))\bigl[4\Sigma_0 + 3\Sigma_{1728} +
+\Sigma_\gamma\bigr]$ with $\Sigma_\gamma(\chi) = \sum_f\chi(f)\log g(f) =
+-12L'(0,\chi)$ by Proposition \ref{prop:klf} at discriminant $1 - n^2$.
+\end{proof}
+
+The vanishing statement is the twist law $u_{\idealr f}u_f = 1$ seen
+through the limit formula; both branches are verified at $n = 9, 11, 13,
+15$, every character, with residuals $\le 10^{-248}$, the even-character
+sums vanishing to $10^{-249}$ or exactly.
+
+\begin{theorem}[the twisted $\Delta$-ratio polynomial]\label{thm:Rpoly}
+Set
+\begin{equation}\label{eq:Rdef}
+  R_f \;:=\; u_f^{6}\;\frac{\beta_2^4(\beta_2 - 1728)^3}
+  {\beta_1^4(\beta_1 - 1728)^3},
+  \qquad |R_f| = \frac{g(f)}{g(\idealr_nf)},
+\end{equation}
+a class function, with $R_{\idealr_nf} = R_f^{-1}$.  Then the multiset
+$\{R_f\}_{f \in \Cl(D)}$ is stable under $\Gal(\bar\Q/\Q)$, so that
+$\prod_f(x - R_f) \in \Q[x]$; and for every odd character
+($\chi(\idealr_n) = -1$),
+\begin{equation}\label{eq:R-stark}
+  -24\,L'(0,\chi) \;=\; \sum_f\chi(f)\log|R_f| .
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+$|R_f| = g(f)/g(\idealr_nf)$ is Lemma \ref{lem:hyp-classwise}, and
+$R_{\idealr f} = 1/R_f$ is the twist law together with $\idealr^2 = 1$ in
+$\Cl(D)$.  By the first-power dihedral law \PaperI[Thm.~6.19] and the
+reciprocity for singular moduli, $u_f$, $\beta_1$ and $\beta_2$ are
+transported by the same generalized dihedral permutation $f \mapsto
+f^{e(\sigma)}\idealc(\sigma)$ of the classes (the translated pair is
+again the canonical pair of the translated class), so $\sigma(R_f) =
+R_{f^{e(\sigma)}\idealc(\sigma)}$.  Finally
+$\sum_f\chi(f)[\log g(f) - \log g(\idealr_nf)] = (1 - \chi(\idealr_n))
+\Sigma_\gamma(\chi) = 2\Sigma_\gamma(\chi) = -24L'(0,\chi)$ for odd $\chi$.
+\end{proof}
+
+This is the hyperbolic counterpart of Theorem \ref{thm:Dn}, and sharper:
+the certified polynomials $\prod_f(x - R_f)$ (Section
+\ref{subsec:unitrecord}) have \emph{integer} coefficients, are
+palindromic, and have constant term $1$ --- the $R_f$ are algebraic units,
+inverted in pairs by the $\idealr_n$-twist, so the $L'(0,\chi)$ of the odd
+characters are $\chi$-combinations of logarithms of genuine units, with
+no $S$-integer dressing at all in the $\Delta$-part.  Theorem
+\ref{thm:unit} proves this for every $n$.
+
+\subsection{The certified record}\label{subsec:record}
+
+Character sums and $L'$-values at the computed levels ($20$ digits shown;
+computed at $250$ digits, $400$ at Euclidean $n = 15$; $S(\chi) =
+S(\bar\chi)$, one value per conjugate pair; characters of a non-cyclic
+class group are indexed by their exponents on the generators of
+$\Z/4\times\Z/2$).  Euclidean:
+\begin{center}
+\small
+\begin{tabular}{@{}rlll@{}}
+\toprule
+$n$ & $\operatorname{ord}\chi$ & $S(\chi)$ & $L'(0,\chi)$\\
+\midrule
+3 & 2 & 10.119185642834999673 & 0.43898596564160556954\\
+5 & 2 & 16.401110452980199012 & 0.96242365011920689500\\
+7 & 2 & 50.898733868194595161 & 2.7686593833135738327\\
+7 & 4 & 22.684295755688513572 & 1.4860221248769270925\\
+9 & 2 & 18.137584684821439049 & 1.7559438625664222782\\
+9 & 3 & 70.144229691414912554 & 4.0476417264498781634\\
+9 & 6 & 34.382429251891407159 & 2.1364594185869239177\\
+11 & 2 & 50.213109260828194576 & 2.9932228461263808979\\
+11 & 3 & 86.033492426467556694 & 5.3026856597888262543\\
+11 & 6 & 27.769444924657409111 & 2.3032180902028192162\\
+13 & 2 & 23.802362926332249068 & 2.3895264345742186082\\
+13 & 3 & 101.24102291036467905 & 6.5582440777920829100\\
+13 & 6 & 50.399596052674761580 & 3.3904644593763457318\\
+15 & 2 $(0,1)$ & 62.742974077314449734 & 3.8496946004768275800\\
+15 & 2 $(2,0)$ & 123.17609219442540179 & 8.2537482755822421869\\
+15 & 2 $(2,1)$ & 48.769335467586396360 & 3.5118877251328445563\\
+15 & 4 $(1,0)$ & 132.06845592069919001 & 8.2852528669601990706\\
+15 & 4 $(1,1)$ & 39.877919196363264725 & 3.4800432906097017186\\
+\bottomrule
+\end{tabular}
+\end{center}
+Hyperbolic (odd characters; the even ones have $S = 0$ to $10^{-249}$
+or exactly):
+\begin{center}
+\small
+\begin{tabular}{@{}rlll@{}}
+\toprule
+$n$ & $\chi$ & $S(\chi)$ & $L'(0,\chi)$\\
+\midrule
+9 & order 4 & 45.337283759443440194 & 1.0612750619050356520\\
+11 & $(0,1)$ & 71.156367508225883636 & 1.7627471740390860505\\
+11 & $(1,0)$ & 46.591472482040984242 & 1.2122976394880445490\\
+13 & $(0,1)$ & 86.596498648832811158 & 2.2924316695611776878\\
+13 & $(1,0)$ & 57.828173780263506754 & 1.5667992369724110787\\
+15 & $(0,1)$ & 96.655012640029353845 & 2.7686593833135738327\\
+15 & $(2,1)$ & 42.411391969797829839 & 1.7000422070566697504\\
+15 & order 4 & 101.30861654091162593 & 2.5318972768037898006\\
+\bottomrule
+\end{tabular}
+\end{center}
+Two coincidences are visible to the eye and explained in Section
+\ref{sec:genus}: Euclidean $n = 7$ (order $2$) and hyperbolic $n = 15$,
+$\chi_{(0,1)}$, share $L' = \log(8 + 3\sqrt7)$, the Kronecker-symbol
+pairs $(-7)\cdot 28$ and $(-8)\cdot 28$ arriving at the same
+$\eps_{28}$; and the three real characters at Euclidean $n = 15$ have
+$L' = 4\log\eps_{60}$, $8\log\eps_5$ and $\tfrac83\log\eps_{12}$.
+
+%%% ============================================================
+\section{Genus characters in closed form}\label{sec:genus}
+
+For a real (genus) character every term of the master identities
+evaluates in closed form: the $L'$-part through a factorization of the
+Epstein $L$-function into two Dirichlet $L$-functions, the $j$-parts
+through exact factorizations in a real quadratic field.
+
+\subsection{Euclidean: the $L'$-part and the field $\Q(\sqrt n)$}
+\label{subsec:genus-euc}
+
+$\Cl(\Oc_n)$ is cyclic of order $6$ at $n = 9, 11, 13$, of order $2$ at
+$n = 3, 5$, $\Z/4$ at $n = 7$, and $\Z/4\times\Z/2$ at $n = 15$; so there
+is one nontrivial real character $\chi_2$ per level $n \le 13$ and three
+at $n = 15$.  For a discriminant $d$ write $\chi_d = (\tfrac{d}{\cdot})$
+for the Kronecker symbol, a (possibly imprimitive) Dirichlet character,
+$L(s,\chi_d)$ for its $L$-function, and $d^*$ for the fundamental
+discriminant of the primitive character inducing $\chi_d$.
+
+\begin{proposition}[genus factorization of the Epstein $L$-function]
+\label{prop:genus-euc}
+For the real character $\chi_2$ of $\Cl(\Oc_n)$, $n \in \{3, 5, 7, 9, 11,
+13\}$, and for the character $\chi_{(2,0)}$ at $n = 15$, the
+representation numbers satisfy, for every $m \ge 1$,
+\begin{equation}\label{eq:conv}
+  R_{\chi_2}(m) \;=\; 2\,\bigl(\mathrm{conv}_{d_1,d_2} * \mathrm{corr}\bigr)(m),
+  \qquad
+  \mathrm{conv}_{d_1,d_2}(m) = \sum_{e \mid m}\chi_{d_1}(e)\,\chi_{d_2}(m/e),
+\end{equation}
+with the decompositions $d_1d_2 = -4n^2$ and finite corrections
+$\mathrm{corr}$ (Dirichlet convolution; $\mathrm{corr} = \delta_1$ unless
+stated) of the table below.  Equivalently, as Dirichlet series,
+\[
+  L(s,\chi_2) = L(s,\chi_{d_1})\,L(s,\chi_{d_2})\,C(s),
+  \qquad C(s) = \sum_m\mathrm{corr}(m)m^{-s},
+\]
+and consequently
+\begin{equation}\label{eq:Lprime-genus}
+  L'(0,\chi_2) \;=\; \frac{2h(d_1^*)}{w(d_1^*)}\;h(d_2)\,\log\eps_{d_2}\;C(0).
+\end{equation}
+\begin{center}
+\small
+\begin{tabular}{@{}rlll@{}}
+\toprule
+$n$ & $d_1\cdot d_2 = -4n^2$ & correction $C(s)$ & $L'(0,\chi_2)$\\
+\midrule
+3 & $(-3)\cdot 12$ & --- & $\tfrac13\log\eps_{12}$\\
+5 & $(-20)\cdot 5$ & --- & $2\log\eps_5$\\
+7 & $(-7)\cdot 28$ & --- & $\log\eps_{28}$\\
+9 & $(-27)\cdot 12$ & $1 + 3^{1-2s}$ & $\tfrac43\log\eps_{12}$\\
+11 & $(-11)\cdot 44$ & --- & $\log\eps_{44}$\\
+13 & $(-52)\cdot 13$ & --- & $2\log\eps_{13}$\\
+15 & $(-15)\cdot 60$ & --- & $4\log\eps_{60}$\\
+\bottomrule
+\end{tabular}
+\end{center}
+with $\eps_{12} = 2 + \sqrt3$, $\eps_5 = \tfrac{1+\sqrt5}{2}$, $\eps_{28} =
+8 + 3\sqrt7$, $\eps_{44} = 10 + 3\sqrt{11}$, $\eps_{13} =
+\tfrac{3+\sqrt{13}}2$, $\eps_{60} = 4 + \sqrt{15}$.  \emph{In every case
+$d_2$ is the discriminant of $\Q(\sqrt n)$}: the real quadratic field
+carrying the genus-character sum at conductor $n$ is $\Q(\sqrt n)$ itself.
+\end{proposition}
+
+\begin{proof}
+The identity \eqref{eq:conv} is verified as an identity of integers for
+all $m \le 300$ at every level.  This is a proof, by Sturm's bound
+\cite{Sturm1987}.  The left side is the $q$-expansion of
+$\tfrac12\sum_\idealc\chi_2(\idealc)\theta_{Q_\idealc}$, whose constant
+term vanishes and which, by Hecke and Schoeneberg
+\cite{Schoeneberg1939}, is a holomorphic modular form of weight $1$ on
+$\Gamma_0(|D|)$, $|D| = 4n^2$, with character $\chi_D$; the right side
+is the weight-$1$ Eisenstein series $E_1(\chi_{d_1}, \chi_{d_2})$ of
+\cite[\S4.8]{DiamondShurman2005}, whose constant term vanishes because
+both characters are nontrivial, together with its $p^a$-dilations
+weighted by the correction coefficients (at $n = 9$: $E + 3E(9\tau)$,
+$E$ of level $36$), a form of the same weight, level and character.  A
+weight-$1$ form on $\Gamma_0(4n^2)$ vanishing at $\infty$ to order beyond
+$\mu(\Gamma_0(4n^2))/12$ --- at most $180$, attained at $n = 15$, far below
+the certified $300$ --- vanishes identically.  For the closed form:
+$L(s,\chi_{d_1})$ differs from the primitive $L(s,\chi_{d_1^*})$ by Euler
+factors at primes $p \mid d_1$, $p \nmid d_1^*$, which here occur only at
+$n = 9$ ($p = 3$, where $\chi_{-3}(3) = 0$ and nothing changes); the
+positive $d_2$ is fundamental at every level, $L(0,\chi_{d_2}) = 0$ and
+$L'(0,\chi_{d_2}) = h(d_2)\log\eps_{d_2}$, while $L(0,\chi_{d_1^*}) =
+2h(d_1^*)/w(d_1^*)$ (Dirichlet's class number formulas at $s = 0$).
+\end{proof}
+
+At $n = 9$ the factor $C(s) = 1 + 3^{1-2s}$, $C(0) = 4$, together with
+$d_1^* = -3$ ($w = 6$), gives $\tfrac13\cdot 4\log\eps_{12}$.  This
+conductor correction at the square conductor --- and only there --- is
+thereby proved as an identity; what remains open is its conceptual
+derivation from the local proper-$\Oc_9$-ideal structure at $3$, and the
+general-$n$ law.  The composite square-free conductor $n = 15$ needs no
+correction for its $\Q(\sqrt{15})$-character, as this reading predicts
+(verified at $400$ digits).  All seven closed forms agree with the
+independent evaluation of Lemma \ref{lem:gamma-eval} to $10^{-249}$ or
+better.
+
+\begin{remark}[the other two real characters at $n = 15$; computational]
+\label{rem:n15}
+The characters $\chi_{(0,1)}$ and $\chi_{(2,1)}$ of $\Cl(\Oc_{15}) \cong
+\Z/4\times\Z/2$ admit \emph{no} factorization of the shape \eqref{eq:conv}
+with a finite correction over the divisor pairs of $-900$ --- an honest
+negative result of the discovery procedure --- but their values are
+cleanly identified (certified ratio, $398$ spare digits at $400$ digits):
+\[
+  L'(0,\chi_{(0,1)}) = 8\log\eps_5, \qquad
+  L'(0,\chi_{(2,1)}) = \tfrac83\log\eps_{12},
+\]
+the units of the two proper subfield levels $5$ and $3$.  Their
+factorizations presumably need Euler data at both conductor primes
+simultaneously; this is an identification, not a proof.
+\end{remark}
+
+\subsection{Euclidean: the $j$-dressing}\label{subsec:dressing-euc}
+
+For the real character $\chi_2$ split the classes by $\chi_2 = \pm1$, and
+let $A, B$ be the products of $j(\idealc)$ (resp.\ of $j(\idealc) - 1728$)
+over the two cosets, so that $\Sigma_0(\chi_2) = \log|A/B|$ (resp.\
+$\Sigma_{1728}(\chi_2) = \log|A/B|$).  By genus theory $A$ and $B$ lie in
+the real quadratic subfield $\Q(\sqrt{d_2})$ of the ring class field
+fixed by $\ker\chi_2$ and the mirror, are algebraic integers, and are
+conjugate over $\Q$, so $A/B$ has norm $1$.
+
+\begin{proposition}[exact $\Sigma$-factorizations; computational]
+\label{prop:dressing-euc}
+At every level $n \le 15$ and for every real character, $A + B$ and $AB$
+are certified integers ($\ge 174$ spare digits at $250$ digits, $\ge 315$
+at $400$), $A, B = \tfrac{s \pm t\sqrt{d_2}}2$ in $\Q(\sqrt n)$, and the
+norm-one ratio $A/B$ factors \emph{exactly}, by ideal arithmetic in
+$\Q(\sqrt{d_2})$ with valuations computed by Hensel lifting and each
+identity re-multiplied out symbolically,
+\begin{equation}\label{eq:dressing}
+  \Sigma_0(\chi_2) = \log\Bigl|\frac AB\Bigr|
+  = k\log\eps_{d_2} + \sum_pe_p\,\lambda_p,
+  \qquad
+  \lambda_p := \log\Bigl|\frac{\pi_p}{\pi_p'}\Bigr|,
+\end{equation}
+over split primes $p$ of $\Q(\sqrt{d_2})$, $\pi_p$ an explicit generator
+of $\idealp_p^{m_p}$ ($m_p$ the order of $\idealp_p$ in the class group,
+$e_p \in \tfrac1{m_p}\Z$), normalized so that $0 \le \lambda_p <
+2\log\eps_{d_2}$; and likewise for $\Sigma_{1728}$.  The split-prime
+support lies in $\GZ(-4n^2,-3)\cup\{p \mid 2n\}$ for $\Sigma_0$ and in
+$\GZ(-4n^2,-4)\cup\{p \mid 2n\}$ for $\Sigma_{1728}$, where $\GZ(D, D')$
+is the set of primes dividing some $\tfrac{|DD'| - x^2}{4}$
+\cite{GrossZagier1985} --- the same Gross--Zagier sets that govern the
+denominators of the phase in \PaperI[Prop.~6.26].  The certified
+factorizations, in the canonical normalization:
+\begin{center}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}lp{6.2cm}p{4.5cm}@{}}
+\toprule
+$n$ & $\Sigma_0(\chi_2)$ & $\Sigma_{1728}(\chi_2)$\\
+\midrule
+3 & $16\log\eps_{12} - 3\lambda_{11} - 3\lambda_{23}$ &
+$4\log\eps_{12} + 2\lambda_{11}$\\
+5 & $30\log\eps_5 - 3\lambda_{11} + 3\lambda_{59} + 3\lambda_{71}$ &
+$28\log\eps_5 + 2\lambda_{11} + 2\lambda_{19}$\\
+7 & $24\log\eps_{28} - 3\lambda_{47} - 3\lambda_{83} - 3\lambda_{131}$ &
+$18\log\eps_{28} + 2\lambda_3 - 2\lambda_{19}$\\
+9 & $16\log\eps_{12} + 3\lambda_{11} - 3\lambda_{23} + 3\lambda_{47} +
+3\lambda_{179} - 3\lambda_{227} - 3\lambda_{239}$ &
+$24\log\eps_{12} - 2\lambda_{11} - 4\lambda_{23}$\\
+11 & $12\log\eps_{44} - 3\lambda_{107} + 3\lambda_{167} + 3\lambda_{263} +
+3\lambda_{347} - 3\lambda_{359}$ &
+$4\log\eps_{44} + 6\lambda_{19} + 2\lambda_{43}$\\
+13 & $18\log\eps_{13} - 3\lambda_{23} + 3\lambda_{107} + 3\lambda_{251} -
+3\lambda_{311} + 3\lambda_{443} - 3\lambda_{491} + 3\lambda_{503}$ &
+$28\log\eps_{13} - 2\lambda_3 - 4\lambda_{23} - 2\lambda_{43}$\\
+15 $(2,0)$ & $42\log\eps_{60} - 3\lambda_{11} + 3\lambda_{59} +
+3\lambda_{71} + 3\lambda_{191} + 3\lambda_{419} + 3\lambda_{479} +
+3\lambda_{659}$ &
+$52\log\eps_{60} + 2\lambda_{11} + 2\lambda_{43} + 2\lambda_{59}$\\
+15 $(0,1)$ & $132\log\eps_5 + 3\lambda_{11} + 3\lambda_{59} +
+3\lambda_{71} + 3\lambda_{191} - 3\lambda_{419} - 3\lambda_{479} -
+3\lambda_{659}$ &
+$124\log\eps_5 - 2\lambda_{11} - 4\lambda_{19} + 4\lambda_{31} -
+2\lambda_{59}$\\
+15 $(2,1)$ & $62\log\eps_{12} - 9\lambda_{11} - 6\lambda_{47} -
+3\lambda_{59} - 3\lambda_{71} - 3\lambda_{191} + 3\lambda_{419} +
+3\lambda_{479} - 3\lambda_{659}$ &
+$16\log\eps_{12} + 6\lambda_{11} + 4\lambda_{23} + 4\lambda_{47} +
+2\lambda_{59}$\\
+\bottomrule
+\end{tabular}
+\end{center}
+(The generators $\pi_p$ are printed by the script; e.g.\ at $n = 3$,
+$\pi_{11} = -4 - \tfrac32\sqrt{12}$, $\pi_{23} = -5 - 2\sqrt{12}$.)
+\end{proposition}
+
+The $\pm3$-multiples in $\Sigma_0$ and the even coefficients in
+$\Sigma_{1728}$ are the $(4,3)$-exponent shadow of $u^6 =
+-\beta^4(\beta - 1728)^3\cdot(\Delta\text{-quotient})$; note that at $n =
+15$ all three real characters carry exact $\Sigma$-data although two of
+them lack the finite genus factorization of their $L'$.  A general law
+for the exponents $k, e_p$ --- a genus-refined Gross--Zagier statement ---
+is open (Section \ref{sec:outlook}).
+
+\begin{theorem}[closed form for the genus character]\label{thm:genus-closed}
+For the real character $\chi_2$ of $\Cl(\Oc_n)$, $n \le 13$, and for the
+$\Q(\sqrt{15})$-character at $n = 15$,
+\[
+  S(\chi_2) \;=\; -2\,\frac{2h(d_1^*)}{w(d_1^*)}\,h(d_2)\,C(0)\,\log\eps_{d_2}
+  \;+\; \tfrac23\,\Sigma_0(\chi_2) + \tfrac12\,\Sigma_{1728}(\chi_2),
+\]
+with the tabulated exact $\Sigma$-factorizations: an explicit element of
+$\Q\log\eps_{\Q(\sqrt n)} + \sum_p\Q\,\lambda_p$ over the Gross--Zagier
+split primes.  (The other two real characters at $n = 15$ carry the same
+$\Sigma$-closed forms, with the certified $\eps$-ratio of Remark
+\ref{rem:n15} standing in for the $L'$-factorization.)
+\end{theorem}
+
+\begin{proof}
+Theorem \ref{thm:euc-master} with \eqref{eq:Lprime-genus} and
+\eqref{eq:dressing}.  Every ingredient is exact; the assembled identity
+is additionally checked against the independent evaluation to
+$10^{-247}$.
+\end{proof}
+
+So the Euclidean phases are an elliptic-unit system \emph{up to an
+identified, Gross--Zagier-supported $S$-integer dressing}: the $L'$-part
+is a unit statement, and the $j$-part is the price of the singular-moduli
+factors in $u^6$.
+
+\begin{remark}[signs]
+The factorizations above are of absolute values, and $S(\chi)$ sees only
+$|u|$.  The sign of $A/B$ is also computed exactly by the script.  The
+sign of the phase itself on the ambiguous classes --- where it is real ---
+is a separate matter: on the Euclidean side reality is the center
+criterion of \PaperI[Prop.~7.10], and on the hyperbolic side the sign of
+$u_f$ on divisor classes is governed by the archimedean law of
+\PaperI[Thm.~6.28].  Signs play no further role in this paper.
+\end{remark}
+
+\subsection{Hyperbolic genus characters}\label{subsec:genus-hyp}
+
+At $n = 11, 13, 15$ some odd characters of $\Cl(1 - n^2)$ are real.  The
+same machinery evaluates everything.
+
+\begin{proposition}[hyperbolic genus factorizations]\label{prop:genus-hyp}
+For the odd real characters of the table, the representation numbers
+satisfy $R_\chi = 2\,\mathrm{conv}_{d_1,d_2}$ exactly (verified for all $m
+\le 300$, proved by the Sturm argument of Proposition
+\ref{prop:genus-euc}, the bounds here being $\le 32$; no conductor
+correction arises for any odd character), and hence
+\[
+  L'(0,\chi) = \frac{2h(d_1^*)}{w(d_1^*)}\,h(d_2)\log\eps_{d_2} :
+\]
+\begin{center}
+\small
+\begin{tabular}{@{}rllll@{}}
+\toprule
+$n$ & odd $\chi$ & $d_1\cdot d_2 = 1 - n^2$ & $L'(0,\chi)$ & field\\
+\midrule
+11 & $\chi_{(0,1)}$ & $(-15)\cdot 8$ & $2\log(1 + \sqrt2)$ & $\Q(\sqrt2)$\\
+11 & $\chi_{(1,0)}$ & $(-3)\cdot 40$ & $\tfrac23\log(3 + \sqrt{10})$ & $\Q(\sqrt{10})$\\
+13 & $\chi_{(0,1)}$ & $(-7)\cdot 24$ & $\log(5 + 2\sqrt6)$ & $\Q(\sqrt6)$\\
+13 & $\chi_{(1,0)}$ & $(-8)\cdot 21$ & $\log\tfrac{5 + \sqrt{21}}2$ & $\Q(\sqrt{21})$\\
+15 & $\chi_{(0,1)}$ & $(-8)\cdot 28$ & $\log(8 + 3\sqrt7)$ & $\Q(\sqrt7)$\\
+15 & $\chi_{(2,1)}$ & $(-4)\cdot 56$ & $\tfrac12\log(15 + 4\sqrt{14})$ & $\Q(\sqrt{14})$\\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{proposition}
+
+The \emph{even} real characters pair with the complementary fields.  At
+$n = 11$ and $n = 13$ the even characters factor (certified by the same
+procedure) as
+\[
+  L(s,\chi_{-24})\,L(s,\chi_5)\quad (n = 11),
+  \qquad
+  L(s,\chi_{-3})\,L(s,\chi_{56})\quad (n = 13),
+\]
+so the fields are $\Q(\sqrt5)$ and $\Q(\sqrt{14})$ --- exactly the fields
+of the pair-sums $u_f + u_f^{-1}$ of \PaperI[Thm.~6.19(3)].  So the
+parity $\chi(\idealr_n) = \pm1$ splits the genus fields of $1 - n^2$ into
+the \emph{pair-sum fields} (even; the algebra of $u + 1/u$) and the
+\emph{$\log|u|$-fields} (odd; the character sums) --- complementary
+halves of one genus theory.  At $n = 9$ (disc $-80$, conductor $2$) the
+single real character is even, and at $n = 15$ the even character
+$\chi_{(2,0)}$ appears; their Epstein $L$-functions factor as
+\begin{gather*}
+  L(s,\chi_{-16})\,L(s,\chi_5)\,(1 + 2^{-s} + 2\cdot4^{-s})\quad (n = 9),\\
+  L(s,\chi_{-7})\,L(s,\chi_{32})\,(1 - 2^{-s} + 2\cdot4^{-s})\quad (n = 15),
+\end{gather*}
+two more instances of the conductor Euler phenomenon, both certified.
+
+\begin{proposition}[hyperbolic $\Sigma$-factorizations; computational]
+\label{prop:dressing-hyp}
+For the odd real characters the coset products over $\ker\chi$ are
+certified conjugate quadratic integers in the matching field, and the
+ratios factor exactly as in \eqref{eq:dressing}; where a split prime is
+non-principal the generator is taken for $\idealp^m$ ($m$ the class
+order) and the exponent is $e/m$ --- at $n = 11$ in $\Q(\sqrt{10})$ (class
+number $2$), $\pi_3 = 1 + \tfrac12\sqrt{40}$ generates $\idealp_3^2$.
+\begin{center}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}llp{4.8cm}p{5.3cm}@{}}
+\toprule
+$n$ & $\chi$ & $\Sigma_0(\chi)$ & $\Sigma_{1728}(\chi)$\\
+\midrule
+11 & $(-15)\cdot8$ & $30\log\eps_8 + 3\lambda_{41} + 3\lambda_{89}$ &
+$36\log\eps_8 + 2\lambda_{71}$\\
+11 & $(-3)\cdot40$ & $14\log\eps_{40} + 3\lambda_3 - 3\lambda_{41} -
+3\lambda_{89}$ & $16\log\eps_{40} - 2\lambda_{71}$\\
+13 & $(-7)\cdot24$ & $18\log\eps_{24} - 3\lambda_5 + 3\lambda_{101}$ &
+$12\log\eps_{24} + 4\lambda_{19} + 2\lambda_{47} + 2\lambda_{167}$\\
+13 & $(-8)\cdot21$ & $24\log\eps_{21} - 3\lambda_5 - 3\lambda_{101}$ &
+$24\log\eps_{21} - 2\lambda_{47} - 2\lambda_{167}$\\
+15 & $(-8)\cdot28$ & $30\log\eps_{28} - 6\lambda_{29} + 3\lambda_{47} -
+6\lambda_{53} + 3\lambda_{167}$ & $20\log\eps_{28} + 2\lambda_{31} -
+2\lambda_{47} - 2\lambda_{103} - 2\lambda_{199} - 2\lambda_{223}$\\
+15 & $(-4)\cdot56$ & $6\log\eps_{56} - 6\lambda_{11} + 3\lambda_{47} -
+3\lambda_{167}$ & $2\log\eps_{56} + 4\lambda_{11} + 2\lambda_{31} +
+4\lambda_{43} - 2\lambda_{47} + 2\lambda_{103} - 2\lambda_{199} -
+2\lambda_{223}$\\
+\bottomrule
+\end{tabular}
+\end{center}
+The split-prime supports again land in $\GZ(1 - n^2, -3)$ resp.\
+$\GZ(1 - n^2, -4)$ together with $p \mid 2(n^2 - 1)$.  Combining with
+Proposition \ref{prop:genus-hyp} and Theorem \ref{thm:hyp-master},
+$S(\chi)$ is in closed form for every odd real character of every
+computed level, verified to $10^{-247}$.
+\end{proposition}
+
+\emph{The non-real odd characters.}  At $n = 9$ ($\Cl \cong \Z/4$) the
+two odd characters are quartic, and their sums collapse by the twist law
+to $S(\chi_4) = 2\log|u_1|$: the master identity is then precisely
+Lemma \ref{lem:hyp-classwise} at the principal class, and $-12L'(0,\chi_4)
+= \log|R_1|$ is a Stark-type evaluation in the quartic ring class field,
+certified through the polynomial of Theorem \ref{thm:Rpoly}.  The same
+holds at $n = 15$ for its quartic odd pair.
+
+\subsection{Certified non-fits: the Stark regime}\label{subsec:nonfits}
+
+\begin{proposition}[computational; certified negative results]
+\label{prop:nonfits}
+For the order-$3$ and order-$6$ characters at Euclidean $n = 9, 11, 13$,
+the order-$4$ characters at Euclidean $n = 7, 15$, and the odd quartic
+characters at hyperbolic $n = 9, 15$, an integer-relation search in the
+information-theoretically safe regime ($250$ digits, $400$ at Euclidean
+$n = 15$; coefficient height $\le 10^6$; tolerance $10^{-200}$, resp.\
+$10^{-320}$; a relation is accepted only when its information content is
+at most a quarter of the working precision) finds \emph{no} rational
+linear relation among $S(\chi)$, $L'(0,\chi)$, $\{\log p : p \mid 2nH(0)
+H(1728)\}$ (resp.\ $p \mid 2(n^2-1)H(0)H(1728)$) and $\log\eps_{d_2}$.
+\end{proposition}
+
+The dressing of a non-real character genuinely lives in the cubic or
+quartic subfield of the ring class field --- its exact description is the
+certified coset data of Remark \ref{rem:cosetcubics} --- and not in the
+rank-one basis of the naive conjecture.  This is the expected Stark-regime
+behaviour: the master identities are exactly the part that survives, and
+the recognition of the coset objects as Stark units of the cubic and
+quartic subfields \cite[Ch.~6--7]{Schertz2010} is the natural
+continuation (Section \ref{sec:outlook}).
+
+%%% ============================================================
+\section{The unit theorem and the per-class valuation law}\label{sec:unit}
+
+This is the technical core of the paper.  Throughout, $n \ge 3$ is odd,
+$D = 1 - n^2$, $\Oc$ the order of discriminant $D$, and the notation of
+the introduction is in force: $r_0 = \tfrac{n-1}2$, $\idealr = \lat{r_0,
+\omega_0}$, $\idealb_1 = \lat{1, m_1}$, $\beta_1 = j(f)$, $\beta_2 =
+j(\idealr f)$, and $R_f$ as in \eqref{eq:Rdef}.
+
+\subsection{The lattice form of the twisted $\Delta$-ratio}
+\label{subsec:lattice}
+
+\begin{lemma}[lattice lemma]\label{lem:lattice}
+For every primitive class $f$ of every odd level $n \ge 3$,
+\begin{equation}\label{eq:lattice}
+  R_f \;=\; r_0^{\,6}\;\frac{\Delta(\idealb_1)}{\Delta(\idealr^{-1}\idealb_1)} .
+\end{equation}
+In particular the $j$-dressing of $R_f$ is pure bookkeeping: the twisted
+ratio \emph{is} the Siegel-type $\Delta$-quotient along the invertible
+ambiguous twist, normalized by its norm.
+\end{lemma}
+
+\begin{proof}
+From the closed form $u_f = -\eps\mu^{-2}h_2(\idealb_1)/h_2(\idealb_2)$
+\PaperI[Prop.~6.10] and the weight algebra $h_2^6 = c\,j^4(j-1728)^3
+\Delta$,
+\[
+  R_f = \eps^6\mu^{-12}\,\frac{\Delta(\idealb_1)}{\Delta(\idealb_2)} .
+\]
+Since $[\idealb_2] = [\idealr^{-1}\idealb_1]$ there is $\nu \in K^\times$,
+unique up to sign, with $\idealb_2 = \nu\,\idealr^{-1}\idealb_1$
+\PaperI[eq.~(6.1)]; homogeneity gives
+\[
+  \Delta(\idealb_2) = \nu^{-12}\Delta(\idealr^{-1}\idealb_1),
+  \qquad\text{so}\qquad
+  R_f = \eps^6\Bigl(\frac{\nu^2}{\mu^2}\Bigr)^{6}\,
+  \frac{\Delta(\idealb_1)}{\Delta(\idealr^{-1}\idealb_1)} .
+\]
+By the theorem
+$\omega_f = \eps\nu^2/(r_0\mu^2) = 1$ of \PaperI[Thm.~6.18],
+$\eps\nu^2/\mu^2 = r_0$, whence $\eps^6(\nu^2/\mu^2)^6 = r_0^6$.
+\end{proof}
+
+The lemma is verified classwise at every odd $n \le 21$, with maximal
+relative deviation $6.5\cdot 10^{-419}$ at $420$ digits, the twist
+lattice $\idealr^{-1}\idealb_1$ being computed by exact Hermite-normal-form
+arithmetic in $K$.  At $n = 3$: $r_0 = 1$, $\idealr = \Oc$, and $R = 1$
+exactly --- the mandatory anchor.
+
+\subsection{The unit theorem}\label{subsec:unit}
+
+\begin{theorem}[unit theorem]\label{thm:unit}
+For every odd $n \ge 3$ and every class $f$ of discriminant $1 - n^2$ ---
+primitive or not, with $R_f$ defined for imprimitive classes by the
+lattice formula \eqref{eq:lattice} --- one has $v_\idealP(R_f) = 0$ at
+every finite place $\idealP$ of $\bar\Q$: $R_f$ is an algebraic
+\emph{unit}.  Consequently the level polynomial $\prod_f(x - R_f)$ over
+the primitive classes is a monic integer polynomial with constant term
+$\pm1$, palindromic by the twist law: the certified observations of
+Theorem \ref{thm:Rpoly} are theorems for every $n$.
+\end{theorem}
+
+The proof runs through five lemmas.  Fix a prime $p$ and a place
+$\idealP \mid p$ of $\bar\Q$, with $v$ the valuation normalized by
+$v(p) = 1$.  For a lattice $\ideala$ with CM by $\Oc$ write $E_\ideala$
+for the elliptic curve $\C/\ideala$.
+
+\begin{lemma}[tangent-scalar expression]\label{lem:tangent}
+Let $\ideala$ be a lattice with CM by $\Oc$, $\idealc$ an invertible
+$\Oc$-ideal, and $\varphi: E_\ideala \to E_{\idealc^{-1}\ideala}$ the
+isogeny that is $z \mapsto z$ analytically.  Then
+\[
+  v\Bigl(\frac{\Delta(\ideala)}{\Delta(\idealc^{-1}\ideala)}\Bigr)
+  \;=\; -12\,v(\delta_\varphi),
+\]
+where $\delta_\varphi$ is the scalar by which $\varphi$ pulls back N\'eron
+differentials of good-reduction models at $\idealP$.
+\end{lemma}
+
+\begin{proof}
+Choose Weierstrass models $(E_i, \omega_i)$ over $\bar\Q$ whose period
+lattices are $\lambda\ideala$ and $\mu\,\idealc^{-1}\ideala$; then
+$\Delta(E_1, \omega_1) = \lambda^{-12}\Delta(\ideala)$, $\Delta(E_2,
+\omega_2) = \mu^{-12}\Delta(\idealc^{-1}\ideala)$, and $\varphi^*\omega_2
+= t\,\omega_1$ with $t = \mu/\lambda \in \bar\Q$ (the isogeny and the
+differentials are algebraic), so $\Delta(\ideala)/\Delta(\idealc^{-1}
+\ideala) = t^{-12}\Delta(E_1, \omega_1)/\Delta(E_2, \omega_2)$.  CM curves
+have potentially good reduction; over a finite extension $L/\Q_p$ choose
+minimal models: their discriminants are units, and writing $\omega_i =
+u_i\,\omega_{i,\min}$ one gets $v(\Delta(E_i, \omega_i)) = -12v(u_i)$
+and $\delta_\varphi = t\,u_1/u_2$; the $u_i$ cancel and the display
+follows.
+\end{proof}
+
+\begin{lemma}[multiplicativity; prime-to-$p$ triviality]\label{lem:mult}
+Tangent scalars multiply along composites, and $v(\delta_\varphi) = 0$
+whenever $\deg\varphi$ is prime to $p$.
+\end{lemma}
+
+\begin{proof}
+Multiplicativity is the chain rule for pullbacks.  Both $\delta_\varphi$
+and $\delta_{\hat\varphi}$ are integral --- isogenies extend to N\'eron
+models --- and $\delta_\varphi\delta_{\hat\varphi} = \deg\varphi$, a
+$p$-adic unit.
+\end{proof}
+
+\begin{lemma}[the $p$-part of the twist]\label{lem:ppart}
+$\idealr = \idealb\idealc$ with $\idealb, \idealc$ invertible
+$\Oc$-ideals, $N\idealb = p^k$ where $k = v_p(r_0)$, $N\idealc$ prime to
+$p$, and $\idealb$ inherits both structural properties of $\idealr$:
+$\bar\idealb = \idealb$ and $\idealb^2 = (p^k)$.
+\end{lemma}
+
+\begin{proof}
+Invertible fractional $\Oc$-ideals decompose along primes (localization);
+let $\idealb$ be the invertible ideal with $\idealb_q = \Oc_q$ for $q \ne
+p$ and $\idealb_p = \idealr_p$, and $\idealc = \idealb^{-1}\idealr$.
+Conjugation acts locally, and $\bar\idealr = \idealr$ gives $\bar\idealb
+= \idealb$.  Locally $(\idealb^2)_p = (\idealr^2)_p = r_0\Oc_p =
+p^k\Oc_p$ and $(\idealb^2)_q = \Oc_q$, which is the local data of the
+principal ideal $(p^k)$.
+\end{proof}
+
+\begin{lemma}[rigidity]\label{lem:rigidity}
+The quantity $d_p := v(\delta_\varphi)$ for the $\idealb$-twist isogeny
+$\varphi: E_\ideala \to E_{\idealb^{-1}\ideala}$ is the same for every
+proper $\Oc$-ideal $\ideala$.
+\end{lemma}
+
+\begin{proof}
+$v(\delta_\varphi)$ is computed on formal groups: it is the tangent
+valuation of the quotient map $G \to G/C$ of $p$-divisible groups over
+$\Oc_L$, where $G = E_\ideala[p^\infty]$ (of the good model) and $C$ is the
+schematic closure of $\ker\varphi = \idealb_p^{-1}\ideala_p/\ideala_p$ ---
+the quotient elliptic curve is the good model of $E_{\idealb^{-1}\ideala}$
+by the N\'eron property, and $\Lie$ of an elliptic curve is $\Lie$ of its
+$p$-divisible group.  So $d_p$ depends only on the isomorphism class of
+the pair $(G, C)$.  Given two proper ideals, choose an invertible
+$\Oc$-ideal $\idealq$ of norm prime to $p$ connecting their classes; the
+connecting isogeny has degree prime to $p$, hence induces an isomorphism
+of $p$-divisible groups, is $\Oc_p$-linear on Tate modules ($T_pE_\ideala
+= \ideala\otimes\Z_p$, free of rank one over $\Oc_p$ since proper ideals
+of quadratic orders are invertible, hence locally principal), and
+identifies the two kernels $\idealb_p^{-1}\ideala_p/\ideala_p$.
+Homothety adjusts representatives within a class.
+\end{proof}
+
+\begin{proposition}[balance]\label{prop:balance}
+$2\,d_p = k$.
+\end{proposition}
+
+\begin{proof}
+Compose the $\idealb$-twist at $\ideala$ with the $\idealb$-twist at
+$\idealb^{-1}\ideala$: since $\idealb^2 = (p^k)$, $\idealb^{-2}\ideala =
+p^{-k}\ideala$, and the composite followed by the isomorphism $z \mapsto
+p^kz$ is the endomorphism $[p^k]$ of $E_\ideala$, of tangent scalar
+$p^k$.  By Lemma \ref{lem:mult} the tangent valuations add to $k$
+(an isomorphism of good models contributes $0$); by Lemma
+\ref{lem:rigidity} both steps contribute the same $d_p$, the twist of a
+proper ideal being proper.
+\end{proof}
+
+\begin{proof}[Proof of Theorem \ref{thm:unit}]
+By Lemma \ref{lem:lattice} and Lemma \ref{lem:tangent} applied to the
+$\idealr$-twist $\varphi: E_{\idealb_1} \to E_{\idealr^{-1}\idealb_1}$,
+which by Lemma \ref{lem:ppart} is the composite of the $\idealb$-twist
+and a twist of degree $N\idealc$ prime to $p$,
+\[
+  v(R_f) = 6\,v(r_0) - 12\,v(\delta_\varphi) = 6k - 12\,d_p = 6k - 6k = 0
+\]
+at every $\idealP \mid p$ with $p \mid r_0$ (Lemmas \ref{lem:mult},
+\ref{lem:rigidity} and Proposition \ref{prop:balance}), and $v(R_f) = 0$
+trivially at $p \nmid r_0$, where the whole twist has degree prime to
+$p$.  For an imprimitive class of content $g$, $\idealb_1$ is proper over
+the order $\Oc'$ of discriminant $D/g^2$ and the twist is by $\idealr' :=
+\idealr\Oc'$ --- invertible (the extension of an invertible ideal),
+ambiguous, with $\idealr'^2 = r_0\Oc'$ --- so the identical argument runs
+over $\Oc'$.  Finally the polynomial statement: rationality of
+$\prod_f(x - R_f)$ is Theorem \ref{thm:Rpoly}; the roots being units, the
+coefficients are rational algebraic integers, hence integers, with
+$\prod_fR_f = 1$ for $n \ge 5$ (the twist law pairs $f$ with $\idealr f$)
+and $R = 1$ at $n = 3$; palindromy is the twist law $R_{\idealr f} =
+R_f^{-1}$.
+\end{proof}
+
+\begin{remark}[what the proof did not need]\label{rem:notneeded}
+No Kronecker limit formula, no Siegel units, and --- despite the Deuring
+dictionary that motivated the statement --- no quasi-canonical-lifting
+valuation formulas: Gross's theory \cite{Gross1986} enters only as the
+conceptual reading (the twist by an ambiguous ideal of the order is a
+\emph{horizontal} move, and horizontal moves preserve local
+$\Delta$-data).  The inputs are potentially good reduction, N\'eron
+differentials, and the rigidity of $p$-divisible-group quotients.
+\end{remark}
+
+\subsection{The certified record and the imprimitive strata}
+\label{subsec:unitrecord}
+
+\begin{proposition}[level polynomials; computational]\label{prop:Rrecord}
+For every odd $n \le 21$ the level polynomial $\prod_{f\ \mathrm{prim}}
+(x - R_f)$ is certified with integer coefficients, palindromic, with
+constant term $1$ (spare digits $\ge 237$ at $250$ digits for $n \le 13$,
+$\ge 275$ at $300$ digits for $n = 15, 17, 19$, $385$ at $420$ digits for
+$n = 21$) --- as Theorem \ref{thm:unit} guarantees --- and is moreover
+\emph{irreducible over $\Q$} (exact factorization): the $R_f$ of a level
+form a single Galois orbit.
+\begin{center}
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}rrp{11.1cm}@{}}
+\toprule
+$n$ & $h$ & $\prod_f(x - R_f)$\\
+\midrule
+3 & 1 & $x - 1$\\
+5 & 2 & $x^2 - 34x + 1$\\
+7 & 2 & $x^2 - 2702x + 1$\\
+9 & 4 & $x^4 - 339524x^3 - 95354x^2 - 339524x + 1$\\
+11 & 4 & $x^4 - 56529284x^3 + 1538876166x^2 - 56529284x + 1$\\
+13 & 4 & $x^4 - 11382984004x^3 + 885435408006x^2 - 11382984004x + 1$\\
+15 & 8 & $x^8 - 2628641876392x^7 - 21595933374628x^6 -
+1373071731101336x^5 + 9740462908109254x^4 - 1373071731101336x^3 -
+21595933374628x^2 - 2628641876392x + 1$\\
+17 & 4 & $x^4 - 673122277718404x^3 + 8553847041196806x^2 -
+673122277718404x + 1$\\
+19 & 8 & $x^8 - 186863535844922888x^7 + 44665915402536486036508x^6 +
+131633377547326082495944x^5 + 179879784238619113420870x^4 +
+(\text{sym})$\\
+21 & 12 & $x^{12} - 55348592922774901452x^{11} +
+87282798056992201360611266x^{10} + \cdots$ (all coefficients printed by
+the script)\\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{proposition}
+
+Irreducibility for general $n$ remains open exactly as for the phase
+polynomials $Q_n$ of \PaperI[Open problem~6.24]: the coincidence set
+$\{f : R_f = R_1\}$ is a translation-invariant subgroup, and only its
+triviality is missing.
+
+\begin{proposition}[imprimitive strata]\label{prop:strata}
+Let $f$ be a class of content $g > 1$, $\Oc'$ the order of discriminant
+$D/g^2$, and $\idealr' = \idealr\Oc'$ the induced twist ideal.  With $R$
+defined by the lattice formula, every stratum polynomial is again an
+integer palindromic polynomial with constant term $\pm1$ (Theorem
+\ref{thm:unit}), and
+\[
+  \idealr'\ \text{principal in }\Oc' \;\Longrightarrow\; R \equiv 1
+  \text{ on the content-}g\text{ stratum}.
+\]
+The converse holds on every computed stratum (computational).
+\end{proposition}
+
+\begin{proof}
+If $\idealr' = (\lambda)$, then $\lambda^2\Oc' = \idealr'^2 = r_0\Oc'$
+forces $\lambda^2 = r_0\zeta$ with $\zeta \in \Oc'^\times$ a root of
+unity, so $\Delta(\idealr'^{-1}\idealb_1) = \lambda^{12}\Delta(\idealb_1)
+= r_0^6\Delta(\idealb_1)$ and $R = 1$.
+\end{proof}
+
+\begin{center}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}rrrll@{}}
+\toprule
+$n$ & content & disc & $\idealr\Oc'$ & stratum polynomial\\
+\midrule
+7 & 2 & $-12$ & $(\sqrt{-3})$, principal & $x - 1$\\
+7 & 4 & $-3$ & principal & $x - 1$\\
+9 & 2 & $-20$ & $(2)$, principal & $(x - 1)^2$\\
+15 & 2 & $-56$ & $\lat{7, \sqrt{-14}}$, \textbf{non}principal &
+$x^4 - 1988x^3 - 3194x^2 - 1988x + 1$\\
+17 & 2 & $-72$ & $\lat{4, 6\sqrt{-2}}$, \textbf{non}principal &
+$x^2 - 9602x + 1$\\
+17 & 3 & $-32$ & $(2\sqrt{-2})$, principal & $(x - 1)^2$\\
+17 & 6 & $-8$ & $(2\sqrt{-2})$, principal & $x - 1$\\
+19 & 3 & $-40$ & $(3)$, principal & $(x - 1)^2$\\
+\bottomrule
+\end{tabular}
+\end{center}
+So nothing breaks on the imprimitive strata: the unit theorem persists;
+what changes is that the twist can \emph{die} (principal induced ideal),
+collapsing the stratum to $R \equiv 1$.
+
+\subsection{The per-class valuation law}\label{subsec:perclass}
+
+We return to the Euclidean $\Delta$-data $G_\idealc = n^{12}\Delta(
+\Lambda_\idealc)/\Delta(\Zi)$ over $\Cl(\Oc_n)$, with $D_n(x) =
+\prod_\idealc(x - G_\idealc) \in \Z[x]$ and $|D_n(0)| = |M(n)|$ (Theorem
+\ref{thm:Dn}).  The $\Delta$-mass law \PaperI[Thm.~7.18] controls the
+product of the $G_\idealc$; the rigidity of Lemma \ref{lem:rigidity}
+distributes it over the classes.
+
+\begin{theorem}[per-class valuations]\label{thm:perclass}
+For every level $n \ge 2$, every prime $p$ with $p^k \parallel n$, and
+every place $\idealP \mid p$ of $\bar\Q$ (normalized $v(p) = 1$), the
+valuation $v_\idealP(G_\idealc)$ is \emph{independent of the class}
+$\idealc$, equal to
+\begin{equation}\label{eq:wpk}
+  w_p(k) \;=\;
+  \begin{cases}
+  0, & p \text{ split } (p \equiv 1 \bmod 4),\\[2pt]
+  \dfrac{12\,(p^k - 1)}{(p-1)\,p^{k-1}(p+1)}, & p \text{ inert }
+  (p \equiv 3 \bmod 4),\\[6pt]
+  6\,(2^k - 1)/2^k, & p = 2;
+  \end{cases}
+\end{equation}
+and $v_\idealP(G_\idealc) = 0$ at $p \nmid n$.
+\end{theorem}
+
+\begin{proof}
+Write $\psi_\idealc: E_{\Lambda_\idealc} \to E_0 := E_{\Zi}$ for the
+isogeny $z \mapsto z$ (degree $n$); by Lemma \ref{lem:tangent},
+$v(G_\idealc) = 12k - 12\,v(\delta)$, where $\delta$ is the tangent scalar
+of the $p$-primary part of $\psi_\idealc$ (Lemma \ref{lem:mult}).  By
+duality it suffices to control $\hat\psi$-data on the \emph{fixed} curve
+$E_0$: the $p$-primary kernel of the dual is the subgroup $C_\idealc =
+p^{-k}\Lambda_{\idealc,p}/\Z_p[i] \subset E_0[p^\infty]$.  Local structure:
+$\Lambda_{\idealc,p}$ is an invertible $\Oc_{n,p}$-module inside $\Z_p[i]$
+of index $p^k = [\Z_p[i] : \Oc_{n,p}]$, hence $\Lambda_{\idealc,p} =
+\epsilon\,\Oc_{n,p}$ with $\epsilon \in K_p^\times$, and the containment
+and the index force $\epsilon \in \Z_p[i]^\times$.  Since $\Z_p[i]
+\subset \operatorname{End}(E_0[p^\infty])$ (the closure of $\Zi$ in the
+$p$-adically complete endomorphism ring), $\epsilon$ is an
+\emph{automorphism of the $p$-divisible group} carrying $C_{\idealc'}$ to
+$C_\idealc$: the pairs $(E_0[p^\infty], C_\idealc)$ are isomorphic for all
+classes, so $v(\delta_{\hat\psi_\idealc})$, hence $v(G_\idealc)$, is
+class-independent.  The value is then pinned by the $\Delta$-mass law:
+$h\cdot w = v_p(\prod_\idealc G_\idealc) = v_p(M(n))$, and $v_p(M(n))/h =
+w_p(k)$ by \PaperI[Thm.~7.18] together with $h = \tfrac12\Ne(p^k)
+\Ne(n/p^k)$ \PaperI[Prop.~3.1, Thm.~7.6].
+\end{proof}
+
+\begin{proposition}[Newton-polygon verification; computational]
+\label{prop:newton}
+The multiset of $\idealP$-adic valuations of the roots of $D_n$ is its
+Newton polygon at $p$.  For every computed level --- $2 \le n \le 18$,
+$21$, $25$, $27$, $49$ --- and every $p \mid n$, the polygon of the
+certified $D_n$ (spare digits $140$--$249$; $460$ digits at $n = 49$) has a
+\emph{single slope, of the value \eqref{eq:wpk}}, across the full degree
+$h$:
+\begin{center}
+\small
+\begin{tabular}{@{}rl@{\qquad}rl@{}}
+\toprule
+$n$ & polygon slopes & $n$ & polygon slopes\\
+\midrule
+2 & $2 : 3$ & 12 & $2 : 9/2;\ 3 : 3$\\
+4 & $2 : 9/2$ & 14 & $2 : 3;\ 7 : 3/2$\\
+7 & $7 : 3/2$ & 16 & $2 : 45/8$\\
+8 & $2 : 21/4$ & 18 & $2 : 3;\ 3^2 : 4$\\
+9 & $3^2 : 4$ & 27 & $3^3 : 13/3$\\
+11 & $11 : 1$ & 49 & $7^2 : 12/7$\\
+\bottomrule
+\end{tabular}
+\end{center}
+(split primes: slope $0$ throughout, e.g.\ $n = 5, 13, 25$; at composite
+$n$ every prime factor is listed).
+\end{proposition}
+
+The denominators of the slopes --- $p^{k-1}(p+1)$ at inert $p$, $2^k$ at
+the ramified prime --- are exactly the ramification degrees of Gross's
+quasi-canonical liftings of level $k$ \cite{Gross1986}: the per-class law
+\emph{is} the quasi-canonical valuation ladder, obtained here from
+rigidity plus the elementary mass recursion.  We stress that this reading
+is an interpretation and not an input of the proof.
+
+\begin{corollary}[the split ladder]\label{cor:split}
+Let $p \equiv 1 \pmod 4$, $p \nmid 6$, $p^k \parallel n$, $n \ne p^k$.
+Then for \emph{every} class, $v_\idealP(u_\idealc^2) = -4k$.
+\end{corollary}
+
+\begin{proof}
+By \PaperI[Lemma~7.12],
+\[
+  u^2 = -12\,\beta(\beta - 1728)\,\frac{g_2(\Lambda_\idealc)}{g_2(\Zi)},
+  \qquad
+  \Bigl(\frac{g_2(\Lambda_\idealc)}{g_2(\Zi)}\Bigr)^{3}
+  = \frac{\beta}{1728}\cdot\frac{G_\idealc}{n^{12}},
+\]
+so $v(u^2) = \tfrac43v(\beta) + v(\beta - 1728) + \tfrac13v(G_\idealc) -
+4k$.  Theorem \ref{thm:perclass} gives $v(G_\idealc)
+= 0$.  At an ordinary place, $\beta \equiv 0$ would force the
+endomorphism ring of the reduction to contain orders of two distinct
+imaginary quadratic fields (impossible), and $\beta \equiv 1728$ would
+force equal prime-to-$p$ conductors, $n/p^k = 1$ (Deuring), which is
+excluded.
+\end{proof}
+
+This proves the exactly arithmetic $5^{4k}$-denominator ladder observed
+at $n = 15$ in \PaperI[\S7.4] (with the witness $v_5(H_{-900}(0)) =
+v_5(H_{-900}(1728)) = 0$ certified).  At non-split $p$ the same reduction
+expresses the fine structure of the normalizers $\lambda_n$ of
+\PaperI[\S7.4] through $w_p(k)$ plus the $\beta$-side collision
+valuations; the remaining open ingredient is the conductor-degenerate
+Gross--Zagier data of Section \ref{sec:outlook}, no longer the
+$\Delta$-part.
+
+\begin{corollary}[the inert ladders, decomposed; computational]
+\label{cor:inert}
+At $n = 7$ ($p = 7$, $k = 1$) and $n = 9$ ($p = 3$, $k = 2$) every
+ingredient of $v_\idealP(u_\idealc^2) = \tfrac43v(\beta) + v(\beta - 1728) +
+\tfrac13v(G) - 4k$ is certified to be a \emph{single} Newton-polygon
+slope --- the $\beta$-collision valuations are class-independent too ---
+giving the constant per-class values
+\begin{gather*}
+  n = 7:\quad v_7(u_\idealc^2) = \tfrac43\cdot0 + \tfrac14 + \tfrac13\cdot\tfrac32 - 4
+  = -\tfrac{13}{4},\\
+  n = 9:\quad v_3(u_\idealc^2) = \tfrac43\cdot\tfrac12 + \tfrac12 + \tfrac13\cdot4 - 8
+  = -\tfrac{11}{2}.
+\end{gather*}
+The recorded denominator ladders follow: at $n = 7$ the integrality bound
+$7^{\lfloor 13k/4\rfloor} = 7^3, 7^6, 7^9, 7^{13}$ for the elementary
+symmetric functions $e_k$ of the $u_\idealc^2$ is met \emph{exactly}; at
+$n = 9$ the bound $3^{\lfloor 11k/2\rfloor}$ is attained at the
+coset-structured $k = 3, 6$ ($3^{16}, 3^{33}$), with structured
+cancellation at the other $k$ ($3^2, 3^6, 3^{19}, 3^{22}$).
+\end{corollary}
+
+So the $\lambda_n$-question is reduced, at every computed level, to one
+datum: the per-class $\beta$-collision slopes, certified constant here,
+whose general law is the genus-refined Gross--Zagier problem of Section
+\ref{sec:outlook}.
+
+%%% ============================================================
+\section{First-power Schmidt units}\label{sec:firstpower}
+
+The unit $R_f$ is a sixth-power-level object.  A canonical sixth root
+exists and obeys the laws of the phase at first power.  Let $\gamma_2 =
+E_4/\eta^8$ and $\gamma_3 = E_6/\eta^{12}$ be the canonical holomorphic
+Weber functions ($\gamma_2^3 = j$, $\gamma_3^2 = j - 1728$), and for a
+primitive class $f$ let $\tau_f$ be the CM point of its reduced form.
+
+\begin{definition}\label{def:w}
+$\displaystyle
+  w_f \;:=\; u_f\cdot\frac{(\gamma_2^2\gamma_3)(\tau_{\idealr f})}
+  {(\gamma_2^2\gamma_3)(\tau_f)} .$
+\end{definition}
+
+\begin{proposition}[exact first-power laws]\label{prop:wlaws}
+For every odd $n \ge 3$ and every primitive class $f$:
+\begin{enumerate}
+\item $w_f^{\,6} = R_f$;
+\item $w_f\,w_{\idealr f} = 1$;
+\item $\overline{w_f} = w_{f^{-1}}$ whenever neither reduced
+representative is a boundary form ($b = a$ or $a = c$);
+\item $\sigma(w_f) = \zeta(\sigma, f)\,w_{f^{e(\sigma)}\idealc(\sigma)}$
+with $\zeta(\sigma, f)^6 = 1$, for every $\sigma \in \Gal(\bar\Q/\Q)$.
+\end{enumerate}
+Moreover, let $\tau_0$ be the adapted uniformizer of \PaperI[Lemma~6.13]
+for the pair $(\idealb_1, \idealr^{-1}\idealb_1)$; by \PaperI[Thm.~6.18],
+\[
+  u_f = -\,\frac{1}{r_0}\,\frac{j'(\tau_0)}{j'(r_0\tau_0)} .
+\]
+Then
+\begin{equation}\label{eq:etaquot}
+  w_f \;=\; -\,\frac{1}{r_0}\Bigl(\frac{\eta(\tau_0)}{\eta(r_0\tau_0)}\Bigr)^{\!4}
+  \quad\text{up to a sixth root of unity}:
+\end{equation}
+a weight-$0$ $\eta$-quotient on $\Gamma_0(r_0)$ evaluated at a Heegner
+point, well defined up to the $\mu_6$-valued $\eta^4$-multiplier of the
+basis choice.  The cocycle $\zeta(\sigma, f)$ \emph{is} this multiplier
+system.
+\end{proposition}
+
+\begin{proof}
+(1) $(\gamma_2^2\gamma_3)^6 = j^4(j - 1728)^3$, so $w_f^6 = u_f^6\,
+\beta_2^4(\beta_2 - 1728)^3/\beta_1^4(\beta_1 - 1728)^3 = R_f$.
+(2) The twist law $u_fu_{\idealr f} = 1$ \PaperI[Thm.~6.6] and the
+telescoping of the $\gamma$-ratio along the $2$-torsion twist
+($\idealr^2f = f$, and reduced points are canonical).
+(3) Off the boundary of the reduced domain $\tau_{f^{-1}} = -\bar\tau_f$
+exactly, the $q$-expansions of $\gamma_2, \gamma_3$ are real, so
+$(\gamma_2^2\gamma_3)(-\bar\tau) = \overline{(\gamma_2^2\gamma_3)(\tau)}$,
+and the mirror law $u_{f^{-1}} = \bar u_f$ \PaperI[Thm.~6.6] finishes.
+(4) Sixth powers are strictly equivariant by Theorem \ref{thm:unit}
+together with the first-power descent \PaperI[Thm.~6.19] (the argument
+of Theorem \ref{thm:Rpoly}), so the discrepancy at first power is a
+sixth root of unity.  For \eqref{eq:etaquot}: $j' = -2\pi i\,
+\gamma_2^2\gamma_3\,\eta^4$, and $\tau_f, \tau_{\idealr f}$ are
+$\SL_2(\Z)$-equivalent to $\tau_0, r_0\tau_0$, under which
+$\gamma_2^2\gamma_3$ picks up sixth roots of unity.
+\end{proof}
+
+\begin{proposition}[the coherence table; computational]\label{prop:mn}
+Let $m(n) \mid 6$ be minimal with $\{w_f^{\,m}\}$ Galois-stable
+(equivalently, $\prod_f(x - w_f^{\,m})$ a certified integer polynomial).
+For all odd $3 \le n \le 35$:
+\begin{center}
+\footnotesize
+\setlength{\tabcolsep}{3.2pt}
+\begin{tabular}{@{}l*{17}{c}@{}}
+\toprule
+$n$ & 3 & 5 & 7 & 9 & 11 & 13 & 15 & 17 & 19 & 21 & 23 & 25 & 27 & 29 &
+31 & 33 & 35\\
+\midrule
+$m(n)$ & 1 & 3 & 1 & 3 & 6 & 1 & 1 & 3 & 2 & 3 & 6 & 1 & 6 & 6 & 6 & 6 & 6\\
+\bottomrule
+\end{tabular}
+\end{center}
+At the fully coherent levels the first-power Schmidt units exist
+unconditionally, with certified irreducible minimal polynomials
+\begin{align*}
+n = 3:&\quad x + 1 \qquad (w = -1),\\
+n = 7:&\quad x^2 + 4x + 1 \qquad (w = -\eps_{12}^{\mp1} = -2 \pm \sqrt3),\\
+n = 13:&\quad x^4 + 50x^3 + 123x^2 + 50x + 1,\\
+n = 15:&\quad x^8 + 112x^7 - 630x^6 + 1568x^5 - 2109x^4\\
+       &\qquad + 1568x^3 - 630x^2 + 112x + 1,\\
+n = 25:&\quad x^8 + 13346x^7 + 24067x^6 - 4876x^5 + 11653x^4\\
+       &\qquad - 4876x^3 + 24067x^2 + 13346x + 1 .
+\end{align*}
+\end{proposition}
+
+The case $n = 7$ is emblematic: the phase of a level-$7$ Schmidt circle,
+$\gamma$-normalized, \emph{is} the fundamental unit of $\Q(\sqrt3)$ up to
+sign.  At the partially coherent levels the intermediate polynomials are
+equally clean: for $w^3$, $x^2 + 6x + 1$ at $n = 5$ ($w^3 =
+-\eps_8^{\pm2}$), $x^4 + 584x^3 + 766x^2 + 584x + 1$ at $n = 9$,
+$x^4 + 25944604x^3 + 99499206x^2 + 25944604x + 1$ at $n = 17$; for $w^2$
+at $n = 19$, $x^8 - 571772x^7 + 36149386x^6 - 42809072x^5 + 82773139x^4 -
+(\text{sym})$.
+
+The pattern of the table resists a congruence law: the sign part $m_2$
+and the cube part $m_3$ of $m(n)$ vary independently: in the computed
+range $m_2 = 2$ exactly at $n = 11$, $19$, $23$, $27$, $29$, $31$, $33$,
+$35$, and $m_3 = 3$ exactly at $n = 5$, $9$, $11$, $17$, $21$, $23$, $27$,
+$29$, $31$, $33$, $35$; and every candidate congruence law formulated on
+the data through $n = 27$ was falsified at $29 \le n \le 35$.  The
+mechanism is visible at the boundary forms, where the mirror law
+genuinely fails by the explicit factors
+\[
+  (\gamma_2^2\gamma_3)(\tau + 1) = -\zeta_3\,(\gamma_2^2\gamma_3)(\tau),
+  \qquad
+  (\gamma_2^2\gamma_3)(-1/\tau) = -(\gamma_2^2\gamma_3)(\tau)
+\]
+(non-real $w$ on ambiguous boundary classes at $n = 31$); re-evaluating
+the $\gamma$'s on a Schertz $6$-system, or using the $\eta$-quotient form
+with a Hermite-adapted $\tau_0$, moves the failure elsewhere without
+removing it.
+
+\begin{openproblem}[the cocycle]\label{op:cocycle}
+Determine $\zeta(\sigma, f)$ --- the multiplier bookkeeping of
+Kubert--Lang and Schertz \cite[Ch.~11]{KubertLang1981}, \cite{Schertz2010}
+for the hybrid object $w_f$, a class function $u_f$ times a ratio of level-$6$
+class invariants --- and derive $m(n)$.  The certified table of
+Proposition \ref{prop:mn} is the constraint any such computation must
+reproduce; the $\eta^4$-form \eqref{eq:etaquot} suggests a Dedekind-sum
+formula in $(r_0, s_0)$.
+\end{openproblem}
+
+%%% ============================================================
+\section{The Robert index}\label{sec:robert}
+
+\subsection{The quadratic layer}\label{subsec:quadratic}
+
+\begin{proposition}[eigenprojections against fundamental units]
+\label{prop:quadlayer}
+Let $\chi$ be an odd real character of $\Cl(1 - n^2)$ with proved
+factorization $L(s,\chi) = L(s,\chi_{d_1})L(s,\chi_{d_2})C(s)$
+(Proposition \ref{prop:genus-hyp}), or a real character of $\Cl(\Oc_n)$
+with the factorization of Proposition \ref{prop:genus-euc}, and set
+\[
+  m_\chi \;:=\; \frac{2h(d_1^*)}{w(d_1^*)}\,h(d_2)\,C(0) \in \Q .
+\]
+Then
+\begin{gather*}
+  \sum_f\chi(f)\log|R_f| = -24\,m_\chi\log\eps_{d_2}
+  \qquad\text{(hyperbolic)},\\
+  \sum_\idealc\chi(\idealc)\log|G_\idealc| = -12\,m_\chi\log\eps_{d_2}
+  \qquad\text{(Euclidean)} :
+\end{gather*}
+the $\chi$-eigenprojection of the Schmidt-unit system against the
+fundamental unit of its real quadratic field is an explicit integer
+multiple of $\log\eps_{d_2}$ built from the class numbers $h(d_1^*)$,
+$h(d_2)$ and the conductor multiplier $C(0)$.
+\end{proposition}
+
+\begin{proof}
+Theorem \ref{thm:Rpoly}, resp.\ Theorem \ref{thm:Dn}(2), with
+\eqref{eq:Lprime-genus}.
+\end{proof}
+
+The certified values (residuals $\le 10^{-248}$ at $250$ digits):
+\begin{center}
+\small
+\begin{tabular}{@{}llll@{}}
+\toprule
+aspect & $n$ & $\chi$ & projection\\
+\midrule
+hyperbolic & 11 & $(0,1)$ & $-48\log\eps_8$\\
+hyperbolic & 11 & $(1,0)$ & $-16\log\eps_{40}$\\
+hyperbolic & 13 & $(0,1)$, $(1,0)$ & $-24\log\eps_{24}$, $-24\log\eps_{21}$\\
+hyperbolic & 15 & $(0,1)$, $(2,1)$ & $-24\log\eps_{28}$, $-12\log\eps_{56}$\\
+Euclidean & 3, 5, 7 & $\chi_2$ & $-4\log\eps_{12}$, $-24\log\eps_5$,
+$-12\log\eps_{28}$\\
+Euclidean & 9, 11, 13 & $\chi_2$ & $-16\log\eps_{12}$, $-12\log\eps_{44}$,
+$-24\log\eps_{13}$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{The cubic layer: the index is $8\,h_{L_3}$}
+\label{subsec:cubic}
+
+Among the Euclidean levels $n \le 31$, the ring class group $\Cl(\Oc_n)$
+has $3$-torsion exactly at $n = 9, 11, 13, 18, 22, 23, 26, 27$.  At such a
+level let $\chi_3$ be a cubic character, $F$ the cyclic cubic extension
+of $K$ inside $H_n$ cut out by $\ker\chi_3$ --- a dihedral sextic over
+$\Q$ --- and $L_3 \subset F$ its real cubic subfield, the fixed field of
+$\ker\chi_3$ and the mirror.  Let
+\[
+  \theta \;:=\; \prod_{\idealc \in \ker\chi_3}G_\idealc
+\]
+be the principal $\Delta$-mass coset product --- at $n = 9, 11, 13$ the
+real root of the coset cubics of Remark \ref{rem:cosetcubics}.  Since
+$v_p(M(n))$ is a multiple of $3$ at every $p$ (the exponents of
+\PaperI[Thm.~7.18] carry the factor $6/e_p \in \{3, 6\}$), $|M(n)|^{1/3}$
+is an integer: $3^8$, $11^2$, $1$, $2^{12}3^{16}$, $2^{12}11^4$, $23^2$,
+$2^{12}$, $3^{26}$ at the eight levels.
+
+\begin{proposition}\label{prop:thetaunit}
+The number $\theta_u := \theta/|M(n)|^{1/3}$ is an algebraic \emph{unit}
+of $L_3$, and $\log|\theta_u| = -8\,L'(0,\chi_3)$ at the real embedding.
+\end{proposition}
+
+\begin{proof}
+$\theta$ is fixed by the translations in $\ker\chi_3$ (Theorem
+\ref{thm:Dn}(1)) and by complex conjugation (which permutes the coset
+$\ker\chi_3$), so $\theta \in L_3$, real.  Integrality both ways: by
+Theorem \ref{thm:perclass} the valuation of every $G_\idealc$ at every
+place over $p \mid n$ is the constant $w_p(k)$ and $0$ elsewhere, so
+$v(\theta) = \tfrac h3w_p(k) = \tfrac13v(M(n))$ over $p \mid n$ and $0$
+elsewhere --- exactly the valuations of $|M(n)|^{1/3}$.  For the
+logarithm write $a = \log|\theta|$ and $b$ for the common log-modulus of
+the two conjugate coset products (they are complex conjugates of each
+other, the mirror exchanging the two nontrivial cosets).  The uniform
+Stark law $-12L'(0,\chi_3) = \sum\chi_3\log|G|$ of Theorem
+\ref{thm:Dn}(2) reads $a - b = -12L'$ (as $\zeta_3 + \zeta_3^2 = -1$),
+while $a + 2b = \log|M(n)|$; solving, $\log|\theta_u| = a -
+\tfrac13\log|M(n)| = \tfrac23(a - b) = -8L'(0,\chi_3)$.
+\end{proof}
+
+\begin{lemma}[conductor Euler factors]\label{lem:conductor}
+Let $\chi$ be a character of $\Cl(\Oc_n)$.  The Epstein $L$-function is
+the sum $L(s,\chi) = \sum_\idealb\bar\chi(\idealb)N(\idealb)^{-s}$ over all
+invertible integral $\Oc_n$-ideals, and factors as $L(s,\chi) =
+\Lprim(s,\chi)\,C_n(s)$, where $\Lprim(s,\chi)$ is the Hecke $L$-function
+of $\chi$ as a primitive ring class character of $K$ and $C_n(s) =
+\prod_{p \mid n}C_{n,p}(s)$ collects the Euler factors of the
+conductor-supported invertible ideals.  If $\chi$ is nontrivial on
+$\ker(\Cl(\Oc_n) \to \Cl(\Oc_{n/p}))$ then $C_{n,p} \equiv 1$; in
+particular $C_n \equiv 1$ when $\chi$ factors through no $\Cl(\Oc_m)$,
+$m \mid n$, $m < n$.
+\end{lemma}
+
+\begin{proof}
+For an invertible $\ideala$, $\alpha \mapsto (\alpha)\ideala^{-1}$
+bijects the nonzero elements of $\ideala$ modulo $\pm1$ with the
+invertible integral ideals in the class of $\ideala^{-1}$, and
+$N(\alpha)/N\ideala = N((\alpha)\ideala^{-1})$; this gives the ideal sum,
+and the Euler product over $p \nmid n$ is the usual one.  At $p \mid n$
+the local order $\Oc_{n,p} = \Z_p + p^k\Oc_{K,p}$ is local with maximal
+ideal $p\Z_p + p^k\Oc_{K,p}$, and its integral invertible ideals are the
+$x\Oc_{n,p}$, $x \in \Oc_{n,p}\setminus\{0\}$ modulo $\Oc_{n,p}^\times$.
+For a non-unit $x$ one checks $x\,\Oc_{n/p,p}^\times \subseteq \Oc_{n,p}$,
+so the group $U' = \Oc_{n/p,p}^\times/\Oc_{n,p}^\times$ acts freely on
+the non-unit ideals, preserving norms; the class of $u\Oc_{n,p}$ ($u \in
+U'$, extended by $\Oc_{n,q}$ at $q \ne p$) runs through $\ker(\Cl(\Oc_n)
+\to \Cl(\Oc_{n/p}))$, and $\chi$ is multiplicative along the orbit, so
+every orbit sum carries the factor $\sum_{u \in U'}\bar\chi(u\Oc_n) = 0$.
+Only the unit ideal survives: $C_{n,p} \equiv 1$.
+\end{proof}
+
+\begin{proposition}\label{prop:cubicfield}
+$L_3$ has one real and one complex place (unit rank $1$), and
+\[
+  h_{L_3}\,R_{L_3}\,C_n(0) \;=\; L'(0,\chi_3),
+\]
+where $L(s,\chi_3)$ is the Epstein $L$-function of level $n$ and
+$C_n(s)$ the finite Euler product of Lemma \ref{lem:conductor}, with
+$C_n \equiv 1$ at $n = 9, 11, 13, 23$, where $\chi_3$ is primitive
+(the class groups of the proper divisor levels have no $3$-torsion).
+\end{proposition}
+
+\begin{proof}
+$\zeta_{L_3}(s) = \zeta(s)\Lprim(s,\chi_3)$ by the Artin formalism for
+the dihedral extension $F/\Q$ ($\zeta_{L_3} = \zeta\cdot L(s,\rho)$ with
+$\rho = \operatorname{Ind}_K^\Q\chi_3$ the two-dimensional
+representation, and $L(s,\rho) = \Lprim(s,\chi_3)$), and $L(s,\chi_3) =
+\Lprim(s,\chi_3)C_n(s)$ by Lemma \ref{lem:conductor}.  Since $L(0,\chi_3)
+= 0$, $L'(0,\chi_3) \ne 0$ (Proposition \ref{prop:klf} and the
+nonvanishing of $L(1,\chi_3)$) and $\zeta(0) = -\tfrac12$, the function
+$\zeta_{L_3}$ vanishes to first order at $s = 0$: $r_1 + r_2 - 1 = 1$
+with a real embedding present, forcing $(r_1, r_2) = (1, 1)$.  The class
+number formula at $s = 0$ \cite[Cor.~VII.5.11]{Neukirch1999},
+$\zeta'_{L_3}(0) = -h_LR_L/w_L$ with $w_L = 2$,
+gives $h_LR_L = -2\zeta'_{L_3}(0) = \Lprim'(0,\chi_3)$, and $L'(0,\chi_3)
+= C_n(0)\Lprim'(0,\chi_3)$ since $\Lprim(0,\chi_3) = 0$.
+\end{proof}
+
+\begin{lemma}[fundamental units; computational, rigorous]
+\label{lem:fundunit}
+For each of the eight levels, the real root $\eta_L$ of the polynomial
+listed in Theorem \ref{thm:robert} is a fundamental unit of $L_3$,
+$R_{L_3} = \log|\eta_L|$.  Method: starting from $\theta_u$, every $k$-th
+root, $2 \le k \le 40$, is tested for certified integrality of its
+minimal polynomial (absolute-error criterion, $\ge 249$ spare digits at
+$250$), descending whenever a root lies in $L_3$; the descent terminates
+at $\eta_L$.  If $\eta_L$ were a proper power $\eta_{\mathrm{true}}^{J}$,
+$J > 1$, then some prime $k \mid J$ would satisfy $k \le J = R_{L_3}/
+R_{\mathrm{true}} < R_{L_3}/0.2052 < 40$ by Friedman's unconditional
+bound $R_K > 0.2052$ for every number field $K \ne \Q$
+\cite{Friedman1989}, and $\eta_L^{1/k} \in L_3$ would have been detected.
+The largest ratio is $R_{L_3}/0.2052 < 31.2$ (at $n = 23$).
+\end{lemma}
+
+\begin{theorem}[Robert index, cubic layer]\label{thm:robert}
+At every Euclidean level with a cubic character, $n \in \{9, 11, 13, 18,
+22, 23, 26, 27\}$,
+\[
+  \bigl[\Oc_{L_3}^\times : \langle -1,\ \theta_u\rangle\bigr]
+  \;=\; \frac{\log|\theta_u|}{R_{L_3}}
+  \;=\; 8\,\frac{L'(0,\chi_3)}{R_{L_3}}
+  \;=\; 8\,h_{L_3}\,C_n(0),
+\]
+where $C_n(0) = 1$ when $\chi_3$ is primitive and $C_n(0)$ is the integer
+imprimitivity multiplier of Lemma \ref{lem:conductor} otherwise.  The
+identity is Propositions \ref{prop:thetaunit}--\ref{prop:cubicfield}; the
+content of the theorem is the certified computation of the fundamental
+units (Lemma \ref{lem:fundunit}), hence of $R_{L_3}$ and of the integer
+$L'(0,\chi_3)/R_{L_3} = h_{L_3}C_n(0)$ ($\ge 249$ spare digits, $L'$ by
+the independent evaluation of Lemma \ref{lem:gamma-eval}):
+\begin{center}
+\footnotesize
+\setlength{\tabcolsep}{3.5pt}
+\begin{tabular}{@{}rlllrrr@{}}
+\toprule
+$n$ & $\chi_3$ & fundamental unit of $L_3$ & $R_{L_3}$ & $h_{L_3}$ &
+$C_n(0)$ & index\\
+\midrule
+9 & primitive & $x^3 + 15x^2 + 57x - 1$ & 4.0476417264 & 1 & 1 & \textbf{8}\\
+11 & primitive & $x^3 - 25x^2 + 201x - 1$ & 5.3026856598 & 1 & 1 & \textbf{8}\\
+13 & primitive & $x^3 - x^2 + 9x - 1$ & 2.1860813593 & 3 & 1 & \textbf{24}\\
+23 & primitive & $x^3 - 49x^2 + 601x - 1$ & 6.3984592530 & 2 & 1 & \textbf{16}\\
+18 & from $n = 9$ & $x^3 + 15x^2 + 57x - 1$ & 4.0476417264 & 1 & 2 & 16\\
+22 & from $n = 11$ & $x^3 - 25x^2 + 201x - 1$ & 5.3026856598 & 1 & 2 & 16\\
+26 & from $n = 13$ & $x^3 - x^2 + 9x - 1$ & 2.1860813593 & 3 & 2 & 48\\
+27 & from $n = 9$ & $x^3 + 15x^2 + 57x - 1$ & 4.0476417264 & 1 & 4 & 32\\
+\bottomrule
+\end{tabular}
+\end{center}
+The minimal polynomials of $\theta_u$ (constant term $-1$; the
+regulators are shown to $10$ decimals, and are certified to $250$):
+{\footnotesize
+\begin{align*}
+n = 9:&\quad x^3 - 11708931x^2 + 115597311109635x - 1,\\
+n = 11:&\quad x^3 + 2297078781x^2 + 2651044211389651971x - 1,\\
+n = 13:&\quad x^3 + 446643445245x^2 + 61048319249786206560771x - 1,\\
+n = 23:&\quad x^3 - 28994720086003708422147x^2\\
+      &\qquad + 289100431655153833437856247634098764691761155x - 1,\\
+n = 18:&\quad x^3 + 94095557056509x^2 + 13362738335777743394966415363x - 1,\\
+n = 22:&\quad x^3 + 25517496658857981x^2
+      + 7028035410742581725200408425098342403x - 1,\\
+n = 26:&\quad x^3 - 77393728680750899988483x^2\\
+      &\qquad + 3726897283223817102236830775918158257403004931x - 1,\\
+n = 27:&\quad x^3 + 17871502813780746125713563645x^2\\
+      &\qquad + 178562775830464135183026414005799966775800870888956534787x - 1 .
+\end{align*}}
+\end{theorem}
+
+\begin{proof}
+$\Oc_{L_3}^\times = \{\pm1\}\times\langle\eta_L\rangle$ by Proposition
+\ref{prop:cubicfield} and Lemma \ref{lem:fundunit}, so the index of
+$\langle -1, \theta_u\rangle$ is $\log|\theta_u|/\log|\eta_L|$, which is
+$8L'(0,\chi_3)/R_{L_3}$ by Proposition \ref{prop:thetaunit} and
+$8h_{L_3}C_n(0)$ by Proposition \ref{prop:cubicfield}.  At the primitive
+levels $h_{L_3}$ is the certified integer $L'(0,\chi_3)/R_{L_3}$; at the
+pullback levels the cubic field, hence $h_{L_3}$ and $R_{L_3}$, is that
+of the primitive level, and the certified integer $L'(0,\chi_3)/R_{L_3}$
+is $h_{L_3}C_n(0)$, from which $C_n(0)$ is read off.
+\end{proof}
+
+Three readings.  (i) At $n = 13$ and $n = 23$ the class numbers $h_{L_3}
+= 3, 2$ of the cubic fields are forced into the index --- precisely the
+Robert--Kubert--Lang phenomenon, ``cyclotomic units have index $h^+$'',
+realized by the Schmidt disks of curvature $2n$.  The row $n = 23$ is a
+genuine out-of-sample confirmation: a new cubic field, computed after
+the law $8h_{L_3}$ had been formulated on $9, 11, 13$.  (ii) The pullback
+levels are a strong internal consistency check: the \emph{identical}
+fundamental units and regulators recur at $n = 9, 18, 27$, at $n = 11,
+22$ and at $n = 13, 26$, while the coset units $\theta_u$ differ, and the
+index grows by exactly the local Euler value $C_n(0)$ --- $2$ per added
+prime, $4$ at the square-conductor step $9 \to 27$ --- the same local
+Euler phenomenon as the conductor corrections of Section
+\ref{sec:genus}.  (iii) The universal factor $8 = 12/(3/2)$ is the weight
+bookkeeping of the $\Delta$-normalization: the coset object is a
+$12$th-power-level datum, projected with the $\tfrac32$-coefficient of
+the Stark relation of Remark \ref{rem:cosetcubics}.
+
+\begin{conjecture}[Robert index for Schmidt units]\label{conj:robert}
+For every Euclidean level whose cubic character is primitive,
+$[\Oc_{L_3}^\times : \langle -1, \theta_u\rangle] = 8\,h_{L_3}$
+(imprimitive levels: times the multiplier $C_n(0)$).  More generally, for
+every ring class field $H_n$ of $\Q(i)$, the group generated by the
+$\Delta$-data $\{G_\idealc\}$ modulo its mass normalization sits inside
+the unit group of $H_n$ with index a product of class numbers of the
+subfields cut out by the character group, up to powers of $2$ and $3$ ---
+the shape of the Kubert--Lang index formulas
+\cite[Ch.~12--13]{KubertLang1981}.
+\end{conjecture}
+
+The conjecture is certified at all eight computed cubic levels, and the
+quadratic layer's class-number factors are Proposition
+\ref{prop:quadlayer}.  We have not compared $\theta_u$ with the Stark
+unit of $H_n$ \cite{Stark1980, HajirVillegas1997}, whose group has index
+$h_{H_n}$ in $\Oc_{H_n}^\times$ (with the roots of unity) at prime
+conductor; the two indices, $8h_{L_3}$ in $\Oc_{L_3}^\times$ and
+$h_{H_n}$ in $\Oc_{H_n}^\times$, live in different groups, and relating
+them is a natural next step outside the scope of this paper.
+
+\begin{remark}[the hyperbolic side]\label{rem:hypindex}
+The hyperbolic $R_f$ satisfy $R_{\idealr f} = 1/R_f$, so their
+projections vanish on every character with $\chi(\idealr) = +1$; since
+cubic characters are even on the $2$-torsion class $\idealr$, the
+hyperbolic cubic layer degenerates identically.  The hyperbolic Robert
+index lives entirely on the odd characters: the quadratic layer of
+Proposition \ref{prop:quadlayer}, and the sextic $\chi_2\chi_3$-layer at
+levels such as $n = 21$, where the odd-part coset products of the $R_f$
+are units by Theorem \ref{thm:unit}; their index against the rank-$2$
+unit lattice is the first genuinely hyperbolic index datum (Section
+\ref{sec:outlook}).
+\end{remark}
+
+%%% ============================================================
+\section{Outlook}\label{sec:outlook}
+
+Four continuations are genuine, in the sense that the data needed to
+start them is already computed and certified.
+
+\begin{enumerate}
+\item \emph{The cocycle of the first-power units} (Open problem
+\ref{op:cocycle}).  Determine $\zeta(\sigma, f)$ by Shimura reciprocity
+for $\gamma_2, \gamma_3$ (Gee--Stevenhagen, Schertz $N$-systems
+\cite{Schertz2010}) applied to the hybrid object $w_f$; the certified
+table $m(n)$ of Proposition \ref{prop:mn} is a sharp target, and the
+$\eta^4$-form \eqref{eq:etaquot} suggests a Dedekind-sum formula in
+$(r_0, s_0)$.
+\item \emph{The genus-refined Gross--Zagier exponent law.}  The tables of
+Propositions \ref{prop:dressing-euc} and \ref{prop:dressing-hyp} express
+every genus-character $j$-sum as $k\log\eps_d + \sum_pe_p\lambda_p$ with
+$e_p \in \{\pm3, \pm6, \pm9\}$ for $\Sigma_0$ and even for
+$\Sigma_{1728}$, supported exactly on $\GZ(D,-3)$ resp.\ $\GZ(D,-4)$.
+Gross--Zagier's $\epsilon(\mathfrak n)$-formula for the genus-character
+weighted factorization of $(j - j')$-norms \cite{GrossZagier1985}, in
+the conductor-degenerate refinement of Lauter--Viray
+\cite{LauterViray2015}, should prove the exponents and signs.  This one
+finite-place computation would settle at once the exact denominator
+valuations of the phase \PaperI[\S6.7], the non-split part of the
+$\lambda_n$-law (Corollary \ref{cor:inert} reduces it to the
+$\beta$-collision slopes), and the general law of the conductor Euler
+corrections at square conductors.
+\item \emph{The hyperbolic sextic index.}  At $n = 21$, and at every
+level whose class group has a $6$-part, the odd-character coset products
+of the $R_f$ are units of the sextic subfield by Theorem \ref{thm:unit}
+(Remark \ref{rem:hypindex}); their index against the rank-$2$ unit
+lattice is the first genuinely hyperbolic Robert-index datum.
+\item \emph{Stark recognition for characters of order $> 2$.}  The
+certified coset cubics and quartics (Remark \ref{rem:cosetcubics},
+Section \ref{subsec:nonfits}) pin $L'(0,\chi_3)$, $L'(0,\chi_4)$ as
+logarithms of explicit algebraic numbers in the cubic and quartic
+subfields of the ring class field; identifying them with the Stark units
+of those fields --- a theorem over an imaginary quadratic base through
+elliptic units \cite{Stark1980}, \cite[Ch.~6--7]{Schertz2010} --- would
+turn the certified non-fits of Proposition \ref{prop:nonfits} into
+positive closed forms, and is the natural route to Conjecture
+\ref{conj:robert} beyond the cubic layer.
+\end{enumerate}
+
+\subsection*{What is new, with anchors}
+Each item names the repository document and section where the full
+record (proofs, data, script output) lives.
+\begin{itemize}
+\item The two Kronecker limit formulas for a geometric invariant of
+circles: Theorems \ref{thm:euc-master} and \ref{thm:hyp-master}
+(\texttt{phase-kronecker-\allowbreak limit.md}, \S2 and \S5).
+\item The genus closed forms with the field $\Q(\sqrt n)$ and the exact
+$\GZ$-supported dressings: Section \ref{sec:genus}
+(\texttt{phase-kronecker-\allowbreak limit.md}, \S4 and \S6).
+\item The unit theorem on all strata: Theorem \ref{thm:unit}
+(\texttt{schmidt-\allowbreak units.md}, \S2).
+\item The per-class valuation law and the split ladder: Theorem
+\ref{thm:perclass} and Corollary \ref{cor:split}
+(\texttt{schmidt-\allowbreak units.md}, \S3).
+\item The first-power units, with $w = -\eps_{12}^{\pm1}$ at $n = 7$:
+Section \ref{sec:firstpower} (\texttt{schmidt-\allowbreak units.md}, \S4).
+\item The Robert index $8h_{L_3}C_n(0)$: Theorem \ref{thm:robert}
+(\texttt{schmidt-\allowbreak units.md}, \S5).
+\end{itemize}
+Open, with the same anchors: the cocycle law $m(n)$
+(\texttt{schmidt-\allowbreak units.md}, \S4); the exponent law of the dressings
+(\texttt{phase-kronecker-\allowbreak limit.md}, \S8, open problems 1--2);
+the sextic index (\texttt{schmidt-\allowbreak units.md}, \S5); and Stark recognition
+(\texttt{phase-kronecker-\allowbreak limit.md}, \S8, open problem 3).
+
+%%% ============================================================
+\appendix
+
+\section{Machine verification}\label{app:verification}
+
+Every finite claim of this paper --- classwise laws, the limit-formula
+identities against the independent evaluation, integer polynomial
+coefficients, exact factorizations in quadratic fields, Newton polygons,
+the coherence table, fundamental units and indices, and the certified
+non-fits --- is verified by one of two standalone Python programs in the
+repository accompanying the paper (\texttt{python3} with \texttt{mpmath}
+\cite{mpmath} and \texttt{sympy} \cite{sympy}), each re-run from a clean
+checkout for this draft; the statements imported from \PaperI{} (the
+closed forms, $\omega \equiv 1$, the transport lemma, the $\Delta$-mass
+law) are covered by the scripts catalogued in \PaperI[App.~A].  Runtimes
+are on a single commodity core.
+
+The certification guard rails of \PaperI[App.~A] are enforced
+throughout: exact integer or rational arithmetic wherever a statement is
+finite (Hermite normal forms, ideal arithmetic in quadratic fields with
+Hensel-lifted valuations, exact factorization); a numerical value is
+accepted as an integer or rational only with at least $\max(20,
+\mathrm{dps}/5)$ spare digits in the absolute-error sense; working
+precisions are set at run time, never at module import; and
+integer-relation searches appear only in negative statements, in the
+information-theoretically safe regime (a relation would be accepted only
+if its information content were at most a quarter of the working
+precision and its residual at rounding level).  No claim of the paper
+rests on an integer-relation search.
+
+\begin{center}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{0.94}
+\begin{tabular}{@{}p{2.6cm}p{5.8cm}p{2.0cm}p{1.4cm}@{}}
+\toprule
+script / phase & verifies & precision, spare digits & time\\
+\midrule
+\texttt{phase\_klf.py --selftest} & Euclidean $n = 3, 5, 7, 9, 11, 13$
+and hyperbolic $n = 9, 11, 13, 15$ at $250$ digits; Euclidean $n = 15$
+at $400$ digits & & 4 min 39 s\\
+\quad classwise laws & Lemmas \ref{lem:euc-classwise},
+\ref{lem:hyp-classwise}, constants included, every class & dev.\
+$\le 1.4\cdot10^{-248}$ ($1.4\cdot10^{-399}$ at 400d) & \\
+\quad limit formula & $\sum\chi\log g = -12L'(0,\chi)$ against Lemma
+\ref{lem:gamma-eval} ($600$--$4600$ terms), every character &
+res.\ $\le 6.2\cdot10^{-249}$ & \\
+\quad master identities & Theorems \ref{thm:euc-master},
+\ref{thm:hyp-master}, every character; even hyperbolic sums vanish &
+res.\ $\le 1.8\cdot10^{-248}$; $\le 7.7\cdot10^{-250}$ & \\
+\quad anchor & \eqref{eq:euc-trivial} against certified $H_{-4n^2}$ and
+the closed form of $M(n)$ & res.\ $\le 9\cdot10^{-249}$ & \\
+\quad $D_n$ & Theorem \ref{thm:Dn}: integer coefficients, $D_n(0) =
+(-1)^hM(n)$, uniform Stark law; coset cubics of Remark
+\ref{rem:cosetcubics} & spare 226--248 (358 at $n = 15$) & \\
+\quad genus factorizations & \eqref{eq:conv} as exact integer identities,
+$m \le 300$; closed forms \eqref{eq:Lprime-genus} against Lemma
+\ref{lem:gamma-eval}; hyperbolic table of Proposition
+\ref{prop:genus-hyp}; even-character factorizations & exact; res.\
+$\le 4.2\cdot10^{-250}$ & \\
+\quad $\Sigma$-factorizations & coset products as integer quadratics;
+every $A/B$ factorization re-multiplied exactly in $\Q(\sqrt d)$
+(Propositions \ref{prop:dressing-euc}, \ref{prop:dressing-hyp}); GZ
+support & spare 174--238 (315--317 at 400d) & \\
+\quad non-fits & Proposition \ref{prop:nonfits}: safe PSLQ, height
+$10^6$, tolerance $10^{-200}$ ($10^{-320}$ at 400d) & information
+$\le\mathrm{dps}/4$ & \\
+\midrule
+\texttt{schmidt\_units.py --selftest} & four phases & & 4 min 0 s\\
+\quad phase 1 & Lemma \ref{lem:lattice} classwise, odd $n \le 21$;
+level polynomials of Proposition \ref{prop:Rrecord} (integer,
+palindromic, constant term $1$, regression-checked, irreducible by
+exact factorization); stratum polynomials and the $R \equiv 1$ collapse
+of Proposition \ref{prop:strata} &
+250--420d; dev.\ $\le 6.5\cdot10^{-419}$; spare 237--385 & \\
+\quad phase 2 & Proposition \ref{prop:newton}: single-slope Newton
+polygons of the certified $D_n$ at every $p \mid n$, $n \le 18, 21, 25,
+27, 49$; split-ladder witness at $n = 15$; inert ladders of Corollary
+\ref{cor:inert} re-derived from certified slopes & 250d (460d at $n =
+49$); spare 140--249 & \\
+\quad phase 3 & Proposition \ref{prop:wlaws}(1)--(3) at every class; the
+table $m(n)$ of Proposition \ref{prop:mn}, each entry re-certified;
+coherent-level polynomials & 250--500d & \\
+\quad phase 4 & Proposition \ref{prop:quadlayer} projections (res.\
+$\le 6.2\cdot10^{-249}$); at all eight cubic levels: unit-normalized coset
+cubics, root descent $k \le 40$ with the Friedman cap, $L'(0,\chi_3)/
+R_{L_3}$ as certified integers, $\log|\theta_u| = -8L'$, the index, and
+the regression record of Theorem \ref{thm:robert} & 250d; spare
+249--250 & 14--43 s per level\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+%% TODO before submission: repository URL / archival identifier for
+%% the scripts.
+
+%%% ============================================================
+\begin{thebibliography}{99}
+
+\bibitem{Cox2013}
+D.~A.~Cox,
+\emph{Primes of the form $x^2 + ny^2$: Fermat, class field theory,
+and complex multiplication},
+2nd ed., Wiley, 2013.
+
+\bibitem{DiamondShurman2005}
+F.~Diamond, J.~Shurman,
+\emph{A first course in modular forms},
+Graduate Texts in Mathematics 228, Springer, 2005.
+
+\bibitem{Friedman1989}
+E.~Friedman,
+\emph{Analytic formulas for the regulator of a number field},
+Invent.\ Math.\ \textbf{98} (1989), 599--622.
+
+\bibitem{GillardRobert1979}
+R.~Gillard, G.~Robert,
+\emph{Groupes d'unit\'es elliptiques},
+Bull.\ Soc.\ Math.\ France \textbf{107} (1979), 305--317.
+
+\bibitem{Gross1986}
+B.~H.~Gross,
+\emph{On canonical and quasi-canonical liftings},
+Invent.\ Math.\ \textbf{84} (1986), 321--326.
+
+\bibitem{GrossZagier1985}
+B.~H.~Gross, D.~B.~Zagier,
+\emph{On singular moduli},
+J.\ reine angew.\ Math.\ \textbf{355} (1985), 191--220.
+
+\bibitem{HajirVillegas1997}
+F.~Hajir, F.~Rodriguez Villegas,
+\emph{Explicit elliptic units, I},
+Duke Math.\ J.\ \textbf{90} (1997), 495--521.
+
+\bibitem{SchmidtI}
+%% TODO: update on publication of Paper I.
+K.~Ivar,
+\emph{Schmidt circles of the Gaussian integers: classification, class
+numbers, and the phase invariant},
+preprint (2026); Paper I of this series.
+
+\bibitem{mpmath}
+F.~Johansson et al.,
+\emph{mpmath: a Python library for arbitrary-precision floating-point
+arithmetic}, \texttt{https://mpmath.org}.
+
+\bibitem{KubertLang1981}
+D.~S.~Kubert, S.~Lang,
+\emph{Modular units},
+Grundlehren der mathematischen Wissenschaften 244, Springer, 1981.
+
+\bibitem{Kucuksakalli2012}
+\"O.~K\"u\c{c}\"uksakall{\i},
+\emph{Class numbers of ring class fields of prime conductor},
+Acta Arith.\ \textbf{153} (2012), 251--269.
+
+\bibitem{Lang1987}
+S.~Lang,
+\emph{Elliptic functions},
+2nd ed., Graduate Texts in Mathematics 112, Springer, 1987.
+
+\bibitem{LauterViray2015}
+K.~Lauter, B.~Viray,
+\emph{On singular moduli for arbitrary discriminants},
+Int.\ Math.\ Res.\ Not.\ IMRN \textbf{2015}, no.\ 19, 9206--9250.
+
+\bibitem{sympy}
+A.~Meurer et al.,
+\emph{SymPy: symbolic computing in Python},
+PeerJ Comput.\ Sci.\ \textbf{3}:e103 (2017).
+
+\bibitem{Meyer1957}
+C.~Meyer,
+\emph{Die Berechnung der Klassenzahl abelscher K\"orper \"uber
+quadratischen Zahlk\"orpern},
+Akademie-Verlag, Berlin, 1957.
+
+\bibitem{Neukirch1999}
+J.~Neukirch,
+\emph{Algebraic number theory},
+Grundlehren der mathematischen Wissenschaften 322, Springer, 1999.
+
+\bibitem{Oukhaba2003}
+H.~Oukhaba,
+\emph{Index formulas for ramified elliptic units},
+Compositio Math.\ \textbf{137} (2003), 1--22.
+
+\bibitem{Ramachandra1964}
+K.~Ramachandra,
+\emph{Some applications of Kronecker's limit formulas},
+Ann.\ of Math.\ (2) \textbf{80} (1964), 104--148.
+
+\bibitem{Robert1973}
+G.~Robert,
+\emph{Unit\'es elliptiques},
+Bull.\ Soc.\ Math.\ France, M\'em.\ \textbf{36} (1973).
+
+\bibitem{Schertz2010}
+R.~Schertz,
+\emph{Complex multiplication},
+New Mathematical Monographs 15, Cambridge University Press, 2010.
+
+\bibitem{Schmidt1975}
+A.~L.~Schmidt,
+\emph{Diophantine approximation of complex numbers},
+Acta Math.\ \textbf{134} (1975), 1--85.
+
+\bibitem{Schoeneberg1939}
+B.~Schoeneberg,
+\emph{Das Verhalten von mehrfachen Thetareihen bei
+Modulsubstitutionen},
+Math.\ Ann.\ \textbf{116} (1939), 511--523.
+
+\bibitem{Siegel1961}
+C.~L.~Siegel,
+\emph{Lectures on advanced analytic number theory},
+notes by S.~Raghavan, Tata Institute of Fundamental Research, Bombay,
+1961.
+
+\bibitem{StangeTAMS}
+K.~E.~Stange,
+\emph{The Apollonian structure of Bianchi groups},
+Trans.\ Amer.\ Math.\ Soc.\ \textbf{370} (2018), 6169--6219.
+
+\bibitem{StangeIMRN}
+K.~E.~Stange,
+\emph{Visualising the arithmetic of imaginary quadratic fields},
+Int.\ Math.\ Res.\ Not.\ IMRN \textbf{2018}, no.\ 12, 3908--3938.
+
+\bibitem{Stark1980}
+H.~M.~Stark,
+\emph{$L$-functions at $s = 1$. IV. First derivatives at $s = 0$},
+Adv.\ in Math.\ \textbf{35} (1980), 197--235.
+
+\bibitem{Sturm1987}
+J.~Sturm,
+\emph{On the congruence of modular forms},
+in: Number theory (New York, 1984--1985), Lecture Notes in Math.\ 1240,
+Springer, 1987, 275--280.
+
+\bibitem{VlasenkoZagier2013}
+M.~Vlasenko, D.~Zagier,
+\emph{Higher Kronecker ``limit'' formulas for real quadratic fields},
+J.\ reine angew.\ Math.\ \textbf{679} (2013), 23--64.
+
+\end{thebibliography}
+
+\end{document}
