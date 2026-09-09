@@ -252,3 +252,53 @@ to the trace-formula program.
    the unit theorem on all strata, the per-class law and the explicit
    \(8h_{L_3}C_n(0)\) over \(\mathbb{Q}(i)\) checked as new; Friedman's
    constant \(0.2052\) verified.)*
+
+## 6. Beyond the Gaussian packing: the program (session of 2026-09-09)
+
+The two papers exhaust the direct line from the classification to the Robert
+index. What carries the proofs beyond \(\mathbb{Z}[i]\): the Kronecker limit
+formula, the rigidity lemma, the per-class local argument and the cubic-layer
+index identity are field-independent; only the \(\Delta\)-mass stratification
+and the "every class exactly twice" dictionary use that \(\mathbb{Z}[i]\) is a
+PID with units \(\mu_4\), and only the hyperbolic side uses the coupling
+\(D = -4r_0s_0\), \(s_0 = r_0+1\), with the ambiguous twist \(\mathfrak{r}^2 = (r_0)\).
+
+1. **The Schmidt \(\Delta\)-system as an Euler system over the ring class tower
+   of \(\mathbb{Q}(i)\) — DONE** ([schmidt-euler-system.md](schmidt-euler-system.md)):
+   norm relations of Heegner shape with the Eisenstein eigenvalue \(\ell+1\)
+   (proved from Paper I's M1), the Hecke recursion for \(L'(0,\chi)\) under
+   pullback (all conductor Euler multipliers of phase-kronecker-limit §4 and
+   Paper II §6 proved), the Robert index along the tower (multipliers
+   \(2,4,7,8,13\), certified to level 81), and the first Kolyvagin step
+   (derivative classes descend). *Remaining*: Kolyvagin's class-group bound,
+   the comparison with Stark's units — [prompts/08-euler-system-kolyvagin.md](prompts/08-euler-system-kolyvagin.md).
+2. **The full Robert index** \([\mathcal{O}_{H_n}^\times : \mathcal{V}_n]\) at
+   \(n = 9, 11, 13\) (degree-12 fields, PARI unit groups), decomposed by
+   characters; predicted Kubert–Lang shape; settles Paper II Conjecture 6.7 at
+   those levels; includes the sextic layer at \(n = 21\) (prompt 08, item 2).
+3. **Other imaginary quadratic fields** (Stange's \(\mathcal{S}_K\)): class number
+   one first (\(\mathbb{Q}(\sqrt{-3})\) tests the \(\mu_6\) torsion; the genus
+   field should become \(\mathbb{Q}(\sqrt f)\) or \(\mathbb{Q}(\sqrt{f|D_K|})\)); then
+   class number \(>1\): cusps \(\leftrightarrow\) ideal classes, the level at one
+   cusp sees only \(\ker(\mathrm{Pic}(\mathcal{O}_f)\to\mathrm{Pic}(\mathcal{O}_K))\),
+   the full unit system lives on pairs \(\Lambda\subset L\) over all cusps; the
+   fiber lemma of schmidt-euler-system.md is local and transports.
+4. **Horizontal families: Atkin–Lehner-coupled Heegner points.** The unit theorem
+   needs only an invertible ambiguous \(\mathfrak{r}\) with \(\mathfrak{r}^2\)
+   principal in an order of any imaginary quadratic field, so
+   \(N^6\Delta(\mathfrak{b})/\Delta(\mathfrak{r}^{-1}\mathfrak{b})\) is a unit for
+   every pair \((N, D)\) with such an \(\mathfrak{r}\); the Gaussian arrangement is
+   the slice \(D = -4N(N+1)\), the even levels of \(i\mathcal{S}\) the next slice.
+5. **Other special unit systems from the same mechanism**: Stark recognition of
+   the cubic/quartic coset objects; the spherical aspect's Pell-twisted units
+   \(m_\ell/u^2\) (KLF transport); the first-power \(w_f\) after the cocycle;
+   \(p\)-adic logarithms of the Euler system toward the anticyclotomic \(p\)-adic
+   \(L\)-function of \(\mathbb{Q}(i)\).
+6. **Beyond imaginary quadratic fields** (speculative): arithmetic Kleinian groups
+   from quaternion algebras (no cusps, no units; Heegner points on Shimura curves,
+   the phase as a derivative of a Shimura-curve correspondence, KLF replaced by
+   Gross–Zagier heights); function fields (Drinfeld modular units, Gekeler's
+   \(\Delta\), Hayes' elliptic units).
+
+Suggested order: 1 (done), 2, 3 at class number one, 4, 5, 3 at class number
+\(>1\), 6.

@@ -89,6 +89,7 @@ Phase layer (CM machinery):
 | [phase-atlas.md](phase-atlas.md) | phase portraits of all odd levels \(\le 41\) + 101; **sign law proved on divisor classes** (Thm 1: \(\operatorname{sign}u_f = -\operatorname{sign}(a_rc_s - a_sc_r)\)); character hypothesis **refuted** (\(n=31,41\)); certified DIT non-relation battery (52 non-relations) |
 | [phase-kronecker-limit.md](phase-kronecker-limit.md) | character sums of \(\log\lvert u\rvert\) = elliptic-unit theory: \(S(\chi) = -2L'(0,\chi) + \tfrac23\Sigma_0 + \tfrac12\Sigma_{1728}\) (Euclidean, proved); hyperbolic \(S(\chi) = 0\) for \(\chi(\mathfrak{r})=+1\), \(= -4L'(0,\chi)+\tfrac43\Sigma_0+\Sigma_{1728}\) for odd \(\chi\) (proved, \(\varepsilon\) and \(\mu\) cancel); genus-character closed forms \(c\, h\log\varepsilon_d\) with the Euclidean field \(=\mathbb{Q}(\sqrt n)\); exact GZ-supported \(S\)-unit dressing; certified \(\Delta\)-mass polynomials \(D_n\) |
 | [schmidt-units.md](schmidt-units.md) | **unit theorem proved**: \(R_f = r_0^6\Delta(\mathfrak{b}_1)/\Delta(\mathfrak{r}^{-1}\mathfrak{b}_1)\) is a unit for every class (imprimitive strata included; \(R\equiv1\) iff induced twist principal); per-class valuation law \(v_P(G_\mathfrak{c}) = w_p(k)\) class-independent (proved, Newton-polygon-verified to \(n=49\)) settling the split \(\lambda_n\)-ladder; first-power \(w_f\) (\(w^6=R\), laws at first power, \(\mu_6\)-cocycle, coherence table \(m(n)\), \(w=-\varepsilon_{12}^{\pm1}\) at \(n=7\)); **Robert index** \([\mathcal{O}_{L_3}^\times:\langle-1,\theta_u\rangle]=8h_{L_3}\) at Euclidean \(n=9,11,13\) (\(h=1,1,3\)) |
+| [schmidt-euler-system.md](schmidt-euler-system.md) | **the \(\Delta\)-data are an Euler system** over the ring class tower \(H_n \subset H_{n\ell}\): norm relations of Heegner shape with the Eisenstein eigenvalue \(\ell+1\) (Thm 1, proved from Paper I's M1 + a fiber lemma); Hecke recursion \(L'(0,\chi^{(n\ell)}) = P_\ell(\chi)L'(0,\chi)\) proving every imprimitive Euler multiplier (\(1+3^{1-2s}\) at \(n=9\), the two \(n=15\) \(\varepsilon\)-ratios, \(C_n(0) = 2,2,2,4\)); Robert index along the tower (multipliers \(2, 4, 7, 8, 13\) certified to level 81); Kolyvagin derivative classes descend (Lemma 5.1); the ratios \(G_\mathfrak{c}/G_{\mathfrak{c}'}\) are units |
 | [spherical-moduli-invariants.md](spherical-moduli-invariants.md) | third geometry: \(\cot\theta = \ell\); census \(4H(4(\ell^2+1))\); shape polynomial \(\prod_{f^2\mid\ell^2+1}H_{-4(\ell^2+1)/f^2}\) (each stratum once); trace slice \(t(4\ell^2+4)\); Pell-unit phase, cap-swap \(u^2_-=\varepsilon^4u^2_+\), level norm \(m_\ell\) with GZ valuation law; **half-orbit phenomenon** (phases = half the Galois root system, golden-ratio cocycle at \(\ell=2\)) |
 
 Monoid / operation layer:
@@ -157,6 +158,15 @@ Planning: [outlook.md](outlook.md) — the master outlook (small/medium/large qu
     settled. **Robert index** \(= 8h_{L_3}C_n(0)\) on the cubic layer (certified at all
     eight cubic levels \(n\le27\); out-of-sample confirmation at \(n=23\), \(h_{L_3}=2\);
     fundamental units rigorous via Friedman's bound).
+21. **Euler-system norm relations** ([schmidt-euler-system.md](schmidt-euler-system.md)):
+    \(N_{H_{n\ell}/H_n}(G_{\mathfrak{c}'}) = (\ell+1 - \mathrm{Fr}_\mathfrak{l} - \mathrm{Fr}_\mathfrak{l}^{-1})G_\mathfrak{c}\)
+    (split), \((\ell+1)G_\mathfrak{c} + 12\log\ell\) (inert), \((3-\mathrm{Fr}_\mathfrak{p})G_\mathfrak{c} + 6\log 2\)
+    (\(\ell=2\)), \((\ell+1)G_\mathfrak{c} - G^{(n/\ell)}_{\mathfrak{c}^+}\) (\(\ell\mid n\)) — Heegner's
+    relations with \(a_\ell \mapsto \ell+1\). Proved (Paper I's M1 + fiber lemma);
+    verified at 42 pairs \((n,\ell)\) to level 125. Corollaries proved: the Hecke
+    recursion for \(L'(0,\chi)\) under pullback (all conductor Euler multipliers),
+    and the Robert index multiplier \(P_\ell(\chi_3)\) along the tower (16 levels
+    certified, up to 81). Open: the Kolyvagin bound (Lemma 5.1 is step one).
 
 ## Status ledger (open problems, deduplicated)
 
@@ -164,17 +174,28 @@ Planning: [outlook.md](outlook.md) — the master outlook (small/medium/large qu
   [phase-kronecker-limit.md](phase-kronecker-limit.md)): \(S(\chi) = \sum\chi\log|u|\)
   evaluates through \(L'(0,\chi)\) in both aspects (proved); genus characters in full
   closed form (Euclidean field \(=\mathbb{Q}(\sqrt n)\)); remaining open there:
-  the exponent law of the \(\Sigma\)-dressings (genus-refined Gross–Zagier), the
-  local Euler factor at square conductors, and Stark closed forms for order \(>2\)
-  characters.
+  the exponent law of the \(\Sigma\)-dressings (genus-refined Gross–Zagier) and
+  Stark closed forms for order \(>2\) characters. *The local Euler factors at
+  conductor primes are now proved at \(s=0\)* by the Hecke recursion of
+  [schmidt-euler-system.md](schmidt-euler-system.md) Thm 2 (the \(n=9\)
+  correction and both \(n=15\) \(\varepsilon\)-ratios are pullback multipliers
+  \(4, 8, 4\)).
 - **Schmidt units: settled** ([schmidt-units.md](schmidt-units.md)): unit theorem for
   \(R_f\) proved (all strata), per-class Euclidean valuation law proved (split
   \(\lambda_n\)-ladder closed), cubic-layer Robert index \(= 8h_{L_3}\) certified at
   \(n = 9, 11, 13\). Remaining open there: the \(\mu_6\)-cocycle law \(m(n)\) of the
   first-power \(w_f\) (Kubert–Lang multiplier bookkeeping; certified table odd
-  \(n\le35\) is the target), the general Robert-index conjecture, the hyperbolic
+  \(n\le35\) is the target), the general Robert-index conjecture (its pullback
+  clause and the \(C_n(0)\) column are now **proved** —
+  [schmidt-euler-system.md](schmidt-euler-system.md) Thm 3), the hyperbolic
   sextic layer (\(n=21\)), and the non-split \(\lambda_n\) fine structure (needs
   §2.8's conductor-degenerate GZ \(\beta\)-valuations only).
+- **Euler system / Kolyvagin** ([schmidt-euler-system.md](schmidt-euler-system.md)):
+  norm relations, Hecke recursion and tower index proved; open: the Kolyvagin
+  class-group bound (derivative classes descend, Lemma 5.1; localization at
+  \(\ell\) not done), the full index \([\mathcal{O}_{H_n}^\times:\mathcal{V}_n]\),
+  the comparison with Stark's units — see
+  [prompts/08-euler-system-kolyvagin.md](prompts/08-euler-system-kolyvagin.md).
 - **Hyperbolic first-power loose ends**: \(T = 1\) (distinctness of \(u_f^{12}\)) for general
   \(n\) — the only gap between per-level and all-\(n\) irreducibility. (The Euclidean
   analogue was closed by archimedean dominance; try the same at level \(1-n^2\).)
@@ -228,6 +249,7 @@ root, e.g. `python3 scripts/alpha_circles.py --selftest`.
 | `spherical_moduli_invariants.py` | census, shape bijection (\(\ell\le20\) exact), resultant identity (symbolic), phase laws, level norms | spherical-moduli-invariants |
 | `phase_klf.py` | Kronecker-limit character sums: master identities, Epstein \(L'(0,\chi)\), genus factorizations with conductor Euler factors, exact \(\mathbb{Q}(\sqrt d)\) coset factorizations, \(D_n\)/\(R\)-polynomials, safe-PSLQ non-fits (`--selftest`: 250–400 digits) | phase-kronecker-limit |
 | `schmidt_units.py` | lattice lemma for \(R_f\); unit polynomials \(n\le21\) + imprimitive strata; Newton-polygon per-class law (to \(n=49\)); first-power \(w_f\) laws + \(m(n)\) table (odd \(n\le35\)); quadratic projections; cubic fundamental units, \(h_{L_3}\), Robert index \(8h_{L_3}\) (`--selftest`, ~45 s) | schmidt-units |
+| `schmidt_euler_system.py` | exact HNF class groups of \(\mathcal{O}_n\) (products, projections, ideal twists, cubic characters); norm relations at 42 pairs \((n,\ell)\) (all four cases, to level 125); Hecke recursion for \(S_\chi = -12L'\) (10 instances, closed forms of Paper II reproduced); Robert-index multipliers along four pullback chains (16 levels, to 81) (`--selftest`, 80 digits, ~70 s) | schmidt-euler-system |
 | `first_power_descent.py` | exact \(\Phi_m\) (\(m\le10\)); \(\omega_f=1\) exact (odd \(n\le21\)); \(u=\Phi_y/\Phi_x\) vs \(\varepsilon\Theta\) (\(\ge108\) digits, \(n\le13\)); exact \(\Pi_n\) = published \(Q_n\), irreducible (\(n\le13\)) (`--selftest`, ~4 s) | first-power-descent |
 | `make_phase_atlas.py` | two-route phases (\(\ge138\) digits), laws on data, \(Q_n\) roots, figures; `--signs`: sign table, character refutation, Theorem-1 divisor rule (81 classes, odd \(n\le41\), 101) | phase-atlas |
 | `dit_comparison.py` | DIT cycle integrals/Rademacher from definitions + the PSLQ battery (52 certified non-relations, 150 digits; `--selftest` anchors) | phase-atlas |
@@ -291,7 +313,11 @@ results in [phase-kronecker-limit.md](phase-kronecker-limit.md)),
 (**done** — manuscript in `papers/2-schmidt-elliptic-units/`; Paper II, narrow,
 assumes Paper I: Kronecker limit formulas, the unit theorem with per-class
 valuations, first-power Schmidt units, the Robert index \(8h_{L_3}C_n(0)\);
-see Paper planning below).
+see Paper planning below), and
+[08-euler-system-kolyvagin.md](prompts/08-euler-system-kolyvagin.md) (the
+continuation of [schmidt-euler-system.md](schmidt-euler-system.md): Kolyvagin's
+bound, the full index of the \(\Delta\)-units, the Stark comparison, and the
+port of Theorems 2–3 into Paper II §6).
 
 ## Paper planning
 
@@ -337,6 +363,10 @@ Hajir–Villegas and Küçüksakallı, credited as such); the limit formulas for
 the phase, the \(\varepsilon\)-cancellation, the \(\mathbb{Q}(\sqrt n)\)
 phenomenon, the unit theorem on all strata, the per-class law and the
 explicit index \(8h_{L_3}C_n(0)\) over \(\mathbb{Q}(i)\) checked as new.
+*Paper II upgrade pending*: [schmidt-euler-system.md](schmidt-euler-system.md)
+Theorems 2–3 prove Remark 3.2's \(\varepsilon\)-ratios, Prop. 3.1's conductor
+correction and Theorem 6.6's \(C_n(0)\) column; port as a short §6 subsection
+(prompt 08, item 4).
 The consolidation plan lives in [outlook.md](outlook.md) §4–5 (two-paper split:
 *Counting and composing Schmidt circles* and *The phase of a Schmidt circle*) and
 [spectral-outlook.md](spectral-outlook.md) §10 (spectral paper ladder, starting with
