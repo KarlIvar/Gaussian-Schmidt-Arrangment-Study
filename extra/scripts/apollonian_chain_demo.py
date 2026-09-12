@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Nested Schmidt disks around a point of the upper half plane.
 
-  python3 scripts/apollonian_chain_demo.py "31/101 + 7/53 i" 12
-  python3 scripts/apollonian_chain_demo.py "0.3141 + 0.2718i" 15 --float
+  python3 extra/scripts/apollonian_chain_demo.py "31/101 + 7/53 i" 12
+  python3 extra/scripts/apollonian_chain_demo.py "0.3141 + 0.2718i" 15 --float
 
 Given z in H the program repeatedly finds an *atom* X of the monoid
     Omega = { X in SL(2,Z[i]) : X(H) subset H }
@@ -16,7 +16,9 @@ arithmetic; the search fails (and the chain stops) exactly when the current
 point lies in the residual set of the Apollonian gasket.
 """
 import sys, os, re
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+_HERE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, _HERE)                                      # sibling scripts in extra/scripts
+sys.path.insert(0, os.path.join(_HERE, '..', '..', 'scripts'))   # the main verification scripts
 from fractions import Fraction
 from omega import (QC, ID, H, act, atom_through, disk_of, is_atom, in_omega,
                    inversive, factor, is_schmidt)

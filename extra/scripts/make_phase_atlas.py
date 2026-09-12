@@ -39,18 +39,21 @@ elliptic-core classes g*(1,1,1) and g*(1,0,1) are excluded (j' vanishes at
 rho and i -- the 0/0 already met at alpha = 2) and drawn neutrally.
 
 Usage (from the repo root):
-    python3 scripts/make_phase_atlas.py --selftest          # laws + anchors
-    python3 scripts/make_phase_atlas.py --figures           # all PNGs
-    python3 scripts/make_phase_atlas.py --signs             # sign-law data
-    python3 scripts/make_phase_atlas.py --figures --levels 7 15
+    python3 extra/scripts/make_phase_atlas.py --selftest          # laws + anchors
+    python3 extra/scripts/make_phase_atlas.py --figures           # all PNGs
+    python3 extra/scripts/make_phase_atlas.py --signs             # sign-law data
+    python3 extra/scripts/make_phase_atlas.py --figures --levels 7 15
 """
 import sys
+import os
 import math
 import argparse
 from fractions import Fraction
 from math import gcd
 
-sys.path.insert(0, 'scripts')
+_HERE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, _HERE)                                      # sibling scripts in extra/scripts
+sys.path.insert(0, os.path.join(_HERE, '..', '..', 'scripts'))   # the main verification scripts
 
 from mpmath import (mp, mpf, mpc, fabs, nstr, pi as mppi, nint, atan2, log,
                     sqrt as msqrt, arg as marg)
@@ -939,7 +942,7 @@ def main():
     ap.add_argument('--figures', action='store_true')
     ap.add_argument('--signs', action='store_true')
     ap.add_argument('--levels', type=int, nargs='*', default=None)
-    ap.add_argument('--outdir', default='figures')
+    ap.add_argument('--outdir', default='extra/figures')
     args = ap.parse_args()
 
     if args.selftest:

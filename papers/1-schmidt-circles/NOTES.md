@@ -4,7 +4,7 @@ Date of pass: 2026-08-30 (session of the paper draft). Searches were run
 through a web-search relay (arXiv full text was not directly reachable from
 this environment; statements below distinguish what was verified from
 abstracts/summaries vs. what could be read verbatim). This complements the
-earlier probes recorded in [spectral-geometry.md](../../spectral-geometry.md)
+earlier probes recorded in [spectral-geometry.md](../../extra/spectral-geometry.md)
 §14 (arXiv metadata, citation graphs of Stange's papers, full-text probes),
 which found exactly three published papers mentioning "Schmidt arrangement"
 and none touching the level stratification, the involution class formula, or

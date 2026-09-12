@@ -22,14 +22,16 @@ Checks:
                 and the class-DEPENDENCE of S (no-go witness): same levels,
                 different classes give different S.
 
-Run: venv/bin/python scripts/middle_kernel.py
+Run: venv/bin/python extra/scripts/middle_kernel.py
 """
 
 import os
 import sys
 from math import gcd
 
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+_HERE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, _HERE)                                      # sibling scripts in extra/scripts
+sys.path.insert(0, os.path.join(_HERE, '..', '..', 'scripts'))   # the main verification scripts
 
 from omega import (G, Mat, Disk, ID, S, T, disk_of, in_omega, inversive,
                    matrix_for_disk)

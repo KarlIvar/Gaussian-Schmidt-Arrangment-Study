@@ -19,7 +19,7 @@ Three properties are checked:
       Theta(W) Theta(X) Theta(Y) = K * Q^2 with K the product of kernel
       values at the six hyperbolic centers.  Also verified with the j'-kernel.
 
-Run: python3 scripts/product_cocycle.py [trials]
+Run: python3 extra/scripts/product_cocycle.py [trials]
 """
 
 import os
@@ -27,7 +27,9 @@ import sys
 import random
 from fractions import Fraction
 
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+_HERE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, _HERE)                                      # sibling scripts in extra/scripts
+sys.path.insert(0, os.path.join(_HERE, '..', '..', 'scripts'))   # the main verification scripts
 
 from omega import (G, Mat, Disk, ID, S, T, disk_of, in_omega, inversive,
                    matrix_for_disk)

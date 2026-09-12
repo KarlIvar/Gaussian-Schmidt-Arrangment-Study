@@ -1,9 +1,9 @@
 # Prompt: the phase atlas, and the Duke–Imamoğlu–Tóth comparison
 
-Read `CLAUDE.md` first, then [moduli-invariants.md](../moduli-invariants.md) §4–5,
-[first-power-descent.md](../first-power-descent.md), [hyperbolic-counting.md](../hyperbolic-counting.md),
-[euclidean-moduli-invariants.md](../euclidean-moduli-invariants.md) §5.2, and
-[outlook.md](../outlook.md) §1.1, §1.6, §2.4, §2.6. Follow the CLAUDE.md guard rails.
+Read `CLAUDE.md` first, then [moduli-invariants.md](../../moduli-invariants.md) §4–5,
+[first-power-descent.md](../../first-power-descent.md), [hyperbolic-counting.md](../../hyperbolic-counting.md),
+[euclidean-moduli-invariants.md](../../euclidean-moduli-invariants.md) §5.2, and
+[outlook.md](../../outlook.md) §1.1, §1.6, §2.4, §2.6. Follow the CLAUDE.md guard rails.
 
 One session, one dataset, two deliverables: computing \(u_f\) for every class at many
 levels is the expensive step, and both halves of this task consume exactly that data.
@@ -25,7 +25,7 @@ the exact \(\Phi_y/\Phi_x\) route of first-power-descent.md — any mismatch is 
 the atlas, full stop.
 
 **Rendering** (matplotlib; PNGs into `figures/`, generator into
-`scripts/make_phase_atlas.py`):
+`extra/scripts/make_phase_atlas.py`):
 
 1. Per-level panels of \(T\) (half-plane and the \(D_3\)-symmetric disk model, as in
    `alpha_circles.py`): fill color = hue by \(\arg u_f\), and a companion panel
@@ -84,9 +84,9 @@ theory; a certified mismatch is the novelty claim the phase paper's introduction
 
 ## Deliverables
 
-- `scripts/make_phase_atlas.py` (figures + selftest that re-checks the twin and
+- `extra/scripts/make_phase_atlas.py` (figures + selftest that re-checks the twin and
   conjugation laws pixel-independently on the computed data) and
-  `scripts/dit_comparison.py` (invariant computations + comparison log with
+  `extra/scripts/dit_comparison.py` (invariant computations + comparison log with
   certification margins).
 - Figures in `figures/` (per-level panels, contact sheet, Euclidean companion if done).
 - One house-style document `phase-atlas.md` containing: the atlas with observations

@@ -1,6 +1,6 @@
 # The double-coset product \((X, Y) \mapsto X\Gamma Y\) in the \((\alpha, \beta_1, \beta_2, \arg u)\)-coordinates
 
-Companion to [atomic-census.md](atomic-census.md). There the product of two \(\Gamma\)-double cosets (\(\Gamma = \mathrm{SL}_2(\mathbb{Z})\)) — the \(\Gamma\)-indexed family \(\{\Gamma X\gamma Y\Gamma\}_{\gamma \in \Gamma}\) — was analysed in the \(\alpha\)-coordinate: \(\alpha(X\gamma Y) = \langle M_{X^{-1}}, \gamma M_Y\rangle\). This note answers the natural next question: *what does the operation do to the remaining coordinates \(\beta_1, \beta_2, \arg u\) of [moduli-invariants.md](moduli-invariants.md)?*
+Companion to [atomic-census.md](atomic-census.md). There the product of two \(\Gamma\)-double cosets (\(\Gamma = \mathrm{SL}_2(\mathbb{Z})\)) — the \(\Gamma\)-indexed family \(\{\Gamma X\gamma Y\Gamma\}_{\gamma \in \Gamma}\) — was analysed in the \(\alpha\)-coordinate: \(\alpha(X\gamma Y) = \langle M_{X^{-1}}, \gamma M_Y\rangle\). This note answers the natural next question: *what does the operation do to the remaining coordinates \(\beta_1, \beta_2, \arg u\) of [moduli-invariants.md](../moduli-invariants.md)?*
 
 The answer is that the operation has exactly **three** invariant-level laws, one per coordinate block — and the count is forced: for fixed \(X, Y\) the product family \(\{XgY : g \in \mathrm{SL}_2(\mathbb{R})\}\) is (generically) \(3\)-dimensional inside the \(6\)-dimensional double-coset space, so its image must be cut out by three relations. They are:
 
@@ -10,7 +10,7 @@ The answer is that the operation has exactly **three** invariant-level laws, one
 | \(\beta_2\) | dually, the \(\beta_2\)-circle stays at inversive distance \(\alpha(X)\) from \(\omega_2(Y)\): the product's \(\beta_2\) remembers only \(Y\) (Thm. 1) |
 | \(\arg u\) | the phase is **anti-additive up to an explicit geometric coboundary**: \(\Theta(X\gamma Y)\,\Theta(X)\,\Theta(Y) = K\,Q^2\) with \(K\) a product of kernel values at the six hyperbolic centers and \(Q\) a cross-ratio through the junction point (Thm. 3) |
 
-All verified in [scripts/product_cocycle.py](scripts/product_cocycle.py): **1205 checks passing** (relations R1/R2 in exact integer arithmetic on 200 random products; the distance form and the cocycle to 50 digits; the full \(\Theta\)-identity with the \(j'\)-kernel).
+All verified in [extra/scripts/product_cocycle.py](scripts/product_cocycle.py): **1205 checks passing** (relations R1/R2 in exact integer arithmetic on 200 random products; the distance form and the cocycle to 50 digits; the full \(\Theta\)-identity with the \(j'\)-kernel).
 
 ## 1. Marginal rigidity: \(\beta_1\) sees only \(X\), \(\beta_2\) sees only \(Y\)
 
@@ -28,7 +28,7 @@ Write \(W = X\gamma Y\), \(a = \alpha(X)\), \(b = \alpha(Y)\), \(n = \alpha(W)\)
 
 *Proof.* \(\omega_1(W) = X\gamma(\omega_1(Y))\) while \(\omega_1(X) = X(\hat{\mathbb{R}}) = X\gamma(\hat{\mathbb{R}})\); Möbius invariance of the pairing gives \(\langle\omega_1 W, \omega_1 X\rangle = \langle\omega_1(Y), \hat{\mathbb{R}}\rangle = \alpha(Y)\). Dually \(\omega_2(W) = \sigma(Y)\gamma^{-1}(\omega_2(X))\) and \(\omega_2(Y) = \sigma(Y)\gamma^{-1}(\hat{\mathbb{R}})\). \(\square\)
 
-To convert to the CM points \(m_1, m_2\) (whose \(j\)-values are \(\beta_1, \beta_2\)), one small lemma of independent use — the pairing of two Schmidt circles as hyperbolic circles ([hyperbolic-counting.md](hyperbolic-counting.md) §2):
+To convert to the CM points \(m_1, m_2\) (whose \(j\)-values are \(\beta_1, \beta_2\)), one small lemma of independent use — the pairing of two Schmidt circles as hyperbolic circles ([hyperbolic-counting.md](../hyperbolic-counting.md) §2):
 
 > **Lemma 2.** For circles \(\omega, \omega'\) in \(\mathbb{H}\) with hyperbolic centers \(p, p'\) and levels \(\alpha, \alpha'\):
 > $$
@@ -56,7 +56,7 @@ To convert to the CM points \(m_1, m_2\) (whose \(j\)-values are \(\beta_1, \bet
 
 ## 2. The phase cocycle
 
-The third relation is an exact multiplicative law for the sixth coordinate. Recall the branch convention \(V(m_2(V)) = m_1(V)\) (Lemma B of [moduli-invariants.md](moduli-invariants.md); it holds for all representatives used here, and the script confirms the \(+\) branch throughout). The only analytic input is the two-point identity for a Möbius map \(T\):
+The third relation is an exact multiplicative law for the sixth coordinate. Recall the branch convention \(V(m_2(V)) = m_1(V)\) (Lemma B of [moduli-invariants.md](../moduli-invariants.md); it holds for all representatives used here, and the script confirms the \(+\) branch throughout). The only analytic input is the two-point identity for a Möbius map \(T\):
 \((Tp - Tq)^2 = T'(p)\,T'(q)\,(p-q)^2\).
 
 > **Theorem 3 (triple-product law).** Let \(X, Y \in \mathrm{SL}_2(\mathbb{C})\) be such that \(X\), \(Y\), \(W = XY\) all carry the \(+\) branch, and let
@@ -88,14 +88,14 @@ The third relation is an exact multiplicative law for the sixth coordinate. Reca
 
 Remarks.
 
-1. **This is the missing third relation.** \(|\Theta|\) is a function of \((\alpha, \beta_1, \beta_2)\) ([moduli-invariants.md](moduli-invariants.md) §1), so the modulus part of Corollary 4 is consistent with Theorem 1; the argument part pins \(\arg u(W)\) given the rest — completing the count \(6 - 3 = 3\) of constraints on the product family.
-2. **Anti-additivity is forced by the symmetric-pair structure.** The Gelfand anti-involution makes the natural product law contravariant; the sign matches the proved twin law \(u_f\,u_{\mathfrak{r}f} = 1\) (products invert phases), whose derivation (law (b) of [moduli-invariants.md](moduli-invariants.md) §5, \(\Theta(X)\overline{\Theta(X^{-1})} = \varepsilon^{-2}\)) is exactly the degenerate limit \(Y \to X^{-1}\) of Theorem 3, where all kernel factors cancelled for the same telescoping reason.
+1. **This is the missing third relation.** \(|\Theta|\) is a function of \((\alpha, \beta_1, \beta_2)\) ([moduli-invariants.md](../moduli-invariants.md) §1), so the modulus part of Corollary 4 is consistent with Theorem 1; the argument part pins \(\arg u(W)\) given the rest — completing the count \(6 - 3 = 3\) of constraints on the product family.
+2. **Anti-additivity is forced by the symmetric-pair structure.** The Gelfand anti-involution makes the natural product law contravariant; the sign matches the proved twin law \(u_f\,u_{\mathfrak{r}f} = 1\) (products invert phases), whose derivation (law (b) of [moduli-invariants.md](../moduli-invariants.md) §5, \(\Theta(X)\overline{\Theta(X^{-1})} = \varepsilon^{-2}\)) is exactly the degenerate limit \(Y \to X^{-1}\) of Theorem 3, where all kernel factors cancelled for the same telescoping reason.
 3. **Iterating along an address** recovers the Birkhoff-product expression of the phase ([atomic-census.md](atomic-census.md) §2): the cocycle is its two-letter germ.
-4. **Arithmetic content at Schmidt triples.** For Schmidt classes all the ingredients are algebraic: the \(m\)-points and \(p\) are quadratic surds, and \(K\) is a ratio of \(j'\)-CM-values, algebraic by Shimura. So the identity states: the product of the three phases \(u\) — elements of the ring class fields of the **three different discriminants** \(1-a^2\), \(1-b^2\), \(1-n^2\) — is an explicit product of elementary algebraic factors. Since each factor separately obeys its own dihedral Galois law ([first-power-descent.md](first-power-descent.md)), the identity forces a matching equivariance on \(K_\gamma Q_\gamma^2\): a **reciprocity constraint coupling CM points of three distinct imaginary quadratic fields**. Nothing in the classical single-discriminant theory sees this coupling.
+4. **Arithmetic content at Schmidt triples.** For Schmidt classes all the ingredients are algebraic: the \(m\)-points and \(p\) are quadratic surds, and \(K\) is a ratio of \(j'\)-CM-values, algebraic by Shimura. So the identity states: the product of the three phases \(u\) — elements of the ring class fields of the **three different discriminants** \(1-a^2\), \(1-b^2\), \(1-n^2\) — is an explicit product of elementary algebraic factors. Since each factor separately obeys its own dihedral Galois law ([first-power-descent.md](../first-power-descent.md)), the identity forces a matching equivariance on \(K_\gamma Q_\gamma^2\): a **reciprocity constraint coupling CM points of three distinct imaginary quadratic fields**. Nothing in the classical single-discriminant theory sees this coupling.
 
 ## 3. Verification
 
-[scripts/product_cocycle.py](scripts/product_cocycle.py) (mpmath at 70 digits, exact integer arithmetic where stated; run inside a venv with mpmath):
+[extra/scripts/product_cocycle.py](scripts/product_cocycle.py) (mpmath at 70 digits, exact integer arithmetic where stated; run inside a venv with mpmath):
 
 1. R1 and R2 of Theorem 1 for 200 random products \(X\gamma Y\) of random Schmidt representatives (levels \(3\)–\(11\)) — exact;
 2. the CM-distance form (Corollary of Lemma 2) to \(50\) digits;
@@ -107,7 +107,7 @@ Remarks.
 
 ## 4. Outlook
 
-1. **The cocycle class.** \(c(X, Y) := \arg K + 2\arg Q\) is a \(2\)-cocycle for the (partially defined) product on double cosets. Is it a coboundary — i.e. is there a canonical "phase potential" \(\phi\) on double cosets with \(c = \phi(W) + \phi(X) + \phi(Y)\)? On the Ford stratum, where the phase theory degenerates to the cusp ([outlook.md](outlook.md) 2.4), \(c\) should reduce to a classical Dedekind–Rademacher cocycle; identifying it would tie the phase of a Schmidt circle to \(\eta\)-multiplier arithmetic by a second, product-theoretic route.
+1. **The cocycle class.** \(c(X, Y) := \arg K + 2\arg Q\) is a \(2\)-cocycle for the (partially defined) product on double cosets. Is it a coboundary — i.e. is there a canonical "phase potential" \(\phi\) on double cosets with \(c = \phi(W) + \phi(X) + \phi(Y)\)? On the Ford stratum, where the phase theory degenerates to the cusp ([outlook.md](../outlook.md) 2.4), \(c\) should reduce to a classical Dedekind–Rademacher cocycle; identifying it would tie the phase of a Schmidt circle to \(\eta\)-multiplier arithmetic by a second, product-theoretic route.
 2. **Inter-level reciprocity.** Make Remark 4 precise: apply \(\sigma \in \mathrm{Gal}(\bar{\mathbb{Q}}/\mathbb{Q})\) to the triple identity at a Schmidt triple and match the dihedral translation laws of the three factors against the Galois action on \(K Q^2\). The expected output is a trilinear symbol on \(\mathrm{Cl}(1-a^2) \times \mathrm{Cl}(1-b^2) \times \mathrm{Cl}(1-n^2)\)-triples occurring in products — a new structure with no single-level counterpart.
 3. **The aligned stratum as a functor.** On aligned products the operation is \((\beta_1, \beta_2)\)-splicing (Corollary to Lemma 2) and the junction cross-ratio degenerates; the phase law should become exactly multiplicative after the \(\varepsilon\)-normalisation. Classify aligned Schmidt products (the \(\varepsilon\)-multiplicative chains of [atomic-census.md](atomic-census.md) §8.5) and check whether \(u\) restricted to them is a homomorphism into the unit group.
 4. **Effective multiplication table.** Theorem 1 + the pairing law reduce the multiplication table of double cosets to: choose \(n\) in the pairing spectrum, then a point on each of the two CM-circles, then the phase from Corollary 4. This is a complete, finite recipe for the "relative Hecke product" of gap G7 — worth writing as an algorithm and testing against the depth-2 census of [atomic-census.md](atomic-census.md).

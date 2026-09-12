@@ -1,12 +1,14 @@
 # Outlook: where the Gaussian Schmidt arrangement project can go next
 
+> **The program is now [PROGRAM.md](PROGRAM.md)** (§6 below is its summary). This file is the historical master outlook; the material off the program's line (monoid, spectral, composition, atlas) was moved to [extra/](extra/README.md) and the links below point there.
+
 ## 0. Where we stand
 
 Proved and machine-certified across the documents:
 
 1. **Diophantine classification** of the circles of \(\mathcal{S} = \mathrm{PSL}_2(\mathbb{Z}[i])\hat{\mathbb{R}}\) ([circle-classification.md](circle-classification.md)); Euclidean counting \(N_e(n) = n\prod(1-\chi_{-4}(p)/p)\) with Catalan-constant asymptotics ([euclidean-counting.md](euclidean-counting.md)).
 2. **Hyperbolic counting**: circles at level \(\alpha = n\) are hyperbolic circles of radius \(\operatorname{arcoth} n\) at CM points of discriminant \(1-n^2\); weighted count \(3H(n^2-1)\) in the ideal triangle ([hyperbolic-counting.md](hyperbolic-counting.md)).
-3. **The involution** \(\sigma(X) = \bar X^{-1}\): class formula \(\hat\sigma[f] = [\mathfrak{r}_n][f]^{-1}\), proved via the explicit unitary basis ([class-formula-proof.md](class-formula-proof.md)); circle-level class group operations ([circle-composition.md](circle-composition.md)).
+3. **The involution** \(\sigma(X) = \bar X^{-1}\): class formula \(\hat\sigma[f] = [\mathfrak{r}_n][f]^{-1}\), proved via the explicit unitary basis ([class-formula-proof.md](class-formula-proof.md)); circle-level class group operations ([circle-composition.md](extra/circle-composition.md)).
 4. **The phase invariant** \(\Theta\), the sixth coordinate on double cosets; functional equations (mirror, inversion = \(e^{-\ell}\)); the normalized \(u_f = \varepsilon\Theta_f\); full generalized-dihedral Galois equivariance of \(u^{12}\) via Shimura–Siegel reciprocity, with the \(\xi\)-torsion closed by the cocycle-ideal lemma; explicit fields for the pair-sums via genus characters; denominators = Gross–Zagier primes of \((1-n^2, -3)\) and \((1-n^2, -4)\) ([moduli-invariants.md](moduli-invariants.md)); and, as a corollary of the equivariance, the phase units of a level are the roots of **one polynomial with integer coefficients** (§5.9 there: unconditionally in degree \(12h\), certified in the sharp degree \(h\) for odd \(n \le 17\)), and that polynomial is **irreducible** at every computed level — one level, one Galois orbit, the degree-\(h\) polynomial being the common minimal polynomial of the level's phase units (§5.10 there).
 5. **The Euclidean moduli theory** (translations \(\times\ \mathrm{SL}_2(\mathbb{Z})\) instead of \(\mathrm{SL}_2(\mathbb{Z}) \times \mathrm{SL}_2(\mathbb{Z})\)): disks of curvature \(2n\) mod translation \(\leftrightarrow\) \(\mathrm{Cl}(\mathbb{Z} + n\mathbb{Z}[i])\) (so \(N_e(n) = 2h(-4n^2)\)); \(j\)-values = ring class polynomial squared; trace slice \(t(4n^2)\); the Euclidean sixth invariant \(\Theta = j'(w)/c^2\) and its lemniscatic phase units with monic integer level polynomials; the \(\Delta\)-mass law **proved** (Theorem 4 there: constancy of the full Hecke mass + PID stratification + generating-function identities + the conjugation sign analysis), and the level polynomials \(P^{(2)}_n, P^{(6)}_n\) **proved irreducible for every \(n\)** (Theorem 5 there: the root-free closed form \(u^2 = -12\beta(\beta-1728)\,g_2(\Lambda)/g_2(\mathbb{Z}[i])\), a cocycle-free square-level Shimura translation law, and an archimedean dominance lemma killing the coincidence subgroup — so the square-level analogues of both hyperbolic open hypotheses, first-power descent and \(T = 1\), are closed on the Euclidean side); \(H_{-4n^2}\) irreducible classically, and the first-power disk polynomial \(P^{(2)}(x^2)\) irreducible at every computed level ([euclidean-moduli-invariants.md](euclidean-moduli-invariants.md), with its own outlook §6 there).
 
@@ -40,7 +42,7 @@ coset-product factorization \(A/B = \pm\varepsilon^k\prod(\pi/\pi')^{e}\) in
 \(\mathbb{Q}(\sqrt d)\) — the sign of \(u_f\) on ambiguous classes should be
 exactly this \(\pm\) traced through the closed form; likely resolvable together
 with 2.8.
-*Update — **largely DONE** ([phase-atlas.md](phase-atlas.md), ported for Paper I):
+*Update — **largely DONE** ([phase-atlas.md](extra/phase-atlas.md), ported for Paper I):
 the sign is **not** a character (refuted at \(n = 31, 41\) by exact Gauss
 composition against certified signs — which is why the \(n \le 17\) data was
 misleading), and on every divisor-type ambiguous class it is the **proved
@@ -57,7 +59,7 @@ point falls). Remaining: the 2-adic ambiguous classes \((a,a,c)\), \((a,b,a)\) a
 
 **1.5 Regularizing \(\alpha = 2\).** The level \(n = 2\) (the inscribed circle; CM point \(\rho\)) is excluded because \(j'(\rho) = 0\). Both \(m_1, m_2\) are \(\rho\)-points, so the *ratio* of leading Laurent coefficients of any kernel defines a regularized \(\Theta(2)\). Compute it; it should be a particularly clean number (the class group is trivial and \(\varepsilon = 2+\sqrt3\)).
 
-**1.6 A phase atlas — DONE** ([phase-atlas.md](phase-atlas.md), figures in
+**1.6 A phase atlas — DONE** ([phase-atlas.md](extra/phase-atlas.md), figures in
 [figures/](figures/)): all odd levels \(\le 41\) plus 101, two independent routes
 agreeing to 138+ digits, laws re-checked on the drawn data; exposed the sign
 geography (→ 1.1 update) and the imprimitive phase strata (roots of unity at small
@@ -90,7 +92,7 @@ mirroring \(\varepsilon_{n^2-1}\) in the discriminant aspect (→ 3.4).
 **2.5 The imprimitive strata.** The class formula's behaviour on non-invertible classes (content \(g > 1\), ramified prime 2) is verified but unproved. The tools now available (cocycle ideal, \(\mathcal{O}_B\)-extension trick) should handle it: non-invertibility of \(\mathfrak{a}_f\) obstructs only one index count, and passing to \(\mathcal{O}_B\) may again dissolve it.
 
 **2.6 Comparison with Duke–Imamoğlu–Tóth — DONE, mismatch certified**
-([phase-atlas.md](phase-atlas.md) §4): at \(3 \le n \le 17\), 52 certified
+([phase-atlas.md](extra/phase-atlas.md) §4): at \(3 \le n \le 17\), 52 certified
 non-relations at 150 digits (safe PSLQ) between \(\log|u_f|\), \(\arg u_f\), the
 pair-sums and the discriminant-\(4(n^2-1)\) cycle integrals of \(j\), the
 Kronecker-limit integrals, \(\log\varepsilon\), \(\pi\), \(\pi^2\); no Rademacher
@@ -184,7 +186,7 @@ Green's-function-type values \(\log|\Delta|\), \(\log|j - j(\text{elliptic})|\)
 at the Heegner pair \((f, \mathfrak{r}f)\), i.e. along the graph of the
 Atkin–Lehner twist). What remains is assembling KLF (archimedean) + 2.8
 (finite places) into one height identity for the phase — with
-[middle-kernel.md](middle-kernel.md)'s Green's-function collapse as the bridge
+[middle-kernel.md](extra/middle-kernel.md)'s Green's-function collapse as the bridge
 to the trace-formula program.
 
 **3.6 Other imaginary quadratic fields.** Everything transports to Schmidt arrangements over \(\mathcal{O}_K\) for other \(K\) (Stange's general setting): the parity/congruence classification, the \(\alpha\)-invariant, the twist \(\mathfrak{r}\), the phase. Comparative questions: the Eisenstein case \(\mathbb{Z}[\omega]\) has \(\mu_6\)-units (richer torsion in the phase — a clean test of the \(\mu(B)\)-analysis); class number \(> 1\) fields (\(\mathcal{O}_{-5}\)) break which steps? The Catalan constant becomes \(L(2, \chi_{d_K})\); the unit \(\varepsilon\) is field-independent — meaning the *geodesic side is universal* while the arithmetic side varies. A uniform treatment would be the definitive paper on Schmidt-arrangement arithmetic.

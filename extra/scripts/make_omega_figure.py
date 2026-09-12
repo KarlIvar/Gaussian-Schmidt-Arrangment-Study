@@ -5,12 +5,14 @@ Left:  the atom disks -- the Apollonian gasket in the strip 0 < Im z < 1 generat
        radius 1/2 at the integers.  Shaded: the Ford disks (alpha = 1, the atoms
        associate to z -> z+i).
 Right: three successive zooms of the nested chain D_1 > D_2 > ... produced by
-       scripts/apollonian_chain_demo.py for z = 31/101 + 7/53 i.  Inside every
+       extra/scripts/apollonian_chain_demo.py for z = 31/101 + 7/53 i.  Inside every
        atom disk sits a congruent copy of the whole gasket -- that self-similarity
        is what makes the factorisation algorithm run.
 """
 import sys, os
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+_HERE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, _HERE)                                      # sibling scripts in extra/scripts
+sys.path.insert(0, os.path.join(_HERE, '..', '..', 'scripts'))   # the main verification scripts
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt

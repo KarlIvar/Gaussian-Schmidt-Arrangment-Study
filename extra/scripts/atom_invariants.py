@@ -9,7 +9,9 @@ associate class SL(2,Z) X SL(2,Z) of the atom).  This script tabulates which pai
 actually occur among the atoms, i.e. among the disks of the Apollonian gasket.
 """
 import sys, os
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+_HERE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, _HERE)                                      # sibling scripts in extra/scripts
+sys.path.insert(0, os.path.join(_HERE, '..', '..', 'scripts'))   # the main verification scripts
 from omega import gasket
 
 

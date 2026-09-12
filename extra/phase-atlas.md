@@ -2,7 +2,7 @@
 
 This document renders the level-\(n\) Schmidt circles of the ideal triangle
 \(T = (0, 1, \infty)\) **colored by the phase invariant** \(u_f\) of
-[moduli-invariants.md](moduli-invariants.md) §4 — the phase portrait of the Gaussian
+[moduli-invariants.md](../moduli-invariants.md) §4 — the phase portrait of the Gaussian
 Schmidt arrangement — and harvests the two results the one expensive dataset (every
 \(u_f\), every odd level \(3 \le n \le 41\), plus \(n = 101\)) makes cheap:
 
@@ -25,13 +25,13 @@ Schmidt arrangement — and harvests the two results the one expensive dataset (
 Status labels: **proved** (mathematical proof, machine-verified), **certified**
 (numerical statement with stated precision and safety margins), **observed**
 (pattern in the data, no proof claimed). Scripts:
-[scripts/make_phase_atlas.py](scripts/make_phase_atlas.py),
-[scripts/dit_comparison.py](scripts/dit_comparison.py).
+[extra/scripts/make_phase_atlas.py](scripts/make_phase_atlas.py),
+[extra/scripts/dit_comparison.py](scripts/dit_comparison.py).
 
 ## 1. The dataset, and why it is trustworthy
 
 For each level the circles of \(T\) come from the congruence sweep of
-[hyperbolic-counting.md](hyperbolic-counting.md) §4; a circle \((q, x, m)\) is colored
+[hyperbolic-counting.md](../hyperbolic-counting.md) §4; a circle \((q, x, m)\) is colored
 through its class \(f = \overline{(q, -x, m)}\) of discriminant \(D = 1 - n^2\). Every
 primitive class receives its phase unit \(u_f = \varepsilon\,\Theta_f\),
 \(\varepsilon = n + \sqrt{n^2-1}\), computed by **two independent routes** at two
@@ -39,11 +39,11 @@ precisions (100 and 140 digits, \(j' = -2\pi i\,E_4^2E_6/\Delta\) via theta cons
 `mp.dps` set after imports — the guard rails of CLAUDE.md):
 
 - **Route A** (canonical matrix): \(u = \varepsilon\, j'(m_1)X'(m_2)/\overline{j'(\bar m_2)}\)
-  on the Lemma-A matrix of [class-formula-proof.md](class-formula-proof.md) — the
+  on the Lemma-A matrix of [class-formula-proof.md](../class-formula-proof.md) — the
   closed form \(-\varepsilon\mu^{-2}h_2(\mathfrak{b}_1)/h_2(\mathfrak{b}_2)\) of
   moduli-invariants.md §5.5.
 - **Route B** (derivative of the modular correspondence,
-  [first-power-descent.md](first-power-descent.md) Prop. 1.3 + Thm. 3.3):
+  [first-power-descent.md](../first-power-descent.md) Prop. 1.3 + Thm. 3.3):
   \(u = -r_0\,h_2(\mathfrak{b}_1)/h_2(\mathfrak{r}^{-1}\mathfrak{b}_1)\),
   \(r_0 = \tfrac{n-1}2\), the twisted lattice produced by exact integer HNF
   arithmetic and both kernel values evaluated after exact
@@ -51,7 +51,7 @@ precisions (100 and 140 digits, \(j' = -2\pi i\,E_4^2E_6/\Delta\) via theta cons
   \(\Phi_y/\Phi_x(\beta_1, \beta_2)\), evaluated through the uniformization of
   \(X_0(r_0)\) instead of through the integer coefficients of \(\Phi_{r_0}\).
 
-**Certification** (`python3 scripts/make_phase_atlas.py --selftest`, all odd
+**Certification** (`python3 extra/scripts/make_phase_atlas.py --selftest`, all odd
 \(3 \le n \le 41\) and \(n = 101\)):
 
 - routes A and B agree to \(\ge 138\) digits at every primitive class of every level;
@@ -100,7 +100,7 @@ figures cannot silently drift from the mathematics.
 | the first non-red/cyan hues appear at \(n = 9\), and interior hue diversity grows with \(n\) | first class group with 4-torsion (\(\mathbb{Z}/4\)); complex \(u\) first at \(n = 9\) (moduli-invariants.md §4, **certified record**) |
 | levels whose panel is *entirely* red/cyan: \(n = 3, 5, 7, 13, 17, 29\) (all circles real-phased; at \(n = 7\) plus the lone gray elliptic-core circle) | exactly the levels \(\le 41\) with 2-torsion class group \(\mathrm{Cl} = (\mathbb{Z}/2)^k\) — all classes ambiguous (\(n = 29\): \((\mathbb{Z}/2)^3\), eight real phases, striking in the sheet); the imprimitive phases there are real too (§2.3) |
 | in the shade panels the two extreme shades sit at the cusps of \(T\) (the principal class, and its \(\mathfrak{r}_n\)-twin with the opposite extreme); the interior classes are pale (\(\lvert u\rvert \approx 1\)), so the shade organizes radially, extreme at the cusps and washing out toward the centroid | \(|u_1|\) maximal (certified at every level); growth \(\log|u_1| = \pi\sqrt{n^2-1}\,(1 + o(1))\): observed \(126.52\) vs \(\pi\sqrt{1680} = 128.78\) at \(n = 41\), \(316.85\) vs \(317.30\) at \(n = 101\) — the leading term is the \(q^{-1}\)-pole of \(F = E_4^2E_6/\Delta\) at the principal CM point of height \(\sqrt N/2\); more generally \(\log\lvert u_f\rvert\) tracks the height of the CM point (largest curvature drop across the twin) (**observed**, leading term derivable) |
-| the gray (excluded) circle at the centroid of \(T\) at \(n = 7\) | the elliptic-core class \(4\cdot(1,1,1)\) — precisely the centroid circle of the Pell levels \(n^2 - 3f^2 = 1\) of [hyperbolic-counting.md](hyperbolic-counting.md) §5, where the phase degenerates to \(0/0\) (outlook.md §1.5) |
+| the gray (excluded) circle at the centroid of \(T\) at \(n = 7\) | the elliptic-core class \(4\cdot(1,1,1)\) — precisely the centroid circle of the Pell levels \(n^2 - 3f^2 = 1\) of [hyperbolic-counting.md](../hyperbolic-counting.md) §5, where the phase degenerates to \(0/0\) (outlook.md §1.5) |
 
 ### 2.2 The sign geography (new, and the seed of §3)
 
@@ -140,7 +140,7 @@ recorded in the ledger.
 
 `phase-atlas-euclidean.png` colors the curvature-\(2n\) disks of the unit square by
 \(\arg u\) for \(n = 7, 12\) (the lemniscatic phase of
-[euclidean-moduli-invariants.md](euclidean-moduli-invariants.md) §5). The proved R/I
+[euclidean-moduli-invariants.md](../euclidean-moduli-invariants.md) §5). The proved R/I
 center criterion of §5.2 there is overlaid letter-by-letter and re-verified against
 the computed phases at \(n \le 13\) (deviations \(\le 10^{-60}\)) — an end-to-end
 correctness check on the rendering pipeline, run through an *independent* phase
@@ -155,7 +155,7 @@ Setup: on an ambiguous (2-torsion) class, \(u_f \in \mathbb{R}^\times\) (law 1);
 (law 2). Outlook.md §1.1 recorded the patterns for \(n \le 17\) and asked whether a
 conductor-aware genus character \(\psi\) explains them via
 \(\operatorname{sign}(u_f) = -\psi(f)\). The full table
-(`python3 scripts/make_phase_atlas.py --signs`; classes in reduced-form order,
+(`python3 extra/scripts/make_phase_atlas.py --signs`; classes in reduced-form order,
 certified from 140-digit phases):
 
 | \(n\) | ambiguous classes and signs | pattern |
@@ -224,7 +224,7 @@ a = a_r a_s, \quad c = c_r c_s, \qquad r_0 = a_r c_r,\ s_0 = a_s c_s,
 > divisor \(a_rc_s\) (the \(r_0\)-part of \(a\) times the \(s_0\)-part of \(c\)) is
 > \(< \sqrt{N}/2\).
 
-*Proof.* By [first-power-descent.md](first-power-descent.md) Thm. 3.3 and Lemma 1.1,
+*Proof.* By [first-power-descent.md](../first-power-descent.md) Thm. 3.3 and Lemma 1.1,
 \(u_f = -r_0\,h_2(\mathfrak{b}_1)/h_2(\mathfrak{r}^{-1}\mathfrak{b}_1)\) with
 \(\mathfrak{b}_1 = [1, m_1]\), \(m_1 = i\sqrt N/(2a)\).
 
@@ -309,7 +309,7 @@ the phase. Note the discriminant pairing this puts on the table: the phase coupl
 \(D = 1 - n^2 < 0\) with \(d = -4D > 0\), exactly the index shape \((D, d)\) of the
 two-sign Fourier coefficients in DIT's Katok–Sarnak framework.
 
-**What was computed** (`python3 scripts/dit_comparison.py`, from the definitions —
+**What was computed** (`python3 extra/scripts/dit_comparison.py`, from the definitions —
 no tables trusted): for \(n = 3, \dots, 17\) odd, all
 \(\mathrm{SL}_2(\mathbb{Z})\)-classes of forms of discriminant \(d\) (Gauss-reduced
 cycles; imprimitive classes included and marked), and per class \(A\):
@@ -430,12 +430,12 @@ open.
 
 | check | command | result |
 |---|---|---|
-| routes A = B (138+ digits), laws 1–2, ambiguity/reality, principal max, published \(Q_n\) roots (\(n \le 17\)), \(\Phi_2\) anchor, Euclidean R/I, \(3H(n^2-1)\) | `python3 scripts/make_phase_atlas.py --selftest` | all pass, every odd \(3 \le n \le 41\) and \(n = 101\) |
-| figures | `python3 scripts/make_phase_atlas.py --figures` | 20 per-level panels + 2 contact sheets + Euclidean companion into `figures/` |
-| sign table, character refutation, Theorem-1 rule, HNF closed form, \(E_6\)/cocycle decomposition | `python3 scripts/make_phase_atlas.py --signs` | table of §3; multiplicativity fails exactly at \(n = 31, 41\); Theorem-1 rule matches all 81 divisor classes |
-| DIT selftest (Dedekind reciprocity vs brute force, \(\Psi\) anchors \(d = 5, 12\), conjugation invariance, \(C(1) = 2\log\varepsilon\), two parametrizations, \(\mathrm{SL}_2\)-invariance) | `python3 scripts/dit_comparison.py --selftest` | all pass |
-| the comparison battery of §4.1 | `python3 scripts/dit_comparison.py` | margins logged per test; no non-trivial relation |
-| cusp probe | `python3 scripts/dit_comparison.py --cusp` | no rational \(\arg u/\pi\), 86 classes |
+| routes A = B (138+ digits), laws 1–2, ambiguity/reality, principal max, published \(Q_n\) roots (\(n \le 17\)), \(\Phi_2\) anchor, Euclidean R/I, \(3H(n^2-1)\) | `python3 extra/scripts/make_phase_atlas.py --selftest` | all pass, every odd \(3 \le n \le 41\) and \(n = 101\) |
+| figures | `python3 extra/scripts/make_phase_atlas.py --figures` | 20 per-level panels + 2 contact sheets + Euclidean companion into `figures/` |
+| sign table, character refutation, Theorem-1 rule, HNF closed form, \(E_6\)/cocycle decomposition | `python3 extra/scripts/make_phase_atlas.py --signs` | table of §3; multiplicativity fails exactly at \(n = 31, 41\); Theorem-1 rule matches all 81 divisor classes |
+| DIT selftest (Dedekind reciprocity vs brute force, \(\Psi\) anchors \(d = 5, 12\), conjugation invariance, \(C(1) = 2\log\varepsilon\), two parametrizations, \(\mathrm{SL}_2\)-invariance) | `python3 extra/scripts/dit_comparison.py --selftest` | all pass |
+| the comparison battery of §4.1 | `python3 extra/scripts/dit_comparison.py` | margins logged per test; no non-trivial relation |
+| cusp probe | `python3 extra/scripts/dit_comparison.py --cusp` | no rational \(\arg u/\pi\), 86 classes |
 
 Precisions: phases at 100 and 140 digits (two-precision drift \(\le 10^{-95}\));
 DIT integrals certified at 150 digits (internally elevated by

@@ -32,16 +32,19 @@ Comparisons (safe PSLQ, guard rails of CLAUDE.md):
     not used in the fit; the log prints margins for every non-match.
 
 Usage:
-    python3 scripts/dit_comparison.py --selftest          # anchors
-    python3 scripts/dit_comparison.py                     # full run, n<=17
-    python3 scripts/dit_comparison.py --cusp              # arg u / pi probe
+    python3 extra/scripts/dit_comparison.py --selftest          # anchors
+    python3 extra/scripts/dit_comparison.py                     # full run, n<=17
+    python3 extra/scripts/dit_comparison.py --cusp              # arg u / pi probe
 """
 import sys
+import os
 import argparse
 from fractions import Fraction
 from math import gcd, isqrt
 
-sys.path.insert(0, 'scripts')
+_HERE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, _HERE)                                      # sibling scripts in extra/scripts
+sys.path.insert(0, os.path.join(_HERE, '..', '..', 'scripts'))   # the main verification scripts
 
 from mpmath import (mp, mpf, mpc, fabs, nstr, sqrt as msqrt, log as mlog,
                     pi as mppi, quad, floor as mfloor, ceil as mceil, arg as marg,

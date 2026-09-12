@@ -25,8 +25,8 @@ census for all odd levels 3 <= n <= NMAX and verifies, in exact arithmetic:
   7. [pairing]      alpha(XY) = <M_X, M_{Y^{-1}}> on random products in Omega.
   8. [asym]         (separate mode) ford-first density -> 3/pi.
 
-Run:  python3 scripts/atomic_census.py [NMAX]        (default 41)
-      python3 scripts/atomic_census.py asym [NMAX]   (density experiment)
+Run:  python3 extra/scripts/atomic_census.py [NMAX]        (default 41)
+      python3 extra/scripts/atomic_census.py asym [NMAX]   (density experiment)
 """
 
 import os
@@ -34,7 +34,9 @@ import sys
 from fractions import Fraction
 from math import isqrt, gcd
 
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+_HERE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, _HERE)                                      # sibling scripts in extra/scripts
+sys.path.insert(0, os.path.join(_HERE, '..', '..', 'scripts'))   # the main verification scripts
 
 from omega import (G, Mat, Disk, ID, H, T, S, disk_of, in_omega, inversive,
                    matrix_for_disk, factor, is_maximal)

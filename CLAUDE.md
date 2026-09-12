@@ -11,7 +11,16 @@ research documents (Markdown + LaTeX) in the root, verification scripts in
 machine-verified** by a named script; documents state their verification status
 explicitly (proved / certified / experimental).
 
-Three literature probes (see [spectral-geometry.md](spectral-geometry.md) §14) confirm
+**The research program is [PROGRAM.md](PROGRAM.md)** — one line, from the
+classification through the phase and the Kronecker limit formulas to the unit
+theorem, the Robert index and the Euler system over the ring class tower, with
+six items continuing it. The main tree of the repository holds only the
+documents, scripts, figures and prompts on that line; everything else (the
+monoid/operation layer, the spectral layer, circle-language composition, the
+phase atlas with the sign law and the DIT comparison) is kept, intact and
+verified, in [extra/](extra/README.md).
+
+Three literature probes (see [spectral-geometry.md](extra/spectral-geometry.md) §14) confirm
 the core results are **not in the literature**: only 3 published papers mention
 "Schmidt arrangement" (Stange et al.), none touch the level stratification, the
 involution class formula, the phase invariant, or spectral geometry.
@@ -77,7 +86,6 @@ Foundational layer (elementary, self-contained):
 | [hyperbolic-counting.md](hyperbolic-counting.md) | level-\(n\) circles = hyperbolic circles of radius \(\operatorname{arcoth} n\) at CM points of disc \(1-n^2\); weighted ideal-triangle count \(= 3H(n^2-1)\) |
 | [involution.md](involution.md) | \(\sigma\) identified (unitary involution, Cartan embedding, Gelfand pair); trace \(=-2\alpha\); 3 twisted classes of det \(-1\) Hermitian forms; class formula stated; circle \(\to\) closed geodesic of length \(2\operatorname{arccosh} n\) |
 | [class-formula-proof.md](class-formula-proof.md) | full proof of \(\hat\sigma[f]=[\mathfrak{r}_n][f]^{-1}\); Lemma A = closed-form \(X\in\mathrm{SL}_2(\mathbb{Z}[i])\) realizing any prescribed circle |
-| [circle-composition.md](circle-composition.md) | Gauss composition in circle language: inverse = mirror; composition = CRT/magnification; 2-torsion = mirror-symmetric circles; matrix recipe \(W_X = \tfrac i2(Z_X+nI)\) |
 
 Phase layer (CM machinery):
 
@@ -86,29 +94,25 @@ Phase layer (CM machinery):
 | [moduli-invariants.md](moduli-invariants.md) | the 6-coordinate system \((\alpha,\beta_1,\beta_2,\arg u)\); \(\hat\sigma\)-pairs on the fiber product \(X_0(\tfrac{n-1}2)\times_{X(1)}X_0(\tfrac{n+1}2)\), discriminant coupled to level; laws \(u_{f^{-1}}=\bar u_f\), \(u_fu_{\mathfrak{r}f}=1\); Theorem A (dihedral equivariance of \(u^{12}\)); GZ-prime denominators (§5.7); level polynomials \(Q_n\) (§5.9) irreducible at computed levels (§5.10) |
 | [first-power-descent.md](first-power-descent.md) | \(u_f = \Phi_y/\Phi_x(\beta_1,\beta_2)\) (derivative of the modular correspondence); Galois law at **first power**; \(\omega_f\equiv1\); irreducibility re-proved by exact arithmetic, no PSLQ |
 | [euclidean-moduli-invariants.md](euclidean-moduli-invariants.md) | \(N_e(n)=2h(-4n^2)\); \(j\)-values \(=H_{-4n^2}^2\); trace slice \(t(4n^2)\); lemniscatic phase; \(\Delta\)-mass law (Thm 4, proved); \(P^{(2)}_n\) irreducible for **every** \(n\) (Thm 5, proved) |
-| [phase-atlas.md](phase-atlas.md) | phase portraits of all odd levels \(\le 41\) + 101; **sign law proved on divisor classes** (Thm 1: \(\operatorname{sign}u_f = -\operatorname{sign}(a_rc_s - a_sc_r)\)); character hypothesis **refuted** (\(n=31,41\)); certified DIT non-relation battery (52 non-relations) |
 | [phase-kronecker-limit.md](phase-kronecker-limit.md) | character sums of \(\log\lvert u\rvert\) = elliptic-unit theory: \(S(\chi) = -2L'(0,\chi) + \tfrac23\Sigma_0 + \tfrac12\Sigma_{1728}\) (Euclidean, proved); hyperbolic \(S(\chi) = 0\) for \(\chi(\mathfrak{r})=+1\), \(= -4L'(0,\chi)+\tfrac43\Sigma_0+\Sigma_{1728}\) for odd \(\chi\) (proved, \(\varepsilon\) and \(\mu\) cancel); genus-character closed forms \(c\, h\log\varepsilon_d\) with the Euclidean field \(=\mathbb{Q}(\sqrt n)\); exact GZ-supported \(S\)-unit dressing; certified \(\Delta\)-mass polynomials \(D_n\) |
 | [schmidt-units.md](schmidt-units.md) | **unit theorem proved**: \(R_f = r_0^6\Delta(\mathfrak{b}_1)/\Delta(\mathfrak{r}^{-1}\mathfrak{b}_1)\) is a unit for every class (imprimitive strata included; \(R\equiv1\) iff induced twist principal); per-class valuation law \(v_P(G_\mathfrak{c}) = w_p(k)\) class-independent (proved, Newton-polygon-verified to \(n=49\)) settling the split \(\lambda_n\)-ladder; first-power \(w_f\) (\(w^6=R\), laws at first power, \(\mu_6\)-cocycle, coherence table \(m(n)\), \(w=-\varepsilon_{12}^{\pm1}\) at \(n=7\)); **Robert index** \([\mathcal{O}_{L_3}^\times:\langle-1,\theta_u\rangle]=8h_{L_3}\) at Euclidean \(n=9,11,13\) (\(h=1,1,3\)) |
 | [schmidt-euler-system.md](schmidt-euler-system.md) | **the \(\Delta\)-data are an Euler system** over the ring class tower \(H_n \subset H_{n\ell}\): norm relations of Heegner shape with the Eisenstein eigenvalue \(\ell+1\) (Thm 1, proved from Paper I's M1 + a fiber lemma); Hecke recursion \(L'(0,\chi^{(n\ell)}) = P_\ell(\chi)L'(0,\chi)\) proving every imprimitive Euler multiplier (\(1+3^{1-2s}\) at \(n=9\), the two \(n=15\) \(\varepsilon\)-ratios, \(C_n(0) = 2,2,2,4\)); Robert index along the tower (multipliers \(2, 4, 7, 8, 13\) certified to level 81); Kolyvagin derivative classes descend (Lemma 5.1); the ratios \(G_\mathfrak{c}/G_{\mathfrak{c}'}\) are units |
 | [spherical-moduli-invariants.md](spherical-moduli-invariants.md) | third geometry: \(\cot\theta = \ell\); census \(4H(4(\ell^2+1))\); shape polynomial \(\prod_{f^2\mid\ell^2+1}H_{-4(\ell^2+1)/f^2}\) (each stratum once); trace slice \(t(4\ell^2+4)\); Pell-unit phase, cap-swap \(u^2_-=\varepsilon^4u^2_+\), level norm \(m_\ell\) with GZ valuation law; **half-orbit phenomenon** (phases = half the Galois root system, golden-ratio cocycle at \(\ell=2\)) |
 
-Monoid / operation layer:
+Off the program's line, in [extra/](extra/README.md) (unchanged content, links rewritten):
 
 | doc | headline result |
 |---|---|
-| [half-plane-monoid.md](half-plane-monoid.md) | \(\Omega\) is rigid; laminarity (inversive products are odd integers); atoms = Apollonian gasket; \(\alpha\)-spectrum = Apollonian orbit of \((-1,1,1,1)\) |
-| [atomic-census.md](atomic-census.md) | cell decomposition of \(\Gamma\backslash\Omega/\Gamma\); Apollonian addresses; level pairing \(\alpha(XY)=\langle M_{X^{-1}},M_Y\rangle\); superadditivity \(\varepsilon_{\alpha(XY)}\ge\varepsilon_{\alpha(X)}\varepsilon_{\alpha(Y)}\); pure-twist \([f]\mapsto[\mathfrak{r}_nf]\) + word reversal; Ford census (\(\varphi(c)\) at \(n=2c^2+1\)); extremal depth \(\tfrac{n+1}2\); the \(3/\pi\) density split |
-| [product-cocycle.md](product-cocycle.md) | Gram rigidity (product's \(\beta_1\) remembers only \(X\), \(\beta_2\) only \(Y\)); aligned stratum splices invariants; phase cocycle \(\Theta(W)\Theta(X)\Theta(Y)=KQ^2\) (anti-additive, explicit geometric coboundary) |
-| [middle-kernel.md](middle-kernel.md) | \(\sum_\gamma f(X\gamma Y)\) for radial \(f\) = automorphic kernel of the modular surface at a Heegner pair; \(\alpha(X\gamma Y)=ab+\sqrt{(a^2-1)(b^2-1)}\cosh d(z_X,\gamma z_Y)\); exact rank-one pole; obstruction = cusp forms; Green's-function/GKZ connection |
+| [extra/circle-composition.md](extra/circle-composition.md) | Gauss composition in circle language: inverse = mirror; composition = CRT/magnification; 2-torsion = mirror-symmetric circles; matrix recipe \(W_X = \tfrac i2(Z_X+nI)\) |
+| [extra/phase-atlas.md](extra/phase-atlas.md) | phase portraits of all odd levels \(\le 41\) + 101; **sign law proved on divisor classes** (Thm 1: \(\operatorname{sign}u_f = -\operatorname{sign}(a_rc_s - a_sc_r)\)); character hypothesis **refuted** (\(n=31,41\)); certified DIT non-relation battery (52 non-relations) |
+| [extra/half-plane-monoid.md](extra/half-plane-monoid.md) | \(\Omega\) is rigid; laminarity (inversive products are odd integers); atoms = Apollonian gasket; \(\alpha\)-spectrum = Apollonian orbit of \((-1,1,1,1)\) |
+| [extra/atomic-census.md](extra/atomic-census.md) | cell decomposition of \(\Gamma\backslash\Omega/\Gamma\); Apollonian addresses; level pairing \(\alpha(XY)=\langle M_{X^{-1}},M_Y\rangle\); superadditivity \(\varepsilon_{\alpha(XY)}\ge\varepsilon_{\alpha(X)}\varepsilon_{\alpha(Y)}\); pure-twist \([f]\mapsto[\mathfrak{r}_nf]\) + word reversal; Ford census (\(\varphi(c)\) at \(n=2c^2+1\)); extremal depth \(\tfrac{n+1}2\); the \(3/\pi\) density split |
+| [extra/product-cocycle.md](extra/product-cocycle.md) | Gram rigidity (product's \(\beta_1\) remembers only \(X\), \(\beta_2\) only \(Y\)); aligned stratum splices invariants; phase cocycle \(\Theta(W)\Theta(X)\Theta(Y)=KQ^2\) (anti-additive, explicit geometric coboundary) |
+| [extra/middle-kernel.md](extra/middle-kernel.md) | \(\sum_\gamma f(X\gamma Y)\) for radial \(f\) = automorphic kernel of the modular surface at a Heegner pair; \(\alpha(X\gamma Y)=ab+\sqrt{(a^2-1)(b^2-1)}\cosh d(z_X,\gamma z_Y)\); exact rank-one pole; obstruction = cusp forms; Green's-function/GKZ connection |
+| [extra/spectral-geometry.md](extra/spectral-geometry.md) | verified literature survey of the Picard orbifold (spectra, PGT, periods, sup-norms, thin groups, CFs); **seven verified gaps G1–G7** the project can fill |
+| [extra/spectral-outlook.md](extra/spectral-outlook.md) | the program: Schmidt relative trace formula (flagship), effective counting, Eichler–Selberg over \(\mathbb{Z}[i]\), ortholength spectrum, phase as spectral object, transfer operators; anchor \(\sum_{n\le X}H(n^2-1)\sim\frac{\pi}{12G}X^2 = \frac{\operatorname{area}(Y)^2}{4\pi\operatorname{vol}(M)}X^2\) |
 
-Spectral layer:
-
-| doc | headline result |
-|---|---|
-| [spectral-geometry.md](spectral-geometry.md) | verified literature survey of the Picard orbifold (spectra, PGT, periods, sup-norms, thin groups, CFs); **seven verified gaps G1–G7** the project can fill |
-| [spectral-outlook.md](spectral-outlook.md) | the program: Schmidt relative trace formula (flagship), effective counting, Eichler–Selberg over \(\mathbb{Z}[i]\), ortholength spectrum, phase as spectral object, transfer operators; anchor \(\sum_{n\le X}H(n^2-1)\sim\frac{\pi}{12G}X^2 = \frac{\operatorname{area}(Y)^2}{4\pi\operatorname{vol}(M)}X^2\) |
-
-Planning: [outlook.md](outlook.md) — the master outlook (small/medium/large questions, consolidation plan, recommended order). Each of atomic-census, product-cocycle, middle-kernel, euclidean-moduli-invariants also carries its own outlook section.
+Planning: [PROGRAM.md](PROGRAM.md) is the program; [outlook.md](outlook.md) is the historical master outlook (small/medium/large questions, consolidation plan, recommended order). Each of atomic-census, product-cocycle, middle-kernel, euclidean-moduli-invariants also carries its own outlook section.
 
 ## Main theorems at a glance
 
@@ -203,7 +207,7 @@ Planning: [outlook.md](outlook.md) — the master outlook (small/medium/large qu
   the \(\Delta\)-part is now proved (per-class law, schmidt-units §3); what remains is
   the \(\beta\)-side: Gross–Zagier multiplicities at conductor-degenerate pairs.
 - **Sign law of \(u_f\) on ambiguous classes**: divisor classes (\(b=0\)) **proved**
-  ([phase-atlas.md](phase-atlas.md) Thm 1, archimedean \(E_6\)-law) and the character
+  ([phase-atlas.md](extra/phase-atlas.md) Thm 1, archimedean \(E_6\)-law) and the character
   hypothesis refuted (\(n=31,41\)); open: the 2-adic ambiguous classes
   (\((a,a,c)\), \((a,b,a)\), levels \(n\equiv\pm1\bmod 8\)).
 - **Imprimitive strata** of the class formula at the ramified prime 2 (verified, unproved).
@@ -226,24 +230,18 @@ Planning: [outlook.md](outlook.md) — the master outlook (small/medium/large qu
 
 Environment: python3 with `mpmath` and `sympy` (a venv was used in the sessions;
 `matplotlib` needed only for figure scripts). Everything runs standalone from the repo
-root, e.g. `python3 scripts/alpha_circles.py --selftest`.
+root, e.g. `python3 scripts/alpha_circles.py --selftest`; the scripts of the
+off-line material live in `extra/scripts/` and are run the same way.
 
 | script | verifies | doc |
 |---|---|---|
 | `verify_classification.py` | orbit BFS = congruence classes; \(N_e\) closed form; \(X^2/2G\) | circle-classification, euclidean-counting |
 | `alpha_circles.py` | level algorithm; \(3H(n^2-1)\), \(n\le40\) (+ spot 301, 1000); figures | hyperbolic-counting |
-| `hurwitz_sum.py` | \(\operatorname{vol} = G/3\); \(\sum H(n^2-1)\sim \pi X^2/12G\) | spectral-outlook |
 | `involution_experiments.py`, `involution_classmap.py` | \(\sigma\)-identities; class map for all classes, odd \(n\le41\); 3 twisted classes | involution |
 | `proof_check.py` | every lemma of the class-formula proof (169 classes) | class-formula-proof |
-| `composition_check.py`, `matrix_composition_check.py` | composition/inversion recipes (1913 pairs); matrix-level recipes | circle-composition |
 | `moduli_invariants.py` | \(\Theta\) invariance, laws, Hilbert polys, isogenies, traces | moduli-invariants |
 | `uf_integer_polynomial.py`, `uf_irreducibility.py` | certified \(Q_n,\Psi_n\) (\(n\le17\)); double-route irreducibility; GZ tagging | moduli-invariants §5.9–5.10 |
 | `gz_denominators.py` | GZ-prime identification of denominators | moduli-invariants §5.7 |
-| `omega.py`, `omega_verify.py` | monoid membership, factorization, atoms (41 checks) | half-plane-monoid |
-| `atom_invariants.py`, `apollonian_chain_demo.py` | atom tables; chain expansion demo | half-plane-monoid |
-| `atomic_census.py` | cells, addresses, census, twist/reversal, densities (4414 checks) | atomic-census |
-| `product_cocycle.py` | Gram rigidity, cocycle (1205 checks) | product-cocycle |
-| `middle_kernel.py` | master formula, layer integral, counting law (654 checks) | middle-kernel |
 | `euclidean_moduli_invariants.py` | Euclidean structure, ring class polys, phases, \(P^{(2)},P^{(6)}\) | euclidean-moduli-invariants |
 | `mass_law_and_irreducibility.py` | Theorem 4 (M1–M4), Theorem 5 ingredients, exact factorizations | euclidean-moduli-invariants |
 | `spherical_moduli_invariants.py` | census, shape bijection (\(\ell\le20\) exact), resultant identity (symbolic), phase laws, level norms | spherical-moduli-invariants |
@@ -251,6 +249,20 @@ root, e.g. `python3 scripts/alpha_circles.py --selftest`.
 | `schmidt_units.py` | lattice lemma for \(R_f\); unit polynomials \(n\le21\) + imprimitive strata; Newton-polygon per-class law (to \(n=49\)); first-power \(w_f\) laws + \(m(n)\) table (odd \(n\le35\)); quadratic projections; cubic fundamental units, \(h_{L_3}\), Robert index \(8h_{L_3}\) (`--selftest`, ~45 s) | schmidt-units |
 | `schmidt_euler_system.py` | exact HNF class groups of \(\mathcal{O}_n\) (products, projections, ideal twists, cubic characters); norm relations at 42 pairs \((n,\ell)\) (all four cases, to level 125); Hecke recursion for \(S_\chi = -12L'\) (10 instances, closed forms of Paper II reproduced); Robert-index multipliers along four pullback chains (16 levels, to 81) (`--selftest`, 80 digits, ~70 s) | schmidt-euler-system |
 | `first_power_descent.py` | exact \(\Phi_m\) (\(m\le10\)); \(\omega_f=1\) exact (odd \(n\le21\)); \(u=\Phi_y/\Phi_x\) vs \(\varepsilon\Theta\) (\(\ge108\) digits, \(n\le13\)); exact \(\Pi_n\) = published \(Q_n\), irreducible (\(n\le13\)) (`--selftest`, ~4 s) | first-power-descent |
+
+Scripts in `extra/scripts/` (off the program's line; run from the repo root, e.g.
+`python3 extra/scripts/atomic_census.py`; the four that import the main scripts put
+`../scripts` on their path):
+
+| script | verifies | doc |
+|---|---|---|
+| `hurwitz_sum.py` | \(\operatorname{vol} = G/3\); \(\sum H(n^2-1)\sim \pi X^2/12G\) | spectral-outlook |
+| `composition_check.py`, `matrix_composition_check.py` | composition/inversion recipes (1913 pairs); matrix-level recipes | circle-composition |
+| `omega.py`, `omega_verify.py` | monoid membership, factorization, atoms (41 checks) | half-plane-monoid |
+| `atom_invariants.py`, `apollonian_chain_demo.py` | atom tables; chain expansion demo | half-plane-monoid |
+| `atomic_census.py` | cells, addresses, census, twist/reversal, densities (4414 checks) | atomic-census |
+| `product_cocycle.py` | Gram rigidity, cocycle (1205 checks) | product-cocycle |
+| `middle_kernel.py` | master formula, layer integral, counting law (654 checks) | middle-kernel |
 | `make_phase_atlas.py` | two-route phases (\(\ge138\) digits), laws on data, \(Q_n\) roots, figures; `--signs`: sign table, character refutation, Theorem-1 divisor rule (81 classes, odd \(n\le41\), 101) | phase-atlas |
 | `dit_comparison.py` | DIT cycle integrals/Rademacher from definitions + the PSLQ battery (52 certified non-relations, 150 digits; `--selftest` anchors) | phase-atlas |
 | `make_composition_figure.py`, `make_omega_figure.py` | figures | — |
@@ -295,12 +307,13 @@ committed, has been rewritten to spec and committed: exact \(\Phi_m\) constructi
 
 ## Next-step prompts
 
-`prompts/` holds ready-to-run session prompts for the highest-value next steps:
+`prompts/` holds ready-to-run session prompts for the highest-value next steps
+(the spectral prompt 02 and the atlas prompt 03 moved to `extra/prompts/`):
 [01-kronecker-limit-formula.md](prompts/01-kronecker-limit-formula.md) (**done** —
 results in [phase-kronecker-limit.md](phase-kronecker-limit.md)),
-[02-schmidt-trace-formula.md](prompts/02-schmidt-trace-formula.md)
-(the flagship spectral identity, staged), [03-phase-atlas-and-dit.md](prompts/03-phase-atlas-and-dit.md)
-(**done** — results in [phase-atlas.md](phase-atlas.md), ported from its branch),
+[02-schmidt-trace-formula.md](extra/prompts/02-schmidt-trace-formula.md)
+(the flagship spectral identity, staged), [03-phase-atlas-and-dit.md](extra/prompts/03-phase-atlas-and-dit.md)
+(**done** — results in [phase-atlas.md](extra/phase-atlas.md), ported from its branch),
 [04-schmidt-units-robert-index.md](prompts/04-schmidt-units-robert-index.md)
 (**done** — results in [schmidt-units.md](schmidt-units.md)),
 [05-genus-refined-gross-zagier.md](prompts/05-genus-refined-gross-zagier.md)
@@ -369,7 +382,7 @@ correction and Theorem 6.6's \(C_n(0)\) column; port as a short §6 subsection
 (prompt 08, item 4).
 The consolidation plan lives in [outlook.md](outlook.md) §4–5 (two-paper split:
 *Counting and composing Schmidt circles* and *The phase of a Schmidt circle*) and
-[spectral-outlook.md](spectral-outlook.md) §10 (spectral paper ladder, starting with
+[spectral-outlook.md](extra/spectral-outlook.md) §10 (spectral paper ladder, starting with
 the ortholength-spectrum note). The Euclidean theory
 ([euclidean-moduli-invariants.md](euclidean-moduli-invariants.md)) is fully proved and
 publishable as a standalone companion or as part of the phase paper. Before drafting:

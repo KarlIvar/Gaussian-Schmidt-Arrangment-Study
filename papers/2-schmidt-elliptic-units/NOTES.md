@@ -8,7 +8,7 @@ papers (bibliographic data, statements of main theorems as quoted by
 others) from what could be read verbatim (nothing in full). This
 complements the Paper I record in
 [papers/1-schmidt-circles/NOTES.md](../1-schmidt-circles/NOTES.md) and the
-probes of [spectral-geometry.md](../../spectral-geometry.md) §14.
+probes of [spectral-geometry.md](../../extra/spectral-geometry.md) §14.
 
 ## The classical elliptic-unit literature, as positioned in the paper
 

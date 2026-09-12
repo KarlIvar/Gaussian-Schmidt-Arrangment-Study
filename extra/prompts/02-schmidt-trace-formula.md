@@ -3,8 +3,8 @@
 Read `CLAUDE.md` first, then [spectral-outlook.md](../spectral-outlook.md) §0–§2 (the
 program and its risks, stated honestly there), [spectral-geometry.md](../spectral-geometry.md)
 (the verified state of the art — especially §2 Eisenstein theory, §9 periods/distinction,
-§13 counting, §14 gaps G2–G3), [hyperbolic-counting.md](../hyperbolic-counting.md), and
-[involution.md](../involution.md) §2. Follow the CLAUDE.md guard rails.
+§13 counting, §14 gaps G2–G3), [hyperbolic-counting.md](../../hyperbolic-counting.md), and
+[involution.md](../../involution.md) §2. Follow the CLAUDE.md guard rails.
 
 ## Mission
 
@@ -31,7 +31,7 @@ Do the work in stages; each stage is a self-contained, committable deliverable.
 
 ## Stage 0 — numerics baseline (half a day)
 
-Extend `scripts/hurwitz_sum.py` to \(X = 10^4\) via the class number formula (not form
+Extend `extra/scripts/hurwitz_sum.py` to \(X = 10^4\) via the class number formula (not form
 enumeration). Fit the second-order term of
 \(\sum_{n\le X}H(n^2-1) - \tfrac{\pi}{12G}X^2\) and test the error-exponent hypotheses
 \(X^{1}\) vs \(X^{4/3}\) (spectral-outlook §1 deliverable (b), §9.1). PSLQ any stable

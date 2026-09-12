@@ -19,8 +19,11 @@ n <= 25 (and samples up to 41):
       the unit semicircle respectively).
 """
 import sys
+import os
 from math import gcd
-sys.path.insert(0, 'scripts')
+_HERE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, _HERE)                                      # sibling scripts in extra/scripts
+sys.path.insert(0, os.path.join(_HERE, '..', '..', 'scripts'))   # the main verification scripts
 from involution_classmap import (classes_of_disc, reduce_form, compose,
                                  inverse, is_primitive)
 

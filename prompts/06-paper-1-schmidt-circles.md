@@ -6,7 +6,7 @@ Read `CLAUDE.md` first. Primary sources, in reading order:
 [hyperbolic-counting.md](../hyperbolic-counting.md),
 [involution.md](../involution.md),
 [class-formula-proof.md](../class-formula-proof.md),
-[circle-composition.md](../circle-composition.md),
+[circle-composition.md](../extra/circle-composition.md),
 [spherical-moduli-invariants.md](../spherical-moduli-invariants.md) §1–2 only,
 [moduli-invariants.md](../moduli-invariants.md),
 [first-power-descent.md](../first-power-descent.md),
@@ -92,7 +92,7 @@ polynomial \(P^{(2)}_n(x^2)\): certified \(n \le 16\), open in general —
 one clearly-labeled paragraph.
 
 **Sign law and DIT (conditional).** `phase-atlas.md` with
-`scripts/make_phase_atlas.py` and `scripts/dit_comparison.py` may still live
+`extra/scripts/make_phase_atlas.py` and `extra/scripts/dit_comparison.py` may still live
 only on the branch `claude/phase-atlas-schmidt-circles-gc1nfc`
 (check `git branch -r | grep phase-atlas`); that branch predates the current
 main, so do **not** merge it wholesale — if the files are absent from main,
