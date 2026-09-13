@@ -126,6 +126,23 @@ imaginary quadratic base, Stark units, prime conductor).
   2, 2, 4). The relation between θ_u and the Stark unit of H_n is stated
   as an open comparison, not claimed.
 
+- **§6.3 (the full index; added in the Robert-index session).** The
+  index formula "regulator of a Galois-stable unit system = Dedekind
+  group determinant of the character sums, divided by the regulator from
+  the class number formula" is the classical mechanism of Sinnott,
+  Kubert–Lang (Ch. 12–13) and Robert (3–5); Washington's Lemma 5.26 is the
+  determinant lemma in the form used. NEW: the closed form
+  (4·24^{h-1}/w) h_{H_n} ∏ C_χ(0) for the Δ-quotients of the proper ideals of
+  every order Z + nZ[i], with the imprimitivity multipliers made explicit
+  through the Dirichlet-series form of the Hecke recursion (a new lemma,
+  proved from the fiber lemma of the Euler-system document), the layer
+  theorem (index in every subfield cut out by a subgroup, which contains
+  Theorem 6.6's cubic layer and the sextic F, a non-CM field), the
+  PARI-verified record with exact exponent matrices, and the saturation
+  observation (index exactly h ∏ C modulo 24-th roots; O^×/W ≅ Cl(H_n) at
+  n = 13, 23), stated as a conjecture of Gras type. Not claimed: any
+  identification of the 24-th roots with Siegel/Stark units.
+
 ## Corrections and additions made while writing
 
 - schmidt-units.md §5.2 listed the Δ-mass at n = 18 as 2^18·3^48; the
@@ -144,6 +161,12 @@ imaginary quadratic base, Stark units, prime conductor).
   Cl(O_n) → Cl(O_{n/p}), i.e. C_n ≡ 1 at the primitive cubic levels; the
   source document asserted this without proof. At the pullback levels
   C_n(0) is read off from the certified integer L'(0,χ_3)/R_{L_3} = h C_n(0).
+
+- (Robert-index session) Conjecture 6.7 replaced by Theorem 6.7 (full index)
+  and the saturated Conjecture 6.12; abstract, introduction, proved/certified
+  summary, plan, outlook item 4 and the appendix table updated; Washington
+  (GTM 83) and PARI/GP added to the bibliography; both selftests re-run before
+  the edit (phase_klf 3 min 45 s, schmidt_units 3 min 0 s, all checks passed).
 
 ## Standard references fixed for the bibliography
 

@@ -109,7 +109,13 @@ $\theta_u$ has index $[\Oc_{L_3}^\times : \langle -1, \theta_u\rangle] =
 ring class field, certified at all eight levels $n \le 27$ with a cubic
 character, with $h_{L_3} = 1, 1, 3, 2$ at the primitive levels $9, 11, 13,
 23$, the last out of sample: the class number of the cubic field is the
-Robert index of the Schmidt units.  Every finite claim is machine-verified;
+Robert index of the Schmidt units.  Finally, the group of all ratios of the
+$\Delta$-data has index $(4\cdot24^{h-1}/w)\,h_{H_n}\prod_\chi C_\chi(0)$ in the
+unit group of the ring class field $H_n$ for every level --- a Dedekind
+group determinant against the class number formula at $s = 0$ --- verified
+with PARI/GP down to the exact exponent matrices, which show that modulo
+$24$-th roots the index is exactly the class number times the
+imprimitivity multipliers.  Every finite claim is machine-verified;
 the scripts and precision policies are catalogued in an appendix.
 \end{abstract}
 
@@ -238,6 +244,25 @@ number $2$: \emph{the class number of the cubic field is the Robert index
 of the Schmidt units}, the exact analogue of ``cyclotomic units have index
 $h^+$'', realized by the disks of curvature $2n$.
 
+The cubic layer is one eigen-piece of a single object, and the present
+version of the paper closes the loop: the group $\mathcal{V}_n$ of all ratios
+$G_\idealc/G_{\idealc'}$ of the $\Delta$-data is a subgroup of full rank of the
+unit group of the ring class field $H_n$, and its regulator is a Dedekind
+group determinant, so that (Theorem \ref{thm:fullindex})
+\[
+  \bigl[\Oc_{H_n}^\times : \mu(H_n)\,\mathcal{V}_n\bigr]
+  \;=\; \frac{4\cdot24^{\,h-1}}{w_{H_n}}\;h_{H_n}\prod_{\chi\ne1}C_\chi(0)
+\]
+for \emph{every} level $n \ge 2$: the class number of the ring class field,
+times an explicit power of $2$ and $3$, times the Euler multipliers of the
+imprimitive characters.  The same argument gives the index in every
+subfield cut out by a subgroup of the class group (Theorem \ref{thm:layers}).
+The theorem is verified with PARI/GP at all levels $n \le 15$
+(unconditionally) and at $n = 23$, down to the exact exponent matrices of the
+units in a fundamental-unit basis, which reveal that modulo $24$-th roots
+the index is \emph{exactly} $h_{H_n}\prod C_\chi(0)$ (Remark
+\ref{rem:saturation}, Conjecture \ref{conj:robert}).
+
 \subsection*{Position in the literature}
 The objects are classical and the ambition is to place a new geometric
 invariant among them.  Kronecker's limit formula and its use to produce
@@ -310,13 +335,18 @@ the split ladder (Theorem \ref{thm:perclass}, Corollary \ref{cor:split});
 the first-power laws of $w_f$ and its $\eta$-quotient form (Proposition
 \ref{prop:wlaws}); the unit property of $\theta_u$, the Stark relation and
 the index identity $8L'(0,\chi_3)/R_{L_3}$ (Propositions
-\ref{prop:thetaunit}--\ref{prop:cubicfield}).  Certified, by exact
+\ref{prop:thetaunit}--\ref{prop:cubicfield}); the full Robert index of the
+$\Delta$-units and its layer form (Theorems \ref{thm:fullindex},
+\ref{thm:layers}, with Lemmas \ref{lem:dedekind}--\ref{lem:torsion}).
+Certified, by exact
 integer arithmetic or with at least $140$ (typically $\ge 200$) spare
 digits, and not proved in general: the coefficient values of the displayed
 polynomials and their irreducibility; the Newton-polygon verification of
 Theorem \ref{thm:perclass} and the inert-ladder decompositions; the
 coherence table $m(n)$ of the first-power units; the fundamental units,
-class numbers and indices of Theorem \ref{thm:robert}; the
+class numbers and indices of Theorem \ref{thm:robert}; the PARI record of
+Proposition \ref{prop:fullrecord} (unconditional at $n \le 15$, GRH at
+$n = 23$) and the saturation identities of Remark \ref{rem:saturation}; the
 $\eps$-ratio identifications at the composite conductor $n = 15$; and the
 converse direction of the stratum criterion.  Certified negatives: the
 PSLQ non-fits for non-real characters and the absence of a congruence
@@ -329,7 +359,7 @@ twisted-ratio polynomials.  Section \ref{sec:genus} evaluates the genus
 characters in closed form.  Section \ref{sec:unit} proves the unit theorem
 and the per-class valuation law --- the technical core.  Section
 \ref{sec:firstpower} constructs the first-power Schmidt units.  Section
-\ref{sec:robert} computes the Robert index.  Section \ref{sec:outlook}
+\ref{sec:robert} computes the Robert index, on the cubic layer and in full.  Section \ref{sec:outlook}
 lists the four genuine continuations, and Appendix \ref{app:verification}
 documents the machine verification.
 
@@ -1961,26 +1991,271 @@ bookkeeping of the $\Delta$-normalization: the coset object is a
 $12$th-power-level datum, projected with the $\tfrac32$-coefficient of
 the Stark relation of Remark \ref{rem:cosetcubics}.
 
-\begin{conjecture}[Robert index for Schmidt units]\label{conj:robert}
-For every Euclidean level whose cubic character is primitive,
-$[\Oc_{L_3}^\times : \langle -1, \theta_u\rangle] = 8\,h_{L_3}$
-(imprimitive levels: times the multiplier $C_n(0)$).  More generally, for
-every ring class field $H_n$ of $\Q(i)$, the group generated by the
-$\Delta$-data $\{G_\idealc\}$ modulo its mass normalization sits inside
-the unit group of $H_n$ with index a product of class numbers of the
-subfields cut out by the character group, up to powers of $2$ and $3$ ---
-the shape of the Kubert--Lang index formulas
-\cite[Ch.~12--13]{KubertLang1981}.
+\subsection{The full index}\label{subsec:fullindex}
+
+The cubic layer is one eigen-piece of a single object.  Let
+\[
+  \mathcal{V}_n \;:=\; \bigl\langle G_\idealc/G_{\idealc'} :
+  \idealc, \idealc' \in \Cl(\Oc_n)\bigr\rangle
+  \;=\; \bigl\langle G_\idealc/G_1 : \idealc \ne 1\bigr\rangle
+  \;\subset\; \Oc_{H_n}^\times
+\]
+be the group of ratios of the $\Delta$-data: by Theorem \ref{thm:perclass}
+every ratio is a unit, and by Theorem \ref{thm:Dn}(1) the group is stable
+under $\Gal(H_n/\Q)$.  $H_n \supset K$ is totally complex of degree $2h$,
+generalized dihedral over $\Q$, of unit rank $h - 1$.  For a nontrivial
+character $\chi$ of $\Cl(\Oc_n)$ write $L(s,\chi) = C_\chi(s)\Lprim(s,\chi)$
+as in Lemma \ref{lem:conductor}, so that $C_\chi(0) = 1$ when $\chi$
+factors through no $\Cl(\Oc_m)$, $m \mid n$, $m < n$.
+
+\begin{theorem}[the full Robert index]\label{thm:fullindex}
+For every level $n \ge 2$ the group $\mathcal{V}_n$ is free abelian of
+rank $h - 1$, meets $\mu(H_n)$ trivially, and
+\[
+  \bigl[\Oc_{H_n}^\times : \mu(H_n)\,\mathcal{V}_n\bigr]
+  \;=\; \frac{24^{\,h-1}\prod_{\chi\ne1}|L'(0,\chi)|}{R_{H_n}}
+  \;=\; \frac{4\cdot 24^{\,h-1}}{w_{H_n}}\;h_{H_n}\prod_{\chi\ne1}C_\chi(0),
+\]
+where $\prod_{\chi\ne1}C_\chi(0)$ is a positive integer and
+$w_{H_n} = |\mu(H_n)| = 4\cdot2^{[4\mid n]}\cdot3^{[3\mid n]}$.
+\end{theorem}
+
+The proof occupies the rest of this subsection; it has four
+ingredients.
+
+\begin{lemma}[Dedekind's group determinant; {\cite[Lemma~5.26]{Washington1997}}]
+\label{lem:dedekind}
+For a finite abelian group $G$ and any $g: G \to \C$,
+$\det\bigl(g(\sigma\tau^{-1}) - g(\sigma)\bigr)_{\sigma,\tau\ne1} =
+\prod_{\chi\ne1}\sum_{\sigma\in G}\chi(\sigma)g(\sigma)$.
+\end{lemma}
+
+\begin{proof}
+The full matrix $A = (g(\sigma\tau^{-1}))_{\sigma,\tau}$ has the
+characters as eigenvectors with eigenvalues $S_{\bar\chi}(g) =
+\sum_\sigma\bar\chi(\sigma)g(\sigma)$, so $\det A = \prod_\chi S_\chi(g)$.
+Subtracting the column $\tau = 1$ from the others and then replacing the
+row $\sigma = 1$ by the sum of all rows turns $A$ into a matrix whose first
+row is $(S_1(g), 0, \dots, 0)$ and whose complementary minor is the matrix
+of the lemma; hence $\det A = S_1(g)\cdot\det(\cdots)$, and the identity
+follows (as a polynomial identity in the values of $g$).
+\end{proof}
+
+\begin{lemma}[primitive level = conductor]\label{lem:primlevel}
+Let $p \mid n$ and let $\chi$ be a character of $\Cl(\Oc_n)$ whose
+conductor, as a Hecke character on $I_K(n)$, divides $\tfrac np\Oc_K$.
+Then $\chi$ factors through $\Cl(\Oc_{n/p})$.  Consequently the levels
+$m \mid n$ through which $\chi$ factors are closed under $\gcd$, $\chi$ has
+a smallest such level $m_\chi$, and $L(s,\chi_{m_\chi}) = \Lprim(s,\chi)$.
+\end{lemma}
+
+\begin{proof}
+In the description $\Cl(\Oc_m) = I_K(m)/P_{K,\Z}(m)$
+\cite[Prop.~7.22]{Cox2013}, with $P_{K,\Z}(m)$ the principal ideals
+$(\alpha)$, $\alpha \equiv a \bmod m\Oc_K$, $a \in \Z$ prime to $m$, the
+projection $\Cl(\Oc_n) \to \Cl(\Oc_{n/p})$ is induced by
+$I_K(n) \subset I_K(n/p)$.  Let $(\gamma) \in P_{K,\Z}(n/p)\cap I_K(n)$,
+$\gamma \equiv c \bmod \tfrac np\Oc_K$; changing $c$ by a multiple of
+$n/p$ we may assume $\gcd(c, n) = 1$.  Then $(\gamma) = (\gamma/c)(c)$
+with $(c) \in P_{K,\Z}(n)$, on which $\chi$ is trivial, and
+$\gamma/c \equiv 1 \bmod^\times\tfrac np\Oc_K$, so $(\gamma/c)$ lies in the
+ray group of the conductor, on which $\chi$ is trivial.  Hence $\chi$ is
+trivial on $P_{K,\Z}(n/p)\cap I_K(n)$, the kernel of the projection.  The
+$\gcd$-closure is the same argument with
+$P_{K,1}(\gcd(m_1,m_2)) = P_{K,1}(m_1)P_{K,1}(m_2)$.  At the level
+$m_\chi$ every $p \mid m_\chi$ has a prime above it dividing the conductor,
+hence (conjugation-symmetry of the conductor of a ring class character)
+all primes above $p$; so the ideals prime to the conductor are the ideals
+prime to $m_\chi$, and Lemma \ref{lem:conductor} gives
+$L(s,\chi_{m_\chi}) = \Lprim(s,\chi)$.
+\end{proof}
+
+\begin{lemma}[the Hecke recursion as an identity of Dirichlet series]
+\label{lem:diricrec}
+Let $\chi \ne 1$ be a character of $\Cl(\Oc_n)$, $\ell$ a prime, and
+$\chi^{(n\ell)}$ its pullback.  Then
+\[
+  L(s,\chi^{(n\ell)}) =
+  \begin{cases}
+  \bigl(1 + \ell^{1-2s} - \ell^{-s}(\chi(\mathfrak l)+\bar\chi(\mathfrak l))\bigr)L(s,\chi)
+  & \ell = \mathfrak l\bar{\mathfrak l},\ \ell\nmid n,\\
+  \bigl(1 + \ell^{1-2s}\bigr)L(s,\chi) & \ell \text{ inert},\ \ell\nmid n,\\
+  \bigl(1 + 2^{1-2s} - 2^{-s}\chi(\idealp)\bigr)L(s,\chi) & \ell = 2\nmid n,\\
+  \bigl(1 + \ell^{1-2s}\bigr)L(s,\chi) - \ell^{-2s}m_\pi L(s,\chi^{(n/\ell)}) & \ell\mid n,
+  \end{cases}
+\]
+the last term present only if $\chi$ factors through $\Cl(\Oc_{n/\ell})$,
+$m_\pi = |\ker(\Cl(\Oc_n)\to\Cl(\Oc_{n/\ell}))|$.  Consequently
+$C_\chi(s)$ is a product of polynomials in $\ell^{-s}$, and $C_\chi(0)$ is
+a product over $\ell \mid n/m_\chi$ of terms $a_{\ell,k}$ defined by
+$a_{\ell,0} = 1$, $a_{\ell,1} = \ell+1-\chi(\mathfrak l)-\bar\chi(\mathfrak l)$,
+$\ell + 1$, $3 - \chi(\idealp)$ or $\ell+1$ in the four cases,
+$a_{\ell,k+1} = (\ell+1)a_{\ell,k} - m_{\ell,k}a_{\ell,k-1}$ with
+$m_{\ell,1} = \ell - \chi_{-4}(\ell)$ ($\ell\nmid m_\chi$), $\ell$
+($\ell\mid m_\chi$), and $m_{\ell,k} = \ell$ for $k \ge 2$.  Every
+$a_{\ell,k}$ ($k \ge 1$) is a real algebraic integer $\ge 2$; hence
+$C_\chi(0) > 0$, $L'(0,\chi) = C_\chi(0)\Lprim'(0,\chi) \ne 0$, and
+$\prod_{\chi\ne1}C_\chi(0)$ is a positive rational integer.
+\end{lemma}
+
+\begin{proof}
+The form of a class is $x \mapsto N(x)$ on its lattice, so
+$\zeta_\idealc(s) = \sum'_{x\in\Lambda_\idealc}N(x)^{-s}$.  Sum the theta
+series over the $\ell+1$ sublattices of index $\ell$ of $\Lambda_\idealc$:
+a point lies in $\ell + 1$ of them if it is in $\ell\Lambda_\idealc$ and in
+one otherwise, giving $(1 + \ell^{1-2s})\zeta_\idealc(s)$; the
+$\Oc_n$-stable sublattices contribute $\ell^{-s}\zeta_{[\mathfrak l]\idealc}$
+(resp.\ $\ell^{-2s}\zeta^{(n/\ell)}_{\pi(\idealc)}$ for $\ell\mid n$) and
+the others are the primitive representatives of the fiber over $\idealc$
+(the fiber lemma of the Euler-system document accompanying this paper);
+sum against $\tfrac12\chi(\idealc)$.  Differentiating at $s = 0$, where
+every $L$ vanishes, gives the recursion for the $L'(0,\cdot)$ along a
+chain of pullbacks from the primitive level, where $L = \Lprim$ (Lemma
+\ref{lem:primlevel}).  Positivity: $a_{\ell,1} \ge \ell - 1 \ge 2$ in every
+case ($|\chi(\mathfrak l)| = 1$; $[\idealp_n]^2 = 1$ so $\chi(\idealp) = \pm1$);
+$a_{\ell,2} - a_{\ell,1} = \ell a_{\ell,1} - m_{\ell,1} > 0$; and
+$a_{\ell,k+1} - a_{\ell,k} = \ell(a_{\ell,k} - a_{\ell,k-1})$ for $k \ge 2$.
+Nonvanishing of $\Lprim'(0,\chi)$ is Hecke's $\Lprim(1,\chi) \ne 0$ through
+the functional equation; Galois invariance of the product gives
+integrality.
+\end{proof}
+
+\begin{lemma}[roots of unity]\label{lem:torsion}
+$\mu(H_n) = \mu_w$ with $w = 4\cdot2^{[4\mid n]}\cdot3^{[3\mid n]}$.
+\end{lemma}
+
+\begin{proof}
+The maximal subfield of $H_n$ abelian over $\Q$ has exponent-$2$ Galois
+group, so $\zeta_m \in H_n$ forces $m \mid 24$; $i \in H_n$; and a
+biquadratic $K(\sqrt d)$ lies in the ring class field $H_n$ iff its
+conductor over $K$ divides $n\Oc_K$ \cite[Thm.~9.18]{Cox2013}: the
+conductor of $K(\sqrt{-3})/K$ is $(3)$, that of $K(\sqrt2) = \Q(\zeta_8)$
+is $(1+i)^4 = (4)$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem \ref{thm:fullindex}]
+The archimedean places of $H_n$ are the conjugate pairs
+$\{\sigma_\ideala, \iota\sigma_\ideala\}$, $\ideala \in \Cl(\Oc_n)$, where
+$\sigma_\ideala$ is the Artin automorphism, extended to the fixed complex
+embedding in which the $G_\idealc$ are computed; in the normalization
+$|x|_v = |\tau x|^2$ of a complex place, Theorem \ref{thm:Dn}(1) gives
+$\log|G_\idealc/G_1|_{v_\ideala} = 2(f(\ideala^{-1}\idealc) - f(\ideala^{-1}))$
+with $f(\idealc) := \log|G_\idealc|$.  For a subgroup $U \subset \Oc_F^\times$
+generated by $r = r_1 + r_2 - 1$ units, the determinant $R(U)$ of the
+$r\times r$ matrix of their logarithms at any $r$ of the places is the
+covolume of the image of $U$ in the unit lattice in the normalization of
+the regulator, so if $R(U) \ne 0$ then $U$ is free of rank $r$, $U\cap\mu(F) = 1$
+and $[\Oc_F^\times:\mu(F)U] = R(U)/R_F$ \cite[Lemma~4.15]{Washington1997}.
+Omitting the place of the identity, the matrix for $U = \mathcal{V}_n$ is
+$M = (2(g(\ideala\idealc^{-1}) - g(\ideala)))_{\ideala,\idealc\ne1}$ with
+$g(x) = f(x^{-1})$ (the group is abelian), which is the matrix of Lemma
+\ref{lem:dedekind}: $\det M = 2^{h-1}\prod_{\chi\ne1}S_{\bar\chi}(f) =
+2^{h-1}\prod_{\chi\ne1}S_\chi(f)$, and $S_\chi(f) = -12L'(0,\chi)$ by
+Theorem \ref{thm:Dn}(2), real since $f(\idealc^{-1}) = f(\idealc)$.  So
+$R(\mathcal{V}_n) = 24^{h-1}\prod_{\chi\ne1}|L'(0,\chi)| \ne 0$ by Lemma
+\ref{lem:diricrec}, which gives the rank, the torsion-freeness and the
+first formula.  For the second, $\zeta_{H_n}(s) =
+\zeta_K(s)\prod_{\chi\ne1}\Lprim(s,\chi)$ (Artin formalism), and comparing
+the coefficients of $s^{h-1}$ in Dedekind's
+$\zeta_F(s) \sim -\tfrac{h_FR_F}{w_F}s^{r_F}$ \cite[Cor.~VII.5.11]{Neukirch1999}
+with $\zeta_K(0) = -\tfrac14$ and the simple zeros of the $\Lprim(s,\chi)$
+gives $\prod_{\chi\ne1}\Lprim'(0,\chi) = 4h_{H_n}R_{H_n}/w_{H_n}$; insert
+$|L'(0,\chi)| = C_\chi(0)\Lprim'(0,\chi)$ (all factors positive).  The
+torsion is Lemma \ref{lem:torsion}.
+\end{proof}
+
+The same proof, with $\Cl(\Oc_n)$ replaced by a quotient $B = \Cl(\Oc_n)/A$
+and $f$ by the coset sums $\sum_{\idealc\in bA}f(\idealc) =
+\log|N_{H_n/H^A}G_\idealc|$, gives the index in every subfield cut out by a
+subgroup:
+
+\begin{theorem}[layer indices]\label{thm:layers}
+For a subgroup $A \le \Cl(\Oc_n)$ with fixed field $H^A$, $B = \Cl(\Oc_n)/A$,
+the ratio group $\mathcal{V}^A = N_{H_n/H^A}(\mathcal{V}_n) = \langle\theta^{(b)}/\theta^{(b')}\rangle$
+of the coset products $\theta^{(b)} = \prod_{\idealc\in bA}G_\idealc$
+satisfies
+\[
+  \bigl[\Oc_{H^A}^\times:\mu(H^A)\mathcal{V}^A\bigr]
+  = \frac{24^{|B|-1}\prod_{\psi\in\widehat B\setminus1}|L'(0,\psi)|}{R_{H^A}}
+  = \frac{4\cdot24^{|B|-1}}{w_{H^A}}\,h_{H^A}\prod_{\psi\in\widehat B\setminus1}C_\psi(0).
+\]
+\end{theorem}
+
+For $A = \ker\chi_3$ the field $H^A = F = K(\theta_u)$ is the sextic of
+Section \ref{subsec:cubic}; it is totally complex but \emph{not} CM ($L_3$
+has a complex place), of unit rank $2$, and Theorem \ref{thm:layers}
+gives $[\Oc_F^\times:\mu_4\mathcal{V}^A] = 576\,h_F\,C_n(0)^2$ — the sextic
+companion of Theorem \ref{thm:robert}, whose $8 = 24/3$ is the real-cubic
+shadow of $24^{|B|-1} = 24^2$.  For $A = \ker\chi_2$, the real statement is
+that $\theta^{(2)}_u := \prod_{\ker\chi_2}G_\idealc/|M(n)|^{1/2}$ is a unit of
+$\Q(\sqrt{d_2})$ with $\log|\theta^{(2)}_u| = \tfrac12\sum\chi_2\log|G| =
+-6m_\chi\log\eps_{d_2}$, i.e.\ $[\Z[\eps_{d_2}]^\times:\langle-1,\theta_u^{(2)}\rangle] = 6m_\chi$
+in the notation of Proposition \ref{prop:quadlayer}.
+
+\begin{proposition}[the record; computational]\label{prop:fullrecord}
+With PARI/GP 2.15.4 \cite{PARI} (\texttt{bnfinit} at $120$ digits, \texttt{bnfcertify}
+successful at every level $n \le 15$, so those rows are unconditional;
+$n = 23$ is GRH-conditional), the independent evaluation of Lemma
+\ref{lem:gamma-eval} for the $L'(0,\chi)$, and the certified integer
+polynomials $D_n$ of Theorem \ref{thm:Dn} factored inside $H_n$ by
+\texttt{nfroots}: the integer $24^{h-1}\prod|L'(0,\chi)|/R_{H_n}$ is
+certified with $\ge 105$ spare digits, equals the right side of Theorem
+\ref{thm:fullindex}, and equals the determinant of the exact exponent
+matrix of the units $G_\idealc/G_1$ in PARI's fundamental-unit basis
+(\texttt{bnfisunit}):
+\begin{center}
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}rlrrrlrrl@{}}
+\toprule
+$n$ & $\Cl(\Oc_n)$ & $h$ & $w$ & $h_{H_n}$ & $\Cl(H_n)$ & $\prod C_\chi(0)$ & index & Smith invariants of $E_n$\\
+\midrule
+3 & $\Z/2$ & 2 & 12 & 1 & $1$ & 1 & $2^3$ & $(8)$\\
+5 & $\Z/2$ & 2 & 4 & 1 & $1$ & 1 & $2^3\,3$ & $(24)$\\
+7 & $\Z/4$ & 4 & 4 & 1 & $1$ & 1 & $2^9\,3^3$ & $(24,24,24)$\\
+9 & $\Z/6$ & 6 & 12 & 1 & $1$ & 4 & $2^{17}\,3^4$ & $(96,24,24,24,8)$\\
+11 & $\Z/6$ & 6 & 4 & 1 & $1$ & 1 & $2^{15}\,3^5$ & $(24,24,24,24,24)$\\
+13 & $\Z/6$ & 6 & 4 & 3 & $\Z/3$ & 1 & $2^{15}\,3^6$ & $(72,24,24,24,24)$\\
+15 & $\Z/4\times\Z/2$ & 8 & 12 & 2 & $\Z/2$ & 32 & $2^{27}\,3^6$ & $(384,48,48,24,24,24,8)$\\
+23 & $\Z/12$ & 12 & 4 & 12 & $\Z/6\times\Z/2$ & 1 & $2^{35}\,3^{12}$ & $(144,48,24^{\times9})$\\
+\bottomrule
+\end{tabular}
+\end{center}
+The same run re-derives the eight-level cubic table of Theorem
+\ref{thm:robert} at its primitive levels by \texttt{bnfisunit} in
+$L_3 = \Q(\theta_u)$ ($\theta_u = \pm\eta^{8}, \eta^{8}, \eta^{24}, \eta^{16}$
+at $n = 9, 11, 13, 23$, $\eta$ PARI's fundamental unit), and the sextic
+indices $576, 576, 1728, 2304$ ($h_F = 1, 1, 3, 4$).
+\end{proposition}
+
+\begin{remark}[the $24$-th-root saturation]\label{rem:saturation}
+The Smith invariants say more than the index.  Let
+$\mathcal{W}_n = \{u \in \Oc_{H_n}^\times : u^{24} \in \mu(H_n)\mathcal{V}_n\}$.
+At the levels with $w = 4$ every $G_\idealc/G_1$ is a $24$-th power in
+$\Oc_{H_n}^\times$ up to a root of unity (an exact $24$-th power at
+$n = 13, 23$), at the levels with $w = 12$ an $8$-th power; and at every
+computed level $[\Oc_{H_n}^\times:\mathcal{W}_n] = \prod_i d_i/\gcd(d_i,24)$
+equals $h_{H_n}\prod_\chi C_\chi(0)$ --- $1, 1, 1, 4, 1, 3, 64, 12$ --- with
+$\Oc_{H_n}^\times/\mathcal{W}_n \cong \Cl(H_n)$ as abstract groups at the primitive
+levels $n = 13$ ($\Z/3$) and $n = 23$ ($\Z/6\times\Z/2$).
+\end{remark}
+
+\begin{conjecture}[saturated Kubert--Lang form]\label{conj:robert}
+For every $n \ge 2$, $[\Oc_{H_n}^\times:\mathcal{W}_n] = h_{H_n}\prod_{\chi\ne1}C_\chi(0)$;
+at levels all of whose characters are primitive,
+$\Oc_{H_n}^\times/\mathcal{W}_n \cong \Cl(H_n)$ as $\Z[\Gal(H_n/K)]$-modules.
 \end{conjecture}
 
-The conjecture is certified at all eight computed cubic levels, and the
-quadratic layer's class-number factors are Proposition
-\ref{prop:quadlayer}.  We have not compared $\theta_u$ with the Stark
-unit of $H_n$ \cite{Stark1980, HajirVillegas1997}, whose group has index
-$h_{H_n}$ in $\Oc_{H_n}^\times$ (with the roots of unity) at prime
-conductor; the two indices, $8h_{L_3}$ in $\Oc_{L_3}^\times$ and
-$h_{H_n}$ in $\Oc_{H_n}^\times$, live in different groups, and relating
-them is a natural next step outside the scope of this paper.
+Given Theorem \ref{thm:fullindex}, the first statement is equivalent to
+$[\mathcal{W}_n:\mu\mathcal{V}_n] = 4\cdot24^{h-1}/w_{H_n}$, a statement about
+which $24$-th roots of the $\Delta$-quotients --- Siegel units --- lie in
+$H_n$ \cite[Ch.~11--12]{KubertLang1981}; the second is of Gras type.  The
+comparison of $\mathcal{V}_n$ with the Stark unit of $H_n$
+\cite{Stark1980, HajirVillegas1997}, whose group has index $h_{H_n}$ in
+$\Oc_{H_n}^\times$ modulo torsion at prime conductor, is now a precise
+question: Theorem \ref{thm:fullindex} puts $\mathcal{V}_n$ at index
+$4\cdot24^{h-1}/w$ below it, and Remark \ref{rem:saturation} suggests that
+the $24$-th roots close the gap exactly.
 
 \begin{remark}[the hyperbolic side]\label{rem:hypindex}
 The hyperbolic $R_f$ satisfy $R_{\idealr f} = 1/R_f$, so their
@@ -2036,8 +2311,8 @@ subfields of the ring class field; identifying them with the Stark units
 of those fields --- a theorem over an imaginary quadratic base through
 elliptic units \cite{Stark1980}, \cite[Ch.~6--7]{Schertz2010} --- would
 turn the certified non-fits of Proposition \ref{prop:nonfits} into
-positive closed forms, and is the natural route to Conjecture
-\ref{conj:robert} beyond the cubic layer.
+positive closed forms, and is the natural route to the Siegel-unit
+refinement of Conjecture \ref{conj:robert}.
 \end{enumerate}
 
 \subsection*{What is new, with anchors}
@@ -2075,7 +2350,7 @@ Every finite claim of this paper --- classwise laws, the limit-formula
 identities against the independent evaluation, integer polynomial
 coefficients, exact factorizations in quadratic fields, Newton polygons,
 the coherence table, fundamental units and indices, and the certified
-non-fits --- is verified by one of two standalone Python programs in the
+non-fits --- is verified by one of three standalone Python programs in the
 repository accompanying the paper (\texttt{python3} with \texttt{mpmath}
 \cite{mpmath} and \texttt{sympy} \cite{sympy}), each re-run from a clean
 checkout for this draft; the statements imported from \PaperI{} (the
@@ -2155,6 +2430,12 @@ cubics, root descent $k \le 40$ with the Friedman cap, $L'(0,\chi_3)/
 R_{L_3}$ as certified integers, $\log|\theta_u| = -8L'$, the index, and
 the regression record of Theorem \ref{thm:robert} & 250d; spare
 249--250 & 14--43 s per level\\
+\midrule
+\texttt{robert\_index\_full.py --selftest} & $n = 3, 5, 7, 9, 11, 13, 15$ (\texttt{--with-23}: $+\,n = 23$); needs PARI/GP 2.15.4 & 150d & 35 s ($+55$ s)\\
+\quad determinant & Lemma \ref{lem:dedekind} on the $h$ numbers $\log|G_\idealc|$, signed, vs $2^{h-1}\prod S_\chi$; $S_\chi = -12L'(0,\chi)$ vs Lemma \ref{lem:gamma-eval} & rel.\ spare $\ge 148$ & \\
+\quad multipliers & primitive levels (exact kernels), $C_\chi(0)$ by Lemma \ref{lem:diricrec}, checked against $L'(0,\chi)/L'(0,\chi_{m_\chi})$ & spare $\ge 148$ & \\
+\quad PARI & $H_n$ by \texttt{polclass}/\texttt{polcompositum}/\texttt{polredbest}; \texttt{bnfinit} (120d), \texttt{bnfcertify} ($\deg \le 16$), $w$ vs Lemma \ref{lem:torsion}; index certified as an integer and equal to Theorem \ref{thm:fullindex}; \texttt{nfroots} of $D_n$, \texttt{bnfisunit} exponent matrices, Smith forms, saturation & spare $\ge 105$ & \\
+\quad layers & $\theta^{(2)}_u$ vs PARI's fundamental unit of $\Q(\sqrt{d_2})$; $\theta_u$ in $L_3$ and $F$ (\texttt{bnfcertify} = 1), Theorem \ref{thm:robert} re-derived, sextic indices & exact & \\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -2306,6 +2587,16 @@ J.~Sturm,
 \emph{On the congruence of modular forms},
 in: Number theory (New York, 1984--1985), Lecture Notes in Math.\ 1240,
 Springer, 1987, 275--280.
+
+\bibitem{PARI}
+The PARI Group,
+\emph{PARI/GP version 2.15.4}, Univ.\ Bordeaux, 2024,
+\texttt{https://pari.math.u-bordeaux.fr/}.
+
+\bibitem{Washington1997}
+L.~C.~Washington,
+\emph{Introduction to cyclotomic fields},
+2nd ed., Graduate Texts in Mathematics 83, Springer, 1997.
 
 \bibitem{VlasenkoZagier2013}
 M.~Vlasenko, D.~Zagier,
