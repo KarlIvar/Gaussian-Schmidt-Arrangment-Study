@@ -696,8 +696,11 @@ passes the absolute-error criterion with \(\ge\max(20,\mathrm{dps}/5)\) spare di
 (\(\ge 40\) for the index; observed \(\ge 82\) everywhere); exact arithmetic for the class
 groups, characters, kernels, exponent matrices and Smith forms; no PSLQ. PARI's
 `bnfinit` is GRH-conditional; the status column says where `bnfcertify` removed the
-condition (a separate `bnfcertify` of the degree-\(24\) field \(H_{23}\) was left running
-during this session; see §7).
+condition. A separate `bnfcertify` of the degree-\(24\) field \(H_{23}\) (same session,
+realprecision 60) did not finish within 90 minutes of CPU time and was stopped; the
+\(n = 23\) row — its class number \(12\), unit group and regulator — therefore remains
+GRH-conditional, while the Dedekind-determinant side of that row (the \(\Delta\)-data,
+the \(L'\)-values, the multipliers) is unconditional.
 
 ## 7. What is proved, what is certified, what is open
 
