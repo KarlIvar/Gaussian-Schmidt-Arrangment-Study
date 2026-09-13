@@ -115,7 +115,7 @@ nine odd levels \(5 \le n \le 21\) (\(24^6\) at \(n = 21\); sextic layer \(2\cdo
 \(h_{H_n}\prod C_\chi(0)\), certified at all eight levels; Gras-type module statement)
 and the law of the \(2\)-adic invariant \(Q^-\).
 
-### Item 3 — Other imaginary quadratic fields. Status: open.
+### Item 3 — Other imaginary quadratic fields. Status: staged ([prompts/10-other-imaginary-quadratic-fields.md](prompts/10-other-imaginary-quadratic-fields.md)).
 
 *Question.* Transport the whole line to Stange's arrangements \(\mathcal{S}_K\).
 
@@ -200,7 +200,7 @@ Main tree (everything here feeds the line):
 | [spherical-moduli-invariants.md](spherical-moduli-invariants.md) | item 5(b) |
 | `papers/` | Papers I and II with their bibliographies and literature records |
 | `scripts/` | the verification scripts of the above (`--selftest` each) |
-| `prompts/` | 01, 04, 05 (done or staged on the line), 06–07 (the papers), 08 (item 1's continuation) |
+| `prompts/` | 01, 04, 05 (done or staged on the line), 06–07 (the papers), 08 (item 1's continuation), 09 (item 2, done), 10 (item 3, staged) |
 | [outlook.md](outlook.md) | the historical master outlook; its §6 summarizes this program |
 
 Moved to `extra/` ([extra/README.md](extra/README.md)): the monoid and operation

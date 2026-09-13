@@ -350,7 +350,13 @@ see Paper planning below), and
 continuation of [schmidt-euler-system.md](schmidt-euler-system.md): Kolyvagin's
 bound, the Stark comparison, and the
 port of Theorems 2–3 into Paper II §6; its item 2, the full index, is **done** —
-[robert-index-full.md](robert-index-full.md), prompt 09, ported to Paper II §6.3).
+[robert-index-full.md](robert-index-full.md)),
+[09-full-robert-index.md](prompts/09-full-robert-index.md) (**done** — the full
+index theorem, the layer and hyperbolic theorems, ported to Paper II §6.3), and
+[10-other-imaginary-quadratic-fields.md](prompts/10-other-imaginary-quadratic-fields.md)
+(item 3 of the program: the whole line over \(\mathbb{Q}(\sqrt{-2}), \mathbb{Q}(\sqrt{-3}), \mathbb{Q}(\sqrt{-7})\),
+then class number \(> 1\); staged, with the expected statements and the constants
+\(w_K/h_K\) displayed).
 
 ## Paper planning
 
