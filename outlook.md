@@ -278,9 +278,10 @@ PID with units \(\mu_4\), and only the hyperbolic side uses the coupling
    \([\mathcal{O}_{H_n}^\times:\mu\mathcal{V}_n] = (4\cdot24^{h-1}/w)\,h_{H_n}\prod C_\chi(0)\) for every
    \(n\), proved (Dedekind determinant + class number formula), with the layer
    theorem and PARI verification at \(n \le 15\) (unconditional) and \(23\) (GRH);
-   Paper II's Conjecture 6.7 replaced. *Remaining*: the \(24\)-th-root saturation
-   (index exactly \(h_{H_n}\prod C_\chi(0)\), Gras-type) and the hyperbolic odd-unit
-   index (\(n = 21\)).
+   Paper II's Conjecture 6.7 replaced; the hyperbolic odd-unit index is Theorem 3
+   there (\(24^6\) at \(n = 21\)). *Remaining*: the \(24\)-th-root saturation
+   (index exactly \(h_{H_n}\prod C_\chi(0)\), Gras-type) and the law of the \(2\)-adic
+   invariant \(Q^-\).
 3. **Other imaginary quadratic fields** (Stange's \(\mathcal{S}_K\)): class number
    one first (\(\mathbb{Q}(\sqrt{-3})\) tests the \(\mu_6\) torsion; the genus
    field should become \(\mathbb{Q}(\sqrt f)\) or \(\mathbb{Q}(\sqrt{f|D_K|})\)); then

@@ -62,10 +62,20 @@ index); class groups, characters, kernels and projections are exact (HNF
 arithmetic of schmidt_euler_system.py); PARI's class numbers and units are
 labelled GRH-conditional unless bnfcertify returned 1; no PSLQ anywhere.
 
+ (H)  the hyperbolic side (Theorem 3 of the document), odd n = 5..21: the units
+      R_f of Paper II Thm 4.2 lie in the odd units E^- = ker(1 + sigma_r) of the
+      ring class field H of disc 1 - n^2, and
+        [E^- : <R_f>] = 24^(h/2) (2^(h/2-1)/Q^-) (h_H w_H+)/(h_H+ w_H) prod_{chi odd} C_chi(0),
+      H^+ = H^{sigma_r}, Q^- = [E : E^+ E^-]; twisted group determinant, exact
+      projections for the multipliers, PARI (tau from nfgaloisconj, kernels on
+      the unit lattice, exact index, H^+), the regulator relation and the
+      relative class number formula; the sextic layer at n = 21 (index 27648).
+
 Usage:
-    python3 scripts/robert_index_full.py --selftest            # n <= 15 (~3 min)
-    python3 scripts/robert_index_full.py --selftest --with-23  # + degree 24 (~+2 min)
-    python3 scripts/robert_index_full.py 9                     # one level
+    python3 scripts/robert_index_full.py --selftest            # Euclidean n <= 15 + hyperbolic (~2 min)
+    python3 scripts/robert_index_full.py --selftest --with-23  # + Euclidean degree 24 (~+1 min)
+    python3 scripts/robert_index_full.py 9                     # one Euclidean level
+    python3 scripts/robert_index_full.py hyp 21                # one hyperbolic level
 Requires mpmath, sympy (Smith form) and PARI/GP (`gp` on the PATH).
 """
 import sys
@@ -85,7 +95,7 @@ from mpmath import (mp, mpf, mpc, log, exp, pi, fabs, nstr, sqrt, e1, cos,
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from schmidt_euler_system import (ClassGroup, G_value, mass_log, factor, chi4,
                                   split_lams, Ne, extend, canon, index_of,
-                                  is_primitive, vecs_of)
+                                  is_primitive, vecs_of, hnf)
 
 # precision is set in main(), never here (guard rail 2)
 
@@ -810,6 +820,20 @@ def layers_of(cg, chars, G, f, S, n, prec, say, Cinfo):
 # --------------------------------------------------------------------------
 
 SELFTEST_LEVELS = [3, 5, 7, 9, 11, 13, 15]
+HYP_LEVELS = [5, 7, 9, 11, 13, 15, 17, 19, 21]
+
+# hyperbolic regression record: n -> (h_H, h_H+, w_H, w_H+, Q^-, prod C, index)
+HYP_RECORD = {
+    5: (1, 2, 6, 2, 1, 1, 4),
+    7: (1, 1, 12, 6, 1, 1, 12),
+    9: (1, 1, 4, 4, 2, 1, 576),
+    11: (2, 4, 6, 2, 2, 1, 96),
+    13: (1, 2, 6, 6, 2, 1, 288),
+    15: (1, 2, 8, 2, 8, 16, 663552),
+    17: (1, 1, 24, 8, 2, 4, 768),
+    19: (1, 1, 6, 6, 4, 1, 663552),
+    21: (4, 4, 2, 2, 32, 1, 191102976),
+}
 
 # regression record: n -> (h(H_n), w, prod C, index, Smith invariants of E_n)
 RECORD = {
@@ -838,6 +862,15 @@ def selftest(with_23=False):
         assert sorted(r["snf"]) == sorted(snf), (n, r["snf"])
         assert r["sat_index"] == hH * pC, (n, r["sat_index"])
         recs.append(r)
+    hrecs = []
+    for n in HYP_LEVELS:
+        r = hyperbolic_odd_index(n)
+        hH, hHp, wH, wHp, Qm, pC, idx = HYP_RECORD[n]
+        assert (r["hH"], r["hHp"], r["wH"], r["wHp"], r["Qm"], r["prodC"], r["idx"]) == (hH, hHp, wH, wHp, Qm, pC, idx), (n, r)
+        hrecs.append(r)
+    if 21 in HYP_LEVELS:
+        r21 = hrecs[HYP_LEVELS.index(21)]
+        assert r21["sextic"][6] == 27648 and r21["sextic"][1] == 8 and r21["sextic"][2] == 4, r21["sextic"]
     print("=" * 78)
     print("SUMMARY   index = [O_{H_n}^x : mu(H_n) V_n] = 24^(h-1) prod|L'| / R_H = (4 24^(h-1)/w) h(H_n) prod C")
     print("=" * 78)
@@ -848,6 +881,14 @@ def selftest(with_23=False):
         st = "certified" if r["cert"] == 1 else "GRH"
         print(f"{r['n']:>3} {'x'.join('Z/%d' % o for o in r['orders']):>10} {r['h']:>3} {r['w']:>3} "
               f"{r['hH']:>7} {str(r['cyc'] or '[]'):>9} {r['prodC']:>6} {r['index']:>28} {fac:>22} {r['spI']:>6} {st}")
+    print("=" * 78)
+    print("HYPERBOLIC   [E^- : <R_f>] = 24^(h/2) (2^(h/2-1)/Q^-) (h_H w_H+)/(h_H+ w_H) prod_(chi odd) C   (Theorem 3)")
+    print("=" * 78)
+    print(f"{'n':>3} {'D':>6} {'Cl':>10} {'h_H':>4} {'w_H':>4} {'h_H+':>5} {'w_H+':>5} {'Q^-':>4} {'prodC':>6} {'index':>12} {'index/24^(h/2)':>15} status")
+    for r in hrecs:
+        st = "certified" if r["cert"] else "GRH"
+        print(f"{r['n']:>3} {1 - r['n'] ** 2:>6} {'x'.join('Z/%d' % o for o in r['orders']):>10} {r['hH']:>4} {r['wH']:>4} "
+              f"{r['hHp']:>5} {r['wHp']:>5} {r['Qm']:>4} {r['prodC']:>6} {r['idx']:>12} {str(Fraction(r['idx'], 24 ** (r['h'] // 2))):>15} {st}")
     print(f"ALL CHECKS PASSED   ({time.time() - t0:.0f}s)")
     return recs
 
@@ -861,9 +902,401 @@ def main(argv):
         sys.exit(1)
     if "--selftest" in flags or not args:
         selftest(with_23="--with-23" in flags)
+    elif args[0] == "hyp":
+        for a in args[1:]:
+            hyperbolic_odd_index(int(a))
     else:
         for a in args:
             level(int(a))
+
+
+
+# --------------------------------------------------------------------------
+# the hyperbolic side: the odd-unit index of the R_f  (Theorem 3 of the document)
+# --------------------------------------------------------------------------
+
+def fundamental_part(D):
+    """D = f^2 dK with dK a fundamental discriminant; returns (dK, f)"""
+    f = 1
+    m = -D
+    # largest square dividing D such that the cofactor is a discriminant
+    k = 2
+    while k * k <= m:
+        while D % (k * k) == 0 and ((D // (k * k)) % 4 in (0, 1)):
+            D //= k * k
+            f *= k
+        k += 1
+    # D may still be 4 * (1 mod 4) = a non-fundamental with f 2
+    if D % 4 == 0 and (D // 4) % 4 == 1:
+        D //= 4
+        f *= 2
+    return D, f
+
+
+def project_form(f, D, dK, fp):
+    """the class of the primitive form f of discriminant D = fc^2 dK in the
+    class group of the order of conductor fp (fp | fc): the reduced form of the
+    ideal O_{fp} * [a, (-b + sqrt D)/2].  Elements of K' = Q(sqrt dK) are
+    pairs (x, y) = x + y sqrt(dK) of Fractions."""
+    from euclidean_moduli_invariants import reduce_form
+    a, b, c = f
+    fc2 = D // dK
+    fc = int(round(fc2 ** 0.5))
+    assert fc * fc == fc2 and fc % fp == 0
+    alpha = (Fraction(a), Fraction(0))
+    beta = (Fraction(-b, 2), Fraction(fc, 2))
+    om = (Fraction(1, 2), Fraction(1, 2)) if dK % 4 == 1 else (Fraction(0), Fraction(1, 2))
+    omf = (om[0] * fp, om[1] * fp)
+
+    def mulK(u, v):
+        return (u[0] * v[0] + u[1] * v[1] * dK, u[0] * v[1] + u[1] * v[0])
+
+    gens = [alpha, beta, mulK(omf, alpha), mulK(omf, beta)]
+    den = 1
+    for (x, y) in gens:
+        den = den * x.denominator // gcd(den, x.denominator)
+        den = den * y.denominator // gcd(den, y.denominator)
+    rows = [(int(x * den), int(y * den)) for (x, y) in gens]
+    d_, b_, a_ = hnf(rows)               # lattice Z (d_, 0) + Z (b_, a_)
+    g1 = (Fraction(d_, den), Fraction(0))
+    g2 = (Fraction(b_, den), Fraction(a_, den))
+    # orientation: Im(g2/g1) > 0  <=>  x1 y2 - x2 y1 > 0
+    if g1[0] * g2[1] - g2[0] * g1[1] < 0:
+        g2 = (-g2[0], -g2[1])
+
+    def N(u):
+        return u[0] * u[0] - dK * u[1] * u[1]
+    A = N(g1)
+    C = N(g2)
+    B = 2 * (g1[0] * g2[0] - dK * g1[1] * g2[1])
+    covol = abs(g1[0] * g2[1] - g2[0] * g1[1])
+    covol_O = abs(Fraction(1) * omf[1])       # det of (1, 0), (omf)
+    Nideal = covol / covol_O
+    A, B, C = A / Nideal, B / Nideal, C / Nideal
+    assert A.denominator == 1 and B.denominator == 1 and C.denominator == 1, (f, A, B, C)
+    A, B, C = int(A), int(B), int(C)
+    assert B * B - 4 * A * C == fp * fp * dK, (f, A, B, C)
+    g = gcd(gcd(A, B), C)
+    assert g == 1, (f, A, B, C)
+    return reduce_form(A, B, C)
+
+
+def hyperbolic_odd_index(n, prec_pari=120, verbose=True, layer=True):
+    """Level n odd, D = 1 - n^2, K' = Q(sqrt D), H the ring class field of the
+    order of discriminant D, r the twist class, tau = sigma_r, H^+ = H^tau.
+    The units R_f of Paper II Thm 4.2 satisfy R_{rf} = 1/R_f, so they lie in
+    the odd units E^- = {u : tau(u) u in mu} of rank h/2.  Verified:
+      (H1) the twisted Dedekind determinant det(2 log|R_{a^-1 f}|)_{a,f in T}
+           (T a transversal of <r>) equals prod_{chi odd} S_chi, S_chi =
+           sum chi(f) log|R_f| = -24 L'(0,chi) (independent evaluation);
+      (H2) the multipliers: for every odd chi the primitive conductor f' | f
+           (D = f^2 dK) is found exactly through the projections
+           Cl(D) -> Cl(f'^2 dK) (ideal extension, in exact arithmetic), and
+           C_chi(0) = L'(0,chi) / L'(0,chi_{f'}) with both L' from the
+           independent evaluation; prod C certified as an integer;
+      (H3) PARI: H, h_H, w_H, R_H; the h units R_f (nfroots of the certified
+           R-polynomial, bnfisunit); tau as the unique automorphism of H/K'
+           inverting every R_f; E^- = ker(1 + tau) on the unit lattice; the
+           EXACT index [E^- : mu <R_f>]; H^+ (degree h over Q) with h_{H^+},
+           R_{H^+}, w_{H^+}; Q^- = [E : E^+ E^-] with E^+ the image of
+           O_{H^+}^x (the tau-fixed units modulo the ones fixed only up to a
+           root of unity); the regulator relation
+           R_H / R_{H^+} = 2^{h/2-1} R^-(E^-) / Q^-; and the identity
+             index = 24^{h/2} (2^{h/2-1}/Q^-) (h_H w_{H^+})/(h_{H^+} w_H) prod_{chi odd} C_chi(0);
+      (H4) the sextic layer (odd chi of order 6 with kernel A): the coset units
+           u_b = N_{H/F}(R_f), F = H^A, and the same identity in F.
+    Class numbers and units are GRH-conditional unless bnfcertify succeeded
+    (attempted at degree <= 16)."""
+    from involution_classmap import classes_of_disc, is_primitive as prim_form
+    from euclidean_moduli_invariants import reduce_form
+    import schmidt_units as SU
+    import phase_klf as PK
+    say = print if verbose else (lambda *a, **k: None)
+    need = need_digits()
+    t0 = time.time()
+    D = 1 - n * n
+    dK, fc = fundamental_part(D)
+    r0, s0 = (n - 1) // 2, (n + 1) // 2
+    prim = [f for f in classes_of_disc(D) if prim_form(f)]
+    h = len(prim)
+    say("=" * 78)
+    say(f"HYPERBOLIC LEVEL n = {n}:  D = {D} = {fc}^2 ({dK}), h = {h}, [H : Q] = {2 * h}   (dps = {mp.dps})")
+    say("=" * 78)
+    R = {f: SU.R_lattice(f, n) for f in prim}
+    co, spR = cert_int_poly([R[f] for f in prim], f"R_{n}")
+    if n in SU.R_POLYS:
+        assert co == SU.R_POLYS[n], (n, co)
+    assert abs(co[-1]) == 1
+    coords, orders = PK.group_data(prim, D)
+    chis = PK.characters(coords, orders)
+    rn = reduce_form(r0, 0, s0)
+    if rn not in coords:
+        rn = (rn[0], -rn[1], rn[2])
+    assert rn in coords
+    byco = {v: k for k, v in coords.items()}
+
+    def cmul(f1, f2):
+        return byco[tuple((a + b) % o for a, b, o in zip(coords[f1], coords[f2], orders))]
+
+    def cinv(f):
+        return byco[tuple((-a) % o for a, o in zip(coords[f], orders))]
+
+    fl = {f: log(fabs(R[f])) for f in prim}
+    for f in prim:
+        assert spare_of(R[cmul(f, rn)] * R[f] - 1) >= need, (n, f)
+    Lp, reps, M = PK.epstein_Lprime0(prim, D, chis)
+    odd, S = [], {}
+    worst = mp.dps
+    for idx_, (ks, cord, chi, isreal) in enumerate(chis):
+        s_ = sum(chi[f] * fl[f] for f in prim)
+        S[ks] = s_
+        if cord == 1:
+            continue
+        if fabs(chi[rn] + 1) < 0.1:
+            odd.append((ks, cord, chi, Lp[idx_]))
+            worst = min(worst, spare_of((s_ + 24 * Lp[idx_]) / max(1, fabs(Lp[idx_]))))
+        else:
+            assert fabs(s_) < mpf(10) ** (-need), (n, ks, "even sum does not vanish")
+    assert worst >= need, (n, worst)
+    assert len(odd) == h // 2
+    say(f"R-polynomial certified (spare {spR}); Pic = {' x '.join('Z/%d' % o for o in orders)}, twist class "
+        f"{rn}; {len(odd)} odd characters; S_chi = -24 L'(0,chi) (spare >= {worst}); even sums vanish")
+    # (H1) twisted group determinant over a transversal
+    T, seen = [], set()
+    for f in prim:
+        if f not in seen:
+            T.append(f)
+            seen.add(f)
+            seen.add(cmul(f, rn))
+    N_ = matrix(len(T), len(T))
+    for i, a in enumerate(T):
+        ai = cinv(a)
+        for j, f in enumerate(T):
+            N_[i, j] = 2 * fl[cmul(ai, f)]
+    dN = det(N_)
+    prodS = mpc(1)
+    prodL = mpf(1)
+    for ks, cord, chi, l in odd:
+        prodS *= S[ks]
+        prodL *= fabs(l)
+    sp1 = spare_of((dN - prodS) / max(1, fabs(prodS)))
+    assert sp1 >= need, (n, nstr(dN, 20), nstr(prodS, 20))
+    say(f"(H1) det(2 log|R_(a^-1 f)|)_(T x T) = prod_(chi odd) S_chi = 24^(h/2) prod|L'|: relative spare {sp1};  "
+        f"R^-(<R_f>) = {nstr(fabs(dN), 25)}")
+    # (H2) multipliers through exact projections to the smaller orders
+    cond_divs = [d for d in range(1, fc + 1) if fc % d == 0]
+    proj = {}
+    for fp in cond_divs:
+        if fp == fc:
+            continue
+        Dp = fp * fp * dK
+        forms_p = [g for g in classes_of_disc(Dp) if prim_form(g)]
+        pm = {}
+        for f in prim:
+            g = project_form(f, D, dK, fp)
+            if g not in forms_p:
+                g = (g[0], -g[1], g[2])
+            assert g in forms_p, (n, fp, f, g)
+            pm[f] = g
+        assert set(pm.values()) == set(forms_p), (n, fp)
+        proj[fp] = (Dp, forms_p, pm)
+    Cvals = {}
+    prodC = mpf(1)
+    for ks, cord, chi, l in odd:
+        levels = [fc]
+        for fp in cond_divs:
+            if fp == fc:
+                continue
+            Dp, forms_p, pm = proj[fp]
+            ok = True
+            val = {}
+            for f in prim:
+                g = pm[f]
+                if g in val:
+                    if fabs(val[g] - chi[f]) > mpf(10) ** (-need):
+                        ok = False
+                        break
+                else:
+                    val[g] = chi[f]
+            if ok:
+                levels.append(fp)
+        for m1 in levels:
+            for m2 in levels:
+                assert gcd(m1, m2) in levels, (n, ks, levels)
+        fmin = min(levels)
+        if fmin == fc:
+            C = mpf(1)
+            desc = "primitive"
+        else:
+            Dp, forms_p, pm = proj[fmin]
+            assert len(forms_p) > 1, (n, ks, fmin)
+            val = {pm[f]: chi[f] for f in prim}
+            Lp_p, _, _ = PK.epstein_Lprime0(forms_p, Dp, [(ks, cord, val, cord <= 2)])
+            C = (l / Lp_p[0]).real
+            desc = f"from conductor {fmin} (disc {Dp})"
+        Cvals[ks] = (cord, fmin, C, desc)
+        prodC *= C
+    prodC_int, spC = cert_int(prodC, "prod C (hyperbolic)")
+    say(f"(H2) odd characters: " + "; ".join(f"chi{ks} (order {cord}) {desc}, C = {nstr(C, 8)}"
+                                            for ks, (cord, fmin, C, desc) in sorted(Cvals.items())))
+    say(f"      prod_(chi odd) C_chi(0) = {prodC_int}   (spare {spC})")
+    # (H3) PARI
+    Rpol = "Pol(" + str(co) + ", x)"
+    certdeg = 16
+    script = GP_HEADER.format(prec0=prec_pari) + f"""
+P = polclass({D}, 0, 'y);
+H = polredbest(polcompositum(y^2 - ({D}), P)[1]);
+print("HPOL ", H);
+bnf = bnfinit(H, 1);
+print("H ", bnf.no); print("CYC ", bnf.cyc); print("W ", bnf.tu[1]); print("REG ", bnf.reg);
+print("CERT ", if(poldegree(H) <= {certdeg}, bnfcertify(bnf), -1));
+r = nfroots(bnf.nf, {Rpol});
+print("NROOTS ", #r);
+nu = #bnf.fu;
+E = matrix(#r, nu); TT = vector(#r);
+for(i=1, #r, e = bnfisunit(bnf, r[i]); for(j=1, nu, E[i,j] = e[j]); TT[i] = lift(e[#e]));
+print("TORS ", TT);
+G = nfgaloisconj(bnf);
+sd = nfroots(bnf.nf, x^2 - ({D}))[1];
+tau = 0; ntau = 0;
+for(k=1, #G, ok = 1; for(i=1, #r, if(nfgaloisapply(bnf, G[k], r[i]) != 1/r[i], ok = 0)); if(ok && nfgaloisapply(bnf, G[k], sd) == sd, tau = G[k]; ntau++));
+print("NTAU ", ntau);
+Tm = matrix(nu, nu);
+for(j=1, nu, e = bnfisunit(bnf, nfgaloisapply(bnf, tau, bnf.fu[j])); for(i=1, nu, Tm[i,j] = e[i]));
+Km = matkerint(matid(nu) + Tm); Kp = matkerint(matid(nu) - Tm);
+print("KMRANK ", #Km); print("KPRANK ", #Kp);
+X = matrix(#Km, #r);
+for(i=1, #r, x = matinverseimage(Km, E[i,]~); for(k=1, #Km, X[k,i] = x[k]));
+sn = matsnf(X); idx = 1; for(k=1, #sn, if(sn[k] != 0, idx *= abs(sn[k]))); print("INDEX ", idx);
+print("XSNF ", sn);
+w = bnf.tu[1]; zt = bnf.tu[2]; et = bnfisunit(bnf, nfgaloisapply(bnf, tau, zt)); t = lift(et[#et]);
+g0 = gcd(w, t - 1); gk = g0;
+for(k=1, #Kp, u = factorback(bnf.fu, Kp[,k]); e = bnfisunit(bnf, nfgaloisapply(bnf, tau, u) / u); gk = gcd(gk, lift(e[#e])));
+ee = g0 / gk;
+Qm = ee * abs(matdet(concat(Kp, Km))); print("QMINUS ", Qm); print("EPLUS ", ee); print("TAUMU ", t);
+z = sd; c = 1;
+while(poldegree(minpoly(z)) < {h} && c < 40, z = sd + sum(i=1, #r, c^i * (r[i] + 1/r[i])); c++);
+print("HPDEG ", poldegree(minpoly(z)));
+Hp = polredbest(minpoly(z));
+print("HPPOL ", Hp);
+bp = bnfinit(Hp, 1);
+print("HPH ", bp.no); print("HPCYC ", bp.cyc); print("HPW ", bp.tu[1]); print("HPREG ", bp.reg);
+print("HPCERT ", if(poldegree(Hp) <= {certdeg}, bnfcertify(bp), -1));
+"""
+    d = parse_tagged(run_gp(script))
+    assert int(d["NROOTS"]) == h and int(d["NTAU"]) == 1, (n, d.get("NROOTS"), d.get("NTAU"))
+    assert int(d["HPDEG"]) == h, (n, "H^+ not generated", d["HPDEG"])
+    assert int(d["KMRANK"]) == h // 2 and int(d["KPRANK"]) == h // 2 - 1, (n, d["KMRANK"], d["KPRANK"])
+    idx = int(d["INDEX"])
+    Qm = int(d["QMINUS"])
+    eplus = int(d["EPLUS"])
+    hH, wH, RH = int(d["H"]), int(d["W"]), mpf(d["REG"])
+    hHp, wHp, RHp = int(d["HPH"]), int(d["HPW"]), mpf(d["HPREG"])
+    cert = int(d["CERT"]) == 1 and int(d["HPCERT"]) == 1
+    Rminus = fabs(dN) / idx
+    spB = spare_of(((RH / RHp) - 2 ** (h // 2 - 1) * Rminus / Qm) / (RH / RHp))
+    lhs = (hH * RH / wH) / (hHp * RHp / wHp)
+    spA = spare_of((lhs * prodC_int - prodL) / prodL)
+    pred = Fraction(24 ** (h // 2) * 2 ** (h // 2 - 1), Qm) * Fraction(hH * wHp, hHp * wH) * prodC_int
+    say(f"(H3) PARI: H = Q[y]/({d['HPOL'][:50]}...): h_H = {hH}, Cl = {parse_int_vector(d['CYC'])}, w_H = {wH}, "
+        f"R_H = {nstr(RH, 20)}; tau = sigma_r (unique automorphism of H/K' inverting all R_f); rank E^- = {h // 2}")
+    say(f"      H^+ = H^tau: h = {hHp}, Cl = {parse_int_vector(d['HPCYC'])}, w = {wHp}, R = {nstr(RHp, 20)};  "
+        f"Q^- = [E : E^+ E^-] = {Qm}  ([ker(1-tau) : E^+] = {eplus}, tau on mu: zeta -> zeta^{d['TAUMU']});  "
+        f"{'bnfcertify = 1 for H and H^+' if cert else 'GRH-conditional'}")
+    say(f"      R_H / R_H+ = 2^(h/2-1) R^-(E^-) / Q^-  with R^-(E^-) = det N / index: spare {spB}")
+    say(f"      (hR/w)_H / (hR/w)_H+ = prod_(chi odd) L'_prim(0,chi) = prod L' / prod C: spare {spA}")
+    say(f"      exact index [E^- : mu <R_f>] = {idx} = 24^{h // 2} * {Fraction(idx, 24 ** (h // 2))}"
+        f"  =  24^(h/2) (2^(h/2-1)/Q^-) (h_H w_H+)/(h_H+ w_H) prod C = {pred}: {'OK' if pred == idx else 'MISMATCH'}")
+    assert spB >= need, (n, nstr(RH / RHp, 20), nstr(2 ** (h // 2 - 1) * Rminus / Qm, 20))
+    assert spA >= need, (n, nstr(lhs * prodC_int, 20), nstr(prodL, 20))
+    assert pred == idx, (n, idx, pred)
+    rec = {"n": n, "h": h, "orders": orders, "idx": idx, "Qm": Qm, "eplus": eplus, "hH": hH, "hHp": hHp,
+           "wH": wH, "wHp": wHp, "RH": RH, "RHp": RHp, "cyc": parse_int_vector(d["CYC"]),
+           "cycp": parse_int_vector(d["HPCYC"]), "prodC": prodC_int, "cert": cert, "pol": d["HPOL"],
+           "polp": d["HPPOL"], "dK": dK, "fc": fc}
+    # (H4) the sextic layer: an odd character of order 6 (if any)
+    six = [(ks, cord, chi, l) for (ks, cord, chi, l) in odd if cord == 6]
+    if layer and six:
+        ks, cord, chi, l = six[0]
+        A = [f for f in prim if fabs(chi[f] - 1) < 0.1]
+        assert len(A) == h // 6
+        cos = {}
+        for f in prim:
+            key = min(cmul(f, a) for a in A)
+            cos.setdefault(key, []).append(f)
+        assert len(cos) == 6
+        U = []
+        for key in sorted(cos):
+            p_ = mpc(1)
+            for f in cos[key]:
+                p_ *= R[f]
+            U.append(p_)
+        cu, spU = cert_int_poly(U, "sextic coset units")
+        assert abs(cu[-1]) == 1
+        oddB = [(k2, c2, ch2, l2) for (k2, c2, ch2, l2) in odd if all(fabs(ch2[a] - 1) < 0.1 for a in A)]
+        assert len(oddB) == 3
+        prodLB, prodCB = mpf(1), mpf(1)
+        for k2, c2, ch2, l2 in oddB:
+            prodLB *= fabs(l2)
+            prodCB *= Cvals[k2][2]
+        prodCB_int, _ = cert_int(prodCB, "prod C (sextic)")
+        script2 = GP_HEADER.format(prec0=prec_pari) + f"""
+cu = Pol({cu}, y);
+F = polredbest(polcompositum(y^2 - ({D}), cu)[1]);
+print("FPOL ", F);
+bF = bnfinit(F, 1);
+print("FH ", bF.no); print("FCYC ", bF.cyc); print("FW ", bF.tu[1]); print("FREG ", bF.reg);
+u = nfroots(bF.nf, subst(cu, y, x));
+print("UNROOTS ", #u);
+nu = #bF.fu;
+E = matrix(#u, nu);
+for(i=1, #u, e = bnfisunit(bF, u[i]); for(j=1, nu, E[i,j] = e[j]));
+G = nfgaloisconj(bF);
+sd = nfroots(bF.nf, x^2 - ({D}))[1];
+tau = 0; ntau = 0;
+for(k=1, #G, ok = 1; for(i=1, #u, if(nfgaloisapply(bF, G[k], u[i]) != 1/u[i], ok = 0)); if(ok && nfgaloisapply(bF, G[k], sd) == sd, tau = G[k]; ntau++));
+print("NTAU ", ntau);
+Tm = matrix(nu, nu);
+for(j=1, nu, e = bnfisunit(bF, nfgaloisapply(bF, tau, bF.fu[j])); for(i=1, nu, Tm[i,j] = e[i]));
+Km = matkerint(matid(nu) + Tm); Kp = matkerint(matid(nu) - Tm);
+print("KMRANK ", #Km); print("KPRANK ", #Kp);
+X = matrix(#Km, #u);
+for(i=1, #u, x = matinverseimage(Km, E[i,]~); for(k=1, #Km, X[k,i] = x[k]));
+sn = matsnf(X); idx = 1; for(k=1, #sn, if(sn[k] != 0, idx *= abs(sn[k]))); print("INDEX ", idx);
+w = bF.tu[1]; zt = bF.tu[2]; et = bnfisunit(bF, nfgaloisapply(bF, tau, zt)); t = lift(et[#et]);
+g0 = gcd(w, t - 1); gk = g0;
+for(k=1, #Kp, v = factorback(bF.fu, Kp[,k]); e = bnfisunit(bF, nfgaloisapply(bF, tau, v) / v); gk = gcd(gk, lift(e[#e])));
+ee = g0 / gk;
+Qm = ee * abs(matdet(concat(Kp, Km))); print("QMINUS ", Qm); print("EPLUS ", ee); print("TAUMU ", t);
+z = sd; c = 1;
+while(poldegree(minpoly(z)) < 6 && c < 40, z = sd + sum(i=1, #u, c^i * (u[i] + 1/u[i])); c++);
+print("FPDEG ", poldegree(minpoly(z)));
+Fp = polredbest(minpoly(z));
+print("FPPOL ", Fp);
+bp = bnfinit(Fp, 1);
+print("FPH ", bp.no); print("FPW ", bp.tu[1]); print("FPREG ", bp.reg);
+print("FCERT ", bnfcertify(bF)); print("FPCERT ", bnfcertify(bp));
+"""
+        d2 = parse_tagged(run_gp(script2))
+        assert int(d2["FPDEG"]) == 6, (n, "F^+ not generated", d2["FPDEG"])
+        assert int(d2["UNROOTS"]) == 6 and int(d2["NTAU"]) == 1 and int(d2["KMRANK"]) == 3 and int(d2["KPRANK"]) == 2
+        idxF, QmF = int(d2["INDEX"]), int(d2["QMINUS"])
+        hF, wF, RF = int(d2["FH"]), int(d2["FW"]), mpf(d2["FREG"])
+        hFp, wFp, RFp = int(d2["FPH"]), int(d2["FPW"]), mpf(d2["FPREG"])
+        lhsF = (hF * RF / wF) / (hFp * RFp / wFp)
+        spF = spare_of((lhsF * prodCB_int - prodLB) / prodLB)
+        predF = Fraction(24 ** 3 * 2 ** 2, QmF) * Fraction(hF * wFp, hFp * wF) * prodCB_int
+        certF = int(d2["FCERT"]) == 1 and int(d2["FPCERT"]) == 1
+        say(f"(H4) sextic layer chi{ks} (odd, order 6): coset units u_b = N_(H/F)(R_f), minimal polynomial {cu}")
+        say(f"      F = K'(u) = Q[y]/({d2['FPOL']}): h_F = {hF}, Cl = {parse_int_vector(d2['FCYC'])}, w = {wF}, R = {nstr(RF, 15)}; "
+            f"F^+: h = {hFp}, w = {wFp}, R = {nstr(RFp, 15)}; Q^- = {QmF}   ({'bnfcertify = 1 for both' if certF else 'GRH'})")
+        say(f"      exact index [E^-(F) : mu <u_b>] = {idxF}  =  24^3 (2^2/Q^-) (h_F w_F+)/(h_F+ w_F) prod C = {predF}: "
+            f"{'OK' if predF == idxF else 'MISMATCH'};  class number formula check spare {spF}")
+        assert predF == idxF, (n, idxF, predF)
+        assert spF >= need, (n, spF)
+        rec["sextic"] = (cu, hF, hFp, wF, wFp, QmF, idxF, certF, d2["FPOL"], d2["FPPOL"], prodCB_int)
+    say(f"hyperbolic level {n} done in {time.time() - t0:.1f} s")
+    return rec
 
 
 if __name__ == "__main__":

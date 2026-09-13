@@ -115,7 +115,9 @@ unit group of the ring class field $H_n$ for every level --- a Dedekind
 group determinant against the class number formula at $s = 0$ --- verified
 with PARI/GP down to the exact exponent matrices, which show that modulo
 $24$-th roots the index is exactly the class number times the
-imprimitivity multipliers.  Every finite claim is machine-verified;
+imprimitivity multipliers; the hyperbolic units have the analogous index
+in the odd units of their class field, $24^6$ exactly at level $21$.  Every
+finite claim is machine-verified;
 the scripts and precision policies are catalogued in an appendix.
 \end{abstract}
 
@@ -2192,6 +2194,54 @@ $\Q(\sqrt{d_2})$ with $\log|\theta^{(2)}_u| = \tfrac12\sum\chi_2\log|G| =
 -6m_\chi\log\eps_{d_2}$, i.e.\ $[\Z[\eps_{d_2}]^\times:\langle-1,\theta_u^{(2)}\rangle] = 6m_\chi$
 in the notation of Proposition \ref{prop:quadlayer}.
 
+The hyperbolic side has the same theorem, with a twist.  The units $R_f$
+of Theorem \ref{thm:unit} satisfy $R_{\idealr f} = R_f^{-1}$, so in the ring
+class field $H$ of discriminant $D = 1 - n^2$ over $K' = \Q(\sqrt D)$ they lie
+in the \emph{odd} units $E^- = \{u : \tau(u)u \in \mu\}$ for the involution
+$\tau = \sigma_\idealr$, and their character sums are $-24L'(0,\chi)$ on the odd
+characters and $0$ on the even ones (Theorem \ref{thm:Rpoly}).  Let
+$H^+ = H^\tau$ (totally complex, of degree $h$), $E = \Oc_H^\times/\mu$,
+$E^+$ the image of $\Oc_{H^+}^\times$, and $Q^- = [E:E^+E^-]$.
+
+\begin{theorem}[hyperbolic odd index]\label{thm:hypindex}
+For every odd $n \ge 3$,
+\[
+  \bigl[E^- : \langle R_f : f \in \Cl(D)\rangle\bigr]
+  \;=\; 24^{h/2}\cdot\frac{2^{h/2-1}}{Q^-}\cdot\frac{h_H\,w_{H^+}}{h_{H^+}\,w_H}
+  \cdot\prod_{\chi\ \mathrm{odd}}C_\chi(0).
+\]
+\end{theorem}
+
+\begin{proof}
+The odd functions on $\Cl(D)$ are coordinatized by a transversal $T$ of
+$\langle\idealr\rangle$, and for $f(x) = \log|R_x|$ the twisted group matrix
+$(f(a^{-1}b))_{a,b\in T}$ has the odd characters as eigenvectors with
+eigenvalues $\tfrac12S_{\bar\chi}(f)$, so the odd regulator of
+$\langle R_f\rangle$ is $\prod_{\chi\,\mathrm{odd}}|S_\chi| =
+24^{h/2}\prod_{\chi\,\mathrm{odd}}|L'(0,\chi)|$; $\zeta_H/\zeta_{H^+} =
+\prod_{\chi\,\mathrm{odd}}\Lprim(s,\chi)$ gives
+$\prod_{\chi\,\mathrm{odd}}\Lprim'(0,\chi) = (h_HR_H/w_H)/(h_{H^+}R_{H^+}/w_{H^+})$;
+and the orthogonal splitting of $E^+E^-$ in the log-space gives
+$R_H/R_{H^+} = 2^{h/2-1}R^-(E^-)/Q^-$.  Assemble as in Theorem
+\ref{thm:fullindex}.
+\end{proof}
+
+At the nine odd levels $5 \le n \le 21$ the index is computed exactly with
+PARI ($\tau$ from \texttt{nfgaloisconj} as the unique automorphism of $H/K'$
+inverting every $R_f$, $E^\pm$ as kernels on the unit lattice, $H^+$ from a
+primitive element, $Q^-$ with the action of $\tau$ on $\mu(H)$) and agrees
+with Theorem \ref{thm:hypindex} in every case, all fields of degree $\le 16$
+certified: $4, 12, 576, 96, 288, 663552, 768, 663552, 191102976$, with
+$Q^- = 1, 1, 2, 2, 2, 8, 2, 4, 32$ --- equal to $2^{h/2-1}$ except at $n = 19$,
+so $Q^-$ is a genuine invariant --- and $\prod C = 16$ at $n = 15$, $4$ at
+$n = 17$ (multipliers through exact projections to the smaller orders).
+At $n = 21$ ($D = -440$, $\Cl \cong \Z/6\times\Z/2$, $h_H = h_{H^+} = 4$) the
+index is $24^6$ exactly, and in the sextic layer cut out by an odd
+character of order $6$ the coset units $N_{H/F}(R_f)$ have index
+$27648 = 2\cdot24^3 = 24^3\,h_F/h_{F^+}$ in $E^-(F)$ ($h_F = 8$, $h_{F^+} = 4$,
+$Q^-_F = 4$; unconditional) --- the hyperbolic index datum asked for in
+Remark \ref{rem:hypindex}.
+
 \begin{proposition}[the record; computational]\label{prop:fullrecord}
 With PARI/GP 2.15.4 \cite{PARI} (\texttt{bnfinit} at $120$ digits, \texttt{bnfcertify}
 successful at every level $n \le 15$, so those rows are unconditional;
@@ -2265,9 +2315,8 @@ hyperbolic cubic layer degenerates identically.  The hyperbolic Robert
 index lives entirely on the odd characters: the quadratic layer of
 Proposition \ref{prop:quadlayer}, and the sextic $\chi_2\chi_3$-layer at
 levels such as $n = 21$, where the odd-part coset products of the $R_f$
-are units by Theorem \ref{thm:unit}; their index against the rank-$2$
-unit lattice is the first genuinely hyperbolic index datum (Section
-\ref{sec:outlook}).
+are units by Theorem \ref{thm:unit}; their index is Theorem
+\ref{thm:hypindex} and the record following it.
 \end{remark}
 
 %%% ============================================================
@@ -2298,11 +2347,12 @@ valuations of the phase \PaperI[\S6.7], the non-split part of the
 $\lambda_n$-law (Corollary \ref{cor:inert} reduces it to the
 $\beta$-collision slopes), and the general law of the conductor Euler
 corrections at square conductors.
-\item \emph{The hyperbolic sextic index.}  At $n = 21$, and at every
-level whose class group has a $6$-part, the odd-character coset products
-of the $R_f$ are units of the sextic subfield by Theorem \ref{thm:unit}
-(Remark \ref{rem:hypindex}); their index against the rank-$2$ unit
-lattice is the first genuinely hyperbolic Robert-index datum.
+\item \emph{The hyperbolic $2$-adic invariant.}  Theorem \ref{thm:hypindex}
+reduces the hyperbolic index to $h_H/h_{H^+}$, the roots of unity, the
+multipliers and $Q^- = [E:E^+E^-]$; the data ($Q^- = 2^{h/2-1}$ except at
+$n = 19$) ask for the cohomological law of $Q^-$ ($H^1$ of
+$\langle\sigma_\idealr\rangle$ on the units, i.e.\ ambiguous classes of
+$H/H^+$) and for the levels $n \ge 23$.
 \item \emph{Stark recognition for characters of order $> 2$.}  The
 certified coset cubics and quartics (Remark \ref{rem:cosetcubics},
 Section \ref{subsec:nonfits}) pin $L'(0,\chi_3)$, $L'(0,\chi_4)$ as
@@ -2431,11 +2481,12 @@ R_{L_3}$ as certified integers, $\log|\theta_u| = -8L'$, the index, and
 the regression record of Theorem \ref{thm:robert} & 250d; spare
 249--250 & 14--43 s per level\\
 \midrule
-\texttt{robert\_index\_full.py --selftest} & $n = 3, 5, 7, 9, 11, 13, 15$ (\texttt{--with-23}: $+\,n = 23$); needs PARI/GP 2.15.4 & 150d & 35 s ($+55$ s)\\
+\texttt{robert\_index\_full.py --selftest} & Euclidean $n = 3, 5, 7, 9, 11, 13, 15$ (\texttt{--with-23}: $+\,n = 23$), hyperbolic $n = 5, \dots, 21$; needs PARI/GP 2.15.4 & 150d & 78 s ($+55$ s)\\
 \quad determinant & Lemma \ref{lem:dedekind} on the $h$ numbers $\log|G_\idealc|$, signed, vs $2^{h-1}\prod S_\chi$; $S_\chi = -12L'(0,\chi)$ vs Lemma \ref{lem:gamma-eval} & rel.\ spare $\ge 148$ & \\
 \quad multipliers & primitive levels (exact kernels), $C_\chi(0)$ by Lemma \ref{lem:diricrec}, checked against $L'(0,\chi)/L'(0,\chi_{m_\chi})$ & spare $\ge 148$ & \\
 \quad PARI & $H_n$ by \texttt{polclass}/\texttt{polcompositum}/\texttt{polredbest}; \texttt{bnfinit} (120d), \texttt{bnfcertify} ($\deg \le 16$), $w$ vs Lemma \ref{lem:torsion}; index certified as an integer and equal to Theorem \ref{thm:fullindex}; \texttt{nfroots} of $D_n$, \texttt{bnfisunit} exponent matrices, Smith forms, saturation & spare $\ge 105$ & \\
 \quad layers & $\theta^{(2)}_u$ vs PARI's fundamental unit of $\Q(\sqrt{d_2})$; $\theta_u$ in $L_3$ and $F$ (\texttt{bnfcertify} = 1), Theorem \ref{thm:robert} re-derived, sextic indices & exact & \\
+\quad hyperbolic & Theorem \ref{thm:hypindex} at odd $n = 5, \dots, 21$: twisted determinant, multipliers by exact projections, $\tau$, $E^\pm$, exact index, $H^+$, $Q^-$, regulator relation, relative class number formula; sextic layer at $n = 21$ & spare $\ge 118$; exact & 60 s\\
 \bottomrule
 \end{tabular}
 \end{center}

@@ -140,8 +140,12 @@ imaginary quadratic base, Stark units, prime conductor).
   Theorem 6.6's cubic layer and the sextic F, a non-CM field), the
   PARI-verified record with exact exponent matrices, and the saturation
   observation (index exactly h ∏ C modulo 24-th roots; O^×/W ≅ Cl(H_n) at
-  n = 13, 23), stated as a conjecture of Gras type. Not claimed: any
-  identification of the 24-th roots with Siegel/Stark units.
+  n = 13, 23), stated as a conjecture of Gras type; and the hyperbolic odd
+  index (Theorem 6.13: the R_f in the odd units of the class field of
+  discriminant 1 - n^2, index 24^{h/2} times a relative class number, roots of
+  unity, multipliers and the 2-adic invariant Q^- = [E : E^+E^-]; exact at
+  nine levels, 24^6 at n = 21). Not claimed: any identification of the 24-th
+  roots with Siegel/Stark units, or a law for Q^-.
 
 ## Corrections and additions made while writing
 
@@ -162,9 +166,10 @@ imaginary quadratic base, Stark units, prime conductor).
   source document asserted this without proof. At the pullback levels
   C_n(0) is read off from the certified integer L'(0,χ_3)/R_{L_3} = h C_n(0).
 
-- (Robert-index session) Conjecture 6.7 replaced by Theorem 6.7 (full index)
-  and the saturated Conjecture 6.12; abstract, introduction, proved/certified
-  summary, plan, outlook item 4 and the appendix table updated; Washington
+- (Robert-index session) Conjecture 6.7 replaced by Theorem 6.7 (full index),
+  Theorem 6.12 (layers), Theorem 6.13 (hyperbolic odd index) and the saturated
+  Conjecture 6.16; abstract, introduction, proved/certified summary, plan,
+  Remark 6.8, outlook items 3–4 and the appendix table updated; Washington
   (GTM 83) and PARI/GP added to the bibliography; both selftests re-run before
   the edit (phase_klf 3 min 45 s, schmidt_units 3 min 0 s, all checks passed).
 

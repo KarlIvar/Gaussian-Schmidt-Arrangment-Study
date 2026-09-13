@@ -107,10 +107,13 @@ against the class number formula at \(s = 0\); the layer theorem gives the index
 every subfield cut out by a subgroup (the cubic \(8h_{L_3}C_n(0)\) of Paper II and the
 sextic \(576h_FC_n(0)^2\)); verified with PARI/GP at \(n = 3, \dots, 15\) (unconditional)
 and \(23\) (GRH) including the exact exponent matrices; Paper II's Conjecture 6.7
-replaced by the theorem (§6.3). *Remaining*: the \(24\)-th-root saturation
-conjecture (index exactly \(h_{H_n}\prod C_\chi(0)\), certified at all eight levels;
-Gras-type module statement) and the hyperbolic odd-unit index (first datum at
-\(n = 21\)).
+replaced by the theorem (§6.3). The hyperbolic side is Theorem 3 there: the index
+of the \(R_f\) in the odd units of the class field of discriminant \(1-n^2\) is
+\(24^{h/2}(2^{h/2-1}/Q^-)(h_Hw_{H^+})/(h_{H^+}w_H)\prod_{\mathrm{odd}}C_\chi(0)\), exact at the
+nine odd levels \(5 \le n \le 21\) (\(24^6\) at \(n = 21\); sextic layer \(2\cdot24^3\)).
+*Remaining*: the \(24\)-th-root saturation conjecture (index exactly
+\(h_{H_n}\prod C_\chi(0)\), certified at all eight levels; Gras-type module statement)
+and the law of the \(2\)-adic invariant \(Q^-\).
 
 ### Item 3 — Other imaginary quadratic fields. Status: open.
 

@@ -180,6 +180,9 @@ Planning: [PROGRAM.md](PROGRAM.md) is the program; [outlook.md](outlook.md) is t
     the Dirichlet-series Hecke recursion. Certified with PARI at \(n = 3\)–\(15\)
     (`bnfcertify`, unconditional) and \(23\) (GRH), exact exponent matrices included;
     saturated form \([\mathcal{O}^\times:\mathcal{W}_n] = h_{H_n}\prod C_\chi(0)\) certified at all eight levels, open in general.
+    **Hyperbolic odd index** (Thm 3 there): \([E^-:\langle R_f\rangle] = 24^{h/2}(2^{h/2-1}/Q^-)(h_Hw_{H^+})/(h_{H^+}w_H)\prod_{\mathrm{odd}}C_\chi(0)\)
+    in the odd units of the ring class field of disc \(1-n^2\), \(Q^- = [E:E^+E^-]\); proved; exact at
+    the nine odd levels \(5\le n\le21\) (\(=24^6\) at \(n = 21\); sextic layer \(27648 = 2\cdot24^3\), unconditional).
 
 ## Status ledger (open problems, deduplicated)
 
@@ -211,8 +214,9 @@ Planning: [PROGRAM.md](PROGRAM.md) is the program; [outlook.md](outlook.md) is t
   *The full index \([\mathcal{O}_{H_n}^\times:\mu\mathcal{V}_n]\) is now a theorem*
   ([robert-index-full.md](robert-index-full.md), item 2 of PROGRAM.md): open there
   are the \(24\)-th-root saturation conjecture (Gras-type: \(\mathcal{O}^\times/\mathcal{W}_n \cong \mathrm{Cl}(H_n)\)
-  at primitive levels, seen at \(n = 13, 23\)) and the hyperbolic odd-unit index
-  (\(n = 21\) datum: see [hyperbolic-index-21.md](hyperbolic-index-21.md) if present).
+  at primitive levels, seen at \(n = 13, 23\)); the hyperbolic odd-unit index is
+  Theorem 3 there (\(24^{h/2}\) times a relative class number and a 2-adic unit index;
+  \(= 24^6\) exactly at \(n = 21\)).
 - **Hyperbolic first-power loose ends**: \(T = 1\) (distinctness of \(u_f^{12}\)) for general
   \(n\) — the only gap between per-level and all-\(n\) irreducibility. (The Euclidean
   analogue was closed by archimedean dominance; try the same at level \(1-n^2\).)
@@ -262,7 +266,7 @@ off-line material live in `extra/scripts/` and are run the same way.
 | `phase_klf.py` | Kronecker-limit character sums: master identities, Epstein \(L'(0,\chi)\), genus factorizations with conductor Euler factors, exact \(\mathbb{Q}(\sqrt d)\) coset factorizations, \(D_n\)/\(R\)-polynomials, safe-PSLQ non-fits (`--selftest`: 250–400 digits) | phase-kronecker-limit |
 | `schmidt_units.py` | lattice lemma for \(R_f\); unit polynomials \(n\le21\) + imprimitive strata; Newton-polygon per-class law (to \(n=49\)); first-power \(w_f\) laws + \(m(n)\) table (odd \(n\le35\)); quadratic projections; cubic fundamental units, \(h_{L_3}\), Robert index \(8h_{L_3}\) (`--selftest`, ~45 s) | schmidt-units |
 | `schmidt_euler_system.py` | exact HNF class groups of \(\mathcal{O}_n\) (products, projections, ideal twists, cubic characters); norm relations at 42 pairs \((n,\ell)\) (all four cases, to level 125); Hecke recursion for \(S_\chi = -12L'\) (10 instances, closed forms of Paper II reproduced); Robert-index multipliers along four pullback chains (16 levels, to 81) (`--selftest`, 80 digits, ~70 s) | schmidt-euler-system |
-| `robert_index_full.py` | full Robert index: Dedekind determinant of the \(\log|G_\mathfrak{c}|\) vs \(\prod S_\chi\) (signed), independent Epstein \(L'\), exact primitive levels and multipliers \(C_\chi(0)\), PARI/GP (`bnfinit` 120 digits, `bnfcertify`, `nfroots` of \(D_n\), `bnfisunit` exponent matrices, Smith forms), certified integer index \(\ge105\) spare digits, layer fields \(\mathbb{Q}(\sqrt{d_2})\), \(L_3\), \(F\); regression record (`--selftest` ~35 s, `--with-23` +55 s; needs `gp`) | robert-index-full |
+| `robert_index_full.py` | full Robert index: Dedekind determinant of the \(\log|G_\mathfrak{c}|\) vs \(\prod S_\chi\) (signed), independent Epstein \(L'\), exact primitive levels and multipliers \(C_\chi(0)\), PARI/GP (`bnfinit` 120 digits, `bnfcertify`, `nfroots` of \(D_n\), `bnfisunit` exponent matrices, Smith forms), certified integer index \(\ge105\) spare digits, layer fields \(\mathbb{Q}(\sqrt{d_2})\), \(L_3\), \(F\); hyperbolic phase (odd units, \(\tau\) from `nfgaloisconj`, \(Q^-\), exact index, odd \(n\le21\)); regression records (`--selftest` ~80 s, `--with-23` +55 s; needs `gp`) | robert-index-full |
 | `first_power_descent.py` | exact \(\Phi_m\) (\(m\le10\)); \(\omega_f=1\) exact (odd \(n\le21\)); \(u=\Phi_y/\Phi_x\) vs \(\varepsilon\Theta\) (\(\ge108\) digits, \(n\le13\)); exact \(\Pi_n\) = published \(Q_n\), irreducible (\(n\le13\)) (`--selftest`, ~4 s) | first-power-descent |
 
 Scripts in `extra/scripts/` (off the program's line; run from the repo root, e.g.

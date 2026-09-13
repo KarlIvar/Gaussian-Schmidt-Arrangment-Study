@@ -40,7 +40,9 @@ field, times an explicit power of \(2\) and \(3\), times the Euler multipliers o
 imprimitive characters — the Kubert–Lang shape that Paper II conjectured, now for
 every level. The same argument gives the index in every subfield of \(H_n\) cut out
 by a subgroup of \(\mathrm{Pic}(\mathcal{O}_n)\) (Theorem 2), which contains the cubic layer of
-Paper II and settles the sextic layer; and the exponent matrices of the units in
+Paper II and settles the sextic layer; the hyperbolic units \(R_f\) of Paper II have
+the analogous index in the odd units of their class field, with a genuine \(2\)-adic
+invariant \(Q^-\) (Theorem 3, §5.6; \(= 24^6\) exactly at \(n = 21\)); and the exponent matrices of the units in
 PARI's fundamental-unit bases show, at every computed level, that modulo the
 \(24\)-th-root saturation of \(\mathcal{V}_n\) the index is *exactly*
 \(h_{H_n}\prod C_\chi(0)\) (§5, certified; conjectured in general).
@@ -52,7 +54,8 @@ character sums, the independent incomplete-gamma evaluation of \(L'(0,\chi)\), t
 class groups and multipliers exactly, and the class numbers, regulators, torsion
 and fundamental units of \(H_n\) with PARI/GP 2.15.4 — `bnfcertify` succeeded at
 every level \(n \le 15\), so those entries are **unconditional**; the level \(n = 23\)
-(degree 24) is GRH-conditional (§6). The numerics verify the proof; the proof does
+(degree 24) is GRH-conditional (§6); the hyperbolic levels \(5 \le n \le 21\) are
+unconditional except the degree-24 field at \(n = 21\). The numerics verify the proof; the proof does
 not rest on them.
 
 Notation as in Paper II and the Euler document: \(K = \mathbb{Q}(i)\), \(\chi_{-4}\) its
@@ -503,11 +506,101 @@ open. Note that Theorem 1 already implies the *order* of the \(p\)-part of
 \(\mathcal{O}^\times/\mathcal{W}_n\) for every \(p \ge 5\): it equals that of \(h_{H_n}\prod C_\chi(0)\),
 since the saturation only changes \(2\)- and \(3\)-parts.
 
+**5.6 The hyperbolic side: the odd-unit index.** The hyperbolic units of Paper II,
+Theorem 4.2, \(R_f = r_0^6\Delta(\mathfrak{b}_1)/\Delta(\mathfrak{r}^{-1}\mathfrak{b}_1)\), \(f \in \mathrm{Cl}(D)\),
+\(D = 1 - n^2\), live in the ring class field \(H\) of the order of discriminant \(D\) over
+\(K' = \mathbb{Q}(\sqrt D)\), with \(\sigma_\mathfrak{a}(R_f) = R_{\mathfrak{a}^{-1}f}\), \(\overline{R_f} = R_{f^{-1}}\)
+and \(R_{\mathfrak{r}f} = R_f^{-1}\). Let \(\tau = \sigma_\mathfrak{r}\) (an involution of \(H/K'\)),
+\(H^+ = H^\tau\) (degree \(h\) over \(\mathbb{Q}\), totally complex — it is not a real subfield),
+\(E = \mathcal{O}_H^\times/\mu\), \(E^\pm = \ker(1 \mp \tau) \subset E\) (the "even" and "odd" units;
+\(E^+\) is the image of \(\mathcal{O}_{H^+}^\times\)), and \(Q^- := [E : E^+E^-]\), a power of \(2\). The
+character sums vanish on the even characters and are \(-24L'(0,\chi)\) on the odd ones
+(\(\chi(\mathfrak{r}) = -1\); Paper II, Theorem 2.10), so \(\langle R_f\rangle \subset E^-\) has rank
+\(h/2 = \operatorname{rank}E^-\).
+
+> **Theorem 3 (hyperbolic odd index).** For every odd \(n \ge 3\),
+> $$
+> \bigl[E^- : \langle R_f : f \in \mathrm{Cl}(D)\rangle\bigr]
+> \;=\; 24^{h/2}\cdot\frac{2^{h/2-1}}{Q^-}\cdot\frac{h_H\,w_{H^+}}{h_{H^+}\,w_H}\cdot\prod_{\chi\ \mathrm{odd}}C_\chi(0),
+> $$
+> where \(C_\chi(0) = L'(0,\chi)/L'_{\mathrm{prim}}(0,\chi)\) (\(=1\) whenever \(D\) is a fundamental
+> discriminant, e.g. \(n = 21\)).
+
+*Proof.* Write \(f(x) = \log|R_x|\), an odd function on \(G = \mathrm{Cl}(D)\) with respect to
+\(C = \langle\mathfrak{r}\rangle\), and let \(T\) be a transversal of \(C\). The log-vectors of \(R_f\)
+at the places \(v_\mathfrak{a}\) are odd under \(\mathfrak{a} \mapsto \mathfrak{r}\mathfrak{a}\); the odd
+subspace of \(\mathbb{R}^G\) has dimension \(h/2\) and the coordinates indexed by \(T\) are
+coordinates on it. For \(R^-(U) := |\det(2\log|\sigma_a(u_j)|)_{a\in T,\,j}|\) (a set of \(h/2\)
+elements \(u_j\) of \(E^-\)) the index of full-rank sublattices of \(E^-\) is again the ratio
+of the \(R^-\)'s. *(i) The twisted group determinant.* For \(a \in T\) and an odd
+character \(\chi\), \(\sum_{b\in T}f(a^{-1}b)\chi(b) = \tfrac12\sum_{b\in G}f(a^{-1}b)\chi(b) = \tfrac12\chi(a)S_{\bar\chi}(f)\)
+(the two elements of a coset contribute equally), and the odd characters restricted to
+\(T\) are a basis of the functions on \(T\); hence \(\det(f(a^{-1}b))_{a,b\in T} = 2^{-h/2}\prod_{\chi\ \mathrm{odd}}S_\chi(f)\)
+and \(R^-(\langle R_f\rangle) = \bigl|\prod_{\chi\ \mathrm{odd}}S_\chi\bigr| = 24^{h/2}\prod_{\chi\ \mathrm{odd}}|L'(0,\chi)| \ne 0\).
+*(ii) The relative class number formula.* \(\zeta_H/\zeta_{H^+} = \prod_{\chi\ \mathrm{odd}}L_{\mathrm{prim}}(s,\chi)\)
+(the characters of \(\mathrm{Gal}(H^+/K')\) are the even ones), and \(r_H - r_{H^+} = h/2\), so
+\(\prod_{\chi\ \mathrm{odd}}L'_{\mathrm{prim}}(0,\chi) = \dfrac{h_HR_H/w_H}{h_{H^+}R_{H^+}/w_{H^+}}\).
+*(iii) Regulators.* In the orthogonal coordinates \((x_{v}+x_{\tau v})/\sqrt2\), \((x_v - x_{\tau v})/\sqrt2\)
+on \(\mathbb{R}^{\mathrm{places}(H)}\) the lattice \(E^+E^-\) splits, and the covolume computation gives
+\(R_H/R_{H^+} = 2^{h/2-1}R^-(E^-)/Q^-\) (the factor \(2^{h/2-1}\) is the CM-field factor
+\(2^{r}/Q\) of Washington, Prop. 4.16, in this non-CM situation; both \(H\) and \(H^+\)
+are totally complex, so no \(\delta_v\)-mismatch occurs). *(iv)* Assemble:
+\([E^-:\langle R_f\rangle] = R^-(\langle R_f\rangle)/R^-(E^-)\), insert (i)–(iii) and
+\(L'(0,\chi) = C_\chi(0)L'_{\mathrm{prim}}(0,\chi)\). \(\square\)
+
+The same statement holds in every layer \(F = H^A\), \(A \le \mathrm{Cl}(D)\) with \(\mathfrak{r} \notin A\),
+for the coset units \(u_b = N_{H/F}(R_f)\) and the odd characters of \(\mathrm{Cl}(D)/A\).
+
+**The record** (script phase H; \(\mathrm{Cl} = \mathrm{Cl}(D)\), \(\tau\)-action on \(\mu(H)\) shown as
+\(\zeta \mapsto \zeta^t\); all fields `bnfcertify` = 1 except \(H\) at \(n = 21\), degree 24, GRH):
+
+| \(n\) | \(D\) | \(\mathrm{Cl}\) | \(h_H\), \(\mathrm{Cl}(H)\) | \(w_H\) | \(h_{H^+}\), \(\mathrm{Cl}(H^+)\) | \(w_{H^+}\) | \(t\) | \(Q^-\) | \(\prod_{\mathrm{odd}}C\) | \([E^-:\langle R_f\rangle]\) |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 5 | \(-24\) | \(\mathbb{Z}/2\) | 1 | 6 | 2, \(\mathbb{Z}/2\) | 2 | 5 | 1 | 1 | \(4 = 24/6\) |
+| 7 | \(-48 = 4^2(-3)\) | \(\mathbb{Z}/2\) | 1 | 12 | 1 | 6 | 7 | 1 | 1 | \(12 = 24/2\) |
+| 9 | \(-80 = 2^2(-20)\) | \(\mathbb{Z}/4\) | 1 | 4 | 1 | 4 | 1 | 2 | 1 | \(576 = 24^2\) |
+| 11 | \(-120\) | \((\mathbb{Z}/2)^2\) | 2, \(\mathbb{Z}/2\) | 6 | 4, \(\mathbb{Z}/4\) | 2 | 5 | 2 | 1 | \(96 = 24^2/6\) |
+| 13 | \(-168\) | \((\mathbb{Z}/2)^2\) | 1 | 6 | 2, \(\mathbb{Z}/2\) | 6 | 1 | 2 | 1 | \(288 = 24^2/2\) |
+| 15 | \(-224 = 2^2(-56)\) | \(\mathbb{Z}/4\times\mathbb{Z}/2\) | 1 | 8 | 2, \(\mathbb{Z}/2\) | 2 | 7 | 8 | 16 | \(663552 = 2\cdot24^4\) |
+| 17 | \(-288 = 6^2(-8)\) | \((\mathbb{Z}/2)^2\) | 1 | 24 | 1 | 8 | 17 | 2 | 4 | \(768 = \tfrac43\,24^2\) |
+| 19 | \(-360 = 3^2(-40)\) | \(\mathbb{Z}/4\times\mathbb{Z}/2\) | 1 | 6 | 1 | 6 | 1 | 4 | 1 | \(663552 = 2\cdot24^4\) |
+| 21 | \(-440\) | \(\mathbb{Z}/6\times\mathbb{Z}/2\) | 4, \(\mathbb{Z}/4\) | 2 | 4, \((\mathbb{Z}/2)^2\) | 2 | 1 | 32 | 1 | \(191102976 = 24^6\) |
+
+Every row satisfies Theorem 3 exactly (the exact index from `bnfisunit` against the
+right side), the regulator relation \(R_H/R_{H^+} = 2^{h/2-1}R^-(E^-)/Q^-\) (spare \(\ge 119\)),
+and the relative class number formula \(\prod_{\mathrm{odd}}L'_{\mathrm{prim}}(0,\chi) = (hR/w)_H/(hR/w)_{H^+}\)
+(spare \(\ge 118\)). Three readings. (i) The powers of \(2\) and \(3\) are governed by the
+roots of unity of \(H\) and \(H^+\) and by \(Q^-\); \(Q^- = 2^{h/2-1}\) at eight of the nine
+levels (so that the \(2\)-adic factor of Theorem 3 is \(1\)) but \(Q^- = 2^{h/2-2}\) at \(n = 19\):
+\(Q^-\) is a genuine invariant, not a bookkeeping constant. (ii) At the fundamental
+levels with \(w_H = w_{H^+}\) — \(n = 9, 19, 21\) — the index is \(24^{h/2}\) times
+\(h_H/h_{H^+}\) times \(2^{h/2-1}/Q^-\): \(24^2\), \(2\cdot24^4\), \(24^6\). (iii) The multipliers of
+the imprimitive levels are computed through exact projections \(\mathrm{Cl}(D) \to \mathrm{Cl}(f'^2d_K)\)
+(ideal extension in the order of conductor \(f'\)) and the independent evaluation at
+the smaller discriminant: at \(n = 15\) the two odd quartic characters come from
+\(\mathrm{Cl}(-56)\) with \(C = 4 = 3 - \chi(\mathfrak{p}_2)\) each (\(2\) ramified in \(\mathbb{Q}(\sqrt{-14})\),
+\(\chi(\mathfrak{p}_2) = -1\)), at \(n = 17\) one odd character comes from \(\mathrm{Cl}(-72)\) with
+\(C = 4\) — the hyperbolic instances of Lemma 3.2, whose proof is the same for any
+imaginary quadratic field.
+
+**The sextic layer at \(n = 21\).** For the odd character \(\chi\) of order \(6\) with kernel
+\(A\) (order \(2\)), the coset units \(u_b = N_{H/F}(R_f)\), \(F = H^A\) of degree \(12\), are the
+roots of the certified palindromic sextic
+\(x^6 - 87350782811055827117922566\,x^5 - 114499870290142503112954895345\,x^4 - 3230730316507362342294534850844180\,x^3 - \cdots + 1\);
+\(F\): \(h_F = 8\) (\(\mathrm{Cl}(F) \cong \mathbb{Z}/8\)), \(w_F = 2\); \(F^+\) (degree 6): \(h = 4\), \(w = 2\);
+\(Q^-_F = 4 = 2^{3-1}\); both `bnfcertify` = 1. The exact index is
+$$
+\bigl[E^-(F) : \langle u_b\rangle\bigr] \;=\; 27648 \;=\; 2\cdot24^{3} \;=\; 24^3\cdot\frac{2^2}{Q^-_F}\cdot\frac{h_F}{h_{F^+}},
+$$
+the first genuinely hyperbolic Robert-index datum, **unconditional**: \(24^3\) times the
+relative class number \(h_F/h_{F^+} = 2\).
+
 ## 6. Machine verification
 
-`python3 scripts/robert_index_full.py --selftest` (levels \(n = 3, 5, 7, 9, 11, 13, 15\);
-add `--with-23` for the degree-\(24\) level; 87 s in total on one core, of which
-40 s are PARI's construction of \(H_{23}\)). Environment: Python 3 with `mpmath`
+`python3 scripts/robert_index_full.py --selftest` (Euclidean levels \(n = 3, 5, 7, 9, 11, 13, 15\)
+and hyperbolic levels \(n = 5, 7, \dots, 21\); add `--with-23` for the degree-\(24\) Euclidean
+level; 78 s in total on one core, plus 55 s for \(n = 23\), of which 40 s are PARI's
+construction of \(H_{23}\)). Environment: Python 3 with `mpmath`
 (150 digits) and `sympy` (Smith normal forms), and **PARI/GP 2.15.4** (`gp`, installed
 with `apt-get install pari-gp`), called through `gp -q` with generated scripts. For
 each level the script asserts:
@@ -551,6 +644,22 @@ each level the script asserts:
    (an independent confirmation of Paper II, Theorem 6.6 — the fundamental units there
    were obtained by root descent, here by PARI), and the exponent vectors of the three
    conjugates of \(\theta_u\) in \(F\) give the sextic indices of Corollary 5.2 exactly.
+
+7. **(H1–H4)** the hyperbolic phase, odd \(n = 5, \dots, 21\): the units \(R_f\) from the
+   lattice lemma (Paper II, Lemma 4.1), the \(R\)-polynomial re-certified against the
+   record of `schmidt_units.py`; the twisted group determinant over a transversal of
+   \(\langle\mathfrak{r}\rangle\) against \(\prod_{\mathrm{odd}}S_\chi\) (signed, spare \(\ge 150\)) with
+   \(S_\chi = -24L'(0,\chi)\) (independent evaluation) and the vanishing of the even sums;
+   the primitive conductor of every odd character through exact projections to the
+   orders of conductor \(f' \mid f\) and \(C_\chi(0) = L'(0,\chi)/L'(0,\chi_{f'})\) (both
+   independent evaluations), \(\prod C\) certified as an integer; PARI: \(H\) (from
+   `polclass`), \(h_H\), \(w_H\), \(R_H\), the \(h\) roots \(R_f\) as units, \(\tau\) as the unique
+   automorphism of \(H/K'\) inverting every \(R_f\), \(E^\pm\) as kernels on the unit lattice,
+   the exact index \([E^-:\langle R_f\rangle]\), \(H^+\) generated by \(\sqrt D + \sum c^i(R_{f_i} + R_{f_i}^{-1})\),
+   \(h_{H^+}, w_{H^+}, R_{H^+}\), \(Q^-\) (with the action of \(\tau\) on \(\mu(H)\)), the regulator
+   relation of step (iii), the relative class number formula of step (ii), and the
+   identity of Theorem 3 as an equality of integers; at \(n = 21\) also the sextic layer.
+   `bnfcertify` succeeded for every field of degree \(\le 16\).
 
 The record (\(\mathrm{Pic} = \mathrm{Pic}(\mathcal{O}_n)\); "index" \(= [\mathcal{O}_{H_n}^\times:\mu(H_n)\mathcal{V}_n]\);
 "spare" = spare digits of the integer certification of \(24^{h-1}\prod|L'|/R_{H_n}\)):
@@ -597,7 +706,8 @@ level = conductor; the \(\gcd\)-closure); Lemma 3.2 (the Hecke recursion of the 
 document as an identity of Dirichlet series, at every \(s\)); Corollary 3.3 (the
 multipliers are positive algebraic integers, \(\prod_\chi C_\chi(0) \in \mathbb{Z}_{>0}\), and
 \(L'(0,\chi) \ne 0\)); Lemma 4.1 (\(\mu(H_n)\)); **Theorem 1**; **Theorem 2** (layers) with
-Corollaries 5.1–5.2. Paper II's Conjecture 6.7 is thereby a theorem in its general
+Corollaries 5.1–5.2; **Theorem 3** (the hyperbolic odd index, with the exact
+\(2\)-adic invariant \(Q^-\)). Paper II's Conjecture 6.7 is thereby a theorem in its general
 form, and its cubic-layer form (Theorem 6.6 there) is contained in Theorem 2 up to the
 passage from \(F\) to its real subfield.
 
@@ -605,7 +715,9 @@ passage from \(F\) to its real subfield.
 `bnfcertify`) and \(n = 23\) (GRH-conditional); the exact exponent matrices and Smith
 forms; the saturation identity \([\mathcal{O}^\times_{H_n}:\mathcal{W}_n] = h_{H_n}\prod C_\chi(0)\) at all eight
 levels (§5.5); the independent PARI confirmation of the eight-level cubic table of
-Paper II at its four primitive levels.
+Paper II at its four primitive levels; the hyperbolic record of §5.6 at the nine odd
+levels \(5 \le n \le 21\) (unconditional except \(H\) at \(n = 21\)) with the sextic-layer index
+\(27648\) at \(n = 21\) (unconditional).
 
 **Open.** Conjecture 5.3 (the \(24\)-th-root saturation; the Galois-module statement
 \(\mathcal{O}^\times/\mathcal{W}_n \cong \mathrm{Cl}(H_n)\) at primitive levels — Gras-type); the
@@ -614,24 +726,17 @@ conductor), whose group has index \(h_{H_n}\) in \(\mathcal{O}_{H_n}^\times\) mo
 says \(\mathcal{V}_n\) has index \(4\cdot24^{h-1}/w\) times that, and §5.5 suggests the \(24\)-th
 roots of the \(\Delta\)-quotients *are* a Stark-type system; the Kolyvagin bound
 ([schmidt-euler-system.md](schmidt-euler-system.md) §5), for which Theorem 1 supplies
-the exact index that the bound should reproduce at every \(p \ge 5\); the hyperbolic
-index (§8).
+the exact index that the bound should reproduce at every \(p \ge 5\); the law of the
+\(2\)-adic invariant \(Q^-\) of Theorem 3 (\(= 2^{h/2-1}\) at eight levels, \(2^{h/2-2}\) at \(n = 19\)).
 
 ## 8. Outlook
 
-- **The hyperbolic index.** The hyperbolic units \(R_f\) (Paper II, Theorem 4.2) satisfy
-  \(R_{\mathfrak{r}f} = R_f^{-1}\), so their group has rank equal to the number of odd
-  characters (\(\chi(\mathfrak{r}) = -1\)) and lives in the "odd" units
-  \(E^- = \{u : \sigma_\mathfrak{r}(u)u \in \mu\}\) of the ring class field of \(\mathbb{Q}(\sqrt{1-n^2})\).
-  The Dedekind determinant over a transversal of \(\langle\mathfrak{r}\rangle\) gives
-  \(R^-(\langle R_f\rangle) = 24^{h/2}\prod_{\chi\ \mathrm{odd}}|L'(0,\chi)|\), and the class number
-  formula for \(H/H^{\langle\mathfrak{r}\rangle}\) gives \(\prod_{\chi\,\mathrm{odd}}L'_{\mathrm{prim}}(0,\chi)\)
-  as a ratio of \(hR/w\)'s; the index \([E^-:\mu\langle R_f\rangle]\) is therefore
-  \(24^{h/2}\) times a *relative* class number times a power of \(2\) (the index
-  \([E : E^+E^-]\)). The first datum, at \(n = 21\) (\(D = -440\), \(\mathrm{Pic} \cong \mathbb{Z}/2\times\mathbb{Z}/6\)),
-  is computed in [hyperbolic-index-21.md](hyperbolic-index-21.md) if present in the
-  repository, else it is the next step: the exact index from `bnfisunit` and
-  `nfgaloisconj`, against \(24^6\,h_H/h_{H^+}\).
+- **The hyperbolic index beyond the first levels.** Theorem 3 reduces the hyperbolic
+  Robert index to \(h_H/h_{H^+}\), the roots of unity, the multipliers and the \(2\)-adic
+  invariant \(Q^- = [E:E^+E^-]\) of the quadratic extension \(H/H^{\sigma_\mathfrak{r}}\); the
+  data (\(Q^- = 2^{h/2-1}\) except at \(n = 19\)) ask for the cohomological law of \(Q^-\)
+  (\(\widehat H^0\)/\(H^1\) of \(\langle\sigma_\mathfrak{r}\rangle\) on the units, i.e. ambiguous
+  classes of \(H/H^+\)), and for the levels \(n \ge 23\) with larger class groups.
 - **Siegel units.** Prove Conjecture 5.3's first half: identify the \(24\)-th roots of the
   \(G_\mathfrak{c}/G_1\) with Siegel–Ramachandra units of the ring class field (Kubert–Lang,
   Ch. 11–12) and compute their torsion ambiguity, which is exactly the \(w/4\)-defect
