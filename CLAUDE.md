@@ -330,7 +330,12 @@ see Paper planning below), and
 [08-euler-system-kolyvagin.md](prompts/08-euler-system-kolyvagin.md) (the
 continuation of [schmidt-euler-system.md](schmidt-euler-system.md): Kolyvagin's
 bound, the full index of the \(\Delta\)-units, the Stark comparison, and the
-port of Theorems 2–3 into Paper II §6).
+port of Theorems 2–3 into Paper II §6), and
+[09-full-robert-index.md](prompts/09-full-robert-index.md) (item 2 of the program:
+the analytic index formula \([\mathcal{O}_{H_n}^\times : \mu\mathcal{V}_n] = (4\cdot24^{h-1}/w)\,h_{H_n}\prod C_\chi(0)\)
+to prove via the Dedekind determinant and the class number formula, its PARI
+verification at \(n \le 15\) and \(23\), the layer indices, the hyperbolic sextic
+layer at \(n = 21\), and the port into Paper II).
 
 ## Paper planning
 

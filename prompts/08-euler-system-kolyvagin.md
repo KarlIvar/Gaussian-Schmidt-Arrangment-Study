@@ -34,13 +34,11 @@ classes \(\kappa_{n,\ell}(v) \in H_n^\times/p\) exist for inert
    (Küçüksakallı, Acta Arith. 153 (2012)); PARI/GP (`bnfinit`) may be
    installed with apt for the class-number side — record any such use in the
    verification section.
-2. **The full index.** Compute \([\mathcal{O}_{H_n}^\times : \mathcal{V}_n]\) at
-   \(n = 9, 11, 13\) (degree 12) and, if feasible, \(23\) (degree 24), with the
-   unit group from PARI and the \(\Delta\)-units from
-   `schmidt_euler_system.py`; decompose by characters and compare with the
-   prediction of the class number formula (Kubert–Lang shape, powers of 2
-   and 3 explicit). This settles Paper II's Conjecture 6.7 at those levels
-   and gives the quadratic and sextic layers.
+2. **The full index** is now its own handoff,
+   [09-full-robert-index.md](09-full-robert-index.md) (the analytic index
+   formula \([\mathcal{O}_{H_n}^\times : \mu\mathcal{V}_n] = (4\cdot24^{h-1}/w)\,h_{H_n}\prod C_\chi(0)\)
+   to prove, and its PARI verification); do it first if both are in one session,
+   since the Kolyvagin bound is stated in terms of that index.
 3. **Stark comparison.** Express Stark's unit of \(H_n\) (prime conductor
    \(n = 11, 13, 23\); Hajir–Rodriguez Villegas' explicit form) in terms of
    \(\mathcal{V}_n\), or show it is not in \(\mathcal{V}_n\); relate the two
