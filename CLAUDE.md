@@ -381,7 +381,12 @@ index theorem, the layer and hyperbolic theorems, ported to Paper II §6.3), and
 (item 3 of the program: the whole line over \(\mathbb{Q}(\sqrt{-2}), \mathbb{Q}(\sqrt{-3}), \mathbb{Q}(\sqrt{-7})\),
 then class number \(> 1\); **done** at class number one, experimental at \(\mathbb{Q}(\sqrt{-5})\) —
 results in [other-fields.md](other-fields.md); the prompt keeps the expected statements, several of
-which failed in instructive ways, see §10 there).
+which failed in instructive ways, see §10 there), and
+[11-horizontal-families.md](prompts/11-horizontal-families.md) (item 4 of the program,
+**staged**: the slices \((D,[\mathfrak{r}])\) and their unit systems, the realization
+criterion \(|d_K||D| + 4 = k^2\) with the twist read off from \(k\), imprimitive strata as
+carriers of the remaining slices (a Pell equation per \((K, D')\)), the even levels of
+\(i\mathcal{S}\), the index and the phase \(u = \Phi_y/\Phi_x\) on arbitrary slices).
 
 ## Paper planning
 

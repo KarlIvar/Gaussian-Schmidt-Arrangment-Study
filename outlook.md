@@ -300,6 +300,10 @@ PID with units \(\mu_4\), and only the hyperbolic side uses the coupling
    \(N^6\Delta(\mathfrak{b})/\Delta(\mathfrak{r}^{-1}\mathfrak{b})\) is a unit for
    every pair \((N, D)\) with such an \(\mathfrak{r}\); the Gaussian arrangement is
    the slice \(D = -4N(N+1)\), the even levels of \(i\mathcal{S}\) the next slice.
+   *Staged*: [prompts/11-horizontal-families.md](prompts/11-horizontal-families.md)
+   (slices \((D,[\mathfrak{r}])\), the realization criterion \(|d_K||D| + 4 = k^2\),
+   imprimitive strata as carriers, the even levels of \(i\mathcal{S}\), the index and
+   the phase on slices).
 5. **Other special unit systems from the same mechanism**: Stark recognition of
    the cubic/quartic coset objects; the spherical aspect's Pell-twisted units
    \(m_\ell/u^2\) (KLF transport); the first-power \(w_f\) after the cocycle;

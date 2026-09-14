@@ -156,7 +156,7 @@ base-character factor (experimental). *Remaining*: the cusp bookkeeping at \(h_K
 and a correction-free normalization; the non-Euclidean class-number-one fields; the
 sign law of \(M(n)\); the phase \(u = \Phi_y/\Phi_x\) over \(K\).
 
-### Item 4 — Horizontal families: Atkin–Lehner-coupled Heegner points. Status: open.
+### Item 4 — Horizontal families: Atkin–Lehner-coupled Heegner points. Status: open, staged ([prompts/11-horizontal-families.md](prompts/11-horizontal-families.md)).
 
 *Question.* The unit theorem needs only an invertible ambiguous ideal
 \(\mathfrak{r}\) with \(\mathfrak{r}^2\) principal in an order of an imaginary
@@ -177,6 +177,16 @@ polynomials agree on equal pairs \((D, [\mathfrak{r}])\) — \(D = -24\) at \(\m
 and the index on a few other slices (\(D = -4N(N+k)\), the odd discriminants
 \(1 - n^2\) of the even levels of \(i\mathcal{S}\)); identify the arrangements or
 Kleinian-group orbits that carry them.
+
+*Staged* ([prompts/11-horizontal-families.md](prompts/11-horizontal-families.md)): the
+slices are the pairs \((D, [\mathfrak{r}])\), \([\mathfrak{r}] \in \mathrm{Cl}(D)[2]\); \(\mathcal{S}_K\) has a
+primitive stratum of discriminant \(D\) iff \(|d_K||D| + 4 = k^2\), with the twist read off
+from \(k\) (the \(\mathrm{PGL}_2\)-arrangement of \(\mathbb{Q}(i)\) realizes every \(1 - n^2\), the even
+\(n\) on \(i\mathcal{S}\)); the imprimitive stratum of conductor \(f\) carries the slice
+\((D/f^2, [\mathfrak{r}_\alpha\mathcal{O}_{D/f^2}])\), so every discriminant occurs at every \(K\) along a
+Pell equation and the remaining slices (\(D = -56, -72, \dots\)) are reached there; the
+index and the phase \(u = \Phi_y/\Phi_x\) transport to arbitrary slices. All of this is
+computed, not yet proved or scripted.
 
 ### Item 5 — Other special unit systems from the same mechanism. Status: open.
 
@@ -225,7 +235,7 @@ Main tree (everything here feeds the line):
 | `papers/` | Papers I and II with their bibliographies and literature records |
 | `scripts/` | the verification scripts of the above (`--selftest` each) |
 | [other-fields.md](other-fields.md) | item 3: the line over \(\mathbb{Q}(\sqrt{-2}), \mathbb{Q}(\sqrt{-3}), \mathbb{Q}(\sqrt{-7}), \mathbb{Q}(\sqrt{-11})\), and \(\mathbb{Q}(\sqrt{-5})\) at \(n = 2, 3\) |
-| `prompts/` | 01, 04, 05 (done or staged on the line), 06–07 (the papers), 08 (item 1's continuation), 09 (item 2, done), 10 (item 3, done at class number one) |
+| `prompts/` | 01, 04, 05 (done or staged on the line), 06–07 (the papers), 08 (item 1's continuation), 09 (item 2, done), 10 (item 3, done at class number one), 11 (item 4, staged) |
 | [outlook.md](outlook.md) | the historical master outlook; its §6 summarizes this program |
 
 Moved to `extra/` ([extra/README.md](extra/README.md)): the monoid and operation
