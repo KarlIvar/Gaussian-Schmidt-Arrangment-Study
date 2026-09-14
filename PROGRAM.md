@@ -115,7 +115,7 @@ nine odd levels \(5 \le n \le 21\) (\(24^6\) at \(n = 21\); sextic layer \(2\cdo
 \(h_{H_n}\prod C_\chi(0)\), certified at all eight levels; Gras-type module statement)
 and the law of the \(2\)-adic invariant \(Q^-\).
 
-### Item 3 — Other imaginary quadratic fields. Status: staged ([prompts/10-other-imaginary-quadratic-fields.md](prompts/10-other-imaginary-quadratic-fields.md)).
+### Item 3 — Other imaginary quadratic fields. Status: **done at class number one** ([other-fields.md](other-fields.md)); class number two experimental.
 
 *Question.* Transport the whole line to Stange's arrangements \(\mathcal{S}_K\).
 
@@ -138,6 +138,24 @@ splitting in \(K\).
 *Deliverable.* The Kronecker limit formulas, the unit theorem and the Euler
 system for each \(K\); the Robert index at the first cubic levels.
 
+*Done* ([other-fields.md](other-fields.md), `scripts/other_fields.py`): for
+\(\mathbb{Q}(\sqrt{-2}), \mathbb{Q}(\sqrt{-3}), \mathbb{Q}(\sqrt{-7}), \mathbb{Q}(\sqrt{-11})\) the whole line —
+classification by \(\beta \equiv 1 \bmod \sqrt{d_K}\) with the orientation and level laws
+(\(2\alpha \equiv -2s \bmod |d_K|\), half-integral levels for \(d_K \equiv 1 \bmod 4\)), the
+discriminant \(4(\alpha^2-1)/d_K\), the class formula \(\hat\sigma[f] = [\mathfrak{r}_\alpha][f]^{-s}\)
+with the twist ideal of norm \((2\alpha-2)/\gcd(2\alpha-2,|d_K|)\), the unit theorem, the
+Euclidean dictionary \(N_e = \tfrac{w_K}{2}h\), the mass law with \(\tfrac{24}{w_Ke_p}\), the
+per-class valuations, the limit formulas with the genus fields \(\mathbb{Q}(\sqrt p)\) /
+\(\mathbb{Q}(\sqrt{p|d_K|})\), the norm relations with \(\pi^{12}\) and the sign \((-1)^{[\ell=2]}\),
+the torsion lemma and the index \(\tfrac{w_K24^{h-1}}{w_{H_n}}h_{H_n}\prod C\) — proved, and
+certified at 19 levels with `bnfcertify` (saturation \(= h_{H_n}\prod C\) throughout). At
+\(\mathbb{Q}(\sqrt{-5})\), \(n = 2, 3\): the single cusp sees the kernel (Stange), the two-cusp data
+\(n^{12}\Delta(\Lambda)/\Delta(\mathcal{O}_K\Lambda)\) satisfy the limit formula with a correction on the
+characters pulled back from \(\mathrm{Pic}(\mathcal{O}_K)\), and the index carries \(w_K/h_K\) and a
+base-character factor (experimental). *Remaining*: the cusp bookkeeping at \(h_K > 1\)
+and a correction-free normalization; the non-Euclidean class-number-one fields; the
+sign law of \(M(n)\); the phase \(u = \Phi_y/\Phi_x\) over \(K\).
+
 ### Item 4 — Horizontal families: Atkin–Lehner-coupled Heegner points. Status: open.
 
 *Question.* The unit theorem needs only an invertible ambiguous ideal
@@ -147,6 +165,13 @@ a unit, and which arrangements realize which slices?
 
 *Why it should work.* The proof of Paper II, Thm. 4.2 is verbatim general; the
 Gaussian arrangement is the slice \(D = -4N(N+1)\).
+
+*Progress.* The general theorem is Theorem 4 of [other-fields.md](other-fields.md)
+(the proof of Paper II §4 for an arbitrary invertible ambiguous twist with principal
+square), and the arrangements realize different slices of one family: the unit
+polynomials agree on equal pairs \((D, [\mathfrak{r}])\) — \(D = -24\) at \(\mathbb{Q}(i)\) level 5 and
+\(\mathbb{Q}(\sqrt{-2})\) level 7, \(D = -20\) at \(\mathbb{Q}(\sqrt{-3})\) level 4 and \(\mathbb{Q}(\sqrt{-7})\) level 6,
+\(D = -36\) at \(\mathbb{Q}(\sqrt{-7})\) level 8 and \(\mathbb{Q}(\sqrt{-11})\) level 10.
 
 *First move.* State and prove the general theorem; evaluate the limit formulas
 and the index on a few other slices (\(D = -4N(N+k)\), the odd discriminants
@@ -178,9 +203,8 @@ rebuilt first.
 ## 3. Order and dependencies
 
 1 (remaining part) and 2 reuse existing scripts and are single-session tasks;
-2 depends on nothing new. 3 at class number one depends on nothing new either,
-but is a multi-session rebuild; 3 at class number above one depends on the
-cusp bookkeeping. 4 depends on Paper II §4 only. 5(a) depends on Paper II §3;
+2 depends on nothing new. 3 at class number one is done (one session, one
+script); 3 at class number above one depends on the cusp bookkeeping. 4 depends on Paper II §4 only. 5(a) depends on Paper II §3;
 5(b) on the spherical proofs; 5(c) on the cocycle; 5(d) on 1. 6 is the deep end.
 
 Recommended order: 1 (remaining), 2, 3 at class number one, 4, 5, 3 at class
@@ -200,7 +224,8 @@ Main tree (everything here feeds the line):
 | [spherical-moduli-invariants.md](spherical-moduli-invariants.md) | item 5(b) |
 | `papers/` | Papers I and II with their bibliographies and literature records |
 | `scripts/` | the verification scripts of the above (`--selftest` each) |
-| `prompts/` | 01, 04, 05 (done or staged on the line), 06–07 (the papers), 08 (item 1's continuation), 09 (item 2, done), 10 (item 3, staged) |
+| [other-fields.md](other-fields.md) | item 3: the line over \(\mathbb{Q}(\sqrt{-2}), \mathbb{Q}(\sqrt{-3}), \mathbb{Q}(\sqrt{-7}), \mathbb{Q}(\sqrt{-11})\), and \(\mathbb{Q}(\sqrt{-5})\) at \(n = 2, 3\) |
+| `prompts/` | 01, 04, 05 (done or staged on the line), 06–07 (the papers), 08 (item 1's continuation), 09 (item 2, done), 10 (item 3, done at class number one) |
 | [outlook.md](outlook.md) | the historical master outlook; its §6 summarizes this program |
 
 Moved to `extra/` ([extra/README.md](extra/README.md)): the monoid and operation

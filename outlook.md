@@ -282,13 +282,18 @@ PID with units \(\mu_4\), and only the hyperbolic side uses the coupling
    there (\(24^6\) at \(n = 21\)). *Remaining*: the \(24\)-th-root saturation
    (index exactly \(h_{H_n}\prod C_\chi(0)\), Gras-type) and the law of the \(2\)-adic
    invariant \(Q^-\).
-3. **Other imaginary quadratic fields** (Stange's \(\mathcal{S}_K\)): class number
-   one first (\(\mathbb{Q}(\sqrt{-3})\) tests the \(\mu_6\) torsion; the genus
-   field should become \(\mathbb{Q}(\sqrt f)\) or \(\mathbb{Q}(\sqrt{f|D_K|})\)); then
-   class number \(>1\): cusps \(\leftrightarrow\) ideal classes, the level at one
-   cusp sees only \(\ker(\mathrm{Pic}(\mathcal{O}_f)\to\mathrm{Pic}(\mathcal{O}_K))\),
-   the full unit system lives on pairs \(\Lambda\subset L\) over all cusps; the
-   fiber lemma of schmidt-euler-system.md is local and transports.
+3. **Other imaginary quadratic fields — DONE at class number one**
+   ([other-fields.md](other-fields.md)): the whole line over
+   \(\mathbb{Q}(\sqrt{-2}), \mathbb{Q}(\sqrt{-3}), \mathbb{Q}(\sqrt{-7}), \mathbb{Q}(\sqrt{-11})\) — congruence
+   classification with orientation and half-integral levels, the twist ideal
+   of norm \((2\alpha-2)/\gcd(2\alpha-2,|d_K|)\), the unit theorem, the mass law with
+   \(24/(w_Ke_p)\), the genus fields \(\mathbb{Q}(\sqrt p)\) / \(\mathbb{Q}(\sqrt{p|d_K|})\) (the
+   predicted \(\mathbb{Q}(\sqrt{f|D_K|})\) at \(p \equiv 3 \bmod 4\)), the norm relations with
+   \(\pi^{12}\) and the sign \((-1)^{[\ell=2]}\), the index with \(w_K\) in place of \(4\)
+   (19 levels, `bnfcertify`). Class number two (\(\mathbb{Q}(\sqrt{-5})\), \(n = 2, 3\)):
+   the single cusp sees the kernel, the two-cusp data need a correction on the
+   base characters — experimental. *Remaining*: the cusp bookkeeping, the
+   non-Euclidean class-number-one fields, the sign law of \(M(n)\), the phase.
 4. **Horizontal families: Atkin–Lehner-coupled Heegner points.** The unit theorem
    needs only an invertible ambiguous \(\mathfrak{r}\) with \(\mathfrak{r}^2\)
    principal in an order of any imaginary quadratic field, so

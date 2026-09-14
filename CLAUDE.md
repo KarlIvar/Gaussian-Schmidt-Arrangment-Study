@@ -98,6 +98,7 @@ Phase layer (CM machinery):
 | [schmidt-units.md](schmidt-units.md) | **unit theorem proved**: \(R_f = r_0^6\Delta(\mathfrak{b}_1)/\Delta(\mathfrak{r}^{-1}\mathfrak{b}_1)\) is a unit for every class (imprimitive strata included; \(R\equiv1\) iff induced twist principal); per-class valuation law \(v_P(G_\mathfrak{c}) = w_p(k)\) class-independent (proved, Newton-polygon-verified to \(n=49\)) settling the split \(\lambda_n\)-ladder; first-power \(w_f\) (\(w^6=R\), laws at first power, \(\mu_6\)-cocycle, coherence table \(m(n)\), \(w=-\varepsilon_{12}^{\pm1}\) at \(n=7\)); **Robert index** \([\mathcal{O}_{L_3}^\times:\langle-1,\theta_u\rangle]=8h_{L_3}\) at Euclidean \(n=9,11,13\) (\(h=1,1,3\)) |
 | [schmidt-euler-system.md](schmidt-euler-system.md) | **the \(\Delta\)-data are an Euler system** over the ring class tower \(H_n \subset H_{n\ell}\): norm relations of Heegner shape with the Eisenstein eigenvalue \(\ell+1\) (Thm 1, proved from Paper I's M1 + a fiber lemma); Hecke recursion \(L'(0,\chi^{(n\ell)}) = P_\ell(\chi)L'(0,\chi)\) proving every imprimitive Euler multiplier (\(1+3^{1-2s}\) at \(n=9\), the two \(n=15\) \(\varepsilon\)-ratios, \(C_n(0) = 2,2,2,4\)); Robert index along the tower (multipliers \(2, 4, 7, 8, 13\) certified to level 81); Kolyvagin derivative classes descend (Lemma 5.1); the ratios \(G_\mathfrak{c}/G_{\mathfrak{c}'}\) are units |
 | [robert-index-full.md](robert-index-full.md) | **the full Robert index proved**: \([\mathcal{O}_{H_n}^\times : \mu(H_n)\mathcal{V}_n] = 24^{h-1}\prod_{\chi\ne1}|L'(0,\chi)|/R_{H_n} = (4\cdot24^{h-1}/w_{H_n})\,h_{H_n}\prod_\chi C_\chi(0)\) for every level (Dedekind determinant + class number formula at \(s=0\)); layer theorem for every subfield cut out by a subgroup (cubic \(8h_{L_3}\), sextic \(576h_F\)); Dirichlet-series form of the Hecke recursion; \(\mu(H_n)\); PARI-certified at \(n\le15\) (unconditional), \(23\) (GRH); \(24\)-th-root saturation: index exactly \(h_{H_n}\prod C_\chi(0)\) (certified, conjectured) |
+| [other-fields.md](other-fields.md) | **the line over other imaginary quadratic fields** (item 3): for \(K = \mathbb{Q}(\sqrt{-2}), \mathbb{Q}(\sqrt{-3}), \mathbb{Q}(\sqrt{-7}), \mathbb{Q}(\sqrt{-11})\): the congruence classification \(\beta \equiv 1 \bmod \sqrt{d_K}\) with descent, unique orientations for \(K \ne \mathbb{Q}(i)\), half-integral levels \(2\alpha \equiv -2s \bmod |d_K|\); level-\(\alpha\) circles = forms of disc \(4(\alpha^2-1)/d_K\) (census \(3H\)); class formula \(\hat\sigma[f] = [\mathfrak{r}_\alpha][f]^{-s}\) with the twist ideal of norm \((2\alpha-2)/\gcd(2\alpha-2,|d_K|)\) (proved: Lemmas A′–C′ with \(g_s = \alpha N + s\operatorname{Re}(u^2)\)); unit theorem for \(R_f\); \(N_e = \tfrac{w_K}{2}h\), mass law \(\tfrac{24}{w_Ke_p}\), per-class valuations; KLF and genus fields \(\mathbb{Q}(\sqrt p)\)/\(\mathbb{Q}(\sqrt{p|d_K|})\); norm relations with \(\pi^{12}\) and the sign \((-1)^{[\ell=2]}\); torsion lemma; full index \(\tfrac{w_K24^{h-1}}{w_{H_n}}h_{H_n}\prod C\) (19 levels, all `bnfcertify`); \(\mathbb{Q}(\sqrt{-5})\) two-cusp dictionary with the corrected KLF and the index factor \(w_K/h_K\) (experimental) |
 | [spherical-moduli-invariants.md](spherical-moduli-invariants.md) | third geometry: \(\cot\theta = \ell\); census \(4H(4(\ell^2+1))\); shape polynomial \(\prod_{f^2\mid\ell^2+1}H_{-4(\ell^2+1)/f^2}\) (each stratum once); trace slice \(t(4\ell^2+4)\); Pell-unit phase, cap-swap \(u^2_-=\varepsilon^4u^2_+\), level norm \(m_\ell\) with GZ valuation law; **half-orbit phenomenon** (phases = half the Galois root system, golden-ratio cocycle at \(\ell=2\)) |
 
 Off the program's line, in [extra/](extra/README.md) (unchanged content, links rewritten):
@@ -184,6 +185,23 @@ Planning: [PROGRAM.md](PROGRAM.md) is the program; [outlook.md](outlook.md) is t
     in the odd units of the ring class field of disc \(1-n^2\), \(Q^- = [E:E^+E^-]\); proved; exact at
     the nine odd levels \(5\le n\le21\) (\(=24^6\) at \(n = 21\); sextic layer \(27648 = 2\cdot24^3\), unconditional).
 
+23. **Other imaginary quadratic fields** ([other-fields.md](other-fields.md)): for
+    \(K = \mathbb{Q}(\sqrt{-2}), \mathbb{Q}(\sqrt{-3}), \mathbb{Q}(\sqrt{-7}), \mathbb{Q}(\sqrt{-11})\) the whole line transports:
+    classification by \(\beta \equiv 1 \bmod \sqrt{d_K}\mathcal{O}_K\) (necessity for every \(K\), descent for the
+    five Euclidean fields), unique orientation of every circle (\(K \ne \mathbb{Q}(i)\)), levels
+    \(2\alpha \equiv -2s \bmod |d_K|\) (half-integral for \(d_K \equiv 1 \bmod 4\)), discriminant
+    \(D_K(\alpha) = 4(\alpha^2-1)/d_K\), class formula \(\hat\sigma[f] = [\mathfrak{r}_\alpha][f]^{-s}\) (twist ideal of
+    norm \(r_0 = (2\alpha-2)/\gcd(2\alpha-2,|d_K|)\), \(\mathfrak{r}\mathfrak{s} = (\theta_D)\)), unit theorem, Euclidean
+    dictionary \(N_e(n) = \tfrac{w_K}{2}h(\mathcal{O}_n)\), mass law with exponent \(\tfrac{24}{w_Ke_p}\tfrac{p^k-1}{p-1}N_e(n/p^k)\),
+    per-class valuations \(12(p^k-1)/(e_p(p-1)N_e(p^k))\), KLF with genus fields \(\mathbb{Q}(\sqrt p)\) or
+    \(\mathbb{Q}(\sqrt{p|d_K|})\), norm relations with \(\pi^{12}\) at the ramified prime and the global sign
+    \((-1)^{[\ell=2]}\), \(\mu(H_n)\) by conductors, and the full index
+    \([\mathcal{O}_{H_n}^\times:\mu\mathcal{V}_n] = \tfrac{w_K24^{h-1}}{w_{H_n}}h_{H_n}\prod C_\chi(0)\). Proved (all \(K\) with
+    \(h_K = 1\), Euclidean for the descent); certified at 19 levels with `bnfcertify` (saturation
+    \(= h_{H_n}\prod C\) at all, including \(h_{H_5} = 2\) over \(\mathbb{Q}(\sqrt{-11})\)). Horizontal coincidences:
+    equal unit polynomials on equal slices \((D,[\mathfrak{r}])\) (item 4). \(\mathbb{Q}(\sqrt{-5})\) at \(n = 2, 3\):
+    experimental (corrected KLF on the base characters, index with \(w_K/h_K\)).
+
 ## Status ledger (open problems, deduplicated)
 
 - **Kronecker limit formula for the phases: settled** (outlook §2.3 / euclidean §6.6,
@@ -238,6 +256,11 @@ Planning: [PROGRAM.md](PROGRAM.md) is the program; [outlook.md](outlook.md) is t
   cap-swap law and \(T\)-norm lemma proofs; the \(\ell=4\) coefficient field; the cocycle
   calculus (what replaces Kronecker's theorem when the cocycle lives in a real field);
   the geometric carrier of the virtual partners \(m_\ell/u^2\).
+- **Other fields** ([other-fields.md](other-fields.md)): done at class number one; open: the sign
+  law of \(M(n)\) (certified, mechanism explained), sufficiency of the congruence classification at
+  the non-Euclidean class-number-one fields, the cusp bookkeeping and a correction-free normalization
+  at class number \(> 1\), the transport of the phase \(u = \Phi_y/\Phi_x\), the enumeration of the
+  horizontal slices \((D, [\mathfrak{r}])\) realized by each \(K\) (item 4).
 - The **large programs**: see outlook.md §3, spectral-outlook.md, and the per-document
   outlooks (trace formula, ortholength spectrum, Kronecker limit formula for
   \(\log|u|\), heights/unlikely intersections, other fields, transfer operators,
@@ -268,6 +291,7 @@ off-line material live in `extra/scripts/` and are run the same way.
 | `schmidt_euler_system.py` | exact HNF class groups of \(\mathcal{O}_n\) (products, projections, ideal twists, cubic characters); norm relations at 42 pairs \((n,\ell)\) (all four cases, to level 125); Hecke recursion for \(S_\chi = -12L'\) (10 instances, closed forms of Paper II reproduced); Robert-index multipliers along four pullback chains (16 levels, to 81) (`--selftest`, 80 digits, ~70 s) | schmidt-euler-system |
 | `robert_index_full.py` | full Robert index: Dedekind determinant of the \(\log|G_\mathfrak{c}|\) vs \(\prod S_\chi\) (signed), independent Epstein \(L'\), exact primitive levels and multipliers \(C_\chi(0)\), PARI/GP (`bnfinit` 120 digits, `bnfcertify`, `nfroots` of \(D_n\), `bnfisunit` exponent matrices, Smith forms), certified integer index \(\ge105\) spare digits, layer fields \(\mathbb{Q}(\sqrt{d_2})\), \(L_3\), \(F\); hyperbolic phase (odd units, \(\tau\) from `nfgaloisconj`, \(Q^-\), exact index, odd \(n\le21\)); regression records (`--selftest` ~80 s, `--with-23` +55 s; needs `gp`) | robert-index-full |
 | `first_power_descent.py` | exact \(\Phi_m\) (\(m\le10\)); \(\omega_f=1\) exact (odd \(n\le21\)); \(u=\Phi_y/\Phi_x\) vs \(\varepsilon\Theta\) (\(\ge108\) digits, \(n\le13\)); exact \(\Pi_n\) = published \(Q_n\), irreducible (\(n\le13\)) (`--selftest`, ~4 s) | first-power-descent |
+| `other_fields.py` | the line over \(\mathbb{Q}(\sqrt{-2}), \mathbb{Q}(\sqrt{-3}), \mathbb{Q}(\sqrt{-7}), \mathbb{Q}(\sqrt{-11})\) (and the Gaussian anchor): orbit BFS = congruences, level sets, descent, class formula + Lemmas A′–C′ at every class of ten levels per field; unit polynomials (200 digits) with laws and KLF; \(D_n\), mass law, sign, Newton polygons, KLF vs independent evaluation, genus closed forms (PARI `quadunit`); norm relations at 26+27+25+21 pairs, Hecke recursion; PARI index (`bnfinit`/`bnfcertify`/`nfroots`/`bnfisunit`, Smith forms, saturation, quadratic and cubic layers) at 19 levels; \(\mathbb{Q}(\sqrt{-5})\) two-cusp data (`--selftest` ~3.5 min; needs `gp`) | other-fields |
 
 Scripts in `extra/scripts/` (off the program's line; run from the repo root, e.g.
 `python3 extra/scripts/atomic_census.py`; the four that import the main scripts put
@@ -355,8 +379,9 @@ port of Theorems 2–3 into Paper II §6; its item 2, the full index, is **done*
 index theorem, the layer and hyperbolic theorems, ported to Paper II §6.3), and
 [10-other-imaginary-quadratic-fields.md](prompts/10-other-imaginary-quadratic-fields.md)
 (item 3 of the program: the whole line over \(\mathbb{Q}(\sqrt{-2}), \mathbb{Q}(\sqrt{-3}), \mathbb{Q}(\sqrt{-7})\),
-then class number \(> 1\); staged, with the expected statements and the constants
-\(w_K/h_K\) displayed).
+then class number \(> 1\); **done** at class number one, experimental at \(\mathbb{Q}(\sqrt{-5})\) —
+results in [other-fields.md](other-fields.md); the prompt keeps the expected statements, several of
+which failed in instructive ways, see §10 there).
 
 ## Paper planning
 
