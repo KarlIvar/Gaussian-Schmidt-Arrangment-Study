@@ -294,12 +294,17 @@ PID with units \(\mu_4\), and only the hyperbolic side uses the coupling
    the single cusp sees the kernel, the two-cusp data need a correction on the
    base characters — experimental. *Remaining*: the cusp bookkeeping, the
    non-Euclidean class-number-one fields, the sign law of \(M(n)\), the phase.
-4. **Horizontal families: Atkin–Lehner-coupled Heegner points.** The unit theorem
-   needs only an invertible ambiguous \(\mathfrak{r}\) with \(\mathfrak{r}^2\)
-   principal in an order of any imaginary quadratic field, so
-   \(N^6\Delta(\mathfrak{b})/\Delta(\mathfrak{r}^{-1}\mathfrak{b})\) is a unit for
-   every pair \((N, D)\) with such an \(\mathfrak{r}\); the Gaussian arrangement is
-   the slice \(D = -4N(N+1)\), the even levels of \(i\mathcal{S}\) the next slice.
+4. **Horizontal families: Atkin–Lehner-coupled Heegner points — DONE**
+   ([horizontal-families.md](horizontal-families.md)): the slices \((D,[\mathfrak{r}])\)
+   (pairs of primitive ambiguous ideals ↔ \(\mathrm{Cl}(D)[2]\)), the levels
+   \(k = t|d_K|\pm2\) of every \(\mathcal{S}_K\) with twists of norm \(t\) and the
+   realization criterion, the stratum law along the Pell solutions (class \(c^j\),
+   odd-prime rule proved), the even levels of \(i\mathcal{S}\) (class formula with
+   \((n-1,n-1,\tfrac n2)\), \(x^2-7x+1\) at \(n=4\)), the second-kind orbit
+   \(\mathcal{S}_K^\perp\) (classified, no twist), the genus law of the twist, and the
+   odd index and the phase on arbitrary slices. *Remaining*: the \(2\)-adic stratum
+   law, the non-principal cusps, carriers for the unreached slices
+   (\((-160,[(5,0,8)])\)).
 5. **Other special unit systems from the same mechanism**: Stark recognition of
    the cubic/quartic coset objects; the spherical aspect's Pell-twisted units
    \(m_\ell/u^2\) (KLF transport); the first-power \(w_f\) after the cocycle;
@@ -311,5 +316,5 @@ PID with units \(\mu_4\), and only the hyperbolic side uses the coupling
    Gross–Zagier heights); function fields (Drinfeld modular units, Gekeler's
    \(\Delta\), Hayes' elliptic units).
 
-Suggested order: 1 (done), 2 (done), 3 at class number one, 4, 5, 3 at class number
+Suggested order: 1 (done), 2 (done), 3 at class number one (done), 4 (done), 5, 3 at class number
 \(>1\), 6.

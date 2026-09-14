@@ -100,6 +100,7 @@ Phase layer (CM machinery):
 | [robert-index-full.md](robert-index-full.md) | **the full Robert index proved**: \([\mathcal{O}_{H_n}^\times : \mu(H_n)\mathcal{V}_n] = 24^{h-1}\prod_{\chi\ne1}|L'(0,\chi)|/R_{H_n} = (4\cdot24^{h-1}/w_{H_n})\,h_{H_n}\prod_\chi C_\chi(0)\) for every level (Dedekind determinant + class number formula at \(s=0\)); layer theorem for every subfield cut out by a subgroup (cubic \(8h_{L_3}\), sextic \(576h_F\)); Dirichlet-series form of the Hecke recursion; \(\mu(H_n)\); PARI-certified at \(n\le15\) (unconditional), \(23\) (GRH); \(24\)-th-root saturation: index exactly \(h_{H_n}\prod C_\chi(0)\) (certified, conjectured) |
 | [other-fields.md](other-fields.md) | **the line over other imaginary quadratic fields** (item 3): for \(K = \mathbb{Q}(\sqrt{-2}), \mathbb{Q}(\sqrt{-3}), \mathbb{Q}(\sqrt{-7}), \mathbb{Q}(\sqrt{-11})\): the congruence classification \(\beta \equiv 1 \bmod \sqrt{d_K}\) with descent, unique orientations for \(K \ne \mathbb{Q}(i)\), half-integral levels \(2\alpha \equiv -2s \bmod |d_K|\); level-\(\alpha\) circles = forms of disc \(4(\alpha^2-1)/d_K\) (census \(3H\)); class formula \(\hat\sigma[f] = [\mathfrak{r}_\alpha][f]^{-s}\) with the twist ideal of norm \((2\alpha-2)/\gcd(2\alpha-2,|d_K|)\) (proved: Lemmas A′–C′ with \(g_s = \alpha N + s\operatorname{Re}(u^2)\)); unit theorem for \(R_f\); \(N_e = \tfrac{w_K}{2}h\), mass law \(\tfrac{24}{w_Ke_p}\), per-class valuations; KLF and genus fields \(\mathbb{Q}(\sqrt p)\)/\(\mathbb{Q}(\sqrt{p|d_K|})\); norm relations with \(\pi^{12}\) and the sign \((-1)^{[\ell=2]}\); torsion lemma; full index \(\tfrac{w_K24^{h-1}}{w_{H_n}}h_{H_n}\prod C\) (19 levels, all `bnfcertify`); \(\mathbb{Q}(\sqrt{-5})\) two-cusp dictionary with the corrected KLF and the index factor \(w_K/h_K\) (experimental) |
 | [spherical-moduli-invariants.md](spherical-moduli-invariants.md) | third geometry: \(\cot\theta = \ell\); census \(4H(4(\ell^2+1))\); shape polynomial \(\prod_{f^2\mid\ell^2+1}H_{-4(\ell^2+1)/f^2}\) (each stratum once); trace slice \(t(4\ell^2+4)\); Pell-unit phase, cap-swap \(u^2_-=\varepsilon^4u^2_+\), level norm \(m_\ell\) with GZ valuation law; **half-orbit phenomenon** (phases = half the Galois root system, golden-ratio cocycle at \(\ell=2\)) |
+| [horizontal-families.md](horizontal-families.md) | **item 4, the slices \((D, [\mathfrak{r}])\)**: slice theorem (primitive ambiguous ideals = \((r_0,0,s_0)\), \((r_0,r_0,\tfrac{r_0+s_0}4)\), \(2^\mu\) of them, pairs \(\{\mathfrak{r},\mathfrak{s}\}\) with \(\mathfrak{r}\mathfrak{s}=(\theta)\) ↔ \(\mathrm{Cl}(D)[2]\), rank \(h/2\)); the levels of \(\mathcal{S}_K\) are \(k = t|d_K|\pm2\) (\(4mt\pm2\)) with **twists of norm \(t\)** (criterion \(|d_K||D|+4=k^2\), coincidence tables — \(D=-84\) three classes at three fields —, unrealized slices, class-number-two principal cusps); the stratum law along the Pell solutions \(k^2-|d_K||D'|f^2=4\) (class \(c^j\), odd-prime rule proved; \((-160,[(5,0,8)])\) reached by no stratum); the even levels of \(i\mathcal{S}\) (\(\hat\sigma[f]=[(n-1,n-1,\tfrac n2)][f]^{-s}\) by Lemma A with the odd-\(D\) Gram form; \(x^2-7x+1\) at \(n=4\); odd index); the second-kind orbit \(\mathcal{S}_K^\perp=\mathrm{PSL}_2(\mathcal{O}_K)\cdot i\hat{\mathbb{R}}\) classified (discriminants \(4-y^2|d_K|\), no twist); genus law of the twist; the odd index (12 slices, unconditional) and the phase \(u=\Phi_y/\Phi_x\) (16 slices, exact \(\Pi\) irreducible) on arbitrary slices |
 
 Off the program's line, in [extra/](extra/README.md) (unchanged content, links rewritten):
 
@@ -201,6 +202,22 @@ Planning: [PROGRAM.md](PROGRAM.md) is the program; [outlook.md](outlook.md) is t
     \(= h_{H_n}\prod C\) at all, including \(h_{H_5} = 2\) over \(\mathbb{Q}(\sqrt{-11})\)). Horizontal coincidences:
     equal unit polynomials on equal slices \((D,[\mathfrak{r}])\) (item 4). \(\mathbb{Q}(\sqrt{-5})\) at \(n = 2, 3\):
     experimental (corrected KLF on the base characters, index with \(w_K/h_K\)).
+24. **Horizontal families** ([horizontal-families.md](horizontal-families.md)): the slice
+    theorem (Thm 1: pairs of primitive ambiguous ideals ↔ \(\mathrm{Cl}(D)[2]\), \(2^\mu\) ideals,
+    \([\mathfrak{r}]=1\) iff \(\min(r_0,s_0)=1\), unit system of rank \(h/2\)); the levels of
+    \(\mathcal{S}_K\) at the principal cusp of every \(K\) are \(k=t|d_K|\pm2\) / \(4mt\pm2\) with the
+    slice of the pair \(\{t,t|d_K|\pm4\}\) / \(\{t,mt\pm1\}\) (Thm 2; twist norm \(t\), trivial iff
+    \(t=1\); the criterion for a slice to be realized by a class-number-one field); the strata
+    of conductor \(f\) carry \((D/f^2,[\mathfrak{r}\mathcal{O}_{D/f^2}])\), the levels of a given \(D'\)
+    are the Pell solutions \(\eta^j\) and the stratum twist class is \(c^j\) with the odd-prime
+    rule \(p^{v_p(D')}\mid N\mathfrak{r}'\iff\eta\equiv1\bmod\mathfrak{p}\) (Thm 3; the \(2\)-part certified);
+    the class formula of \(i\mathcal{S}\) at even \(n\) with the twist \((n-1,n-1,\tfrac n2)\)
+    (Thm 5, Lemmas A′′–C′′, certified \(n\le16\)); the second-kind orbit \(\mathcal{S}_K^\perp\)
+    classified (Thm 6: \(A,C\in\operatorname{Tr}\mathcal{O}_K\), \(N(B)=1+AC\); discriminants
+    \(4-y^2|d_K|\), all forms, no level-preserving involution); the genus law of the twist
+    (Thm 7); the odd index (Thm 8) and the phase \(u_\mathfrak{b}=\Phi_y/\Phi_x\) with its Galois law
+    and \(j\)-dressing (Thm 9) on every slice. Proved; certified at 54 slices (units), 12 (index,
+    `bnfcertify`), 16 (phase, exact \(\Pi\)); the even-level ledger item closed.
 
 ## Status ledger (open problems, deduplicated)
 
@@ -249,8 +266,16 @@ Planning: [PROGRAM.md](PROGRAM.md) is the program; [outlook.md](outlook.md) is t
 - **\(3/\pi\) split**: make the incomplete-period equidistribution step rigorous.
 - **Euclidean first power**: irreducibility of \(P^{(2)}_n(x^2)\) for all \(n\)
   (\(\pm\)-cocycle, weight-2 refinement of Lemma T).
-- **Even levels / \(i\mathcal{S}\)**: whole \(\alpha\)-theory run only at odd \(n\);
-  transport expected clean (odd discriminants).
+- **Even levels / \(i\mathcal{S}\): closed** ([horizontal-families.md](horizontal-families.md) §5):
+  class formula \(\hat\sigma[f]=[(n-1,n-1,\tfrac n2)][f]^{-s}\) proved (Lemma A on the coset
+  \(\det X=i\) with the Gram form \(nN(u)-s\operatorname{Im}(u^2)\)), units, KLF, odd index and
+  phase run at \(n\le16\).
+- **Horizontal families** ([horizontal-families.md](horizontal-families.md)): open there:
+  the \(2\)-adic part of the stratum-twist law (the odd-prime rule is proved), the
+  non-principal cusps at \(h_K>1\) (the residues \(k\not\equiv\pm2\), e.g. \(k=58\) at
+  \(\mathbb{Q}(\sqrt{-6})\)), a carrier for the slices no arrangement reaches
+  (\((-160,[(5,0,8)])\)), the \(24\)-th-root saturation and \(Q^-\) on slices with
+  \(|\mathrm{Cl}(D)[2]|=8\) (\(D=-480\)), and a Kronecker-limit theory for the second-kind orbit.
 - **\(\alpha=2\) regularization** (\(j'(\rho)=0\)).
 - **Spherical opens**: the shape bijection unconditionally (Gauss-quaternionic count);
   cap-swap law and \(T\)-norm lemma proofs; the \(\ell=4\) coefficient field; the cocycle
@@ -259,8 +284,9 @@ Planning: [PROGRAM.md](PROGRAM.md) is the program; [outlook.md](outlook.md) is t
 - **Other fields** ([other-fields.md](other-fields.md)): done at class number one; open: the sign
   law of \(M(n)\) (certified, mechanism explained), sufficiency of the congruence classification at
   the non-Euclidean class-number-one fields, the cusp bookkeeping and a correction-free normalization
-  at class number \(> 1\), the transport of the phase \(u = \Phi_y/\Phi_x\), the enumeration of the
-  horizontal slices \((D, [\mathfrak{r}])\) realized by each \(K\) (item 4).
+  at class number \(> 1\), the transport of the phase \(u = \Phi_y/\Phi_x\) (done on slices in
+  [horizontal-families.md](horizontal-families.md) §9; the enumeration of the slices realized by each
+  \(K\) is Theorem 2 there).
 - The **large programs**: see outlook.md §3, spectral-outlook.md, and the per-document
   outlooks (trace formula, ortholength spectrum, Kronecker limit formula for
   \(\log|u|\), heights/unlikely intersections, other fields, transfer operators,
@@ -292,6 +318,7 @@ off-line material live in `extra/scripts/` and are run the same way.
 | `robert_index_full.py` | full Robert index: Dedekind determinant of the \(\log|G_\mathfrak{c}|\) vs \(\prod S_\chi\) (signed), independent Epstein \(L'\), exact primitive levels and multipliers \(C_\chi(0)\), PARI/GP (`bnfinit` 120 digits, `bnfcertify`, `nfroots` of \(D_n\), `bnfisunit` exponent matrices, Smith forms), certified integer index \(\ge105\) spare digits, layer fields \(\mathbb{Q}(\sqrt{d_2})\), \(L_3\), \(F\); hyperbolic phase (odd units, \(\tau\) from `nfgaloisconj`, \(Q^-\), exact index, odd \(n\le21\)); regression records (`--selftest` ~80 s, `--with-23` +55 s; needs `gp`) | robert-index-full |
 | `first_power_descent.py` | exact \(\Phi_m\) (\(m\le10\)); \(\omega_f=1\) exact (odd \(n\le21\)); \(u=\Phi_y/\Phi_x\) vs \(\varepsilon\Theta\) (\(\ge108\) digits, \(n\le13\)); exact \(\Pi_n\) = published \(Q_n\), irreducible (\(n\le13\)) (`--selftest`, ~4 s) | first-power-descent |
 | `other_fields.py` | the line over \(\mathbb{Q}(\sqrt{-2}), \mathbb{Q}(\sqrt{-3}), \mathbb{Q}(\sqrt{-7}), \mathbb{Q}(\sqrt{-11})\) (and the Gaussian anchor): orbit BFS = congruences, level sets, descent, class formula + Lemmas A′–C′ at every class of ten levels per field; unit polynomials (200 digits) with laws and KLF; \(D_n\), mass law, sign, Newton polygons, KLF vs independent evaluation, genus closed forms (PARI `quadunit`); norm relations at 26+27+25+21 pairs, Hecke recursion; PARI index (`bnfinit`/`bnfcertify`/`nfroots`/`bnfisunit`, Smith forms, saturation, quadratic and cubic layers) at 19 levels; \(\mathbb{Q}(\sqrt{-5})\) two-cusp data (`--selftest` ~3.5 min; needs `gp`) | other-fields |
+| `horizontal_families.py` | item 4: slice enumeration (ambiguous forms, pairs, \(\mathrm{Cl}[2]\), \(-400\le D<-4\)); the realization criterion and the \(t\)-parametrization at the nine class-number-one fields (|D| ≤ 300) and the class formula with Lemmas A′–C′ through the explicit \(P\) at the non-Euclidean fields and at \(d_K=-20,-24,-40,-52\); the Pell search with the exact stratum twist (HNF; 14 × 9 pairs, 4 solutions each) and the strata realization table; \(R\) on 54 slices by lattices (200 digits) with laws and KLF, equal-slice / different-class comparisons, 7 strata; \(i\mathcal{S}\) at even \(n\le16\) (class map, Lemmas A′′–C′′) and \(\mathcal{S}_K^\perp\) at five fields (BFS, descent, census); genus vectors at 80 levels and closed forms with PARI; the odd index at 12 slices (`bnfinit` 120 digits, `bnfcertify`, `bnfisunit`, \(Q^-\)); the phase \(u=\Phi_y/\Phi_x\) at 16 slices with the \(j\)-dressing, partner law and exact \(\Pi\) (\(\Phi_m\) exact for \(m\le12\), PARI `polmodular` for prime \(m\)); regression records (`--selftest` 270 s; needs `gp`) | horizontal-families |
 
 Scripts in `extra/scripts/` (off the program's line; run from the repo root, e.g.
 `python3 extra/scripts/atomic_census.py`; the four that import the main scripts put
@@ -381,7 +408,13 @@ index theorem, the layer and hyperbolic theorems, ported to Paper II §6.3), and
 (item 3 of the program: the whole line over \(\mathbb{Q}(\sqrt{-2}), \mathbb{Q}(\sqrt{-3}), \mathbb{Q}(\sqrt{-7})\),
 then class number \(> 1\); **done** at class number one, experimental at \(\mathbb{Q}(\sqrt{-5})\) —
 results in [other-fields.md](other-fields.md); the prompt keeps the expected statements, several of
-which failed in instructive ways, see §10 there).
+which failed in instructive ways, see §10 there). **Prompt 11**,
+[11-horizontal-families.md](prompts/11-horizontal-families.md) (item 4: the slices \((D,[\mathfrak{r}])\),
+their realization by primitive and imprimitive strata, the even levels of \(i\mathcal{S}\), the
+second-kind orbit, the index and the phase on slices; **done** — results in
+[horizontal-families.md](horizontal-families.md), with §10 there recording the expected
+statements that failed: the unrealized list, the non-principal-cusp levels \(k=58\), \(98\),
+the absence of a twist on \(\mathcal{S}_K^\perp\)).
 
 ## Paper planning
 

@@ -156,7 +156,7 @@ base-character factor (experimental). *Remaining*: the cusp bookkeeping at \(h_K
 and a correction-free normalization; the non-Euclidean class-number-one fields; the
 sign law of \(M(n)\); the phase \(u = \Phi_y/\Phi_x\) over \(K\).
 
-### Item 4 — Horizontal families: Atkin–Lehner-coupled Heegner points. Status: open.
+### Item 4 — Horizontal families: Atkin–Lehner-coupled Heegner points. Status: **done** ([horizontal-families.md](horizontal-families.md)).
 
 *Question.* The unit theorem needs only an invertible ambiguous ideal
 \(\mathfrak{r}\) with \(\mathfrak{r}^2\) principal in an order of an imaginary
@@ -177,6 +177,26 @@ polynomials agree on equal pairs \((D, [\mathfrak{r}])\) — \(D = -24\) at \(\m
 and the index on a few other slices (\(D = -4N(N+k)\), the odd discriminants
 \(1 - n^2\) of the even levels of \(i\mathcal{S}\)); identify the arrangements or
 Kleinian-group orbits that carry them.
+
+*Done* ([horizontal-families.md](horizontal-families.md), `scripts/horizontal_families.py`):
+the slice theorem (the primitive ambiguous ideals of \(\mathcal{O}_D\) are \((r_0,0,s_0)\) and
+\((r_0,r_0,\tfrac{r_0+s_0}4)\), \(2^\mu\) of them, in pairs \(\mathfrak{r}\mathfrak{s}=(\theta)\) ↔ \(\mathrm{Cl}(D)[2]\);
+the unit system has rank \(h/2\)); the levels of \(\mathcal{S}_K\) at the principal cusp of every \(K\)
+are \(k=t|d_K|\pm2\) resp. \(4mt\pm2\) and carry the pairs \(\{t,t|d_K|\pm4\}\) resp. \(\{t,mt\pm1\}\)
+(twist norm \(t\)): a slice is realized by a class-number-one field iff its pair satisfies
+\(|d_K|=(s_0\mp4)/r_0\), \(|r_0-s_0|\in\{1,2\}\) (\(\mathbb{Q}(i)\)) or \(s_0=2r_0\pm1\) (\(\mathbb{Q}(\sqrt{-2})\));
+\(D=-84\) is realized with its three nontrivial classes at three fields, twelve slices with
+\(|D|\le120\) at no primitive stratum; the strata of conductor \(f\) carry \((D/f^2,[\mathfrak{r}\mathcal{O}_{D/f^2}])\),
+the levels of a fixed \(D'\) are the powers of the fundamental Pell solution and the stratum
+twist class is \(c^j\) (odd-prime rule proved: \(p^{v_p(D')}\mid N\mathfrak{r}'\iff\eta\equiv1\bmod\mathfrak{p}\)),
+so each \(K\) reaches exactly one nontrivial class per \(D'\) and \((-160,[(5,0,8)])\) none; the
+even levels of \(i\mathcal{S}\) (class formula with \((n-1,n-1,\tfrac n2)\), \(x^2-7x+1\) at \(n=4\), index,
+phase) close the even-level ledger item; the second-kind orbit \(\mathcal{S}_K^\perp\) is classified
+(discriminants \(4-y^2|d_K|\), no twist); the genus law of the twist, Theorem 3 of the index
+document and the phase \(u=\Phi_y/\Phi_x\) hold on every slice (12 resp. 16 slices certified).
+*Remaining*: the \(2\)-adic stratum law, the non-principal cusps, a carrier for the
+unreached slices, saturation and \(Q^-\) at \(|\mathrm{Cl}(D)[2]|=8\), a limit theory for
+\(\mathcal{S}_K^\perp\) (§13 there).
 
 ### Item 5 — Other special unit systems from the same mechanism. Status: open.
 
@@ -204,7 +224,8 @@ rebuilt first.
 
 1 (remaining part) and 2 reuse existing scripts and are single-session tasks;
 2 depends on nothing new. 3 at class number one is done (one session, one
-script); 3 at class number above one depends on the cusp bookkeeping. 4 depends on Paper II §4 only. 5(a) depends on Paper II §3;
+script); 3 at class number above one depends on the cusp bookkeeping. 4 is done (one session,
+one script); its remaining parts depend on the cusp bookkeeping of 3. 5(a) depends on Paper II §3;
 5(b) on the spherical proofs; 5(c) on the cocycle; 5(d) on 1. 6 is the deep end.
 
 Recommended order: 1 (remaining), 2, 3 at class number one, 4, 5, 3 at class
@@ -225,7 +246,8 @@ Main tree (everything here feeds the line):
 | `papers/` | Papers I and II with their bibliographies and literature records |
 | `scripts/` | the verification scripts of the above (`--selftest` each) |
 | [other-fields.md](other-fields.md) | item 3: the line over \(\mathbb{Q}(\sqrt{-2}), \mathbb{Q}(\sqrt{-3}), \mathbb{Q}(\sqrt{-7}), \mathbb{Q}(\sqrt{-11})\), and \(\mathbb{Q}(\sqrt{-5})\) at \(n = 2, 3\) |
-| `prompts/` | 01, 04, 05 (done or staged on the line), 06–07 (the papers), 08 (item 1's continuation), 09 (item 2, done), 10 (item 3, done at class number one) |
+| [horizontal-families.md](horizontal-families.md) | item 4: the slices \((D,[\mathfrak{r}])\), their carriers (primitive and imprimitive strata, \(i\mathcal{S}\), class-number-two cusps, the second-kind orbit), the index and the phase on slices |
+| `prompts/` | 01, 04, 05 (done or staged on the line), 06–07 (the papers), 08 (item 1's continuation), 09 (item 2, done), 10 (item 3, done at class number one), 11 (item 4, done) |
 | [outlook.md](outlook.md) | the historical master outlook; its §6 summarizes this program |
 
 Moved to `extra/` ([extra/README.md](extra/README.md)): the monoid and operation
